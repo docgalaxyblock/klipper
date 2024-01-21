@@ -1591,7 +1591,7 @@ also be processed if the mcu is shutdown.</p>
 <p>This method also applies to devices operating in
 <a href="CANBUS.html#usb-to-can-bus-bridge-mode">CANBridge</a> mode.</p>
 <h4 id="katapults-flashtoolpy">Katapult's flashtool.py<a class="headerlink" href="#katapults-flashtoolpy" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>~/katapult/scripts/flashtool.py<span class="w"> </span>-i<span class="w"> </span>&lt;CAN_IFACE&gt;<span class="w"> </span>-u<span class="w"> </span>&lt;UUID&gt;<span class="w"> </span>-r
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>./katapult/scripts/flashtool.py<span class="w"> </span>-i<span class="w"> </span>&lt;CAN_IFACE&gt;<span class="w"> </span>-u<span class="w"> </span>&lt;UUID&gt;<span class="w"> </span>-r
 </code></pre></div>
 
 <p>Where <code>&lt;CAN_IFACE&gt;</code> is the can interface to use. If using <code>can0</code>, both the <code>-i</code>
@@ -1602,9 +1602,9 @@ and <code>&lt;CAN_IFACE&gt;</code> may be omitted.</p>
 for information on finding the CAN UUID of your devices.</p>
 <h2 id="entering-the-bootloader">Entering the bootloader<a class="headerlink" href="#entering-the-bootloader" title="Permanent link">&para;</a></h2>
 <p>When klipper receives one of the above bootloader requests:</p>
-<p>If <a href="https://github.com/Arksine/katapult">Katapult</a> (formerly known as CANBoot) is
-available, klipper will request that Katapult stay active on the next boot, then
-reset the MCU (therefore entering Katapult).</p>
+<p>If Katapult (formerly known as CANBoot) is available, klipper will request that
+Katapult stay active on the next boot, then reset the MCU (therefore entering
+Katapult).</p>
 <p>If Katapult is not available, klipper will then try to enter a
 platform-specific bootloader, such as STM32's DFU
 mode(<a href="#stm32-dfu-warning">see note</a>).</p>

@@ -1177,13 +1177,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#katapult-bootloader-lpc176x-stm32-rp2040" class="md-nav__link">
-    katapult bootloader (LPC176x, STM32, RP2040)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#avr-micro-controllers" class="md-nav__link">
     AVR micro-controllers
   </a>
@@ -1291,6 +1284,13 @@
           <li class="md-nav__item">
   <a href="#stm32f103stm32f072-with-msc-bootloader" class="md-nav__link">
     STM32F103/STM32F072 with MSC bootloader
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stm32f103stm32f0x2-with-canboot-bootloader" class="md-nav__link">
+    STM32F103/STM32F0x2 with CanBoot bootloader
   </a>
   
 </li>
@@ -1482,13 +1482,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#katapult-bootloader-lpc176x-stm32-rp2040" class="md-nav__link">
-    katapult bootloader (LPC176x, STM32, RP2040)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#avr-micro-controllers" class="md-nav__link">
     AVR micro-controllers
   </a>
@@ -1600,6 +1593,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stm32f103stm32f0x2-with-canboot-bootloader" class="md-nav__link">
+    STM32F103/STM32F0x2 with CanBoot bootloader
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1699,36 +1699,6 @@ needed to flash a bootloader, and the steps needed to flash an
 application.  This document is not an authoritative reference; it is
 intended as a collection of useful information that the Klipper
 developers have accumulated.</p>
-<h2 id="katapult-bootloader-lpc176x-stm32-rp2040">katapult bootloader (LPC176x, STM32, RP2040)<a class="headerlink" href="#katapult-bootloader-lpc176x-stm32-rp2040" title="Permanent link">&para;</a></h2>
-<p>The <a href="https://github.com/Arksine/katapult">katapult</a> (formerly known as CANBoot)
-bootloader provides an option for uploading Klipper firmware over the CANBUS.  The
-bootloader itself is derived from Klipper's source code.  Currently katapult supports
-the LPC176x, STM32, and RP2040.</p>
-<p>It is recommended to use a ST-Link Programmer to flash katapult, however it
-should be possible to flash using <code>stm32flash</code> on STM32F103 devices, and
-<code>dfu-util</code> on STM32F042/STM32F072 devices.  See the previous sections in this
-document for instructions on these flashing methods, substituting <code>katapult.bin</code>
-for the file name where appropriate.  The katapult repository linked above provides
-instructions for building the bootloader.</p>
-<p>The first time katapult has been flashed it should detect that no application
-is present and enter the bootloader.  If this doesn't occur it is possible to
-enter the bootloader by pressing the reset button twice in succession.</p>
-<p>The <code>flash_can.py</code> utility supplied in the <code>lib/canboot</code> folder may be used to
-upload Klipper firmware.  The device UUID is necessary to flash.  If you do not
-have a UUID it is possible to query nodes currently running the bootloader:</p>
-<div class="highlight"><pre><span></span><code>python3 ~/klipper/lib/canboot/flash_can.py -q
-</code></pre></div>
-
-<p>This will return UUIDs for all connected nodes not currently assigned a UUID.
-This should include all nodes currently in the bootloader.</p>
-<p>Once you have a UUID, you may upload firmware with following command:</p>
-<div class="highlight"><pre><span></span><code>python3 ~/klipper/lib/canboot/flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u aabbccddeeff
-</code></pre></div>
-
-<p>Where <code>aabbccddeeff</code> is replaced by your UUID.  Note that the <code>-i</code> and <code>-f</code>
-options may be omitted, they default to <code>can0</code> and <code>~/klipper/out/klipper.bin</code>
-respectively.</p>
-<p>When building Klipper for use with katapult, select the 8 KiB Bootloader option.</p>
 <h2 id="avr-micro-controllers">AVR micro-controllers<a class="headerlink" href="#avr-micro-controllers" title="Permanent link">&para;</a></h2>
 <p>In general, the Arduino project is a good reference for bootloaders
 and flashing procedures on the 8-bit Atmel Atmega micro-controllers.
@@ -2082,6 +2052,36 @@ with something like:</p>
 <p>The bootloader can be activated by pressing the reset button of the board twice.
 As soon as the bootloader is activated, the board appears as a USB flash drive
 onto which the klipper.bin file can be copied.</p>
+<h3 id="stm32f103stm32f0x2-with-canboot-bootloader">STM32F103/STM32F0x2 with CanBoot bootloader<a class="headerlink" href="#stm32f103stm32f0x2-with-canboot-bootloader" title="Permanent link">&para;</a></h3>
+<p>The <a href="https://github.com/Arksine/CanBoot">CanBoot</a> bootloader provides an option
+for uploading Klipper firmware over the CANBUS.  The bootloader itself is
+derived from Klipper's source code.  Currently CanBoot supports the STM32F103,
+STM32F042, and STM32F072 models.</p>
+<p>It is recommended to use a ST-Link Programmer to flash CanBoot, however it
+should be possible to flash using <code>stm32flash</code> on STM32F103 devices, and
+<code>dfu-util</code> on STM32F042/STM32F072 devices.  See the previous sections in this
+document for instructions on these flashing methods, substituting <code>canboot.bin</code>
+for the file name where appropriate.  The CanBoot repository linked above provides
+instructions for building the bootloader.</p>
+<p>The first time CanBoot has been flashed it should detect that no application
+is present and enter the bootloader.  If this doesn't occur it is possible to
+enter the bootloader by pressing the reset button twice in succession.</p>
+<p>The <code>flash_can.py</code> utility supplied in the <code>lib/canboot</code> folder may be used to
+upload Klipper firmware.  The device UUID is necessary to flash.  If you do not
+have a UUID it is possible to query nodes currently running the bootloader:</p>
+<div class="highlight"><pre><span></span><code>python3 flash_can.py -q
+</code></pre></div>
+
+<p>This will return UUIDs for all connected nodes not currently assigned a UUID.
+This should include all nodes currently in the bootloader.</p>
+<p>Once you have a UUID, you may upload firmware with following command:</p>
+<div class="highlight"><pre><span></span><code>python3 flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u aabbccddeeff
+</code></pre></div>
+
+<p>Where <code>aabbccddeeff</code> is replaced by your UUID.  Note that the <code>-i</code> and <code>-f</code>
+options may be omitted, they default to <code>can0</code> and <code>~/klipper/out/klipper.bin</code>
+respectively.</p>
+<p>When building Klipper for use with CanBoot, select the 8 KiB Bootloader option.</p>
 <h2 id="stm32f4-micro-controllers-skr-pro-11">STM32F4 micro-controllers (SKR Pro 1.1)<a class="headerlink" href="#stm32f4-micro-controllers-skr-pro-11" title="Permanent link">&para;</a></h2>
 <p>STM32F4 micro-controllers come equipped with a built-in system bootloader
 capable of flashing over USB (via DFU), 3.3V Serial, and various other
