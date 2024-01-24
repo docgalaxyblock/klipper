@@ -1390,20 +1390,24 @@
 Recv: // Finish with ACCEPT or ABORT command.
 Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
 </code></pre></div>
+
 <p>L'altezza attuale dell'ugello (come la intende attualmente la stampante) è mostrata tra "--&gt; &lt;--". Il numero a destra è l'altezza dell'ultimo tentativo di sonda appena maggiore dell'altezza attuale e a sinistra è l'ultimo tentativo di sonda inferiore all'altezza attuale (o ?????? se non è stato effettuato alcun tentativo).</p>
 <p>Metti la carta tra l'ugello e il letto. Può essere utile piegare un angolo della carta in modo che sia più facile da afferrare. (Cerca di non spingere il piatto quando muovi la carta avanti e indietro.)</p>
 <p><img alt="paper-test" src="img/paper-test.jpg" /></p>
 <p>Utilizzare il comando TESTZ per richiedere all'ugello di avvicinarsi alla carta. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>TESTZ Z=-.1
 </code></pre></div>
+
 <p>Il comando TESTZ sposterà l'ugello di una distanza relativa dalla posizione corrente dell'ugello. (Quindi, <code>Z=-.1</code> richiede che l'ugello si avvicini al piatto di 0,1 mm.) Dopo che l'ugello ha smesso di muoversi, spingere la carta avanti e indietro per controllare se l'ugello è in contatto con la carta e per sentire la quantità di attrito. Continua a emettere comandi TESTZ finché non si avverte una piccola quantità di attrito durante il test con la carta.</p>
 <p>Se si trova troppo attrito, è possibile utilizzare un valore Z positivo per spostare l'ugello verso l'alto. È anche possibile utilizzare <code>TESTZ Z=+</code> o <code>TESTZ Z=-</code> per "sezionare in due" l'ultima posizione, ovvero per spostarsi in una posizione a metà strada tra due posizioni. Ad esempio, se si riceve il seguente prompt da un comando TESTZ:</p>
 <div class="highlight"><pre><span></span><code>Recv: // Z position: 0.130 --&gt; 0.230 &lt;-- 0.280
 </code></pre></div>
+
 <p>Quindi un <code>TESTZ Z=-</code> sposterebbe l'ugello in una posizione Z di 0,180 (a metà strada tra 0,130 e 0,230). È possibile utilizzare questa funzione per ridurre rapidamente a un attrito costante. È anche possibile usare <code>Z=++</code> e <code>Z=--</code> per tornare direttamente a una misurazione passata - per esempio, dopo il prompt sopra un comando <code>TESTZ Z=--</code> sposterebbe l'ugello su una Z posizione di 0,130.</p>
 <p>Dopo aver trovato una piccola quantità di attrito, eseguire il comando ACCETTA:</p>
 <div class="highlight"><pre><span></span><code>ACCEPT
 </code></pre></div>
+
 <p>Questo accetterà l'altezza Z data e procederà con lo strumento di calibrazione fornito.</p>
 <p>L'esatta quantità di attrito percepito non è cruciale, così come la quantità di espansione termica e l'esatta larghezza della carta non sono cruciali. Cerca solo di ottenere la stessa quantità di attrito ogni volta che esegui il test.</p>
 <p>Se qualcosa va storto durante il test, è possibile utilizzare il comando <code>ABORT</code> per uscire dallo strumento di calibrazione.</p>
@@ -1484,7 +1488,7 @@ Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

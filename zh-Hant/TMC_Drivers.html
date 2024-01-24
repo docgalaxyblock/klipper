@@ -1800,6 +1800,7 @@ rotation_distance: 40
 homing_speed: 20
 ...
 </code></pre></div>
+
 <h4 id="printercfg">為無感測器歸位配置printer.cfg<a class="headerlink" href="#printercfg" title="Permanent link">&para;</a></h4>
 <p>在<code>stepper_x</code> 配置部分， <code>homing_retract_dist</code> 設定必須被設為零，以禁用第二次歸位動作。在使用無感測器歸位時，第二次歸位嘗試不會提高精度，也不會可靠地工作，而且會擾亂調整過程。</p>
 <p>確保在配置的TMC驅動部分沒有指定 <code>hold_current</code>的設定。（如果設定了hold_current，那麼在接觸后，當滑車撞到軌道末端時，電機就會停止，在這個位置上減少電流可能會導致滑車移動--這將導致歸位效能不佳，並會擾亂調整過程。）</p>
@@ -1814,6 +1815,7 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>用於tmc2130或tmc5160配置的例子如下：</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 #  連線到TMC的DIAG1引腳(或使用diag0_pin / DIAG0引腳)
@@ -1825,6 +1827,7 @@ endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>用於tmc2660配置的例子如下：</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64     # -64是最敏感的值，63是最不敏感的值
@@ -1835,14 +1838,17 @@ endstop_pin: ^PA1   # 與TMC SG_TST引腳相連的引腳
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>上面的例子只顯示了針對無感測器歸位的設定。所有可用選項請參見<a href="Config_Reference.html#tmc-stepper-driver-configuration">配置參考</a>。</p>
 <h4 id="_7">找到能成功歸位的最高的敏感度設定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>將滑車放在靠近軌道中心的位置。使用SET_TMC_FIELD命令來設定最高靈敏度。對於tmc2209：</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
+
 <p>對於tmc2130, tmc5160, and tmc2660:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
 </code></pre></div>
+
 <p>Then issue a <code>G28 X0</code> command and verify the axis does not move at all or quickly stops moving. If the axis does not stop, then issue an <code>M112</code> to halt the printer - something is not correct with the diag/sg_tst pin wiring or configuration and it must be corrected before continuing.</p>
 <p>接下來，不斷降低 <code>VALUE</code> 設定的靈敏度，並再次執行 <code>SET_TMC_FIELD</code>和<code>G28 X0</code> 命令，找到能使使滑車成功地一直移動到端點並停止的最高的靈敏度。(對於TMC2209驅動，調整是減少 SGTHRS，對於其他驅動，調整是增加 sgt)。確保每次嘗試都在軌道中心附近開始（如果需要，發出<code>M84</code>，然後手動將滑車移到中心）。該方法應該可以找到可靠歸位的最高靈敏度（更高的靈敏度設定會導致滑車只動一小段或完全不動）。注意找到的值為<em>maximum_sensitivity</em>。(如果在最低靈敏度（SGTHRS=0或sgt=63）下滑車也不動，那麼diag/sg_tst 引腳的接線或配置可能有問題，必須在繼續後面操作前予以修正。）</p>
 <p>在尋找最大靈敏度時，更方便的是跳到不同的VALUE設定（比如將VALUE參數的一半）。如果這樣做，請準備好發出 <code>M112</code>命令以停止印表機，因為靈敏度很低的設定可能會導致軸反覆 "撞 "到導軌的末端。</p>
@@ -1878,6 +1884,7 @@ gcode:
     # 列印過程中設定電流
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
+
 <p>產生的宏可以從<a href="Config_Reference.html#homing_override">homing_override配置部分</a>或<a href="Slicers.html#klipper-gcode_macro">START_PRINT宏</a>中呼叫。</p>
 <p>請注意，如果歸位期間的驅動電流發生變化，則應重新執行調整過程。</p>
 <h3 id="corexy">在CoreXY上進行無感測器歸位的技巧<a class="headerlink" href="#corexy" title="Permanent link">&para;</a></h3>
@@ -1903,6 +1910,7 @@ gcode:
     G28 X0
     G1 X5 F1200
 </code></pre></div>
+
 <h2 id="_10">查詢和診斷驅動程式設定<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>`<a href="G-Code.md#dump_tmc">DUMP_TMC 命令</a>是配置和診斷驅動程式的有效工具。它將報告所有由Klipper配置的欄位，以及所有可以從驅動中查詢到的欄位。</p>
 <p>所有報告的欄位都定義在驅動器的Trinamic數據手冊中。這些數據表可以在<a href="https://www.trinamic.com/">Trinamic網站</a>上找到。請獲取並檢視驅動器的Trinamic數據手冊來解釋DUMP_TMC的結果。</p>
@@ -2010,7 +2018,7 @@ gcode:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

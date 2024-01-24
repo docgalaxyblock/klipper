@@ -1456,10 +1456,12 @@ make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-skr-v1.3
 sudo service klipper start
 </code></pre></div>
+
 <p>Az eszköz helyének és az alaplap nevének meghatározása a felhasználó feladata. Ha a felhasználónak több alaplapot kell égetnie, akkor a Klipper szolgáltatás újraindítása előtt a <code>flash-sdcard.sh</code> (vagy <code>make flash</code>, ha szükséges) programot kell futtatni minden egyes alaplaphoz.</p>
 <p>A támogatott alaplapok a következő paranccsal listázhatók:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -l
 </code></pre></div>
+
 <p>Ha nem látod az alaplapodat a listában, akkor lehet, hogy új alaplap definíciót kell hozzáadnod a <a href="#alaplap-definiciok">lentebb leírtak szerint</a>.</p>
 <h2 id="fejlett-felhasznalas">Fejlett felhasználás<a class="headerlink" href="#fejlett-felhasznalas" title="Permanent link">&para;</a></h2>
 <p>A fenti parancsok feltételezik, hogy az MCU az alapértelmezett 250000-es átviteli sebességgel csatlakozik, és a firmware a <code>~/klipper/out/klipper.bin</code> címen található. A <code>flash-sdcard.sh</code> szkript lehetőséget biztosít ezen alapértelmezések megváltoztatására. Az összes opciót a súgó képernyőn lehet megtekinteni:</p>
@@ -1480,12 +1482,15 @@ opcionális argumentumok:
   -b &lt;baud&gt;       soros átviteli sebesség (alapértelmezett 250000)
   -f &lt;firmware&gt;   a klipper.bin elérési útja
 </code></pre></div>
+
 <p>Ha az alaplapod olyan firmware-el égetted, amely egyéni átviteli sebesség mellett csatlakozik, akkor a <code>-b</code> opció megadásával frissítheted:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -b 115200 /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Ha a Klipper alapértelmezett helytől eltérő helyen található készletét szeretnéd égetni, akkor ezt a <code>-f</code> opció megadásával teheted meg:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -f ~/downloads/klipper.bin /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Ne feledd, hogy az MKS Robin E3 frissítésekor nem szükséges manuálisan futtatni az <code>update_mks_robin.py</code> fájlt, és az így kapott bináris állományt a <code>flash-sdcard.sh</code> fájlba táplálni. Ez az eljárás a feltöltési folyamat során automatikusan megtörténik.</p>
 <p>A <code>-c</code> opcióval egy ellenőrző vagy csak ellenőrzésre szolgáló műveletet végezhetsz, amellyel tesztelheted, hogy a kártya helyesen futtatja-e a megadott firmware-t. Ezt az opciót elsősorban olyan esetekre szánjuk, amikor kézi bekapcsolás szükséges az égetési eljárás befejezéséhez, például olyan bootloaderek esetében, amelyek SDIO módot használnak SPI helyett az SD-kártyák elérésekor. (Lásd a figyelmeztetéseket alább.) De bármikor használható annak ellenőrzésére is, hogy a kártyára égetett kód megegyezik-e a build mappában lévő verzióval bármely támogatott kártyán.</p>
 <h2 id="ovintezkedesek">Óvintézkedések<a class="headerlink" href="#ovintezkedesek" title="Permanent link">&para;</a></h2>
@@ -1505,6 +1510,7 @@ opcionális argumentumok:
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>A következő mezők adhatók meg:</p>
 <ul>
 <li><code>mcu</code>: Az mcu típusa. Ez a build konfigurálása után a <code>make menuconfig</code> <code>cat .config | grep CONFIG_MCU</code>. Ez a mező kötelezően kitöltendő.</li>
@@ -1525,6 +1531,7 @@ opcionális argumentumok:
      <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Ha új alaplap definícióra van szükséged, és nem tetszik a fent leírt eljárás, akkor ajánlott, hogy a <a href="Contact.html#discord">Klipper Közösségi Discord</a> segítségével kérj egyet.</p>
 <h2 id="sdio-val-egeto-alaplapok">SDIO-val égető alaplapok<a class="headerlink" href="#sdio-val-egeto-alaplapok" title="Permanent link">&para;</a></h2>
 <p><a href="#caveats">Ahogyan a figyelmeztetések</a> is említik, azok az alaplapok, amelyek bootloadere SDIO módot használ az SD-kártyához való hozzáféréshez, az alaplapot, és különösen magát az SD-kártyát ki kell kapcsolni, hogy a fájl SD-kártyára írása közben használt SPI módból vissza lehessen váltani SDIO módba, hogy a bootloader be tudja égetni az alaplapra. Ezek az alaplap definíciók a <code>skip_verify</code> flag-et használják, amely azt mondja az égető eszköznek, hogy álljon le a firmware SD-kártyára írása után, hogy az alaplapot kézzel lehessen bekapcsolni, és az ellenőrzés lépését elhalasztani, amíg ez be nem fejeződik.</p>
@@ -1542,6 +1549,7 @@ make
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <h3 id="sdio-programozas-rpi-vel-ugyanazon-tapegyseggel">SDIO programozás RPi-vel ugyanazon tápegységgel<a class="headerlink" href="#sdio-programozas-rpi-vel-ugyanazon-tapegyseggel" title="Permanent link">&para;</a></h3>
 <p>Egy tipikus munkamenet az RPi-vel ugyanazon a tápegységen a következőképpen néz ki. Természetesen a megfelelő eszköz elérési útvonalát és az alaplap nevét kell használnod:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
@@ -1558,6 +1566,7 @@ cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <p>Ebben az esetben, mivel az RPi Gazdagép újraindul, ami újraindítja a <code>klipper</code> szolgáltatást, az ellenőrzés lépése előtt újra le kell állítani a <code>klipper</code> szolgáltatást, és az ellenőrzés befejezése után újra kell indítani.</p>
 <h3 id="sdio-bol-spi-re-labkiosztas">SDIO-ból SPI-re lábkiosztás<a class="headerlink" href="#sdio-bol-spi-re-labkiosztas" title="Permanent link">&para;</a></h3>
 <p>Ha az alaplap kapcsolási rajza SDIO-t használ az SD-kártyához, akkor az alábbi táblázatban leírtak szerint lekérheted a tűket, hogy meghatározhasd a <code>board_defs.py</code> fájlban hozzárendelendő kompatibilis szoftver SPI tűit:</p>
@@ -1704,7 +1713,7 @@ sudo service klipper start
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

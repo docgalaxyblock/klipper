@@ -1662,15 +1662,18 @@
 <p>Il modo generico per trovare una porta seriale USB è eseguire <code>ls /dev/serial/by-id/*</code> da un terminale ssh sulla macchina host. Probabilmente produrrà un output simile al seguente:</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>Il nome trovato nel comando precedente è stabile ed è possibile utilizzarlo nel file di configurazione e durante il flashing del codice del microcontrollore. Ad esempio, un comando flash potrebbe essere simile a:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
+
 <p>e la configurazione aggiornata potrebbe essere simile a:</p>
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>Assicurati di copiare e incollare il nome dal comando "ls" che hai eseguito sopra poiché il nome sarà diverso per ciascuna stampante.</p>
 <p>Se stai usando più microcontrollori e non hanno ID univoci (comune sulle schede con un chip USB CH340), segui invece le indicazioni sopra usando il comando <code>ls /dev/serial/by-path/*</code>.</p>
 <h2 id="quando-il-microcontrollore-si-riavvia-il-dispositivo-cambia-in-devttyusb1">Quando il microcontrollore si riavvia, il dispositivo cambia in /dev/ttyUSB1<a class="headerlink" href="#quando-il-microcontrollore-si-riavvia-il-dispositivo-cambia-in-devttyusb1" title="Permanent link">&para;</a></h2>
@@ -1685,6 +1688,7 @@ serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 <div class="highlight"><pre><span></span><code>[mcu]
 baud: 250000
 </code></pre></div>
+
 <p>La velocità di trasmissione mostrata sulla pagina Web di OctoPrint non ha alcun impatto sulla velocità di trasmissione interna del microcontrollore Klipper. Impostare sempre la velocità di trasmissione OctoPrint su 250000 quando si utilizza Klipper.</p>
 <p>La velocità in baud del microcontrollore Klipper non è correlata alla velocità in baud del bootloader del microcontrollore. Vedere il <a href="Bootloaders.html">bootloader document</a> per ulteriori informazioni sui bootloader.</p>
 <h2 id="posso-eseguire-klipper-su-qualcosa-di-diverso-da-un-raspberry-pi-3">Posso eseguire Klipper su qualcosa di diverso da un Raspberry Pi 3?<a class="headerlink" href="#posso-eseguire-klipper-su-qualcosa-di-diverso-da-un-raspberry-pi-3" title="Permanent link">&para;</a></h2>
@@ -1699,9 +1703,11 @@ baud: 250000
 <p>È possibile eseguire più istanze del software host Klipper, ma per farlo è necessaria la conoscenza dell'amministratore Linux. Gli script di installazione di Klipper determinano l'esecuzione del seguente comando Unix:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -l /tmp/klippy.log
 </code></pre></div>
+
 <p>È possibile eseguire più istanze del comando precedente purché ogni istanza abbia il proprio file di configurazione della stampante, il proprio file di registro e il proprio pseudo-tty. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer2.cfg -l /tmp/klippy2.log -I /tmp/printer2
 </code></pre></div>
+
 <p>Se scegli di farlo, dovrai implementare gli script di avvio, arresto e installazione necessari (se presenti). Lo script <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a> e lo script <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-start.sh">klipper-start.sh</a> possono essere utili come esempi.</p>
 <h2 id="devo-usare-octoprint">Devo usare OctoPrint?<a class="headerlink" href="#devo-usare-octoprint" title="Permanent link">&para;</a></h2>
 <p>Il software Klipper non dipende da OctoPrint. È possibile utilizzare un software alternativo per inviare comandi a Klipper, ma ciò richiede la conoscenza dell'amministratore Linux.</p>
@@ -1767,6 +1773,7 @@ baud: 250000
 git pull
 ~/klipper/scripts/install-octopi.sh
 </code></pre></div>
+
 <p>Quindi si può ricompilare e flashare il codice del microcontrollore. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 make clean
@@ -1776,11 +1783,13 @@ sudo service klipper stop
 make flash FLASH_DEVICE=/dev/ttyACM0
 sudo service klipper start
 </code></pre></div>
+
 <p>Tuttavia, capita spesso che cambi solo il software host. In questo caso è possibile aggiornare e riavviare solo il software host con:</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper
 git pull
 sudo service klipper restart
 </code></pre></div>
+
 <p>Se dopo aver utilizzato questo collegamento il software avverte della necessità di eseguire il reflash del microcontrollore o si verifica qualche altro errore insolito, seguire i passaggi completi di aggiornamento descritti sopra.</p>
 <p>Se gli errori persistono, ricontrolla il documento <a href="Config_Changes.html">config changes</a>, poiché potrebbe essere necessario modificare la configurazione della stampante.</p>
 <p>Si noti che i comandi g-code RESTART e FIRMWARE_RESTART non caricano il nuovo software: i comandi "sudo service klipper restart" e "make flash" di cui sopra sono necessari affinché una modifica del software abbia effetto.</p>
@@ -1860,7 +1869,7 @@ rm -rf ~/klippy-env ~/klipper
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

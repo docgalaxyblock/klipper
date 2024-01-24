@@ -1635,6 +1635,7 @@
 shaper_freq_x: ...    # frequence pour la marque X sur le modèle de test
 shaper_freq_y: ...    # frequence pour la marque Y sur le modèle de test
 </code></pre></div>
+
 <p>Pour l'exemple ci-dessus, nous obtenons shaper_freq_x/y = 49,4.</p>
 <h3 id="choix-de-linput-shaper">Choix de l'input shaper<a class="headerlink" href="#choix-de-linput-shaper" title="Permanent link">&para;</a></h3>
 <p>Klipper prend en charge plusieurs type d'"input shaper". Ils diffèrent par leur sensibilité aux erreurs déterminant la fréquence de résonance et le degré de lissage qu'ils provoquent dans les pièces imprimées. De plus, certains de ces "input shaper" comme 2HUMP_EI et 3HUMP_EI ne doivent généralement pas être utilisés avec shaper_freq = fréquence de résonance - ils sont configurés à partir de différentes considérations pour réduire plusieurs résonances à la fois (ndt : le 2HUMP_EI est à utiliser lorsque deux pics de résonance sont détectés, le 3HUMP_EI est à utiliser lorsque trois pics de résonance sont détectés).</p>
@@ -1657,6 +1658,7 @@ shaper_freq_x: ...
 shaper_freq_y: ...
 shaper_type: mzv
 </code></pre></div>
+
 <p>Quelques notes sur le choix de l'input shaper :</p>
 <ul>
 <li>Le type EI peut être plus adapté aux imprimantes à lit mobile (si la fréquence de résonance et le lissage résultant le permettent) : plus le filament est déposé sur le lit en mouvement, plus la masse du lit augmente et la fréquence de résonance diminue. Étant donné que le type EI est plus robuste aux changements de fréquence de résonance, il peut être plus efficace lors de l'impression de grandes pièces.</li>
@@ -1736,6 +1738,7 @@ shaper_freq_x: 50
 shaper_freq_y: 50
 shaper_type: 2hump_ei
 </code></pre></div>
+
 <p>Continuez le réglage avec la section <a href="#selecting-max_accel">Choix de l'accélération maximale</a>.</p>
 <h2 id="depannage-et-faq">Dépannage et FAQ<a class="headerlink" href="#depannage-et-faq" title="Permanent link">&para;</a></h2>
 <h3 id="je-narrive-pas-a-obtenir-de-mesures-fiables-des-frequences-de-resonance">Je n'arrive pas à obtenir de mesures fiables des fréquences de résonance<a class="headerlink" href="#je-narrive-pas-a-obtenir-de-mesures-fiables-des-frequences-de-resonance" title="Permanent link">&para;</a></h3>
@@ -1757,6 +1760,7 @@ gcode:
   SET_DUAL_CARRIAGE CARRIAGE=0
   SET_INPUT_SHAPER SHAPER_TYPE_X=&lt;primary_carriage_shaper&gt; SHAPER_FREQ_X=&lt;primary_carriage_freq&gt; SHAPER_TYPE_Y=&lt;y_shaper&gt; SHAPER_FREQ_Y=&lt;y_freq&gt;
 </code></pre></div>
+
 <p>Note that <code>SHAPER_TYPE_Y</code> and <code>SHAPER_FREQ_Y</code> should be the same in both commands. It is also possible to put a similar snippet into the start g-code in the slicer, however then the shaper will not be enabled until any print is started.</p>
 <p>Note that the input shaper only needs to be configured once. Subsequent changes of the carriages or their modes via <code>SET_DUAL_CARRIAGE</code> command will preserve the configured input shaper parameters.</p>
 <h3 id="input_shaper-affecte-t-il-le-temps-dimpression">input_shaper affecte-t-il le temps d'impression ?<a class="headerlink" href="#input_shaper-affecte-t-il-le-temps-dimpression" title="Permanent link">&para;</a></h3>
@@ -1891,7 +1895,7 @@ gcode:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

@@ -1437,9 +1437,11 @@
 <p>你的 3D 印表機的設計師最初從旋轉距離計算 <code>steps_per_mm</code>。如果您知道steps_per_mm，則可以使用此通用公式獲得原始旋轉距離：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; / &lt;steps_per_mm&gt;
 </code></pre></div>
+
 <p>或者，如果你有一個舊版本的Klipper配置並知道<code>step_distance</code>參數，你可以使用這個公式：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; * &lt;step_distance&gt;
 </code></pre></div>
+
 <p><code>&lt;full_steps_per_rotation&gt;</code> 設定由步進電機的型別決定。大多數步進電機是「1.8 度步進電機」，因此每轉 200 步（360 除以 1.8 等於 200）。一些步進電機是「0.9 度步進電機」，因此每轉有 400 整步。其他步進電機很少見。如果不確定，請不要在配置檔案中設定 full_steps_per_rotation 並在上面的公式中使用 200。</p>
 <p><code>&lt;microsteps&gt;</code>設定由取決於步進電機驅動型號。大多數驅動使用 16 個微步。如果不確定，請在配置中設定 <code>microsteps: 16</code>，並在上面的公式中使用 16。</p>
 <p>幾乎所有印表機都應該在 X、Y 和 Z 型軸上具有「rotation_distance」整數。如果上述公式導致rotation_distance在整數的 .01 範圍內，則將最終值捨入為該whole_number。</p>
@@ -1463,11 +1465,13 @@
 <p>首先確定皮帶的型別。大多數印表機使用2毫米的皮帶間距（也就是說，皮帶上的每個齒相距2毫米）。然後計算步進電機滑輪上的齒數。然後計算出rotation_distance （旋轉距離）為：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;belt_pitch&gt; * &lt;number_of_teeth_on_pulley&gt;
 </code></pre></div>
+
 <p>例如，如果一臺印表機有一條2毫米間距的皮帶並使用一個20齒的皮帶輪，那麼旋轉距離為40。</p>
 <h3 id="_4">使用絲桿的軸<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>使用以下公式可以簡單的計算出常見的旋轉距離：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;screw_pitch&gt; * &lt;number_of_separate_threads&gt;
 </code></pre></div>
+
 <p>例如，常見的"T8絲桿"的旋轉距離為8（它的間距為2mm，有4個獨立的螺紋）。</p>
 <p>老式印表機的"螺紋桿"在導螺桿上只有一個"螺紋"，因此旋轉距離是螺桿的間距。(例如，M6公制桿的旋轉距離為1，M8桿的旋轉距離為1.25。</p>
 <h3 id="_5">擠出機<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -1551,7 +1555,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

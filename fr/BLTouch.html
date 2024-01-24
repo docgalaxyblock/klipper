@@ -1441,6 +1441,7 @@
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
+
 <p>Si le BL-Touch est utilisé pour amener l'axe Z à l'origine, réglez <code>endstop_pin : probe:z_virtual_endstop</code> et supprimez <code>position_endstop</code> dans la section de configuration <code>[stepper_z]</code>, puis ajoutez une section de configuration <code>[safe_z_home]</code> pour lever l'axe z, ramener les axes xy à la position d'origine, se déplacer au centre du lit et ramener l'axe z à la position d'origine. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>[safe_z_home]
 home_xy_position: 100, 100 # Change coordinates to the center of your print bed
@@ -1448,6 +1449,7 @@ speed: 50
 z_hop: 10                 # Move up 10mm
 z_hop_speed: 5
 </code></pre></div>
+
 <p>Il est important que le mouvement z_hop dans safe_z_home soit suffisamment élevé pour que la sonde ne heurte rien, même si la broche de la sonde se trouve dans son état le plus bas.</p>
 <h2 id="tests-initiaux">Tests initiaux<a class="headerlink" href="#tests-initiaux" title="Permanent link">&para;</a></h2>
 <p>Avant de poursuivre, vérifiez que la BL-Touch est montée à la bonne hauteur, la tige doit se trouver à environ 2 mm au-dessus de la buse lorsqu'elle est rétractée</p>
@@ -1563,7 +1565,7 @@ Si vous avez une version V3.1, n'automatisez pas ou ne répétez pas la mémoris
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

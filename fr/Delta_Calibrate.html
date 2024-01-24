@@ -1420,9 +1420,11 @@
 <div class="highlight"><pre><span></span><code>G28
 DELTA_CALIBRATE METHOD=manual
 </code></pre></div>
+
 <p>Après avoir sondé les sept points, de nouveaux paramètres Delta seront calculés. Enregistrez et appliquez ces paramètres en exécutant :</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>L'étalonnage initial doit fournir des paramètres Delta suffisamment précis pour une impression. S'il s'agit d'une nouvelle imprimante, c'est le bon moment pour imprimer certains objets simples et vérifier son bon fonctionnement.</p>
 <h2 id="etalonnage-delta-avance">Étalonnage Delta avancé<a class="headerlink" href="#etalonnage-delta-avance" title="Permanent link">&para;</a></h2>
 <p>L'étalonnage Delta de base fait généralement un bon travail de calcul des paramètres delta de sorte que la buse soit à la bonne distance du lit. Cependant, il n'essaye pas de calibrer la précision dimensionnelle X et Y. L'étalonnage delta amélioré permet de vérifier la précision dimensionnelle.</p>
@@ -1438,6 +1440,7 @@ DELTA_CALIBRATE METHOD=manual
 <p>Entrez ces paramètres dans Klipper avec une liste de nombres réels (/!\ utilisez le point comme séparateur décimal) séparés par des virgules :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_DISTS=&lt;a_dist&gt;,&lt;far_c_dist&gt;,&lt;b_dist&gt;,&lt;far_a_dist&gt;,&lt;c_dist&gt;,&lt;far_b_dist&gt;
 </code></pre></div>
+
 <p>Fournissez les valeurs sans espaces entre chaque valeurs.</p>
 <p>Mesurez ensuite la distance entre le pilier A et le pilier en face de l'étiquette C.</p>
 <p><img alt="delta-ab-distance" src="img/delta-outer-distance.jpg" /></p>
@@ -1446,12 +1449,14 @@ DELTA_CALIBRATE METHOD=manual
 <p>Saisissez ces paramètres dans Klipper :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_DISTS=&lt;a_to_far_c&gt;,&lt;far_c_to_b&gt;,&lt;b_to_far_a&gt;,&lt;far_a_to_c&gt;,&lt;c_to_far_b&gt;,&lt;far_b_to_a&gt;
 </code></pre></div>
+
 <p>À ce stade, vous pouvez retirer l'objet du lit. Les mesures finales concernent les piliers eux-mêmes. Mesurez la taille du pilier central le long du rayon A, puis du rayon B, puis du rayon C.</p>
 <p><img alt="delta-a-pillar" src="img/delta-a-pillar.jpg" /></p>
 <p><img alt="delta_cal_e_step3" src="img/delta_cal_e_step3.png" /></p>
 <p>Saisissez-les dans Klipper :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;b&gt;,&lt;c&gt;
 </code></pre></div>
+
 <p>Les mesures finales concernent les piliers extérieurs. Commencez par mesurer la distance du pilier A le long de la ligne allant de A au pilier en face de C.</p>
 <p><img alt="delta-ab-pillar" src="img/delta-outer-pillar.jpg" /></p>
 <p>Ensuite, dans le sens antihoraire, mesurez les piliers extérieurs restants (pilier en face de C le long de la ligne vers B, pilier B le long de la ligne vers le pilier en face de A, etc.).</p>
@@ -1459,16 +1464,20 @@ DELTA_CALIBRATE METHOD=manual
 <p>Et entrez-les dans Klipper :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;far_c&gt;,&lt;b&gt;,&lt;far_a&gt;,&lt;c&gt;,&lt;far_b&gt;
 </code></pre></div>
+
 <p>Si l'objet a été mis à l'échelle à une taille plus petite ou plus grande, indiquez le facteur d'échelle utilisé lors du découpage de l'objet :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE SCALE=1.0
 </code></pre></div>
+
 <p>(Une valeur d'échelle de 2,0 signifierait que l'objet est deux fois sa taille d'origine, 0,5 serait la moitié de sa taille d'origine.)</p>
 <p>Enfin, effectuez l'étalonnage delta amélioré en exécutant :</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CALIBRATE=extended
 </code></pre></div>
+
 <p>Cette commande peut prendre plusieurs minutes. Une fois terminé, elle calculera les paramètres delta mis à jour (rayon delta, angles de tour, positions de butée et longueurs de bras). Utilisez la commande SAVE_CONFIG pour enregistrer et appliquer les paramètres :</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>La commande SAVE_CONFIG enregistre à la fois les paramètres delta mis à jour et les informations des mesures de distance. Les futures commandes DELTA_CALIBRATE utiliseront également ces informations de distance. N'essayez pas de ressaisir les mesures de distance brutes après avoir exécuté SAVE_CONFIG, car cette commande modifie la configuration de l'imprimante et les mesures brutes ne s'appliquent plus.</p>
 <h3 id="notes-complementaires">Notes complémentaires<a class="headerlink" href="#notes-complementaires" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1548,7 +1557,7 @@ DELTA_CALIBRATE METHOD=manual
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

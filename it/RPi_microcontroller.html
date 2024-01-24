@@ -1443,20 +1443,24 @@
 sudo cp ./scripts/klipper-mcu.service /etc/systemd/system/
 sudo systemctl enable klipper-mcu.service
 </code></pre></div>
+
 <h2 id="creazione-del-codice-del-microcontrollore">Creazione del codice del microcontrollore<a class="headerlink" href="#creazione-del-codice-del-microcontrollore" title="Permanent link">&para;</a></h2>
 <p>Per compilare il codice del microcontrollore Klipper, iniziate configurandolo per il "processo Linux":</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>Nel menu, impostate "Microcontroller Architecture" su "Linux process", poi salvate e uscite.</p>
 <p>Per compilare e installare il nuovo codice del microcontrollore, eseguire:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <p>Se klippy.log segnala un errore "Autorizzazione negata" quando si tenta di connettersi a <code>/tmp/klipper_host_mcu</code>, è necessario aggiungere l'utente al gruppo tty. Il seguente comando aggiungerà l'utente "pi" al gruppo tty:</p>
 <div class="highlight"><pre><span></span><code>sudo usermod -a -G tty pi
 </code></pre></div>
+
 <h2 id="configurazione-rimanente">Configurazione rimanente<a class="headerlink" href="#configurazione-rimanente" title="Permanent link">&para;</a></h2>
 <p>Completare l'installazione configurando l'MCU secondario di Klipper seguendo le istruzioni in <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-raspberry-pi.cfg">RaspberryPi sample config</a> e <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-multi-mcu.cfg">Multi MCU sample config</a>.</p>
 <h2 id="facoltativo-abilitazione-di-spi">Facoltativo: abilitazione di SPI<a class="headerlink" href="#facoltativo-abilitazione-di-spi" title="Permanent link">&para;</a></h2>
@@ -1468,12 +1472,15 @@ sudo service klipper start
 <p>Per installare il <em>Linux GPIO character device - binary</em> su una distro basata su debian come octopi eseguire:</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get install gpiod
 </code></pre></div>
+
 <p>Per controllare i gpiochip disponibili eseguire:</p>
 <div class="highlight"><pre><span></span><code>gpiodetect
 </code></pre></div>
+
 <p>Per verificare il numero di pin e la disponibilità dei pin:</p>
 <div class="highlight"><pre><span></span><code>gpioinfo
 </code></pre></div>
+
 <p>Il pin scelto può quindi essere utilizzato all'interno della configurazione come <code>gpiochip&lt;n&gt;/gpio&lt;o&gt;</code> dove <strong>n</strong> è il numero del chip visto dal comando <code>gpiodetect</code> e <strong>o</strong> è il numero di riga visto dal comando <code>gpioinfo</code>.</p>
 <p><strong><em>Attenzione:</em></strong> solo i gpio contrassegnati come <code>inutilizzati</code> possono essere utilizzati. Non è possibile che una <em>linea</em> sia usata da più processi contemporaneamente.</p>
 <p>Per esempio su un RPi 3B+ dove klipper usa il GPIO20 per un interruttore:</p>
@@ -1547,25 +1554,30 @@ gpiochip1 - 8 lines:
         line   6:      unnamed       unused   input  active-high
         line   7:      unnamed       unused   input  active-high
 </code></pre></div>
+
 <h2 id="opzionale-hardware-pwm">Opzionale: Hardware PWM<a class="headerlink" href="#opzionale-hardware-pwm" title="Permanent link">&para;</a></h2>
 <p>I Raspberry Pi hanno due canali PWM (PWM0 e PWM1) che sono esposti sull'intestazione o, in caso contrario, possono essere instradati ai pin gpio esistenti. Il demone mcu Linux utilizza l'interfaccia sysfs pwmchip per controllare i dispositivi hardware pwm sugli host Linux. L'interfaccia sysfs pwm non è esposta per impostazione predefinita su un Raspberry e può essere attivata aggiungendo una riga a <code>/boot/config.txt</code>:</p>
 <div class="highlight"><pre><span></span><code># Abilita l&#39;interfaccia sysfs di pwmchip
 dtoverlay=pwm,pin=12,func=4
 </code></pre></div>
+
 <p>This example enables only PWM0 and routes it to gpio12. If both PWM channels need to be enabled you can use <code>pwm-2chan</code>:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 dtoverlay=pwm-2chan,pin=12,func=4,pin2=13,func2=4
 </code></pre></div>
+
 <p>This example additionally enables PWM1 and routes it to gpio13.</p>
 <p>The overlay does not expose the pwm line on sysfs on boot and needs to be exported by echo'ing the number of the pwm channel to <code>/sys/class/pwm/pwmchip0/export</code>. This will create device <code>/sys/class/pwm/pwmchip0/pwm0</code> in the filesystem. The easiest way to do this is by adding this to <code>/etc/rc.local</code> before the <code>exit 0</code> line:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
+
 <p>When using both PWM channels, the number of the second channel needs to be echo'd as well:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 echo 1 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
+
 <p>Con il sysfs a posto, potete ora utilizzare il canale o i canali pwm aggiungendo il seguente pezzo di configurazione al vostro <code>printer.cfg</code>:</p>
 <div class="highlight"><pre><span></span><code>[output_pin caselight]
 pin: host:pwmchip0/pwm0
@@ -1581,6 +1593,7 @@ value: 0
 shutdown_value: 0
 cycle_time: 0.0005
 </code></pre></div>
+
 <p>This will add hardware pwm control to gpio12 and gpio13 on the Pi (because the overlay was configured to route pwm0 to pin=12 and pwm1 to pin=13).</p>
 <p>PWM0 può essere indirizzato su gpio12 e gpio18, PWM1 può essere indirizzato su gpio13 e gpio19:</p>
 <table>
@@ -1684,7 +1697,7 @@ cycle_time: 0.0005
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

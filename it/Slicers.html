@@ -1459,13 +1459,16 @@
 <p>In Cura, per passare le temperature, verrebbe utilizzato il seguente gcode iniziale:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT BED_TEMP={material_bed_temperature_layer_0} EXTRUDER_TEMP={material_print_temperature_layer_0}
 </code></pre></div>
+
 <p>Nei derivati di slic3r come PrusaSlicer e SuperSlicer, verrebbe utilizzato quanto segue:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
 </code></pre></div>
+
 <p>Si noti inoltre che questeislicer inseriranno i propri codici di riscaldamento quando determinate condizioni non vengono soddisfatte. In Cura, l'esistenza delle variabili <code>{material_bed_temperature_layer_0}</code> e <code>{material_print_temperature_layer_0}</code> è sufficiente per mitigare questo problema. Nei derivati slic3r, dovresti usare:</p>
 <div class="highlight"><pre><span></span><code>M140 S0
 M104 S0
 </code></pre></div>
+
 <p>prima della chiamata della macro. Tieni inoltre presente che SuperSlicer ha un'opzione del pulsante "solo gcode personalizzato", che ottiene lo stesso risultato.</p>
 <p>Un esempio di una macro START_PRINT che utilizza questi parametri può essere trovato in config/sample-macros.cfg</p>
 
@@ -1538,7 +1541,7 @@ M104 S0
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

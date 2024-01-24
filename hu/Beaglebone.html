@@ -1397,6 +1397,7 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-beaglebone.sh
 </code></pre></div>
+
 <h2 id="octoprint-telepitese">Octoprint telepítése<a class="headerlink" href="#octoprint-telepitese" title="Permanent link">&para;</a></h2>
 <p>Ezután telepíthetjük az Octoprintet:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/foosel/OctoPrint.git
@@ -1404,37 +1405,45 @@ cd OctoPrint/
 virtualenv venv
 ./venv/bin/python setup.py install
 </code></pre></div>
+
 <p>És állítsd be az OctoPrintet úgy, hogy az indításkor elinduljon:</p>
 <div class="highlight"><pre><span></span><code>sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
 sudo chmod +x /etc/init.d/octoprint
 sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
 sudo update-rc.d octoprint defaults
 </code></pre></div>
+
 <p>Módosítani kell az OctoPrint <strong>/etc/default/octoprint</strong> konfigurációs fájlját. Meg kell változtatni a <code>OCTOPRINT_USER</code> felhasználót <code>debian</code>-ra, változtassuk meg a <code>NICELEVEL</code>-t <code>0</code>-ra, vegyük ki a <code>BASEDIR</code> megjegyzést, <code>CONFIGFILE</code>, és <code>DAEMON</code> beállításokat, és módosítsd a hivatkozásokat <code>/home/pi/</code>-ről <code>/home/debian/</code>-re:</p>
 <div class="highlight"><pre><span></span><code>sudo nano /etc/default/octoprint
 </code></pre></div>
+
 <p>Ezután indítsd el az Octoprint szolgáltatást:</p>
 <div class="highlight"><pre><span></span><code>sudo systemctl start octoprint
 </code></pre></div>
+
 <p>Győződj meg róla, hogy az OctoPrint webszerver elérhető - a következő címen kell lennie: <a href="http://beaglebone:5000/">http://beaglebone:5000/</a></p>
 <h2 id="a-mikrokontroller-kodjanak-elkeszitese">A mikrokontroller kódjának elkészítése<a class="headerlink" href="#a-mikrokontroller-kodjanak-elkeszitese" title="Permanent link">&para;</a></h2>
 <p>A Klipper mikrokontroller kódjának lefordításához kezdjük a "Beaglebone PRU" konfigurálásával:</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>Az új mikrokontroller kódjának elkészítéséhez és telepítéséhez futtasd a következőt:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <p>Szükséges továbbá a mikrokontroller kódjának lefordítása és telepítése egy Linux gazdafolyamathoz. Konfiguráld másodszor is egy "Linux folyamat" számára:</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 </code></pre></div>
+
 <p>Ezután telepítsd ezt a mikrokontroller kódot is:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <h2 id="hatralevo-konfiguracio">Hátralevő konfiguráció<a class="headerlink" href="#hatralevo-konfiguracio" title="Permanent link">&para;</a></h2>
 <p>Fejezd be a telepítést a Klipper és az Octoprint konfigurálásával a <a href="Installation.html#configuring-klipper">Telepítés</a> fődokumentumban található utasítások szerint.</p>
 <h2 id="nyomtatas-a-beaglebone-on">Nyomtatás a Beaglebone-on<a class="headerlink" href="#nyomtatas-a-beaglebone-on" title="Permanent link">&para;</a></h2>
@@ -1509,7 +1518,7 @@ sudo service klipper start
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

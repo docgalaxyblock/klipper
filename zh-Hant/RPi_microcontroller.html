@@ -1443,20 +1443,24 @@
 sudo cp ./scripts/klipper-mcu.service /etc/systemd/system/
 sudo systemctl enable klipper-mcu.service
 </code></pre></div>
+
 <h2 id="_1">構建微控制器程式碼<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>要編譯的 Klipper 微控制器程式碼，需要先將編譯配置設定為「Linux Process」：</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>在菜單中，設定「Microcontroller Archetecture」（微控制器架構）為「Linux Process」（Linux 程序），然後儲存(save)並退出(exit)。</p>
 <p>要構建和安裝新的微控制器程式碼，請執行：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <p>如果klippy.log在試圖連線到<code>/tmp/klipper_host_mcu</code>時輸出 "Permission denied" 錯誤，那麼你需要將你的使用者新增到tty使用者組。下面的命令將把 "pi "使用者新增到tty使用者組中：</p>
 <div class="highlight"><pre><span></span><code>sudo usermod -a -G tty pi
 </code></pre></div>
+
 <h2 id="_2">剩餘的配置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>按照<a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-raspberry-pi.cfg">RaspberryPi 參考配置</a>和<a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-multi-mcu.cfg">多微控制器參考配置</a>中的說明配置Klipper 二級微控制器來完成安裝。</p>
 <h2 id="spi">可選：啟用 SPI<a class="headerlink" href="#spi" title="Permanent link">&para;</a></h2>
@@ -1468,12 +1472,15 @@ sudo service klipper start
 <p>要在基於 Debian 的發行版（如 OctoPi）上安裝 <em>Linux GPIO character device - binary</em>，請執行：</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get install gpiod
 </code></pre></div>
+
 <p>要檢查可用的gpiochip，請執行：</p>
 <div class="highlight"><pre><span></span><code>gpiodetect
 </code></pre></div>
+
 <p>要檢查針腳編號和針腳可用性，請執行：</p>
 <div class="highlight"><pre><span></span><code>gpioinfo
 </code></pre></div>
+
 <p>因此，所選引腳可以在配置中可以通過 <code>gpiochip&lt;n&gt;/gpio&lt;o&gt;</code>引用，其中 <strong>n</strong> 是由 <code>gpiodetect</code> 命令看到的晶片編號<strong>o</strong> 是 <code>gpioinfo</code> 命令看到的行號。</p>
 <p><strong><em>警告：</em></strong>只有標記為<code>unused</code>的 gpio 才可以被使用。一條<em>線路</em>不可能被多個程序同時使用。</p>
 <p>例如，在樹莓派 3B+上 將GPIO20作為 Klipper 的一個開關：</p>
@@ -1547,25 +1554,30 @@ gpiochip1 - 8 lines:
         line   6:      unnamed       unused   input  active-high
         line   7:      unnamed       unused   input  active-high
 </code></pre></div>
+
 <h2 id="pwm">可選功能：硬體 PWM<a class="headerlink" href="#pwm" title="Permanent link">&para;</a></h2>
 <p>樹莓派有兩個PWM通道（PWM0和PWM1），它們通常暴露在header中上，如果沒有，可以路由到現有的 gpio 引腳。Linux mcu 守護程式使用 pwmchip sysfs 介面來控制 Linux 主機上的硬體 PWM 裝置。pwm sysfs 介面在樹莓上預設是隱藏的，可以通過在<code>/boot/config.txt</code>中加入一行設定來啟用：</p>
 <div class="highlight"><pre><span></span><code># 啟用 pwmchip sysfs 介面
 dtoverlay=pwm,pin=12,func=4
 </code></pre></div>
+
 <p>This example enables only PWM0 and routes it to gpio12. If both PWM channels need to be enabled you can use <code>pwm-2chan</code>:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 dtoverlay=pwm-2chan,pin=12,func=4,pin2=13,func2=4
 </code></pre></div>
+
 <p>This example additionally enables PWM1 and routes it to gpio13.</p>
 <p>The overlay does not expose the pwm line on sysfs on boot and needs to be exported by echo'ing the number of the pwm channel to <code>/sys/class/pwm/pwmchip0/export</code>. This will create device <code>/sys/class/pwm/pwmchip0/pwm0</code> in the filesystem. The easiest way to do this is by adding this to <code>/etc/rc.local</code> before the <code>exit 0</code> line:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
+
 <p>When using both PWM channels, the number of the second channel needs to be echo'd as well:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 echo 1 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
+
 <p>有了 sysfs，現在可以通過將以下配置新增到 <code>printer.cfg</code> 來使用 PWM 通道：</p>
 <div class="highlight"><pre><span></span><code>[output_pin caselight]
 pin: host:pwmchip0/pwm0
@@ -1581,6 +1593,7 @@ value: 0
 shutdown_value: 0
 cycle_time: 0.0005
 </code></pre></div>
+
 <p>This will add hardware pwm control to gpio12 and gpio13 on the Pi (because the overlay was configured to route pwm0 to pin=12 and pwm1 to pin=13).</p>
 <p>PWM0 可以被路由到 gpio12 和 gpio18，PWM1 可以被路由到 gpio13 和 gpio19：</p>
 <table>
@@ -1684,7 +1697,7 @@ cycle_time: 0.0005
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

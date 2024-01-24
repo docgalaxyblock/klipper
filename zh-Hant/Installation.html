@@ -1402,28 +1402,34 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-octopi.sh
 </code></pre></div>
+
 <p>以上將會下載 Klipper 、安裝一些系統依賴、設定 Klipper 在系統啟動時執行並啟動Klipper 主機程式。這將需要網際網路連線以及可能需要幾分鐘時間才能完成。</p>
 <h2 id="_3">構建和刷寫微控制器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在編譯微控制器程式碼之前，首先在樹莓派上執行這些命令：</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p><a href="#obtain-a-klipper-configuration-file">打印機配置文件</a> 頂部的註釋應描述“make menuconfig”期間需要設置的設置。在網絡瀏覽器或文本編輯器中打開文件，然後在文件頂部附近查找這些說明。一旦配置了適當的“menuconfig”設置，按“Q”退出，然後按“Y”保存。然後運行：</p>
 <div class="highlight"><pre><span></span><code>make
 </code></pre></div>
+
 <p>如果 <a href="#obtain-a-klipper-configuration-file">打印機配置文件</a> 頂部的註釋描述了將最終圖像“閃爍”到打印機控制板的自定義步驟，則按照這些步驟操作，然後繼續 <a href="#configuring-octoprint-to-use-klipper">配置OctoPrint</a>。</p>
 <p>否則，通常使用以下步驟來“刷新”打印機控制板。首先，需要確定連接到微控制器的串口。運行以下命令：</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
+
 <p>它應該報告類似以下的內容：</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>通常每一個印表機都有自己獨特的串列埠名，這個獨特串列埠名將會在刷寫微處理器時用到。在上述輸出中可能有多行。如果是這樣的話選擇與微控制器相應的 (檢視<a href="FAQ.html#wheres-my-serial-port">FAQ</a>瞭解更多資訊).</p>
 <p>對於常見的微控制器，可以用類似以下的方法來刷寫韌體：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
+
 <p>請務必用印表機的唯一串列埠名稱來更新 FLASH_DEVICE 參數。</p>
 <p>第一次刷寫時要確保 OctoPrint 沒有直接連線到印表機（在 OctoPrint 網頁的 "連線 "分段中點選 "斷開連線"）。</p>
 <h2 id="klipper-octoprint">為Klipper配置 OctoPrint<a class="headerlink" href="#klipper-octoprint" title="Permanent link">&para;</a></h2>
@@ -1440,16 +1446,20 @@ sudo service klipper start
 <div class="highlight"><pre><span></span><code>cp ~/klipper/config/example-cartesian.cfg ~/printer.cfg
 nano ~/printer.cfg
 </code></pre></div>
+
 <p>每台打印機都有自己獨特的微控制器名稱是很常見的。刷新 Klipper 後名稱可能會更改，因此即使在刷新時已經完成這些步驟，也要重新運行這些步驟。執行：</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
+
 <p>它應該報告類似以下的內容：</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>然後使用唯一名稱更新配置文件。例如，更新 <code>[mcu]</code> 部分，使其看起來類似於：</p>
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>建立和編輯文件後，需要在 OctoPrint Web 終端中發出“重新啟動”命令以加載配置。如果成功讀取 Klipper 配置文件並且成功找到並配置了微控制器，則“狀態”命令將報告打印機已準備就緒。</p>
 <p>在自定義打印機配置文件時，Klipper 報告配置錯誤的情況並不少見。如果發生錯誤，請對打印機配置文件進行任何必要的更正並發出“restart”，直到“status”報告打印機已準備好。</p>
 <p>Klipper通過OctoPrint終端標籤報告錯誤資訊。可以使用 "status "命令來重新報告錯誤資訊。預設的Klipper啟動指令碼也在<strong>/tmp/klippy.log</strong>中放置一個日誌，提供更詳細的資訊。</p>
@@ -1524,7 +1534,7 @@ serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

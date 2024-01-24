@@ -1396,9 +1396,10 @@ drivers - see below for details.)</p>
 <p>If using Trinamic stepper motor drivers with run-time configuration
 then one can calibrate the endstop phases using the
 ENDSTOP_PHASE_CALIBRATE command. Start by adding the following to the
-config file:
+config file:</p>
 <div class="highlight"><pre><span></span><code>[endstop_phase]
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Then RESTART the printer and run a <code>G28</code> command followed by an
 <code>ENDSTOP_PHASE_CALIBRATE</code> command. Then move the toolhead to a new
 location and run <code>G28</code> again. Try moving the toolhead to several
@@ -1411,15 +1412,17 @@ use that phase. (So, in future homing operations, Klipper will obtain
 the same position even if the endstop triggers a little earlier or a
 little later.)</p>
 <p>To save the endstop phase for a particular stepper motor, run
-something like the following:
+something like the following:</p>
 <div class="highlight"><pre><span></span><code>ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Run the above for all the steppers one wishes to save. Typically, one
 would use this on stepper_z for cartesian and corexy printers, and for
 stepper_a, stepper_b, and stepper_c on delta printers. Finally, run
-the following to update the configuration file with the data:
+the following to update the configuration file with the data:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
-</code></pre></div></p>
+</code></pre></div>
+
 <h3 id="additional-notes">Additional notes<a class="headerlink" href="#additional-notes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>This feature is most useful on delta printers and on the Z endstop
@@ -1548,7 +1551,7 @@ the following to update the configuration file with the data:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

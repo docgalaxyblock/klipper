@@ -1422,14 +1422,17 @@ resistors</a> on the CAN bus. If the resistors are not properly installed then m
 <p>L'outil Linux <a href="https ://github.com/linux-can/can-utils">can-utils</a> fournit le logiciel de capture. Il peut être installé en exécutant :</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get update &amp;&amp; sudo apt-get install can-utils
 </code></pre></div>
+
 <p>Une fois installé, on peut obtenir une capture de tous les messages de bus CAN sur une interface avec la commande suivante :</p>
 <div class="highlight"><pre><span></span><code>candump -tz -Ddex can0,#FFFFFFFF &gt; mycanlog
 </code></pre></div>
+
 <p>On peut lire le fichier journal résultant (<code>mycanlog</code> dans l'exemple ci-dessus) pour voir chaque message de bus CAN brut qui a été envoyé et reçu par Klipper. Comprendre le contenu de ces messages nécessite une connaissance de bas niveau de Klipper : <a href="CANBUS_protocol.html">Protocole CANBUS</a> et <a href="MCU_Commands.html">Commandes MCU</a>.</p>
 <h3 id="analyser-les-messages-klipper-dans-un-journal-candump">Analyser les messages Klipper dans un journal candump<a class="headerlink" href="#analyser-les-messages-klipper-dans-un-journal-candump" title="Permanent link">&para;</a></h3>
 <p>Il est possible d'utiliser l'outil <code>parsecandump.py</code> pour analyser les messages microcontrôleur Klipper de bas niveau contenus dans un journal candump. L'utilisation de cet outil nécessite la connaissance de Klipper <a href="MCU_Commands.html">MCU commands</a>. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>./scripts/parsecandump.py mycanlog 108 ./out/klipper.dict
 </code></pre></div>
+
 <p>This tool produces output similar to the <a href="Debugging.html#translating-gcode-files-to-micro-controller-commands">parsedump
 tool</a>. See the documentation for that tool for information on generating the Klipper micro-controller data dictionary.</p>
 <p>In the above example, <code>108</code> is the <a href="CANBUS_protocol.html#micro-controller-id-assignment">CAN bus
@@ -1511,7 +1514,7 @@ id</a>. It is a hexadecimal number. The id <code>108</code> is assigned by Klipp
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

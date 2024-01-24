@@ -1401,23 +1401,26 @@ tab, home the printer, and then use the OctoPrint jogging buttons to
 move the head to a position near the center of the bed.</p>
 <p>Place a piece of blue painters tape (or similar) on the bed underneath
 the probe. Navigate to the OctoPrint "Terminal" tab and issue a PROBE
-command:
+command:</p>
 <div class="highlight"><pre><span></span><code>PROBE
 </code></pre></div>
-Place a mark on the tape directly under where the probe is (or use a
+
+<p>Place a mark on the tape directly under where the probe is (or use a
 similar method to note the location on the bed).</p>
 <p>Issue a <code>GET_POSITION</code> command and record the toolhead XY location
-reported by that command. For example if one sees:
+reported by that command. For example if one sees:</p>
 <div class="highlight"><pre><span></span><code>Recv: // toolhead: X:46.500000 Y:27.000000 Z:15.000000 E:0.000000
 </code></pre></div>
-then one would record a probe X position of 46.5 and probe Y position
+
+<p>then one would record a probe X position of 46.5 and probe Y position
 of 27.</p>
 <p>After recording the probe position, issue a series of G1 commands
 until the nozzle is directly above the mark on the bed. For example,
-one might issue:
+one might issue:</p>
 <div class="highlight"><pre><span></span><code>G1 F300 X57 Y30 Z15
 </code></pre></div>
-to move the nozzle to an X position of 57 and Y of 30. Once one finds
+
+<p>to move the nozzle to an X position of 57 and Y of 30. Once one finds
 the position directly above the mark, use the <code>GET_POSITION</code> command
 to report that position. This is the nozzle position.</p>
 <p>The x_offset is then the <code>nozzle_x_position - probe_x_position</code> and
@@ -1445,9 +1448,10 @@ the XY probe offset calibration described above.</p>
 <a href="Bed_Level.html#the-paper-test">"the paper test"</a>) to determine the
 actual distance between the nozzle and bed at the given location. Once
 those steps are complete one can <code>ACCEPT</code> the position and save the
-results to the config file with:
+results to the config file with:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Note that if a change is made to the printer's motion system, hotend
 position, or probe location then it will invalidate the results of
 PROBE_CALIBRATE.</p>
@@ -1467,7 +1471,7 @@ printer and then move the head to a position near the center of the
 bed. Navigate to the OctoPrint terminal tab and run the
 <code>PROBE_ACCURACY</code> command.</p>
 <p>This command will run the probe ten times and produce output similar
-to the following:
+to the following:</p>
 <div class="highlight"><pre><span></span><code>Recv: // probe accuracy: at X:0.000 Y:0.000 Z:10.000
 Recv: // and read 10 times with speed of 5 mm/s
 Recv: // probe at -0.003,0.005 is z=2.506948
@@ -1481,7 +1485,8 @@ Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe at -0.003,0.005 is z=2.519448
 Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe accuracy results: maximum 2.519448, minimum 2.506948, range 0.012500, average 2.513198, median 2.513198, standard deviation 0.006250
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Ideally the tool will report an identical maximum and minimum value.
 (That is, ideally the probe obtains an identical result on all ten
 probes.) However, it's normal for the minimum and maximum values to
@@ -1627,7 +1632,7 @@ then be careful to always use the probe at a consistent temperature.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

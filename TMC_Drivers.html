@@ -1902,12 +1902,13 @@ the end of the rail. However, the TMC drivers can't reliably detect a
 stall at very slow speeds.</p>
 <p>A good starting point for the homing speed is for the stepper motor to
 make a full rotation every two seconds. For many axes this will be the
-<code>rotation_distance</code> divided by two. For example:
+<code>rotation_distance</code> divided by two. For example:</p>
 <div class="highlight"><pre><span></span><code>[stepper_x]
 rotation_distance: 40
 homing_speed: 20
 ...
-</code></pre></div></p>
+</code></pre></div>
+
 <h4 id="configure-printercfg-for-sensorless-homing">Configure printer.cfg for sensorless homing<a class="headerlink" href="#configure-printercfg-for-sensorless-homing" title="Permanent link">&para;</a></h4>
 <p>The <code>homing_retract_dist</code> setting must be set to zero in the
 <code>stepper_x</code> config section to disable the second homing move. The
@@ -1921,7 +1922,7 @@ may cause the carriage to move - that results in poor performance and
 will confuse the tuning process.)</p>
 <p>It is necessary to configure the sensorless homing pins and to
 configure initial "stallguard" settings. A tmc2209 example
-configuration for an X axis might look like:
+configuration for an X axis might look like:</p>
 <div class="highlight"><pre><span></span><code>[tmc2209 stepper_x]
 diag_pin: ^PA1      # Set to MCU pin connected to TMC DIAG pin
 driver_SGTHRS: 255  # 255 is most sensitive value, 0 is least sensitive
@@ -1931,8 +1932,9 @@ driver_SGTHRS: 255  # 255 is most sensitive value, 0 is least sensitive
 endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
-</code></pre></div></p>
-<p>An example tmc2130 or tmc5160 config might look like:
+</code></pre></div>
+
+<p>An example tmc2130 or tmc5160 config might look like:</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 # Pin connected to TMC DIAG1 pin (or use diag0_pin / DIAG0 pin)
 driver_SGT: -64  # -64 is most sensitive value, 63 is least sensitive
@@ -1942,8 +1944,9 @@ driver_SGT: -64  # -64 is most sensitive value, 63 is least sensitive
 endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
-</code></pre></div></p>
-<p>An example tmc2660 config might look like:
+</code></pre></div>
+
+<p>An example tmc2660 config might look like:</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64     # -64 is most sensitive value, 63 is least sensitive
 ...
@@ -1952,19 +1955,22 @@ driver_SGT: -64     # -64 is most sensitive value, 63 is least sensitive
 endstop_pin: ^PA1   # Pin connected to TMC SG_TST pin
 homing_retract_dist: 0
 ...
-</code></pre></div></p>
+</code></pre></div>
+
 <p>The examples above only show settings specific to sensorless
 homing. See the
 <a href="Config_Reference.html#tmc-stepper-driver-configuration">config reference</a>
 for all the available options.</p>
 <h4 id="find-highest-sensitivity-that-successfully-homes">Find highest sensitivity that successfully homes<a class="headerlink" href="#find-highest-sensitivity-that-successfully-homes" title="Permanent link">&para;</a></h4>
 <p>Place the carriage near the center of the rail. Use the SET_TMC_FIELD
-command to set the highest sensitivity. For tmc2209:
+command to set the highest sensitivity. For tmc2209:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
-For tmc2130, tmc5160, and tmc2660:
+
+<p>For tmc2130, tmc5160, and tmc2660:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Then issue a <code>G28 X0</code> command and verify the axis does not move at all
 or quickly stops moving. If the axis does not stop, then issue an
 <code>M112</code> to halt the printer - something is not correct with the
@@ -2041,7 +2047,7 @@ for the driver's internal stall flag to still be set from a previous
 move.</p>
 <p>It can also be useful to have that macro set the driver current before
 homing and set a new current after the carriage has moved away.</p>
-<p>An example macro might look something like:
+<p>An example macro might look something like:</p>
 <div class="highlight"><pre><span></span><code>[gcode_macro SENSORLESS_HOME_X]
 gcode:
     {% set HOME_CUR = 0.700 %}
@@ -2058,7 +2064,8 @@ gcode:
     G1 X5 F1200
     # Set current during print
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
-</code></pre></div></p>
+</code></pre></div>
+
 <p>The resulting macro can be called from a
 <a href="Config_Reference.html#homing_override">homing_override config section</a>
 or from a <a href="Slicers.html#klipper-gcode_macro">START_PRINT macro</a>.</p>
@@ -2085,7 +2092,7 @@ restrictions:</p>
    limit (which may skew the stall detection). The pause is necessary
    to ensure the driver's stall flag is cleared prior to homing again.</li>
 </ol>
-<p>An example CoreXY homing macro might look like:
+<p>An example CoreXY homing macro might look like:</p>
 <div class="highlight"><pre><span></span><code>[gcode_macro HOME]
 gcode:
     G90
@@ -2099,7 +2106,8 @@ gcode:
     G4 P2000
     G28 X0
     G1 X5 F1200
-</code></pre></div></p>
+</code></pre></div>
+
 <h2 id="querying-and-diagnosing-driver-settings">Querying and diagnosing driver settings<a class="headerlink" href="#querying-and-diagnosing-driver-settings" title="Permanent link">&para;</a></h2>
 <p>The `<a href="G-Codes.html#dump_tmc">DUMP_TMC command</a> is a useful tool when
 configuring and diagnosing the drivers. It will report all fields
@@ -2281,7 +2289,7 @@ source of information.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

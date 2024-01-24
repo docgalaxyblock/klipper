@@ -1643,6 +1643,7 @@ mesh_min: 35, 6
 mesh_max: 240, 198
 probe_count: 5, 3
 </code></pre></div>
+
 <ul>
 <li><code>speed: 120</code><br>
   <em>Default Value: 50</em><br>
@@ -1694,6 +1695,7 @@ mesh_radius: 75
 mesh_origin: 0, 0
 round_probe_count: 5
 </code></pre></div>
+
 <ul>
 <li><code>mesh_radius: 75</code><br>
   <em>Required</em><br>
@@ -1742,6 +1744,7 @@ mesh_pps: 2, 3
 algorithm: bicubic
 bicubic_tension: 0.2
 </code></pre></div>
+
 <ul>
 <li><code>mesh_pps: 2, 3</code><br>
   <em>Default Value: 2, 2</em><br>
@@ -1792,6 +1795,7 @@ probe_count: 5, 3
 move_check_distance: 5
 split_delta_z: .025
 </code></pre></div>
+
 <ul>
 <li><code>move_check_distance: 5</code><br>
   <em>Default Value: 5</em><br>
@@ -1836,6 +1840,7 @@ fade_start: 1
 fade_end: 10
 fade_target: 0
 </code></pre></div>
+
 <ul>
 <li><code>fade_start: 1</code><br>
   <em>Default Value: 1</em><br>
@@ -1886,6 +1891,7 @@ mesh_max: 240, 198
 zero_reference_position: 125, 110
 probe_count: 5, 3
 </code></pre></div>
+
 <ul>
 <li><code>zero_reference_position:</code><br>
   <em>Default Value: None (disabled)</em><br>
@@ -1912,6 +1918,7 @@ the <code>zero_reference_position</code>. The output will look similar to the fo
 ... (additional generated points)
 // bed_mesh: relative_reference_index 24 is (131.5, 108.0)
 </code></pre></div>
+
 <p><em>Note:  The above output is also printed in <code>klippy.log</code> during initialization.</em></p>
 <p>Using the example above we see that the <code>relative_reference_index</code> is
 printed along with its coordinate.  Thus the <code>zero_reference_position</code>
@@ -1945,6 +1952,7 @@ faulty_region_3_max: 205.0, 110.0
 faulty_region_4_min: 30.0, 170.0
 faulty_region_4_max: 45.0, 210.0
 </code></pre></div>
+
 <ul>
 <li><code>faulty_region_{1...99}_min</code><br>
   <code>faulty_region_{1..99}_max</code><br>
@@ -2020,6 +2028,7 @@ restored with a <code>[delayed_gcode]</code>:</p>
 <span class="na">gcode</span><span class="o">:</span>
 <span class="w">  </span><span class="na">BED_MESH_PROFILE LOAD</span><span class="o">=</span><span class="s">default</span>
 </code></pre></div>
+
 <h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
 <p><code>BED_MESH_OUTPUT PGP=[0 | 1]</code></p>
 <p>Outputs the current mesh state to the terminal.  Note that the mesh itself
@@ -2044,6 +2053,7 @@ set, the generated probed points will be output to the terminal:</p>
 // 13 | (164.8, 193.0) | (188.8, 198.0)
 // 14 | (216.0, 193.0) | (240.0, 198.0)
 </code></pre></div>
+
 <p>The "Tool Adjusted" points refer to the nozzle location for each point, and
 the "Probe" points refer to the probe location.  Note that when manually
 probing the "Probe" points will refer to both the tool and nozzle locations.</p>
@@ -2128,7 +2138,7 @@ if the secondary extruder is mounted "behind" the primary extruder.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

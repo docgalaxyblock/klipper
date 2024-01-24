@@ -1695,9 +1695,11 @@ avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U flash:w:stk500boot_v2_mega2560.hex
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
+
 <p>Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>avrdude -cwiring -patmega2560 -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <h3 id="atmega1280">Atmega1280<a class="headerlink" href="#atmega1280" title="Permanent link">&para;</a></h3>
 <p>Cette puce se trouve généralement dans les anciennes versions de "l'Arduino Mega".</p>
 <p>Pour flasher le chargeur de démarrage lui-même, utilisez quelque chose comme :</p>
@@ -1707,9 +1709,11 @@ avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U flash:w:ATmegaBOOT_168_atmega1280.hex
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
+
 <p>Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1280 -P/dev/ttyACM0 -b57600 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <h3 id="atmega1284p">Atmega1284p<a class="headerlink" href="#atmega1284p" title="Permanent link">&para;</a></h3>
 <p>Cette puce se trouve couramment dans les cartes d'imprimante 3d de style "Melzi".</p>
 <p>Pour flasher le chargeur de démarrage lui-même, utilisez quelque chose comme :</p>
@@ -1719,17 +1723,21 @@ avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m 
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega1284p.hex
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
+
 <p>Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1284p -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <p>Notez qu'un certain nombre de cartes de style "Melzi" sont préinstallées avec un chargeur de démarrage qui utilise un débit de 57600 bauds. Dans ce cas, pour flasher une application, utilisez plutôt quelque chose comme ceci :</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1284p -P/dev/ttyACM0 -b57600 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <h3 id="at90usb1286">At90usb1286<a class="headerlink" href="#at90usb1286" title="Permanent link">&para;</a></h3>
 <p>Ce document ne couvre pas la méthode pour flasher un chargeur de démarrage sur l'At90usb1286 ni le flashage général des applications sur cet appareil.</p>
 <p>L'appareil Teensy++ de pjrc.com est livré avec un chargeur de démarrage propriétaire. Il nécessite un outil de flash personnalisé de <a href="https://github.com/PaulStoffregen/teensy_loader_cli">https://github.com/PaulStoffregen/teensy_loader_cli</a>. On peut flasher une application avec en utilisant quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>teensy_loader_cli --mcu=at90usb1286 out/klipper.elf.hex -v
 </code></pre></div>
+
 <h3 id="atmega168">Atmega168<a class="headerlink" href="#atmega168" title="Permanent link">&para;</a></h3>
 <p>L'atmega168 a un espace flash limité. Si vous utilisez un chargeur de démarrage, il est recommandé d'utiliser le chargeur de démarrage Optiboot. Pour flasher ce chargeur de démarrage, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex&#39;
@@ -1738,9 +1746,11 @@ avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega168.hex
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
+
 <p>Pour flasher une application via le chargeur de démarrage Optiboot, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega168 -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <h2 id="micro-controleurs-sam3-arduino-due">Micro-contrôleurs SAM3 (Arduino Due)<a class="headerlink" href="#micro-controleurs-sam3-arduino-due" title="Permanent link">&para;</a></h2>
 <p>Il n'est pas courant d'utiliser un chargeur de démarrage avec le mcu SAM3. La puce elle-même possède une ROM qui permet de programmer le flash à partir du port série 3,3 V ou de l'USB.</p>
 <p>Pour activer la ROM, la broche "effacement" est maintenue haute pendant une réinitialisation, ce qui efface le contenu flash et provoque l'exécution de la ROM. Sur un Arduino Due, cette séquence peut être accomplie en définissant un débit en bauds de 1200 sur le "port usb de programmation" (le port USB le plus proche de l'alimentation).</p>
@@ -1749,6 +1759,7 @@ avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 -a -e -w out/klipper.bin -v -b
 bossac -U -p /dev/ttyACM0 -R
 </code></pre></div>
+
 <h2 id="micro-controleurs-sam4-duet-wifi">Micro-contrôleurs SAM4 (Duet Wifi)<a class="headerlink" href="#micro-controleurs-sam4-duet-wifi" title="Permanent link">&para;</a></h2>
 <p>Il n'est pas courant d'utiliser un bootloader avec le mcu SAM4. La puce elle-même possède une ROM qui permet de programmer le flash à partir du port série 3,3 V ou de l'USB.</p>
 <p>Pour activer la ROM, la broche "effacement" est maintenue haute pendant une réinitialisation, ce qui efface le contenu flash et provoque l'exécution de la ROM.</p>
@@ -1756,6 +1767,7 @@ bossac -U -p /dev/ttyACM0 -R
 <p>Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>bossac --port=/dev/ttyACM0 -b -U -e -w -v -R out/klipper.bin
 </code></pre></div>
+
 <h2 id="samdc21-micro-controllers-duet3d-toolboard-1lc">SAMDC21 micro-controllers (Duet3D Toolboard 1LC)<a class="headerlink" href="#samdc21-micro-controllers-duet3d-toolboard-1lc" title="Permanent link">&para;</a></h2>
 <p>The SAMC21 is flashed via the ARM Serial Wire Debug (SWD) interface. This is commonly done with a dedicated SWD hardware dongle. Alternatively, one can use a <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi with OpenOCD</a>.</p>
 <p>When using OpenOCD with the SAMC21, extra steps must be taken to first put the chip into Cold Plugging mode if the board makes use of the SWD pins for other purposes. If using OpenOCD on a Rasberry Pi, this can be done by running the following commands before invoking OpenOCD.</p>
@@ -1778,51 +1790,64 @@ echo &quot;Unexporting SWCLK and SRST pins.&quot;
 echo $SWCLK &gt; /sys/class/gpio/unexport
 echo $SRST &gt; /sys/class/gpio/unexport
 </code></pre></div>
+
 <p>To flash a program with OpenOCD use the following chip config:</p>
 <div class="highlight"><pre><span></span><code>source [find target/at91samdXX.cfg]
 </code></pre></div>
+
 <p>Obtain a program; for instance, klipper can be built for this chip. Flash with OpenOCD commands similar to:</p>
 <div class="highlight"><pre><span></span><code>at91samd chip-erase
 at91samd bootloader 0
 program out/klipper.elf verify
 </code></pre></div>
+
 <h2 id="micro-controleurs-samd21-arduino-zero">Micro-contrôleurs SAMD21 (Arduino Zero)<a class="headerlink" href="#micro-controleurs-samd21-arduino-zero" title="Permanent link">&para;</a></h2>
 <p>Le chargeur de démarrage SAMD21 est flashé via l'interface ARM Serial Wire Debug (SWD). Cela se fait généralement avec un dongle matériel SWD dédié. Alternativement, on peut utiliser un <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi avec OpenOCD</a>.</p>
 <p>Pour flasher un chargeur de démarrage avec OpenOCD, utilisez la configuration de puce suivante :</p>
 <div class="highlight"><pre><span></span><code>source [find target/at91samdXX.cfg]
 </code></pre></div>
+
 <p>Procurez-vous un bootloader - par exemple :</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin&#39;
 </code></pre></div>
+
 <p>Flashez avec des commandes OpenOCD similaires à :</p>
 <div class="highlight"><pre><span></span><code>at91samd bootloader 0
 program samd21_sam_ba.bin verify
 </code></pre></div>
+
 <p>Le chargeur de démarrage le plus courant sur le SAMD21 est celui que l'on trouve sur le "Arduino Zero". Il utilise un chargeur de démarrage de 8 Ko (l'application doit être compilée avec une adresse de démarrage de 8 Ko). On peut entrer dans ce chargeur de démarrage en double-cliquant sur le bouton de réinitialisation. Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 --offset=0x2000 -w out/klipper.bin -v -b -R
 </code></pre></div>
+
 <p>En revanche, "l'Arduino M0" utilise un bootloader de 16KiB (l'application doit être compilée avec une adresse de démarrage de 16KiB). Pour flasher une application sur ce chargeur de démarrage, réinitialisez le microcontrôleur et exécutez la commande flash dans les premières secondes du démarrage - quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>avrdude -c stk500v2 -p atmega2560 -P /dev/ttyACM0 -u -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
+
 <h2 id="micro-controleurs-samd51-adafruit-metro-m4-et-similaires">Micro-contrôleurs SAMD51 (Adafruit Metro-M4 et similaires)<a class="headerlink" href="#micro-controleurs-samd51-adafruit-metro-m4-et-similaires" title="Permanent link">&para;</a></h2>
 <p>Comme le SAMD21, le chargeur de démarrage SAMD51 est flashé via l'interface ARM Serial Wire Debug (SWD). Pour flasher un chargeur de démarrage avec <a href="#running-openocd-on-the-raspberry-pi">OpenOCD sur un Raspberry Pi</a> utilisez la configuration de puce suivante :</p>
 <div class="highlight"><pre><span></span><code>source [find target/atsame5x.cfg]
 </code></pre></div>
+
 <p>Obtenir un Chargeur de Démarrage - De nombreux Chargeurs de démarrage sont disponibles sur <a href="https://github.com/adafruit/uf2-samdx1/releases/latest">https://github.com/adafruit/uf2-samdx1/releases/latest</a>. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin&#39;
 </code></pre></div>
+
 <p>Flashez avec des commandes OpenOCD similaires à :</p>
 <div class="highlight"><pre><span></span><code>at91samd bootloader 0
 program bootloader-itsybitsy_m4-v3.7.0.bin verify
 at91samd bootloader 16384
 </code></pre></div>
+
 <p>Le SAMD51 utilise un chargeur de démarrage de 16 Ko (l'application doit être compilée avec une adresse de démarrage de 16 Ko). Pour flasher une application, utilisez quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 --offset=0x4000 -w out/klipper.bin -v -b -R
 </code></pre></div>
+
 <h2 id="microcontroleurs-stm32f103-dispositifs-blue-pill">Microcontrôleurs STM32F103 (dispositifs Blue Pill)<a class="headerlink" href="#microcontroleurs-stm32f103-dispositifs-blue-pill" title="Permanent link">&para;</a></h2>
 <p>Les appareils STM32F103 ont une ROM qui peut flasher un chargeur de démarrage ou une application via un port série 3,3 V. En règle générale, on câblerait les broches PA10 (MCU Rx) et PA9 (MCU Tx) à un adaptateur UART 3,3 V. Pour accéder à la ROM, il faut connecter la broche "boot 0" au niveau haut et la broche "boot 1" au niveau bas, puis réinitialiser l'appareil. Le package "stm32flash" peut ensuite être utilisé pour flasher l'appareil en utilisant quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>stm32flash -w out/klipper.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
+
 <p>Notez que si l'on utilise un Raspberry Pi pour le port série 3.3V, le protocole stm32flash utilise un mode de parité série que le "mini UART" du Raspberry Pi ne prend pas en charge. Voir <a href="https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts">https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts</a> pour plus de détails sur l'activation de l'uart complet sur les broches GPIO du Raspberry Pi.</p>
 <p>Après avoir flashé, réglez à la fois "boot 0" et "boot 1" sur bas afin que les futures réinitialisations démarrent à partir du flash.</p>
 <h3 id="stm32f103-avec-chargeur-de-demarrage-stm32duino">STM32F103 avec chargeur de démarrage stm32duino<a class="headerlink" href="#stm32f103-avec-chargeur-de-demarrage-stm32duino" title="Permanent link">&para;</a></h3>
@@ -1832,9 +1857,11 @@ at91samd bootloader 16384
 
 stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
+
 <p>Ce chargeur de démarrage utilise 8 Ko d'espace flash (l'application doit être compilée avec une adresse de démarrage de 8 Ko). Flashez une application avec quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>dfu-util -d 1eaf:0003 -a 2 -R -D out/klipper.bin
 </code></pre></div>
+
 <p>Le chargeur de démarrage ne s'exécute généralement que pendant une courte période après le démarrage. Il peut être nécessaire de chronométrer la commande ci-dessus pour qu'elle s'exécute pendant que le chargeur de démarrage est toujours actif (le chargeur de démarrage fait clignoter une LED de la carte pendant son exécution). Vous pouvez également définir la broche "boot 0" sur low et la broche "boot 1" sur high pour rester en mode chargeur de démarrage après une réinitialisation.</p>
 <h3 id="stm32f103-avec-chargeur-de-demarrage-hid">STM32F103 avec chargeur de démarrage HID<a class="headerlink" href="#stm32f103-avec-chargeur-de-demarrage-hid" title="Permanent link">&para;</a></h3>
 <p>Le <a href="https://github.com/Serasidis/STM32_HID_Bootloader">chargeur de démarrage HID</a> est un chargeur de démarrage compact et sans pilote capable de flasher via USB. Un <a href="https://github.com/Arksine/STM32_HID_Bootloader/releases/latest">fork avec des builds spécifiques au SKR Mini E3 1.2</a> est également disponible.</p>
@@ -1842,13 +1869,16 @@ stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 <p>Il n'est pas possible d'utiliser stm32flash pour le SKR Mini E3 car la broche boot0 est directement liée à la terre et non connectée via des broches d'en-tête. Il est recommandé d'utiliser un STLink V2 avec le programmeur STM32Cube pour flasher le bootloader. Si vous n'avez pas accès à un STLink, il est également possible d'utiliser un <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi et OpenOCD</a> avec la configuration de puce suivante :</p>
 <div class="highlight"><pre><span></span><code>source [find target/stm32f1x.cfg]
 </code></pre></div>
+
 <p>Si vous le souhaitez, vous pouvez faire une sauvegarde du flash actuel avec la commande suivante. Notez que cela peut prendre un certain temps :</p>
 <div class="highlight"><pre><span></span><code>flash read_bank 0 btt_skr_mini_e3_backup.bin
 </code></pre></div>
+
 <p>vous pouvez flasher avec des commandes similaires à :</p>
 <div class="highlight"><pre><span></span><code>stm32f1x mass_erase 0
 program hid_btt_skr_mini_e3.bin verify 0x08000000
 </code></pre></div>
+
 <p>NOTES :</p>
 <ul>
 <li>L'exemple ci-dessus efface la puce puis programme le bootloader. Quelle que soit la méthode choisie pour flasher, il est recommandé d'effacer la puce avant de flasher.</li>
@@ -1875,15 +1905,19 @@ Après quoi, vous pouvez relâcher le bouton de réinitialisation.</li>
 cd ~/klipper/lib/hidflash
 make
 </code></pre></div>
+
 <p>Si le chargeur de démarrage est en cours d'exécution, vous pouvez flasher avec quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>~/klipper/lib/hidflash/hid-flash ~/klipper/out/klipper.bin
 </code></pre></div>
+
 <p>Vous pouvez aussi utiliser <code>make flash</code> pour flasher directement klipper :</p>
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=1209:BEBA
 </code></pre></div>
+
 <p>OU si klipper a déjà été flashé :</p>
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=/dev/ttyACM0
 </code></pre></div>
+
 <p>Il peut être nécessaire d'entrer manuellement dans le chargeur de démarrage, cela peut être fait en définissant "boot 0" au niveau bas et "boot 1" au niveau haut. Sur la SKR Mini E3 "Boot 1" n'est pas disponible, vous pouvez donc le faire en mettant la broche PA2 au niveau bas si vous avez flashé "hid_btt_skr_mini_e3.bin". Cette broche est étiquetée "TX0" sur le connecteur TFT dans le document "PIN" du SKR Mini E3. Il y a une broche de terre à côté de PA2 que vous pouvez utiliser pour mettre PA2 au niveau bas.</p>
 <h3 id="stm32f103stm32f072-avec-chargeur-de-demarrage-msc">STM32F103/STM32F072 avec chargeur de démarrage MSC<a class="headerlink" href="#stm32f103stm32f072-avec-chargeur-de-demarrage-msc" title="Permanent link">&para;</a></h3>
 <p>Le <a href="https://github.com/Telekatz/MSC-stm32f103-bootloader">chargeur de démarrage MSC</a> est un chargeur de démarrage sans pilote capable de flasher via USB.</p>
@@ -1891,6 +1925,7 @@ make
 <p>Pour les cartes STM32F072, il est également possible de flasher le bootloader via USB (via DFU) avec quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code> dfu-util -d 0483:df11 -a 0 -R -D  MSCboot-STM32F072.bin -s0x08000000:leave
 </code></pre></div>
+
 <p>Ce chargeur de démarrage utilise 8 Ko ou 16 Ko d'espace flash, voir la description du chargeur de démarrage (l'application doit être compilée avec l'adresse de démarrage correspondante).</p>
 <p>Le chargeur de démarrage peut être activé en appuyant deux fois sur le bouton de réinitialisation de la carte. Dès que le chargeur de démarrage est activé, la carte apparaît comme une clé USB sur laquelle le fichier klipper.bin peut être copié.</p>
 <h3 id="stm32f103stm32f0x2-avec-chargeur-de-demarrage-canboot">STM32F103/STM32F0x2 avec chargeur de démarrage CanBoot<a class="headerlink" href="#stm32f103stm32f0x2-avec-chargeur-de-demarrage-canboot" title="Permanent link">&para;</a></h3>
@@ -1900,10 +1935,12 @@ make
 <p>L'utilitaire <code>flash_can.py</code> fourni dans le dossier <code>lib/canboot</code> peut être utilisé pour télécharger le firmware Klipper. L'UUID de l'appareil doit clignoter. Si vous n'avez pas d'UUID, il est possible d'interroger les nœuds exécutant actuellement le chargeur de démarrage :</p>
 <div class="highlight"><pre><span></span><code>python3 flash_can.py -q
 </code></pre></div>
+
 <p>Cela renverra les UUID pour tous les nœuds connectés et qui n'avaient pas d'UUID attribué. Cela devrait inclure tous les nœuds actuellement dans le chargeur de démarrage.</p>
 <p>Une fois que vous avez un UUID, vous pouvez télécharger le firmware avec la commande suivante :</p>
 <div class="highlight"><pre><span></span><code>python3 flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u aabbccddeeff
 </code></pre></div>
+
 <p>Où <code>aabbccddeeff</code> est remplacé par votre UUID. Notez que les options <code>-i</code> et <code>-f</code> peuvent être omises, elles sont par défaut sur <code>can0</code> et <code>~/klipper/out/klipper.bin</code>.</p>
 <p>Lors de la création de Klipper pour une utilisation avec CanBoot, sélectionnez l'option 8 KiB Bootloader.</p>
 <h2 id="micro-controleurs-stm32f4-skr-pro-11">Micro-contrôleurs STM32F4 (SKR Pro 1.1)<a class="headerlink" href="#micro-controleurs-stm32f4-skr-pro-11" title="Permanent link">&para;</a></h2>
@@ -1913,6 +1950,7 @@ make
 
 stm32flash -w hid_bootloader_SKR_PRO.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
+
 <p>Ce chargeur de démarrage nécessite 16 Ko d'espace flash sur le STM32F4 (l'application doit être compilée avec une adresse de démarrage de 16 Ko).</p>
 <p>Comme avec le STM32F1, le STM32F4 utilise l'outil hid-flash pour télécharger des fichiers binaires sur le MCU. Voir les instructions ci-dessus pour plus de détails sur la façon de construire et d'utiliser hid-flash.</p>
 <p>Il peut être nécessaire d'entrer manuellement dans le chargeur de démarrage, cela peut être fait en définissant "boot 0" au niveau bas, "boot 1" au niveau haut et en branchant l'appareil. Une fois la programmation terminée, débranchez l'appareil et re-réglez "boot 1" au niveau bas pour que l'application soit chargée.</p>
@@ -1934,10 +1972,12 @@ cd openocd
 make
 make install
 </code></pre></div>
+
 <h3 id="configurer-openocd">Configurer OpenOCD<a class="headerlink" href="#configurer-openocd" title="Permanent link">&para;</a></h3>
 <p>Créez un fichier de configuration OpenOCD :</p>
 <div class="highlight"><pre><span></span><code>nano ~/openocd/openocd.cfg
 </code></pre></div>
+
 <p>Utilisez une configuration similaire à la suivante :</p>
 <div class="highlight"><pre><span></span><code># Utilise les pins du RPI: GPIO25 pour SWDCLK, GPIO24 pour SWDIO, GPIO18 pour nRST
 source [find interface/raspberrypi2-native.cfg]
@@ -1961,6 +2001,7 @@ init
 targets
 reset halt
 </code></pre></div>
+
 <h3 id="cablez-le-raspberry-pi-sur-la-puce-cible">Câblez le Raspberry Pi sur la puce cible<a class="headerlink" href="#cablez-le-raspberry-pi-sur-la-puce-cible" title="Permanent link">&para;</a></h3>
 <p>Éteignez à la fois le Raspberry Pi et la puce cible avant le câblage ! Vérifiez que la puce cible utilise bien du 3,3 V avant de la connecter au Raspberry Pi !</p>
 <p>Connectez GND, SWDCLK, SWDIO et RST sur la puce cible à GND, GPIO25, GPIO24 et GPIO18 sur le Raspberry Pi.</p>
@@ -1970,10 +2011,12 @@ reset halt
 <div class="highlight"><pre><span></span><code>cd ~/openocd/
 sudo ~/openocd/install/bin/openocd -f ~/openocd/openocd.cfg
 </code></pre></div>
+
 <p>Ce qui précède devrait amener OpenOCD à émettre des messages texte, puis à attendre (il ne doit pas immédiatement revenir à l'invite du shell). Si OpenOCD se ferme tout seul ou s'il continue à émettre des messages texte, vérifiez à nouveau le câblage.</p>
 <p>Une fois OpenOCD en cours d'exécution et stable, on peut lui envoyer des commandes via telnet. Ouvrez une autre session SSH et exécutez ce qui suit :</p>
 <div class="highlight"><pre><span></span><code>telnet 127.0.0.1 4444
 </code></pre></div>
+
 <p>(Vous pouvez quitter telnet en appuyant sur ctrl+] puis en exécutant la commande "quit".)</p>
 <h3 id="openocd-et-gdb">OpenOCD et gdb<a class="headerlink" href="#openocd-et-gdb" title="Permanent link">&para;</a></h3>
 <p>Il est possible d'utiliser OpenOCD avec gdb pour déboguer Klipper. Les commandes suivantes supposent que l'on exécute gdb sur une machine de bureau.</p>
@@ -1981,13 +2024,16 @@ sudo ~/openocd/install/bin/openocd -f ~/openocd/openocd.cfg
 <div class="highlight"><pre><span></span><code>bindto 0.0.0.0
 gdb_port 44444
 </code></pre></div>
+
 <p>Redémarrez OpenOCD sur le Raspberry Pi, puis exécutez la commande Unix suivante sur la machine de bureau :</p>
 <div class="highlight"><pre><span></span><code>cd /path/to/klipper/
 gdb out/klipper.elf
 </code></pre></div>
+
 <p>Dans gdb, exécutez :</p>
 <div class="highlight"><pre><span></span><code>target remote octopi:44444
 </code></pre></div>
+
 <p>(Remplacez "octopi" par le nom d'hôte du Raspberry Pi.) Une fois que gdb est en cours d'exécution, il est possible de définir des points d'arrêt et d'inspecter les registres.</p>
 
               
@@ -2059,7 +2105,7 @@ gdb out/klipper.elf
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

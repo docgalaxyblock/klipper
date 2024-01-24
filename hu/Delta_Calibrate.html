@@ -1420,9 +1420,11 @@
 <div class="highlight"><pre><span></span><code>G28
 DELTA_CALIBRATE METHOD=manual
 </code></pre></div>
+
 <p>A hét pont szintezése után új delta paraméterek kerülnek kiszámításra. Mentsd el és alkalmazd ezeket a paramétereket a következőt futtatva:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>Az alapkalibrációnak olyan delta paramétereket kell biztosítania, amelyek elég pontosak az alapvető nyomtatáshoz. Ha ez egy új nyomtató, ez egy jó alkalom néhány alapvető objektum nyomtatására és az általános működés ellenőrzésére.</p>
 <h2 id="tovabbfejlesztett-delta-kalibralas">Továbbfejlesztett delta kalibrálás<a class="headerlink" href="#tovabbfejlesztett-delta-kalibralas" title="Permanent link">&para;</a></h2>
 <p>Az alap delta-kalibrálás általában jó munkát végez a delta paraméterek kiszámításában, hogy a fúvóka a megfelelő távolságra legyen a tárgyasztaltól. Nem próbálja azonban kalibrálni az X és Y dimenzió pontosságát. A méretpontosság ellenőrzésére érdemes egy kibővített delta-kalibrációt elvégezni.</p>
@@ -1438,6 +1440,7 @@ DELTA_CALIBRATE METHOD=manual
 <p>Add meg ezeket a paramétereket a Klipperbe lebegőpontos számok vesszővel elválasztott listájával:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_DISTS=&lt;a_dist&gt;,&lt;far_c_dist&gt;,&lt;b_dist&gt;,&lt;far_a_dist&gt;,&lt;c_dist&gt;,&lt;far_b_dist&gt;
 </code></pre></div>
+
 <p>Az értékeket szóközök nélkül add meg.</p>
 <p>Ezután mérd meg a távolságot az "A" oszlop és a "C" címkével szemben lévő oszlop között.</p>
 <p><img alt="delta-ab-distance" src="img/delta-outer-distance.jpg" /></p>
@@ -1446,12 +1449,14 @@ DELTA_CALIBRATE METHOD=manual
 <p>Add meg ezeket a paramétereket a Klippernek:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_DISTS=&lt;a_to_far_c&gt;,&lt;far_c_to_b&gt;,&lt;b_to_far_a&gt;,&lt;far_a_to_c&gt;,&lt;c_to_far_b&gt;,&lt;far_b_to_a&gt;
 </code></pre></div>
+
 <p>Ezen a ponton nyugodtan leveheted a tárgyat a tárgyasztalról. A végső mérések magukra az oszlopokra vonatkoznak. Mérd meg a középső oszlop méretét az "A" küllők mentén, majd a "B" küllők mentén, végül a "C" küllők mentén.</p>
 <p><img alt="delta-a-pillar" src="img/delta-a-pillar.jpg" /></p>
 <p><img alt="delta_cal_e_step3" src="img/delta_cal_e_step3.png" /></p>
 <p>Add meg őket a Klippernek:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;b&gt;,&lt;c&gt;
 </code></pre></div>
+
 <p>A végső mérések a külső küllőkről szólnak. Kezdjük azzal, hogy megmérjük az "A" küllő távolságát az "A" küllőtől a "C" küllővel szemben lévő küllőig tartó vonal mentén.</p>
 <p><img alt="delta-ab-pillar" src="img/delta-outer-pillar.jpg" /></p>
 <p>Ezután az óramutató járásával ellentétes irányban mérjük meg a többi külső oszlopot (a "C" küllővel szemben lévő oszlop a "B" küllővel szembeni vonal mentén, a "B" küllő a "B" küllővel szembeni vonal mentén az "A" küllővel szemben lévő oszlopig stb.).</p>
@@ -1459,16 +1464,20 @@ DELTA_CALIBRATE METHOD=manual
 <p>És add meg őket a Klipper-nek:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;far_c&gt;,&lt;b&gt;,&lt;far_a&gt;,&lt;c&gt;,&lt;far_b&gt;
 </code></pre></div>
+
 <p>Ha az objektumot kisebb vagy nagyobb méretre méretezték, akkor add meg az objektum szeletelésekor használt méretezési tényezőt:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE SCALE=1.0
 </code></pre></div>
+
 <p>(A 2,0-ás méretarány azt jelenti, hogy az objektum kétszer akkora, mint az eredeti mérete, 0,5 pedig az eredeti méret fele.)</p>
 <p>Végezd el végül a továbbfejlesztett delta-kalibrálást a következő futtatásával:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CALIBRATE=extended
 </code></pre></div>
+
 <p>Ez a parancs több percig is eltarthat. A parancs befejezése után kiszámítja a frissített delta paramétereket (delta sugár, toronyszögek, végállások és karok hossza). A SAVE_CONFIG paranccsal mentsd el és alkalmazd a beállításokat:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>A SAVE_CONFIG parancs mind a frissített delta paramétereket, mind a távolságmérésekből származó információkat elmenti. A jövőbeni DELTA_CALIBRATE parancsok ezeket a távolságinformációkat is felhasználják. A SAVE_CONFIG parancs futtatása után ne próbáld meg újra megadni a nyers távolságméréseket, mivel ez a parancs megváltoztatja a nyomtató konfigurációját, és a nyers mérések már nem érvényesek.</p>
 <h3 id="tovabbi-megjegyzesek">További megjegyzések<a class="headerlink" href="#tovabbi-megjegyzesek" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1548,7 +1557,7 @@ DELTA_CALIBRATE METHOD=manual
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

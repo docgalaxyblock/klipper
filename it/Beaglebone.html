@@ -1397,6 +1397,7 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-beaglebone.sh
 </code></pre></div>
+
 <h2 id="installare-octoprint">Installare Octoprint<a class="headerlink" href="#installare-octoprint" title="Permanent link">&para;</a></h2>
 <p>Si può quindi installare Octoprint:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/foosel/OctoPrint.git
@@ -1404,37 +1405,45 @@ cd OctoPrint/
 virtualenv venv
 ./venv/bin/python setup.py install
 </code></pre></div>
+
 <p>E configura OctoPrint per l'avvio all'avvio:</p>
 <div class="highlight"><pre><span></span><code>sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
 sudo chmod +x /etc/init.d/octoprint
 sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
 sudo update-rc.d octoprint defaults
 </code></pre></div>
+
 <p>È necessario modificare il file di configurazione <strong>/etc/default/octoprint</strong> di OctoPrint. Si deve cambiare l'utente <code>OCTOPRINT_USER</code> in <code>debian</code>, cambiare <code>NICELEVEL</code> in <code>0</code>, togliere il commento alle impostazioni di <code>BASEDIR</code>, <code>CONFIGFILE</code> e <code>DAEMON</code> e cambiare i riferimenti della home da <code>/home/pi/</code> a <code>/home/debian/</code>:</p>
 <div class="highlight"><pre><span></span><code>sudo nano /etc/default/octoprint
 </code></pre></div>
+
 <p>Quindi avvia il servizio Octoprint:</p>
 <div class="highlight"><pre><span></span><code>sudo systemctl start octoprint
 </code></pre></div>
+
 <p>Assicurati che il server web OctoPrint sia accessibile - dovrebbe trovarsi su: <a href="http://beaglebone:5000/">http://beaglebone:5000/</a></p>
 <h2 id="creazione-del-codice-del-microcontrollore">Creazione del codice del microcontrollore<a class="headerlink" href="#creazione-del-codice-del-microcontrollore" title="Permanent link">&para;</a></h2>
 <p>Per compilare il codice del microcontrollore Klipper, inizia configurandolo per il "Beaglebone PRU":</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>Per compilare e installare il nuovo codice del microcontrollore, eseguire:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <p>È inoltre necessario compilare e installare il codice del microcontrollore per un processo host Linux. Configuralo per un "processo Linux":</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 </code></pre></div>
+
 <p>Quindi installa anche questo codice del microcontrollore:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <h2 id="configurazione-rimanente">Configurazione rimanente<a class="headerlink" href="#configurazione-rimanente" title="Permanent link">&para;</a></h2>
 <p>Completare l'installazione configurando Klipper e Octoprint seguendo le istruzioni nel documento principale <a href="Installation.html#configuring-klipper">Installation</a>.</p>
 <h2 id="stampa-sul-beaglebone">Stampa sul Beaglebone<a class="headerlink" href="#stampa-sul-beaglebone" title="Permanent link">&para;</a></h2>
@@ -1509,7 +1518,7 @@ sudo service klipper start
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

@@ -1450,14 +1450,17 @@
 <p>Il sorgente "controllo spazi bianchi" può essere eseguito con:</p>
 <div class="highlight"><pre><span></span><code>./scripts/check_whitespace.sh
 </code></pre></div>
+
 <p>La suite di test di regressione Klippy richiede "dizionari di dati" da molte piattaforme. Il modo più semplice per ottenerli è <a href="https://github.com/Klipper3d/klipper/issues/1438">scaricarli da github</a>. Una volta scaricati i dizionari di dati, utilizzare quanto segue per eseguire la suite di regressione:</p>
 <div class="highlight"><pre><span></span><code>tar xfz klipper-dict-20??????.tar.gz
 ~/klippy-env/bin/python ~/klipper/scripts/test_klippy.py -d dict/ ~/klipper/test/klippy/*.test
 </code></pre></div>
+
 <h2 id="invio-manuale-di-comandi-al-microcontrollore">Invio manuale di comandi al microcontrollore<a class="headerlink" href="#invio-manuale-di-comandi-al-microcontrollore" title="Permanent link">&para;</a></h2>
 <p>Normalmente, il processo host klippy.py verrebbe utilizzato per tradurre i comandi gcode in comandi del microcontrollore Klipper. Tuttavia, è anche possibile inviare manualmente questi comandi MCU (funzioni contrassegnate con la macro DECL_COMMAND() nel codice sorgente di Klipper). Per farlo, esegui:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/console.py /tmp/pseudoserial
 </code></pre></div>
+
 <p>Vedere il comando "HELP" all'interno dello strumento per ulteriori informazioni sulla sua funzionalità.</p>
 <p>Sono disponibili alcune opzioni della riga di comando. Per ulteriori informazioni esegui: <code>~/klippy-env/bin/python ./klippy/console.py --help</code></p>
 <h2 id="traduzione-di-file-gcode-in-comandi-del-microcontrollore">Traduzione di file gcode in comandi del microcontrollore<a class="headerlink" href="#traduzione-di-file-gcode-in-comandi-del-microcontrollore" title="Permanent link">&para;</a></h2>
@@ -1466,12 +1469,15 @@
 <div class="highlight"><pre><span></span><code>make menuconfig
 make
 </code></pre></div>
+
 <p>Una volta fatto quanto sopra è possibile eseguire Klipper in modalità batch (vedi <a href="Installation.html">installazione</a> per i passaggi necessari per costruire l'ambiente virtuale python e un file printer.cfg):</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py ~/printer.cfg -i test.gcode -o test.serial -v -d out/klipper.dict
 </code></pre></div>
+
 <p>Quanto sopra produrrà un file <strong>test.serial</strong> con output seriale binario. Questo output può essere tradotto in testo leggibile con:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/parsedump.py out/klipper.dict test.serial &gt; test.txt
 </code></pre></div>
+
 <p>Il file risultante <strong>test.txt</strong> contiene un elenco leggibile di comandi del microcontrollore.</p>
 <p>La modalità batch disabilita alcuni comandi di risposta/richiesta per funzionare. Di conseguenza, ci saranno alcune differenze tra i comandi effettivi e l'output sopra. I dati generati sono utili per il test e l'ispezione; non è utile per l'invio a un vero microcontrollore.</p>
 <h2 id="analisi-del-movimento-e-registrazione-dei-dati">Analisi del movimento e registrazione dei dati<a class="headerlink" href="#analisi-del-movimento-e-registrazione-dei-dati" title="Permanent link">&para;</a></h2>
@@ -1479,24 +1485,30 @@ make
 <p>La registrazione dei dati è abilitata con lo strumento <code>data_logger.py</code>. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog
 </code></pre></div>
+
 <p>Questo comando si collegherà al Klipper API Server, sottoscriverà le informazioni sullo stato e sul movimento e registrerà i risultati. Vengono generati due file: un file di dati compresso e un file di indice (ad esempio, <code>mylog.json.gz</code> e <code>mylog.index.gz</code>). Dopo aver avviato la registrazione, è possibile completare le stampe e altre azioni: la registrazione continuerà in background. Al termine della registrazione, premi <code>ctrl-c</code> per uscire dallo strumento <code>data_logger.py</code>.</p>
 <p>I file risultanti possono essere letti e rappresentati graficamente utilizzando lo strumento <code>motan_graph.py</code>. Per generare grafici su un Raspberry Pi, è necessario un passaggio per installare il pacchetto "matplotlib":</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get update
 sudo apt-get install python-matplotlib
 </code></pre></div>
+
 <p>Tuttavia, potrebbe essere più conveniente copiare i file di dati su una macchina di classe desktop insieme al codice Python nella directory <code>scripts/motan/</code>. Gli script di analisi del movimento dovrebbero essere eseguiti su qualsiasi macchina con una versione recente di <a href="https://python.org">Python</a> e <a href="https://matplotlib.org/">Matplotlib</a> installata.</p>
 <p>I grafici possono essere generati con un comando come il seguente:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -o mygraph.png
 </code></pre></div>
+
 <p>One can use the <code>-g</code> option to specify the datasets to graph (it takes a Python literal containing a list of lists). For example:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
 </code></pre></div>
+
 <p>L'elenco dei set di dati disponibili può essere trovato usando l'opzione <code>-l</code>, ad esempio:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py -l
 </code></pre></div>
+
 <p>È anche possibile specificare le opzioni di stampa matplotlib per ogni set di dati:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
 </code></pre></div>
+
 <p>Sono disponibili molte opzioni di matplotlib; alcuni esempi sono "color", "label", "alpha" e "linestyle".</p>
 <p>Lo strumento <code>motan_graph.py</code> supporta molte altre opzioni della riga di comando: usa l'opzione <code>--help</code> per vedere un elenco. Può anche essere conveniente visualizzare/modificare lo stesso script <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/motan/motan_graph.py">motan_graph.py</a>.</p>
 <p>I log di dati grezzi prodotti dallo strumento <code>data_logger.py</code> seguono il formato descritto in <a href="API_Server.html">Server API</a>. Può essere utile ispezionare i dati con un comando Unix come il seguente: <code>gunzip &lt; mylog.json.gz | tr '\03' '\n' | less</code></p>
@@ -1506,9 +1518,11 @@ sudo apt-get install python-matplotlib
 <div class="highlight"><pre><span></span><code>sudo apt-get update
 sudo apt-get install python-matplotlib
 </code></pre></div>
+
 <p>Quindi i grafici possono essere prodotti con:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/graphstats.py /tmp/klippy.log -o loadgraph.png
 </code></pre></div>
+
 <p>Si può quindi visualizzare il file <strong>loadgraph.png</strong> risultante.</p>
 <p>Possono essere prodotti diversi grafici. Per ulteriori informazioni esegui: <code>~/klipper/scripts/graphstats.py --help</code></p>
 <h2 id="estrazione-di-informazioni-dal-file-klippylog">Estrazione di informazioni dal file klippy.log<a class="headerlink" href="#estrazione-di-informazioni-dal-file-klippylog" title="Permanent link">&para;</a></h2>
@@ -1518,6 +1532,7 @@ cd work_directory
 cp /tmp/klippy.log .
 ~/klipper/scripts/logextract.py ./klippy.log
 </code></pre></div>
+
 <p>Lo script estrarrà il file di configurazione della stampante ed estrarrà le informazioni di arresto dell'MCU. I dump delle informazioni da un arresto dell'MCU (se presente) verranno riordinati in base al timestamp per facilitare la diagnosi degli scenari di causa ed effetto.</p>
 <h2 id="test-con-simulavr">Test con simulavr<a class="headerlink" href="#test-con-simulavr" title="Permanent link">&para;</a></h2>
 <p>Lo strumento <a href="http://www.nongnu.org/simulavr/">simulavr</a> consente di simulare un microcontrollore Atmel ATmega. Questa sezione descrive come eseguire test di file gcode tramite simulavr. Si consiglia di eseguirlo su una macchina di classe desktop (non un Raspberry Pi) poiché richiede una CPU significativa per funzionare in modo efficiente.</p>
@@ -1527,9 +1542,11 @@ cd simulavr
 make python
 make build
 </code></pre></div>
+
 <p>Assicurati che un file come <strong>./build/pysimulavr/_pysimulavr.*.so</strong> sia presente dopo la compilazione di cui sopra:</p>
 <div class="highlight"><pre><span></span><code>ls ./build/pysimulavr/_pysimulavr.*.so
 </code></pre></div>
+
 <p>Questo comando dovrebbe segnalare un file specifico (ad esempio <strong>./build/pysimulavr/_pysimulavr.cpython-39-x86_64-linux-gnu.so</strong>) e non un errore.</p>
 <p>Se utilizzi un sistema basato su Debian (Debian, Ubuntu, ecc.) puoi installare i seguenti pacchetti e generare file *.deb per l'installazione di simulavr a livello di sistema:</p>
 <div class="highlight"><pre><span></span><code>sudo apt update
@@ -1537,23 +1554,29 @@ sudo apt install g++ make cmake swig rst2pdf help2man texinfo
 make cfgclean python debian
 sudo dpkg -i build/debian/python3-simulavr*.deb
 </code></pre></div>
+
 <p>Per compilare Klipper per l'uso in simulavr, eseguire:</p>
 <div class="highlight"><pre><span></span><code>cd /path/to/klipper
 make menuconfig
 </code></pre></div>
+
 <p>e compilare il software del microcontrollore per un AVR atmega644p e selezionare il supporto per l'emulazione del software SIMULAVR. Quindi si può compilare Klipper (eseguire <code>make</code>) e quindi avviare la simulazione con:</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/build/pysimulavr/ ./scripts/avrsim.py out/klipper.elf
 </code></pre></div>
+
 <p>Nota che se hai installato python3-simulavr a livello di sistema, non è necessario impostare <code>PYTHONPATH</code> e puoi semplicemente eseguire il simulatore come</p>
 <div class="highlight"><pre><span></span><code>./scripts/avrsim.py out/klipper.elf
 </code></pre></div>
+
 <p>Quindi, con simulavr in esecuzione in un'altra finestra, è possibile eseguire quanto segue per leggere gcode da un file (ad es. "test.gcode"), elaborarlo con Klippy e inviarlo a Klipper in esecuzione in simulavr (vedere <a href="Installazione .md">installazione</a> per i passaggi necessari per costruire l'ambiente virtuale Python):</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py config/generic-simulavr.cfg -i test.gcode -v
 </code></pre></div>
+
 <h3 id="utilizzo-di-simulavr-con-gtkwave">Utilizzo di simulavr con gtkwave<a class="headerlink" href="#utilizzo-di-simulavr-con-gtkwave" title="Permanent link">&para;</a></h3>
 <p>Una caratteristica utile di simulavr è la sua capacità di creare file di generazione di onde di segnale con l'esatta sincronizzazione degli eventi. Per fare ciò, segui le istruzioni sopra, ma esegui avrsim.py con una riga di comando come la seguente:</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/src/python/ ./scripts/avrsim.py out/klipper.elf -t PORTA.PORT,PORTC.PORT
 </code></pre></div>
+
 <p>Quanto sopra creerebbe un file <strong>avrsim.vcd</strong> con informazioni su ogni modifica ai GPIO su PORTA e PORTB. Questo potrebbe quindi essere visualizzato usando gtkwave con:</p>
 <div class="highlight"><pre><span></span><code>gtkwave avrsim.vcd
 </code></pre></div>
@@ -1627,7 +1650,7 @@ make menuconfig
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

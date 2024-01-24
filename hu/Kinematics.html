@@ -1505,6 +1505,7 @@
 <p>A Klipper állandó gyorsulást valósít meg. Az állandó gyorsulás legfontosabb képlete a következő:</p>
 <div class="highlight"><pre><span></span><code>velocity(time) = start_velocity + accel*time
 </code></pre></div>
+
 <h2 id="trapez-generator">Trapéz generátor<a class="headerlink" href="#trapez-generator" title="Permanent link">&para;</a></h2>
 <p>A Klipper hagyományos "trapézgenerátort" használ az egyes mozgások modellezésére. Minden lépésnek van kezdősebessége, állandó gyorsítás mellett utazósebességre gyorsul, állandó sebességgel utazik, majd állandó gyorsítással lelassít a végsebességre .</p>
 <p><img alt="trapezoid" src="img/trapezoid.svg.png" /></p>
@@ -1524,6 +1525,7 @@
 <p>Kulcsképlet az előretekintéshez:</p>
 <div class="highlight"><pre><span></span><code>end_velocity^2 = start_velocity^2 + 2*accel*move_distance
 </code></pre></div>
+
 <h3 id="simitott-eloretekintes">Simított előretekintés<a class="headerlink" href="#simitott-eloretekintes" title="Permanent link">&para;</a></h3>
 <p>A Klipper egy olyan mechanizmust is megvalósít, amely kisimítja a rövid "cikkcakk" mozgásokat. Nézzük a következő mozgásokat:</p>
 <p><img alt="zigzag" src="img/zigzag.svg.png" /></p>
@@ -1536,14 +1538,17 @@
 <p>A legfontosabb képlet annak meghatározására, hogy egy mozgásnak milyen messzire kell eljutnia állandó gyorsulás mellett, a következő:</p>
 <div class="highlight"><pre><span></span><code>move_distance = (start_velocity + .5 * accel * move_time) * move_time
 </code></pre></div>
+
 <p>és az állandó sebességű mozgásra vonatkozó kulcsképlet a következő:</p>
 <div class="highlight"><pre><span></span><code>move_distance = cruise_velocity * move_time
 </code></pre></div>
+
 <p>A mozgások cartesian koordinátáinak meghatározására szolgáló kulcsképletek a következők:</p>
 <div class="highlight"><pre><span></span><code>cartesian_x_position = start_x + move_distance * total_x_movement / total_movement
 cartesian_y_position = start_y + move_distance * total_y_movement / total_movement
 cartesian_z_position = start_z + move_distance * total_z_movement / total_movement
 </code></pre></div>
+
 <h3 id="cartesian-robotok">Cartesian robotok<a class="headerlink" href="#cartesian-robotok" title="Permanent link">&para;</a></h3>
 <p>A legegyszerűbb eset a lépések generálása a kartotéknyomtatókhoz. Az egyes tengelyeken történő mozgás közvetlenül kapcsolódik a cartesian térben történő mozgáshoz.</p>
 <p>Kulcsképletek:</p>
@@ -1551,12 +1556,14 @@ cartesian_z_position = start_z + move_distance * total_z_movement / total_moveme
 stepper_y_position = cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="corexy-robotok">CoreXY robotok<a class="headerlink" href="#corexy-robotok" title="Permanent link">&para;</a></h3>
 <p>A lépések generálása egy CoreXY gépen csak egy kicsit bonyolultabb, mint az egyszerű cartesian robotoké. A legfontosabb képletek a következők:</p>
 <div class="highlight"><pre><span></span><code>stepper_a_position = cartesian_x_position + cartesian_y_position
 stepper_b_position = cartesian_x_position - cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="delta-robotok">Delta robotok<a class="headerlink" href="#delta-robotok" title="Permanent link">&para;</a></h3>
 <p>A delta roboton történő lépésgenerálás a Pitagorasz-tételen alapul:</p>
 <div class="highlight"><pre><span></span><code>stepper_position = (sqrt(arm_length^2
@@ -1565,6 +1572,7 @@ stepper_z_position = cartesian_z_position
                          - (cartesian_y_position - tower_y_position)^2)
                     + cartesian_z_position)
 </code></pre></div>
+
 <h3 id="leptetomotor-gyorsulasi-hatarertekei">Léptetőmotor gyorsulási határértékei<a class="headerlink" href="#leptetomotor-gyorsulasi-hatarertekei" title="Permanent link">&para;</a></h3>
 <p>A delta kinematikával lehetséges, hogy egy cartesian térben gyorsuló mozgás nagyobb gyorsulást igényel egy adott léptetőmotoron, mint a mozgás gyorsulása. Ez akkor fordulhat elő, ha egy mozgatott kar inkább vízszintes, mint függőleges, és a mozgás vonala az adott léptető torony közelében halad el. Bár ezekhez a mozgásokhoz nagyobb léptetőmotor-gyorsulásra lehet szükség, mint a nyomtató maximálisan konfigurált mozgásgyorsulása, az adott léptető által mozgatott effektív tömeg kisebb lesz. Így a nagyobb léptető gyorsulás nem eredményez jelentősen nagyobb léptető nyomatékot, és ezért ártalmatlannak tekinthető.</p>
 <p>A szélsőséges esetek elkerülése érdekében azonban a Klipper a nyomtató konfigurált maximális mozgási gyorsulásának háromszorosában határozza meg a léptető gyorsulásának felső határát. (Hasonlóképpen, a léptető maximális sebessége a maximális mozgatási sebesség háromszorosára van korlátozva). E korlát betartása érdekében az építési terület szélső szélén (ahol a léptető kar közel vízszintes lehet) a mozgások maximális gyorsulása és sebessége alacsonyabb lesz.</p>
@@ -1573,12 +1581,14 @@ stepper_z_position = cartesian_z_position
 <p>Az extruder alapmozgása egyszerűen kiszámítható. A lépésidő generálása ugyanazokat a képleteket használja, mint a cartesian gépek:</p>
 <div class="highlight"><pre><span></span><code>stepper_position = requested_e_position
 </code></pre></div>
+
 <h3 id="nyomas-elotolas">Nyomás előtolás<a class="headerlink" href="#nyomas-elotolas" title="Permanent link">&para;</a></h3>
 <p>A kísérletek azt mutatták, hogy az extruder modellezését az alap extruder képleten túl is lehet javítani. Ideális esetben az extrudálási mozgás előrehaladtával a mozgás minden egyes pontján ugyanannyi szálnak kell lerakódnia, és a mozgás után nem szabad extrudálódnia. Sajnos gyakran előfordul, hogy az alap extrudálási képletek miatt az extrudálási mozgások kezdetén túl kevés szál kerül ki az extruderből, és az extrudálás befejezése után többletszál kerül extrudálásra. Ezt gyakran nevezik "ooze"-nak.</p>
 <p><img alt="ooze" src="img/ooze.svg.png" /></p>
 <p>A "nyomás előtolás" rendszer ezt úgy próbálja figyelembe venni, hogy az extruderhez egy másik modellt használ. Ahelyett, hogy naivan azt hinné, hogy az extruderbe táplált minden egyes mm^3 szálat az extruderből azonnal ugyanannyi mm^3 fog kilépni, a rendszer egy nyomáson alapuló modellt használ. A nyomás nő, amikor a szál az extruderbe kerül (mint a <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke törvény</a> szerint), és az extrudáláshoz szükséges nyomást a fúvóka nyílásán keresztül történő áramlási sebesség uralja (mint a <a href="https://en.wikipedia.org/wiki/Poiseuille_law">Poiseuille törvény</a> szerint). A kulcsgondolat az, hogy a szál, a nyomás és az áramlási sebesség közötti kapcsolat egy lineáris együtthatóval modellezhető:</p>
 <div class="highlight"><pre><span></span><code>pa_position = nominal_position + pressure_advance_coefficient * nominal_velocity
 </code></pre></div>
+
 <p>A nyomás előtolás együttható meghatározásához lásd a <a href="Pressure_Advance.html">nyomás előtolás</a> dokumentumot.</p>
 <p>Az alapvető nyomás előtolás képlete az extruder motorjának hirtelen sebességváltozásait okozhatja. A Klipper ennek elkerülése érdekében az extruder mozgásának "simítását" alkalmazza.</p>
 <p><img alt="pressure-advance" src="img/pressure-velocity.png" /></p>
@@ -1660,7 +1670,7 @@ stepper_z_position = cartesian_z_position
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

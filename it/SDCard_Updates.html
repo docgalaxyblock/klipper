@@ -1456,10 +1456,12 @@ make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-skr-v1.3
 sudo service klipper start
 </code></pre></div>
+
 <p>Spetta all'utente determinare la posizione del dispositivo e il nome della scheda. Se un utente ha bisogno di eseguire il flashing di più schede, <code>flash-sdcard.sh</code> (o <code>make flash</code> se appropriato) dovrebbe essere eseguito per ciascuna scheda prima di riavviare il servizio Klipper.</p>
 <p>Le schede supportate possono essere elencate con il seguente comando:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -l
 </code></pre></div>
+
 <p>Se non vedi la tua scheda elencata, potrebbe essere necessario aggiungere una nuova definizione di scheda come <a href="#board-definitions">descritto di seguito</a>.</p>
 <h2 id="utilizzo-avanzato">Utilizzo avanzato<a class="headerlink" href="#utilizzo-avanzato" title="Permanent link">&para;</a></h2>
 <p>I comandi precedenti presuppongono che l'MCU si connetta alla velocità di trasmissione predefinita di 250000 e che il firmware si trovi in <code>~/klipper/out/klipper.bin</code>. Lo script <code>flash-sdcard.sh</code> fornisce opzioni per modificare queste impostazioni predefinite. Tutte le opzioni possono essere visualizzate dalla schermata della guida:</p>
@@ -1480,12 +1482,15 @@ optional arguments:
   -b &lt;baud&gt;       serial baud rate (default is 250000)
   -f &lt;firmware&gt;   path to klipper.bin
 </code></pre></div>
+
 <p>Se la tua scheda è stata flashata con un firmware che si connette a un baud rate personalizzato, è possibile eseguire l'aggiornamento specificando l'opzione <code>-b</code>:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -b 115200 /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Se desideri eseguire il flashing di una build di Klipper situata in un luogo diverso da quello predefinito, puoi farlo specificando l'opzione <code>-f</code>:</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -f ~/downloads/klipper.bin /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Nota che quando si aggiorna un MKS Robin E3 non è necessario eseguire manualmente <code>update_mks_robin.py</code> e fornire il binario risultante a <code>flash-sdcard.sh</code>. Questa procedura è automatizzata durante il processo di caricamento.</p>
 <p>L'opzione <code>-c</code> viene utilizzata per eseguire un controllo o un'operazione di sola verifica per testare se la scheda esegue correttamente il firmware specificato. Questa opzione è destinata principalmente ai casi in cui è necessario un ciclo di alimentazione manuale per completare la procedura di flashing, ad esempio con i bootloader che utilizzano la modalità SDIO anziché SPI per accedere alle proprie schede SD. (Vedi avvertenze di seguito) Ma può anche essere utilizzato in qualsiasi momento per verificare se il codice visualizzato nella scheda corrisponde alla versione nella cartella build su qualsiasi scheda supportata.</p>
 <h2 id="avvertenze">Avvertenze<a class="headerlink" href="#avvertenze" title="Permanent link">&para;</a></h2>
@@ -1505,6 +1510,7 @@ optional arguments:
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Possono essere specificati i seguenti campi:</p>
 <ul>
 <li><code>mcu</code>: il tipo di Mcu. Questo può essere recuperato dopo aver configurato la build tramite <code>make menuconfig</code> eseguendo <code>cat .config | grep CONFIG_MCU</code>. Questo campo è obbligatorio.</li>
@@ -1525,6 +1531,7 @@ optional arguments:
     <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Se hai bisogno di una nuova definizione di scheda e ti senti a disagio con la procedura descritta sopra, ti consigliamo di rivolgerti a <a href="Contact.html#discord">Klipper Community Discord</a>.</p>
 <h2 id="flashing-di-schede-che-utilizzano-sdio">Flashing di schede che utilizzano SDIO<a class="headerlink" href="#flashing-di-schede-che-utilizzano-sdio" title="Permanent link">&para;</a></h2>
 <p><a href="#caveats">Come menzionato nelle avvertenze</a>, le schede il cui bootloader utilizza la modalità SDIO per accedere alla scheda SD richiedono un ciclo di alimentazione della scheda, e in particolare della scheda SD stessa, per passare dalla modalità SPI utilizzata durante la scrittura il file sulla scheda SD di nuovo in modalità SDIO affinché il bootloader lo inserisca nella scheda. Queste definizioni della scheda utilizzeranno il flag <code>skip_verify</code>, che indica allo strumento di flashing di interrompersi dopo aver scritto il firmware sulla scheda SD in modo che la scheda possa essere spenta e riaccesa manualmente e il passaggio di verifica posticipato fino al completamento.</p>
@@ -1542,6 +1549,7 @@ make
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <h3 id="programmazione-sdio-con-rpi-sullo-stesso-alimentatore">Programmazione SDIO con RPi sullo stesso alimentatore<a class="headerlink" href="#programmazione-sdio-con-rpi-sullo-stesso-alimentatore" title="Permanent link">&para;</a></h3>
 <p>Una sessione tipica con l'RPi sullo stesso alimentatore è simile alla seguente. Ovviamente, dovrai utilizzare il percorso del dispositivo e il nome della scheda corretti:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
@@ -1558,6 +1566,7 @@ cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <p>In questo caso, poiché è in corso il riavvio dell'RPi Host, che riavvierà il servizio <code>klipper</code>, è necessario arrestare nuovamente <code>klipper</code> prima di eseguire il passaggio di verifica e riavviarlo al termine della verifica.</p>
 <h3 id="mappatura-pin-da-sdio-a-spi">Mappatura pin da SDIO a SPI<a class="headerlink" href="#mappatura-pin-da-sdio-a-spi" title="Permanent link">&para;</a></h3>
 <p>Se lo schema della tua scheda utilizza SDIO per la sua scheda SD, puoi mappare i pin come descritto nella tabella seguente per determinare i pin SPI del software compatibili da assegnare nel file <code>board_defs.py</code>:</p>
@@ -1704,7 +1713,7 @@ sudo service klipper start
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

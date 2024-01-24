@@ -1403,27 +1403,34 @@
 Length BD = 142.8
 Length AD = 99.8
 </code></pre></div>
+
 <p><code>SET_SKEW</code>可以配置 XY 平面的偏斜校正。</p>
 <div class="highlight"><pre><span></span><code>SET_SKEW XY=140.4,142.8,99.8
 </code></pre></div>
+
 <p>你也可以在 G代码中加入 XZ 和 YZ 的测量值：</p>
 <div class="highlight"><pre><span></span><code>SET_SKEW XY=140.4,142.8,99.8 XZ=141.6,141.4,99.8 YZ=142.4,140.5,99.5
 </code></pre></div>
+
 <p><code>[skew_correction]</code> 模块也支持多配置管理，用法类似<code>[bed_mesh]</code>。在使用<code>SET_SKEW</code> G-Code 设置偏斜后，你可以使用<code>SKEW_PROFILE</code> G-Code来保存偏斜配置：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE SAVE=my_skew_profile
 </code></pre></div>
+
 <p>在执行这个命令之后，Klipper 会提示你发送 <code>SAVE_CONFIG</code> G-Code 来保存配置。如果没有名为<code>my_skew_profile</code>的配置，那么一个新的配置将被创建。如果命名的配置文件存在，它将被覆盖。</p>
 <p>保存配置后，您可以加载它：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE LOAD=my_skew_profile
 </code></pre></div>
+
 <p>也可以删除旧的或过时的配置：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE REMOVE=my_skew_profile
 </code></pre></div>
+
 <p>在删除一个配置文件后，Klipper 提示你发送 <code>SAVE_CONFIG</code> 以保留修改。</p>
 <h2 id="_5">验证修正<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>在配置了 skew_correction 之后，你可以在启用修正的情况下重新打印校准物件。使用下面的 G-Code 来检查每个平面的偏斜。其结果应该低于通过<code>GET_CURRENT_SKEW</code>报告的结果。</p>
 <div class="highlight"><pre><span></span><code>CALC_MEASURED_SKEW AC=&lt;ad长度&gt; BD=&lt;bd长度&gt; AD=&lt;ad长度&gt;
 </code></pre></div>
+
 <h2 id="_6">注意事项<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>由于偏斜校正的性质，建议之在归位和任何类型的靠近打印区域边缘的运动（如清除或喷嘴擦除）完成之后的开始打印 G-Code 中配置偏斜校正。您可以使用 <code>SET_SKEW</code> 或 <code>SKEW_PROFILE</code> G-Code 来完成此操作。还建议在结束打印 G-Code 中发出 <code>SET_SKEW CLEAR=1</code>。</p>
 <p>请记住，<code>[skew_correction]</code>有可能产生一个会使打印头在 X 和/或 Y 轴上超出打印机边界的修正。建议在使用<code>[skew_correction]</code>时将打印物件远离打印机边缘。</p>
@@ -1497,7 +1504,7 @@ Length AD = 99.8
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

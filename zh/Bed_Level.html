@@ -1390,20 +1390,24 @@
 Recv: // Finish with ACCEPT or ABORT command.
 Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
 </code></pre></div>
+
 <p>喷嘴的（按照打印机目前的定义的）当前高度显示在"--&gt; &lt;--"之间。右边的数字是刚刚大于当前高度的最后一次探测高度，左边的数字是小于当前高度的最后一次探测高度（如果没有尝试，则??????）。</p>
 <p>将纸放在喷嘴和床面之间。折叠纸张的一角可以让它更容易被抓在手里。(来回移动纸张时，尽量不要下压床面。）</p>
 <p><img alt="paper-test" src="img/paper-test.jpg" /></p>
 <p>使用 TESTZ 命令将喷嘴向纸条靠近。例如：</p>
 <div class="highlight"><pre><span></span><code>TESTZ Z=-.1
 </code></pre></div>
+
 <p>TESTZ命令将相对喷嘴的当前位置移动指定距离。(因此，<code>Z=-.1</code> 命令喷嘴向床身靠近 0.1mm。）喷嘴停止移动后，来回推动纸张，检查喷嘴是否与纸张接触，并感受摩擦力的大小。继续发出 TESTZ 命令，直到塞纸测试时感觉到少量的摩擦。</p>
 <p>如果发现摩擦力太大，那么可以用一个正的 Z 值将喷嘴向上移动，或者用<code>TESTZ Z=+</code>或<code>TESTZ Z=-</code>来二分上一次位置和当前位置-也就是移动到两个位置之间的一半位置。例如，如果从 TESTZ 命令后收到以下反馈：</p>
 <div class="highlight"><pre><span></span><code>Recv: // Z position: 0.130 --&gt; 0.230 &lt;-- 0.280
 </code></pre></div>
+
 <p>然后 <code>TESTZ Z=-</code> 会将喷嘴移动到 Z 坐标 0.180 （0.130 和 0.230之间）。这个功能可以快速的找到一致阻力的位置。也可以用 <code>Z=++</code> 和 <code>Z=--</code> 直接回到上一次测量位置。例如，在上面反馈后执行<code>TESTZ Z=--</code>命令会将 Z 坐标移动到 0.130。</p>
 <p>感受到少量的摩擦后，运行 ACCEPT 命令：</p>
 <div class="highlight"><pre><span></span><code>ACCEPT
 </code></pre></div>
+
 <p>这将接受给定的 Z 高度，并继续使用给定的校准工具。</p>
 <p>确切的阻力并不重要，就像热膨胀量和纸张的确切宽度并不重要一样。只需要每次测试时尽量达到相同的阻力就行了。</p>
 <p>如果在测试过程中出了问题，可以使用 <code>ABORT</code> 命令来退出校准工具。</p>
@@ -1484,7 +1488,7 @@ Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

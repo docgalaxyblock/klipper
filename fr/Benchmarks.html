@@ -1641,14 +1641,17 @@ queue_step oid=2 interval={ticks} count=60000 add=0
 set_next_step_dir oid=2 dir=1
 queue_step oid=2 interval=3000 count=1 add=0
 </code></pre></div>
+
 <p>Ces tests simulent le déplacement de trois moteurs pas à pas simultanément. Si son exécution entraîne une erreur "Rescheduled timer in the past" or "Stepper too far in past", cela indique que le paramètre <code>ticks</code> est trop faible (il en résulte une vitesse de pas trop rapide) . L'objectif est de trouver le réglage le plus bas du paramètre ticks qui aboutit de manière fiable à la réussite du test. Il devrait être possible de rechercher par dichotomie le paramètre ticks jusqu'à ce qu'une valeur stable soit trouvée.</p>
 <p>En cas d'échec, on peut copier-coller ce qui suit pour effacer l'erreur en vue du prochain test :</p>
 <div class="highlight"><pre><span></span><code>clear_shutdown
 </code></pre></div>
+
 <p>Pour obtenir les tests de moteurs pas à pas, la même séquence de configuration est utilisée, mais seul le premier bloc du test ci-dessus est copié-collé dans la fenêtre console.py.</p>
 <p>Pour produire les tests trouvés dans le document <a href="Features.html">Fonctionnalités</a>, le nombre total de pas par seconde est calculé en multipliant le nombre de steppers actifs par la fréquence mcu nominale et en divisant par le paramètre final ticks. Les résultats sont arrondis au K le plus proche. Par exemple, avec trois steppers actifs :</p>
 <div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
 </code></pre></div>
+
 <p>Les tests sont exécutés avec des paramètres adaptés aux pilotes TMC. Pour les microcontrôleurs prenant en charge <code>STEPPER_BOTH_EDGE=1</code> (comme indiqué dans la ligne <code>MCU config</code> au premier démarrage de console.py), utilisez <code>step_pulse_duration=0</code> et <code>invert_step=-1</code> pour permettre un pas optimisé sur les deux fronts de l'impulsion de pas. Pour les autres microcontrôleurs utiliser un <code>step_pulse_duration</code> correspondant à 100ns.</p>
 <h3 id="test-du-taux-de-pas-sur-avr">Test du taux de pas sur AVR<a class="headerlink" href="#test-du-taux-de-pas-sur-avr" title="Permanent link">&para;</a></h3>
 <p>La séquence de configuration suivante est utilisée sur les puces AVR :</p>
@@ -1658,6 +1661,7 @@ config_stepper oid=1 step_pin=PA3 dir_pin=PA2 invert_step=0 step_pulse_ticks=32
 config_stepper oid=2 step_pin=PC7 dir_pin=PC6 invert_step=0 step_pulse_ticks=32
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version gcc <code>avr-gcc (GCC) 5.4.0</code>. Les tests 16Mhz et 20Mhz ont été exécutés à l'aide d'un simulavr configuré pour un atmega644p (les tests précédents ont confirmé que les résultats du simulavr correspondent aux tests sur un 16Mhz at90usb et un 16Mhz atmega2560).</p>
 <table>
 <thead>
@@ -1685,6 +1689,7 @@ config_stepper oid=1 step_pin=PB26 dir_pin=PC30 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PA21 dir_pin=PC30 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>.</p>
 <table>
 <thead>
@@ -1712,6 +1717,7 @@ config_stepper oid=1 step_pin=PC26 dir_pin=PA8 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PC26 dir_pin=PB4 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>.</p>
 <table>
 <thead>
@@ -1739,6 +1745,7 @@ config_stepper oid=1 step_pin=PD7 dir_pin=PD12 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PD8 dir_pin=PD13 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur la validation <code>59314d99</code> avec la version gcc <code>gcc version 10.3.1 20210621 (version) (GNU Arm Embedded Toolchain 10.3-2021.07)</code>.</p>
 <table>
 <thead>
@@ -1766,6 +1773,7 @@ config_stepper oid=1 step_pin=gpio1_15 dir_pin=gpio0_26 invert_step=0 step_pulse
 config_stepper oid=2 step_pin=gpio0_22 dir_pin=gpio2_1 invert_step=0 step_pulse_ticks=20
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>pru-gcc (GCC) 8.0.0 20170530 (expérimental)</code>.</p>
 <table>
 <thead>
@@ -1793,6 +1801,7 @@ config_stepper oid=1 step_pin=PA3 dir_pin=PA2 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB8 dir_pin=PA2 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>.</p>
 <table>
 <thead>
@@ -1820,6 +1829,7 @@ config_stepper oid=1 step_pin=PB3 dir_pin=PB6 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PA4 dir_pin=PB7 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>.</p>
 <table>
 <thead>
@@ -1847,6 +1857,7 @@ config_stepper oid=1 step_pin=PB2 dir_pin=PB6 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB3 dir_pin=PB7 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>. Les résultats STM32F407 ont été obtenus en exécutant un binaire STM32F407 sur un STM32F446 (et donc en utilisant une horloge de 168 MHz).</p>
 <table>
 <thead>
@@ -1892,6 +1903,7 @@ config_stepper oid=1 step_pin=PA15 dir_pin=PA8 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PE2 dir_pin=PE3 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>00191b5c</code> avec la version de gcc <code>arm-none-eabi-gcc (15:8-2019-q3-1+b1) 8.3.1 20190703 (release) [gcc- 8 branches révision 273027]</code>.</p>
 <table>
 <thead>
@@ -1919,6 +1931,7 @@ config_stepper oid=1 step_pin=PB10 dir_pin=PB2 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB0 dir_pin=PC5 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>247cd753</code> avec la version gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>.</p>
 <table>
 <thead>
@@ -1946,6 +1959,7 @@ config_stepper oid=1 step_pin=P1.21 dir_pin=P1.18 invert_step=-1 step_pulse_tick
 config_stepper oid=2 step_pin=P1.23 dir_pin=P1.18 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code>. Les résultats du LPC1769 à 120Mhz ont été obtenus en overclockant un LPC1768 à 120Mhz.</p>
 <table>
 <thead>
@@ -1991,6 +2005,7 @@ config_stepper oid=1 step_pin=PB3 dir_pin=PA21 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PA17 dir_pin=PA21 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version de gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> sur un microcontrôleur SAMD21G18.</p>
 <table>
 <thead>
@@ -2018,6 +2033,7 @@ config_stepper oid=1 step_pin=PA22 dir_pin=PA21 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PA22 dir_pin=PA19 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> sur un microcontrôleur SAMD51J19A.</p>
 <table>
 <thead>
@@ -2053,6 +2069,7 @@ config_stepper oid=1 step_pin=PL11 dir_pin=PE15 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PL12 dir_pin=PE16 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>08d037c6</code> avec la version de gcc <code>or1k-linux-musl-gcc (GCC) 9.2.0</code> sur un microcontrôleur Allwinner A64-H.</p>
 <table>
 <thead>
@@ -2080,6 +2097,7 @@ config_stepper oid=1 step_pin=gpio26 dir_pin=gpio4 invert_step=-1 step_pulse_tic
 config_stepper oid=2 step_pin=gpio27 dir_pin=gpio5 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version gcc <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> sur une carte Raspberry Pi Pico.</p>
 <table>
 <thead>
@@ -2107,6 +2125,7 @@ config_stepper oid=1 step_pin=gpio4 dir_pin=gpio5 invert_step=0 step_pulse_ticks
 config_stepper oid=2 step_pin=gpio6 dir_pin=gpio17 invert_step=0 step_pulse_ticks=5
 finalize_config crc=0
 </code></pre></div>
+
 <p>Le test a été exécuté pour la dernière fois sur le commit <code>59314d99</code> avec la version gcc <code>gcc (Raspbian 8.3.0-6+rpi1) 8.3.0</code> sur un Raspberry Pi 3 (révision a02082). Il était difficile d'obtenir des résultats stables dans ce benchmark.</p>
 <table>
 <thead>
@@ -2132,6 +2151,7 @@ finalize_config crc=0
 FLOOD 100000 0.0 debug_nop
 get_uptime
 </code></pre></div>
+
 <p>Une fois le test terminé, déterminez la différence entre les horloges signalées dans les deux messages de réponse "uptime". Le nombre total de commandes par seconde est alors <code>100000 * mcu_frequency / clock_diff</code>.</p>
 <p>Notez que ce test peut saturer la capacité USB/CPU d'un Raspberry Pi. En cas d'exécution sur un Raspberry Pi, Beaglebone ou un ordinateur hôte similaire, augmentez le délai (par exemple, <code>DELAY {clock + 20*freq} get_uptime</code>). Le cas échéant, les tests de performances ci-dessous concernent console.py exécuté sur une machine de bureau avec l'appareil connecté via un concentrateur à haut débit.</p>
 <table>
@@ -2310,7 +2330,7 @@ get_uptime
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

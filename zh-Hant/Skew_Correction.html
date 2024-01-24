@@ -1403,27 +1403,34 @@
 Length BD = 142.8
 Length AD = 99.8
 </code></pre></div>
+
 <p><code>SET_SKEW</code>可以配置 XY 平面的偏斜校正。</p>
 <div class="highlight"><pre><span></span><code>SET_SKEW XY=140.4,142.8,99.8
 </code></pre></div>
+
 <p>你也可以在 G程式碼中加入 XZ 和 YZ 的測量值：</p>
 <div class="highlight"><pre><span></span><code>SET_SKEW XY=140.4,142.8,99.8 XZ=141.6,141.4,99.8 YZ=142.4,140.5,99.5
 </code></pre></div>
+
 <p><code>[skew_correction]</code> 模組也支援多配置管理，用法類似<code>[bed_mesh]</code>。在使用<code>SET_SKEW</code> G-Code 設定偏斜后，你可以使用<code>SKEW_PROFILE</code> G-Code來儲存偏斜配置：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE SAVE=my_skew_profile
 </code></pre></div>
+
 <p>在執行這個命令之後，Klipper 會提示你發送 <code>SAVE_CONFIG</code> G-Code 來儲存配置。如果沒有名為<code>my_skew_profile</code>的配置，那麼一個新的配置將被建立。如果命名的配置檔案存在，它將被覆蓋。</p>
 <p>儲存配置后，您可以載入它：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE LOAD=my_skew_profile
 </code></pre></div>
+
 <p>也可以刪除舊的或過時的配置：</p>
 <div class="highlight"><pre><span></span><code>SKEW_PROFILE REMOVE=my_skew_profile
 </code></pre></div>
+
 <p>在刪除一個配置檔案后，Klipper 提示你發送 <code>SAVE_CONFIG</code> 以保留修改。</p>
 <h2 id="_5">驗證修正<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>在配置了 skew_correction 之後，你可以在啟用修正的情況下重新列印校準物件。使用下面的 G-Code 來檢查每個平面的偏斜。其結果應該低於通過<code>GET_CURRENT_SKEW</code>報告的結果。</p>
 <div class="highlight"><pre><span></span><code>CALC_MEASURED_SKEW AC=&lt;ad長度&gt; BD=&lt;bd長度&gt; AD=&lt;ad長度&gt;
 </code></pre></div>
+
 <h2 id="_6">注意事項<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>由於偏斜校正的性質，建議之在歸位和任何型別的靠近列印區域邊緣的運動（如清除或噴嘴擦除）完成之後的開始列印 G-Code 中配置偏斜校正。您可以使用 <code>SET_SKEW</code> 或 <code>SKEW_PROFILE</code> G-Code 來完成此操作。還建議在結束列印 G-Code 中發出 <code>SET_SKEW CLEAR=1</code>。</p>
 <p>請記住，<code>[skew_correction]</code>有可能產生一個會使列印頭在 X 和/或 Y 軸上超出印表機邊界的修正。建議在使用<code>[skew_correction]</code>時將列印物件遠離印表機邊緣。</p>
@@ -1497,7 +1504,7 @@ Length AD = 99.8
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

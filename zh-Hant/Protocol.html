@@ -1557,6 +1557,7 @@ schedule_digital_out oid=8 clock=4000000 value=0
 queue_step oid=7 interval=7458 count=10 add=331
 queue_step oid=7 interval=11717 count=4 add=1281
 </code></pre></div>
+
 <p>有關可用命令的資訊，請參閱 <a href="MCU_Commands.html">mcu 命令</a>文件。有關如何將 G-Code 檔案轉換為其相應的可讀的微控制器命令資訊，請參閱<a href="Debugging.html">除錯</a>文件。</p>
 <p>本頁提供了Klipper訊息傳遞協議本身的高層描述。它描述了訊息是如何被聲明、以二進制格式編碼（"壓縮 "方案）和傳輸的。</p>
 <p>該協議的目標是在主機和微控制器之間建立一個無錯誤的通訊通道，對微控制器來說是低延遲、低頻寬和低複雜度的。</p>
@@ -1566,6 +1567,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>微控制器軟體通過使用C程式碼中的DECL_COMMAND()宏來聲明一個 「命令」。例如：</p>
 <div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
 </code></pre></div>
+
 <p>以上聲明了一個名為 "update_digital_out "的命令。這允許主機 「invoke」這個命令，這將使得command_update_digital_out()C函式在微控制器中被執行。上述內容還表明，該命令需要兩個整數參數。當command_update_digital_out()C程式碼被執行時，它將被傳遞一個包含這兩個整數的陣列--第一個對應于 "oid"，第二個對應于 "value"。</p>
 <p>一般來說，參數是用printf()風格的語法描述的（例如，"%u"）。這種格式化直接對應於人類可讀的命令（例如，"update_digital_out oid=7 value=1"）。在上面的例子中，"value="是一個參數名稱，"%c "表示該參數是一個整數。在內部，參數名只作為記錄使用。在這個例子中，"%c "也是作為記錄使用的，表示預期的整數是1位元組寬度（聲明的整數寬度不影響編解碼）。</p>
 <p>微控制器韌體構建的時候包含所有用DECL_COMMAND()聲明的命令，確定其參數，並使得它們可以被呼叫。</p>
@@ -1573,6 +1575,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>當從微控制器向主機發送資訊時會產生一個 "響應"。這些都是使用sendf()C語言宏來聲明和發送的。例如：</p>
 <div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
 </code></pre></div>
+
 <p>以上傳輸了一個 "狀態 "響應訊息，其中包含兩個整數參數（"時鐘 "和 "狀態"）。微控制器的構建會自動找到所有sendf()的呼叫，併爲其產生編碼器。sendf()函式的第一個參數描述了響應，它的格式與命令聲明相同。</p>
 <p>主機可以為每個響應註冊一個回撥函式。因此，實際上，命令允許主機在微控制器上呼叫C函式，響應允許微控制器軟體在主機上呼叫程式碼。</p>
 <p>sendf()宏只能從命令或任務處理程式中呼叫，而不能從中斷或定時器中呼叫。程式碼不需要在收到命令的響應中發出sendf()，程式碼也不限制sendf()的呼叫次數，任務處理程式在在任何時候都可以呼叫sendf()。</p>
@@ -1580,6 +1583,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>爲了簡化除錯，也有一個output()C函式。例如：</p>
 <div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
 </code></pre></div>
+
 <p>output()函式的用法與printf()相似–它的目的是產生和格式化任意的資訊供人閱讀。</p>
 <h3 id="_6">聲明列舉<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>列舉允許主機程式碼對微控制器作為整數處理的參數使用字串標識。它們在微控制器程式碼中被聲明-例如：</p>
@@ -1587,21 +1591,25 @@ queue_step oid=7 interval=11717 count=4 add=1281
 
 DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
 </code></pre></div>
+
 <p>在第一個例子中，DECL_ENUMERATION()宏定義了一個列舉量可以用於任意的命令/響應訊息，這個列舉量的參數名稱為 "spi_bus "或參數名稱後綴為"_spi_bus "。對於此參數，字串 "spi "是一個有效的值，它將以一個零的整數值被傳遞。</p>
 <p>也可以聲明一個列舉範圍。在第二個例子中，"pin "參數（或任何後綴為"_pin "的參數）將接受PC0、PC1、PC2、...、PC7作為有效值。字串將被轉化成整數16、17、18...23進行傳輸。</p>
 <h3 id="_7">聲明常量<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>常量也可以被導出。例子如下：</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
 </code></pre></div>
+
 <p>可以從微控制器向主機輸出一個名為 "SERIAL_BAUD "，值為250000的常數。也可以將字串聲明成常量-例如：</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
 </code></pre></div>
+
 <h2 id="_8">底層訊息編碼<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>爲了實現上述RPC機制，每個命令和響應都被編碼成二進制格式進行傳輸。本節介紹這個傳輸系統。</p>
 <h3 id="_9">訊息塊<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>所有從主機到微控制器以及從微控制器到主機的數據都包含在 "訊息塊 "中。一個訊息塊有一個兩位元組的頭和一個三位元組的尾。資訊塊的格式如下：</p>
 <div class="highlight"><pre><span></span><code>&lt;1 byte length&gt;&lt;1 byte sequence&gt;&lt;n-byte content&gt;&lt;2 byte crc&gt;&lt;1 byte sync&gt;
 </code></pre></div>
+
 <p>長度位元組指示訊息塊中的位元組數，包括頭和尾的位元組（因此訊息的最短長度為5位元組）。目前最大的訊息塊長度為64位元組。序號位元組的低4位是序列號，高4位總是0x10（高4位保留給未來用）。內容位元組包含任意數據，其格式在下一節中描述。crc位元組包含訊息塊的16位CCITT<a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC</a>，CRC計算包括頭位元組但不包括尾位元組。同步位元組為0x7e。</p>
 <p>訊息塊的格式是受<a href="https://en.wikipedia.org/wiki/High-Level_Data_Link_Control">HDLC</a>訊息幀的啓發。與HDLC一樣，訊息塊在開始時可以選擇包含一個額外的同步字元。與HDLC不同的是，同步字元並不專屬於框架，也可以出現在訊息塊內容中（不需要轉義）。</p>
 <h3 id="_10">訊息塊內容<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
@@ -1612,9 +1620,11 @@ update_digital_out oid=5 value=0
 get_config
 get_clock
 </code></pre></div>
+
 <p>並編碼為下面八個VLQ整數：</p>
 <div class="highlight"><pre><span></span><code>&lt;id_update_digital_out&gt;&lt;6&gt;&lt;1&gt;&lt;id_update_digital_out&gt;&lt;5&gt;&lt;0&gt;&lt;id_get_config&gt;&lt;id_get_clock&gt;
 </code></pre></div>
+
 <p>爲了對資訊內容進行編解碼，主機和微控制器都必須確保使用的命令的ID和每個命令對應的參數數量一致。因此，在上面的例子中，主機和微控制器都知道 "id_update_digital_out "後面總是跟著兩個參數，而 "id_get_config "和 "id_get_clock "沒有參數。主機和微控制器共享一個 "數據字典"，這個數據字典將命令描述（例如，"update_digital_out oid=%c value=%c"）對映到它們的整數命令ID。當處理數據時，解析器將知道一個給定的命令ID后預期有特定數量的VLQ編碼參數。</p>
 <p>從微控制器發送到主機的塊的訊息內容遵循相同的格式。這些訊息中的識別符號是 "響應ID"，但它們的作用相同，並遵循相同的編碼規則。事實上，從微控制器發送到主機的訊息塊在訊息塊內容中只包含一個響應。</p>
 <h4 id="_11">可變長度數值<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
@@ -1653,6 +1663,7 @@ get_clock
 <p>作為上述編碼規則的例外，如果一個命令或響應的參數是一個動態字串，那麼該參數不會被編碼為一個簡單的VLQ整數。相反，它的編碼方式是將長度作為一個VLQ編碼的整數並跟著內容本身來傳輸：</p>
 <div class="highlight"><pre><span></span><code>&lt;VLQ encoded length&gt;&lt;n-byte contents&gt;
 </code></pre></div>
+
 <p>在數據字典中的命令描述使主機和微控制器都知道哪些命令參數使用簡單的VLQ編碼，哪些參數使用字串編碼。</p>
 <h2 id="_13">數據字典<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p>爲了在微控制器和主機之間建立有意義的通訊，雙方必須商定一個 "數據字典"。這個數據字典包含了命令和響應的整數識別符號及它們的描述。</p>
@@ -1737,7 +1748,7 @@ get_clock
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

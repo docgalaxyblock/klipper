@@ -3719,11 +3719,13 @@ serial:
 # 重置自己。如果微控制器默認為“arduino”
 # 通過串行端口進行通信，否則為“命令”。
 </code></pre></div>
+
 <h3 id="mcu-mcu-my_extra_mcu">額外的mcu [mcu my_extra_mcu]<a class="headerlink" href="#mcu-mcu-my_extra_mcu" title="Permanent link">&para;</a></h3>
 <p>額外的微控制器（可以定義任意數量的帶有「mcu」字首的部分）。 額外的微控制器引入了額外的引腳，這些引腳可以配置為加熱器、步進器、風扇等。例如，如果引入了「[mcu extra_mcu]」部分，那麼諸如「extra_mcu:ar9」之類的引腳就可以在其他地方使用 ，在配置中（其中「ar9」是給定 mcu 上的硬體引腳名稱或別名）。</p>
 <div class="highlight"><pre><span></span><code>[mcu my_extra_mcu]
 #   請參閱&quot;mcu&quot;分段的配置參數。
 </code></pre></div>
+
 <h2 id="_4">常用的機型設定<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="printer">[printer]<a class="headerlink" href="#printer" title="Permanent link">&para;</a></h3>
 <p>印表機控制的高級設定部分。</p>
@@ -3755,6 +3757,7 @@ max_accel:
 #   cornering velocity. If this is set to zero then the toolhead will
 #   decelerate to zero at each corner. The default is 5mm/s.
 </code></pre></div>
+
 <h3 id="stepper">[stepper]<a class="headerlink" href="#stepper" title="Permanent link">&para;</a></h3>
 <p>步進電機定義。 不同的印表機型別（由 [列印] 配置部分中的「機型」選項指定）步進器需要定義不同的名稱（例如，<code>stepper_x</code> 與 <code>stepper_a</code>）。 以下是常見的步進器定義。</p>
 <p>有關計算 <code>rotation_distance</code> 參數的信息，請參閱 <a href="Rotation_Distance.html">rotation distance document</a>。有關使用多個微控制器進行歸位的信息，請參見 <a href="Multi_MCU_Homing.html">Multi-MCU homing</a> 文檔。</p>
@@ -3830,6 +3833,7 @@ position_max:
 #   default is true if position_endstop is near position_max and false
 #   if near position_min.
 </code></pre></div>
+
 <h3 id="_5">笛卡爾機型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>有關示例XYZ機型配置檔案，請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-cartesian.cfg">example-cartesian.cfg</a>。</p>
 <p>此處描述的參數只適用於笛卡爾印表機，有關可用參數，請參閱 <a href="#common-kinematic-settings">常用運動設定</a>。</p>
@@ -3857,6 +3861,7 @@ max_z_accel:
 # the Z axis in a cartesian robot.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="_6">線性三角洲機型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>有關示例線性三角洲機型配置檔案，請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-delta.cfg">example-delta.cfg</a>。 有關校準的資訊，請參閱 <a href="Delta_Calibrate.html">delta calibrate guide</a>。</p>
 <p>此處僅描述了線性三角洲印表機的特定參數 - 有關可用參數，請參閱 <a href="#common-kinematic-settings">常用運動設定</a>。</p>
@@ -3933,6 +3938,7 @@ radius:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
+
 <h3 id="deltesian-kinematics">Deltesian Kinematics<a class="headerlink" href="#deltesian-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-deltesian.cfg">example-deltesian.cfg</a> for an example deltesian kinematics config file.</p>
 <p>Only parameters specific to deltesian printers are described here - see <a href="#common-kinematic-settings">common kinematic settings</a> for available parameters.</p>
@@ -4000,6 +4006,7 @@ arm_x_length:
 # the Y axis in a deltesian robot.
 [stepper_y]
 </code></pre></div>
+
 <h3 id="corexy">CoreXY 機型<a class="headerlink" href="#corexy" title="Permanent link">&para;</a></h3>
 <p>有關 corexy（及 H-BOT）機型文件的示例，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexy.cfg">example-corexy.cfg</a>。</p>
 <p>這裡只描述了 CoreXY 印表機特有的參數 -- 有關可用參數，請參閱 <a href="#common-kinematic-settings">常見機型設定</a>。</p>
@@ -4027,6 +4034,7 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="corex">CoreX 機型<a class="headerlink" href="#corex" title="Permanent link">&para;</a></h3>
 <p>有關 corexz 機型配置文件的示例，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexz.cfg">example-corexz.cfg</a>。</p>
 <p>此處描述的參數只適用於笛卡爾印表機—有關全部可用參數，請參閱 <a href="#common-kinematic-settings">常用的機型設定</a>。</p>
@@ -4051,6 +4059,7 @@ max_z_accel:
 # stepper controlling the X-Z movement.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="corexy_1">混合型 CoreXY 機型<a class="headerlink" href="#corexy_1" title="Permanent link">&para;</a></h3>
 <p>有關示例混合 corexy 機型配置文件，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexy.cfg">example-hybrid-corexy.cfg</a>。</p>
 <p>這種機型也稱為 Markforged 機型。</p>
@@ -4076,6 +4085,7 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="corexz">混合型 CoreXZ 機型<a class="headerlink" href="#corexz" title="Permanent link">&para;</a></h3>
 <p>有關示例混合 corexz 機型配置文件，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexz.cfg">example-hybrid-corexz.cfg</a>。</p>
 <p>這種機型也稱為 Markforged 機型。</p>
@@ -4101,6 +4111,7 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="polar">Polar機型<a class="headerlink" href="#polar" title="Permanent link">&para;</a></h3>
 <p>有關Polar機型配置文件的示例，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-polar.cfg">example-polar.cfg</a>。</p>
 <p>這裡只描述了極地印表機特有的參數—全部可用的參數請見<a href="#common-kinematic-settings">常用的機型設定</a>。</p>
@@ -4134,6 +4145,7 @@ gear_ratio:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="_7">旋轉三角洲機型<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>有關旋轉三角洲機型配置文件的示例，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-rotary-delta.cfg">example-rotary-delta.cfg</a>。</p>
 <p>此處僅介紹特定於旋轉三角洲印表機的參數—有關可用參數，請參閱<a href="#common-kinematic-settings">常用的機型設定</a>。</p>
@@ -4214,6 +4226,7 @@ radius:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
+
 <h3 id="_8">纜繩絞盤機型<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-winch.cfg">example-winch.cfg</a> 以獲取示例電纜絞盤運動學配置文件。</p>
 <p>這裡只描述了纜繩鉸盤式印表機特有的參數 — 全部可用的參數見<a href="#common-kinematic-settings">常用的機型設定</a>。</p>
@@ -4235,6 +4248,7 @@ anchor_z:
 #   The X, Y, and Z position of the cable winch in cartesian space.
 #   These parameters must be provided.
 </code></pre></div>
+
 <h3 id="_9">無機型<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>可以定義特殊的 "none" 機型來禁用 Klipper 中的機型支援。可以用於控制不是 3D 印表機的裝置或除錯。</p>
 <div class="highlight"><pre><span></span><code>[printer]
@@ -4244,6 +4258,7 @@ max_accel: 1
 #   The max_velocity and max_accel parameters must be defined. The
 #   values are not used for &quot;none&quot; kinematics.
 </code></pre></div>
+
 <h2 id="_10">通用擠出機和熱床支援<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="extruder">[extruder]<a class="headerlink" href="#extruder" title="Permanent link">&para;</a></h3>
 <p>The extruder section is used to describe the heater parameters for the nozzle hotend along with the stepper controlling the extruder. See the <a href="G-Codes.html#extruder">command reference</a> for additional information. See the <a href="Pressure_Advance.html">pressure advance guide</a> for information on tuning pressure advance.</p>
@@ -4369,6 +4384,7 @@ max_temp:
 #   enough so that reasonable temperatures do not result in an error.
 #   These parameters must be provided.
 </code></pre></div>
+
 <h3 id="heater_bed">[heater_bed]<a class="headerlink" href="#heater_bed" title="Permanent link">&para;</a></h3>
 <p>heat_bed 部分描述了一個加熱床。它使用與“擠出機”部分中描述的相同的加熱器設置。</p>
 <div class="highlight"><pre><span></span><code>[heater_bed]
@@ -4380,6 +4396,7 @@ min_temp:
 max_temp:
 #   以上參數詳見「extruder」配置分段。
 </code></pre></div>
+
 <h2 id="_11">列印床調平支援<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="bed_mesh">[bed_mesh]<a class="headerlink" href="#bed_mesh" title="Permanent link">&para;</a></h3>
 <p>網床調平。定義一個 bed_mesh 配置分段來啟用基於探測點產生網格的 Z 軸偏移移動變換。當使用探針歸位 Z 軸時，建議通過 printer.cfg 中定義一個 safe_z_home 分段使 Z 軸歸位在列印區域的中心執行。</p>
@@ -4403,6 +4420,7 @@ max_temp:
                    /
                  x  (0, -r) start
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code>[bed_mesh]
 #speed: 50
 #   The speed (in mm/s) of non-probing moves during the calibration.
@@ -4494,6 +4512,7 @@ max_temp:
 #   for details on faulty regions.  Up to 99 faulty regions may be added.
 #   By default no faulty regions are set.
 </code></pre></div>
+
 <h3 id="bed_tilt">[bed_tilt]<a class="headerlink" href="#bed_tilt" title="Permanent link">&para;</a></h3>
 <p>列印床傾斜補償。可以定義一個 bed_tilt 配置分段來啟用移動變換傾斜列印床補償。請注意，bed_mesh 和 bed_tilt 不相容：兩者無法同時被定義。</p>
 <p>有關更多信息，請參閱 <a href="G-Codes.html#bed_tilt">命令參考</a>。</p>
@@ -4523,6 +4542,7 @@ max_temp:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
+
 <h3 id="bed_screws">[bed_screws]<a class="headerlink" href="#bed_screws" title="Permanent link">&para;</a></h3>
 <p>幫助調整床調平螺絲的工具。可以定義 [bed_screws] 配置部分以啟用 BED_SCREWS_ADJUST G-Code 命令。</p>
 <p>有關更多信息，請參閱 <a href="Manual_Level.html#adjusting-bed-leveling-screws">leveling guide</a> 和 <a href="G-Codes.html#bed_screws">command reference</a>。</p>
@@ -4559,6 +4579,7 @@ max_temp:
 #   The speed (in mm/s) when moving from a horizontal_move_z position
 #   to a probe_height position. The default is 5.
 </code></pre></div>
+
 <h3 id="screws_tilt_adjust">[screws_tilt_adjust]<a class="headerlink" href="#screws_tilt_adjust" title="Permanent link">&para;</a></h3>
 <p>使用 Z 探頭幫助調整床螺絲傾斜度的工具。可以定義一個 screw_tilt_adjust 配置部分來啟用 SCREWS_TILT_CALCULATE G-Code 命令。</p>
 <p>有關更多信息，請參閱 <a href="Manual_Level.html#adjusting-bed-leveling-screws-using-the-bed-probe">leveling guide</a> 和 <a href="G-Codes.html#screws_tilt_adjust">command reference</a>。</p>
@@ -4592,6 +4613,7 @@ max_temp:
 #   rotation of the knob decreases the gap between the nozzle and the
 #   bed. Conversely, a counter-clockwise rotation increases the gap.
 </code></pre></div>
+
 <h3 id="z_tilt">[z_tilt]<a class="headerlink" href="#z_tilt" title="Permanent link">&para;</a></h3>
 <p>多 Z 步進傾斜調整。此功能可以獨立調整多個 z 步進器（請參閱“stepper_z1”部分）以調整傾斜。如果此部分存在，則 Z_TILT_ADJUST 擴展 <a href="G-Codes.html#z_tilt">G-Code 命令</a> 變得可用。</p>
 <div class="highlight"><pre><span></span><code>[z_tilt]
@@ -4626,6 +4648,7 @@ max_temp:
 #   minimum value for the range of probed points which you can learn
 #   by observing command output.
 </code></pre></div>
+
 <h3 id="quad_gantry_level">[quad_gantry_level]<a class="headerlink" href="#quad_gantry_level" title="Permanent link">&para;</a></h3>
 <p>使用 4 個獨立控制的 Z 電機移動龍門調平。修正移動龍門上的雙曲拋物線效應（薯片），更加靈活。警告：在移動床上使用它可能會導致不良結果。如果此部分存在，則 QUAD_GANTRY_LEVEL 擴展 G 代碼命令可用。此例程假定以下 Z 電機配置：</p>
 <div class="highlight"><pre><span></span><code> ----------------
@@ -4637,6 +4660,7 @@ max_temp:
  |Z           Z3|
  ----------------
 </code></pre></div>
+
 <p>其中 X 是床上的0、0點</p>
 <div class="highlight"><pre><span></span><code>[quad_gantry_level]
 #gantry_corners:
@@ -4665,10 +4689,12 @@ max_temp:
 #   If retries are enabled then retry if largest and smallest probed
 #   points differ more than retry_tolerance.
 </code></pre></div>
+
 <h3 id="skew_correction">[skew_correction]<a class="headerlink" href="#skew_correction" title="Permanent link">&para;</a></h3>
 <p>打印機歪斜校正。可以使用軟件糾正打印機在 3 個平面 xy、xz、yz 上的歪斜。這是通過沿平面打印校準模型並測量三個長度來完成的。由於歪斜校正的性質，這些長度是通過 gcode 設置的。有關詳細信息，請參閱 <a href="Skew_Correction.html">Skew Correction</a> 和 <a href="G-Codes.html#skew_correction">Command Reference</a>。</p>
 <div class="highlight"><pre><span></span><code>[skew_correction]
 </code></pre></div>
+
 <h3 id="z_thermal_adjust">[z_thermal_adjust]<a class="headerlink" href="#z_thermal_adjust" title="Permanent link">&para;</a></h3>
 <p>Temperature-dependant toolhead Z position adjustment. Compensate for vertical toolhead movement caused by thermal expansion of the printer's frame in real-time using a temperature sensor (typically coupled to a vertical section of frame).</p>
 <p>See also: <a href="G-Codes.html#z_thermal_adjust">extended g-code commands</a>.</p>
@@ -4700,6 +4726,7 @@ max_temp:
 #   See the &quot;heater_generic&quot; section for the definition of this
 #   parameter.
 </code></pre></div>
+
 <h2 id="_12">自定義歸零<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <h3 id="safe_z_home">[safe_z_home]<a class="headerlink" href="#safe_z_home" title="Permanent link">&para;</a></h3>
 <p>安全 Z 歸位。可以使用這種機制將 Z 軸歸位到特定的 X、Y 坐標。例如，如果工具頭必須在 Z 可以歸位之前移動到床的中心，這很有用。</p>
@@ -4724,6 +4751,7 @@ home_xy_position:
 #   When set to True, the X and Y axes are reset to their previous
 #   positions after Z axis homing. The default is False.
 </code></pre></div>
+
 <h3 id="homing_override">[homing_override]<a class="headerlink" href="#homing_override" title="Permanent link">&para;</a></h3>
 <p>歸位覆寫。可以使用這種機制來執行一系列 G-Code 命令來替代常規的G28。通常用於需要特定過程才能將機器歸零的印表機。</p>
 <div class="highlight"><pre><span></span><code>[homing_override]
@@ -4747,6 +4775,7 @@ gcode：
 #   頭必須在執行常規 G28 機制前移動相應的軸時有用。
 #   預設不假定軸的位置。
 </code></pre></div>
+
 <h3 id="endstop_phase">[endstop_phase]<a class="headerlink" href="#endstop_phase" title="Permanent link">&para;</a></h3>
 <p>步進相位調整擋塊。要使用此功能，請使用“endstop_phase”前綴定義配置部分，後跟相應步進器配置部分的名稱（例如，“[endstop_phase stepper_z]”）。此功能可以提高限位開關的準確性。添加一個簡單的“[endstop_phase]”聲明以啟用 ENDSTOP_PHASE_CALIBRATE 命令。</p>
 <p>有關更多信息，請參閱 <a href="Endstop_Phase.html">endstop phases guide</a> 和 <a href="G-Codes.html#endstop_phase">command reference</a>。</p>
@@ -4767,6 +4796,7 @@ gcode：
 #   層都會在全步上。）
 #   預設為 False。
 </code></pre></div>
+
 <h2 id="g">G 程式碼宏和事件<a class="headerlink" href="#g" title="Permanent link">&para;</a></h2>
 <h3 id="gcode_macro">[gcode_macro]<a class="headerlink" href="#gcode_macro" title="Permanent link">&para;</a></h3>
 <p>G-Code宏（"gcode_macro"字首定義的G-Code 宏分段沒有數量限制）。更多資訊請參見<a href="Command_Templates.html">命令模板指南</a>。</p>
@@ -4793,6 +4823,7 @@ gcode：
 #   在 HELP 命令或自動完成中使用的簡單描述。
 #   預設為&quot;G-Code macro&quot;。
 </code></pre></div>
+
 <h3 id="delayed_gcode">[delayed_gcode]<a class="headerlink" href="#delayed_gcode" title="Permanent link">&para;</a></h3>
 <p>在設定的延遲上執行 G-Codee。有關詳細信息，請參閱 <a href="Command_Templates.html#delayed-gcodes">command template guide</a> 和 <a href="G-Codes.html#delayed_gcode">command reference</a>。</p>
 <div class="highlight"><pre><span></span><code>[delayed_gcode my_delayed_gcode]。
@@ -4806,6 +4837,7 @@ gcode:
 #   用。如果設定為 0，delayed_gcode 將在啟動時不執行。
 # 預設為0。
 </code></pre></div>
+
 <h3 id="save_variables">[save_variables]<a class="headerlink" href="#save_variables" title="Permanent link">&para;</a></h3>
 <p>支持將變量保存到磁盤，以便在重新啟動時保留它們。有關詳細信息，請參閱 [command templates]](Command_Templates.md#save-variables-to-disk) 和 <a href="G-Codes.html#save_variables">G-Code reference</a>。</p>
 <div class="highlight"><pre><span></span><code>[save_variables]
@@ -4813,6 +4845,7 @@ filename:
 #   必須提供一個可以用來儲存參數到磁碟的檔名。
 #   例如 . ~/variables.cfg
 </code></pre></div>
+
 <h3 id="idle_timeout">[idle_timeout]<a class="headerlink" href="#idle_timeout" title="Permanent link">&para;</a></h3>
 <p>閒置超時。預設啟用閒置超時 - 新增顯式 idle_timeout 配置分段以更改預設設定。</p>
 <div class="highlight"><pre><span></span><code>[idle_timeout]
@@ -4824,6 +4857,7 @@ filename:
 #   在執行以上 G-Code 前等待的空閑時間（以秒為單位）
 #   預設為 600 秒。
 </code></pre></div>
+
 <h2 id="g-code">可選的 G-Code 特性<a class="headerlink" href="#g-code" title="Permanent link">&para;</a></h2>
 <h3 id="virtual_sdcard">[virtual_sdcard]<a class="headerlink" href="#virtual_sdcard" title="Permanent link">&para;</a></h3>
 <p>如果主機的速度不足以很好地執行 OctoPrint，虛擬 SD 卡可能有幫助。它允許 Klipper 主機軟體使用標準的 SD 卡G程式碼命令（例如，M24）直接列印儲存在主機目錄中的 gcode 檔案。</p>
@@ -4837,11 +4871,13 @@ path:
 #on_error_gcode:
 #   A list of G-Code commands to execute when an error is reported.
 </code></pre></div>
+
 <h3 id="sdcard_loop">[sdcard_loop]<a class="headerlink" href="#sdcard_loop" title="Permanent link">&para;</a></h3>
 <p>一些具有階段清除功能的打印機，例如部件彈出器或帶式打印機，可以在 sdcard 文件的循環部分中找到用途。 （例如，一遍又一遍地打印相同的零件，或重複零件的一部分以獲得鍊或其他重複圖案）。</p>
 <p>有關支持的命令，請參閱 <a href="G-Codes.html#sdcard_loop">命令參考</a>。請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> 文件了解 Marlin 兼容的 M808 G-Code碼。</p>
 <div class="highlight"><pre><span></span><code>[sdcard_loop]
 </code></pre></div>
+
 <h3 id="force_move">[force_move]<a class="headerlink" href="#force_move" title="Permanent link">&para;</a></h3>
 <p>支持手動移動步進電機進行診斷。請注意，使用此功能可能會使打印機處於無效狀態 - 有關重要詳細信息，請參閱 <a href="G-Codes.html#force_move">命令參考</a>。</p>
 <div class="highlight"><pre><span></span><code>[force_move]
@@ -4850,6 +4886,7 @@ path:
 #   G程式碼命令。
 #   預設為false。
 </code></pre></div>
+
 <h3 id="pause_resume">[pause_resume]<a class="headerlink" href="#pause_resume" title="Permanent link">&para;</a></h3>
 <p>支持位置捕獲和恢復的暫停/恢復功能。有關詳細信息，請參閱 <a href="G-Codes.html#pause_resume">命令參考</a>。</p>
 <div class="highlight"><pre><span></span><code>[pause_resume]
@@ -4857,6 +4894,7 @@ path:
 #   當捕捉/恢復功能被啟用時，返回到捕獲的位置的速度(單位：毫米/秒)。
 #   預設為50.0 mm/s。
 </code></pre></div>
+
 <h3 id="firmware_retraction">[firmware_retraction]<a class="headerlink" href="#firmware_retraction" title="Permanent link">&para;</a></h3>
 <p>固件印絲回抽。這啟用了由許多切片器發出的 G10（回抽）和 G11（取消回抽）GCODE 命令。下面的參數提供了啟動默認值，儘管可以通過 SET_RETRACTION <a href="G-Codes.html#firmware_retraction">命令</a>) 調整這些值，從而允許每燈絲設置和運行時間調整。</p>
 <div class="highlight"><pre><span></span><code>[firmware_retraction]
@@ -4873,6 +4911,7 @@ path:
 #   退回速度，以毫米(mm)為單位。
 #   預設為每秒10毫米
 </code></pre></div>
+
 <h3 id="gcode_arcs">[gcode_arcs]<a class="headerlink" href="#gcode_arcs" title="Permanent link">&para;</a></h3>
 <p>支持 G-Code arc (G2/G3) 命令。</p>
 <div class="highlight"><pre><span></span><code>[gcode_arcs]
@@ -4883,6 +4922,7 @@ path:
 #   配置值的曲線會被視為直線。
 #   預設為1毫米。
 </code></pre></div>
+
 <h3 id="respond">[respond]<a class="headerlink" href="#respond" title="Permanent link">&para;</a></h3>
 <p>啟用“M118”和“RESPOND”擴展 <a href="G-Codes.html#respond">commands</a>。</p>
 <div class="highlight"><pre><span></span><code>[respond]
@@ -4896,11 +4936,13 @@ path:
 # 直接設置默認前綴。如果存在，該值將
 # 覆蓋“default_type”。
 </code></pre></div>
+
 <h3 id="exclude_object">[exclude_object]<a class="headerlink" href="#exclude_object" title="Permanent link">&para;</a></h3>
 <p>Enables support to exclude or cancel individual objects during the printing process.</p>
 <p>See the <a href="Exclude_Object.html">exclude objects guide</a> and <a href="G-Codes.html#excludeobject">command reference</a> for additional information. See the <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> file for a Marlin/RepRapFirmware compatible M486 G-Code macro.</p>
 <div class="highlight"><pre><span></span><code>[exclude_object]
 </code></pre></div>
+
 <h2 id="_13">共振補償<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <h3 id="input_shaper">[input_shaper]<a class="headerlink" href="#input_shaper" title="Permanent link">&para;</a></h3>
 <p>啟用 <a href="Resonance_Compensation.html">resonance compensation</a>。另請參閱 <a href="G-Codes.html#input_shaper">命令參考</a>。</p>
@@ -4930,6 +4972,7 @@ path:
 #   預設值是 0.1，適用於大多數印表機。
 #   大多數情況下不需要調整這個值。
 </code></pre></div>
+
 <h3 id="adxl345">[adxl345]<a class="headerlink" href="#adxl345" title="Permanent link">&para;</a></h3>
 <p>支持 ADXL345 加速度計。這種支持允許人們從傳感器查詢加速度計測量值。這將啟用 ACCELEROMETER_MEASURE 命令（有關詳細信息，請參閱 <a href="G-Codes.html#adxl345">G-Codes</a>）。默認芯片名稱是“default”，但可以指定一個明確的名稱（例如，[adxl345 my_chip_name]）。</p>
 <div class="highlight"><pre><span></span><code>[adxl345]
@@ -4958,6 +5001,7 @@ cs_pin:
 #   將此速率從預設的3200改為低於800的速率，這將大大影響
 #   共振測量的質量。
 </code></pre></div>
+
 <h3 id="lis2dw">[lis2dw]<a class="headerlink" href="#lis2dw" title="Permanent link">&para;</a></h3>
 <p>Support for LIS2DW accelerometers.</p>
 <div class="highlight"><pre><span></span><code>[lis2dw]
@@ -4975,6 +5019,7 @@ cs_pin:
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
+
 <h3 id="mpu9250">[mpu9250]<a class="headerlink" href="#mpu9250" title="Permanent link">&para;</a></h3>
 <p>Support for MPU-9250, MPU-9255, MPU-6515, MPU-6050, and MPU-6500 accelerometers (one may define any number of sections with an "mpu9250" prefix).</p>
 <div class="highlight"><pre><span></span><code>[mpu9250 my_accelerometer]
@@ -4990,6 +5035,7 @@ cs_pin:
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
+
 <h3 id="resonance_tester">[resonance_tester]<a class="headerlink" href="#resonance_tester" title="Permanent link">&para;</a></h3>
 <p>支持共振測試和自動輸入整形器校準。為了使用該模塊的大部分功能，必須安裝額外的軟件依賴項；有關詳細信息，請參閱 <a href="Measuring_Resonances.html">測量共振</a> 和 <a href="G-Codes.html#resonance_tester">命令參考</a>。有關 <code>max_smoothing</code> 參數及其使用的更多信息，請參閱測量共振指南的 <a href="Measuring_Resonances.html#max-smoothing">Max Smoothing</a> 部分。</p>
 <div class="highlight"><pre><span></span><code>[resonance_tester]
@@ -5037,6 +5083,7 @@ cs_pin:
 #   will decrease the precision of the test. The default value is 1.0
 #   (Hz/sec == sec^-2).
 </code></pre></div>
+
 <h2 id="_14">配置檔案助手<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="board_pins">[board_pins]<a class="headerlink" href="#board_pins" title="Permanent link">&para;</a></h3>
 <p>控制板引腳別名（可以定義任意數量的帶有 "board_pins "字首的分段）。用它來定義微控制器上的引腳的別名。</p>
@@ -5052,10 +5099,12 @@ aliases_&lt;name&gt;:
 #   則 &quot;name &quot;將被建立為一個保留針腳（例如，&quot;EXP1_9=&lt;GND&gt;&quot;
 #   將保留 &quot;EXP1_9&quot;）。可以指定任何數量以 &quot;aliases_&quot;開頭的分段。
 </code></pre></div>
+
 <h3 id="include">[include]<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
 <p>引入檔案支援。可以在主印表機配置檔案中引用額外的配置檔案。支援萬用字元（例如，<code>configs/*.cfg</code>）。</p>
 <div class="highlight"><pre><span></span><code>[include my_other_config.cfg]
 </code></pre></div>
+
 <h3 id="duplicate_pin_override">[duplicate_pin_override]<a class="headerlink" href="#duplicate_pin_override" title="Permanent link">&para;</a></h3>
 <p>該工具允許在配置文件中多次定義單個微控制器引腳，而無需進行正常的錯誤檢查。這用於診斷和調試目的。如果 Klipper 支持多次使用相同的引腳，則不需要此部分，並且使用此覆蓋可能會導致混淆和意外結果。</p>
 <div class="highlight"><pre><span></span><code>[duplicate_pin_override]
@@ -5063,6 +5112,7 @@ pins:
 #   一個逗號分隔的引腳列表，允許其中的引腳在配置檔案中被多次使用而不觸發錯誤檢查。
 #   必須提供此參數。
 </code></pre></div>
+
 <h2 id="_15">列印床探測硬體<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <h3 id="probe">[probe]<a class="headerlink" href="#probe" title="Permanent link">&para;</a></h3>
 <p>Z 高度探頭。可以定義此部分以啟用 Z 高度探測硬件。啟用此部分後，PROBE 和 QUERY_PROBE 擴展 <a href="G-Codes.html#probe">g-code commands</a> 變得可用。此外，請參閱 <a href="Probe_Calibrate.html">探頭校準指南</a>。探測部分還創建一個虛擬的“probe:z_virtual_endstop”引腳。可以將 stepper_z endstop_pin 設置為笛卡爾式打印機上的此虛擬引腳，該打印機使用探針代替 z 終點。如果使用“probe:z_virtual_endstop”，則不要在 stepper_z 配置部分定義 position_endstop。</p>
@@ -5123,6 +5173,7 @@ z_offset:
 #   issue any commands here that move the toolhead. The default is to
 #   not run any special G-Code commands on deactivation.
 </code></pre></div>
+
 <h3 id="bltouch">[bltouch]<a class="headerlink" href="#bltouch" title="Permanent link">&para;</a></h3>
 <p>BLTouch 探針。可以定義這個分段（而不是探針（probe）分段）來啟用 BLTouch 探針。更多資訊見<a href="BLTouch.html">BL-Touch 指南</a>和<a href="G-Code.md#bltouch">命令參考</a>。一個虛擬的 "probe:z_virtual_endstop "引腳也會被同時建立（詳見 "probe "章節）。</p>
 <div class="highlight"><pre><span></span><code>[bltouch]
@@ -5173,6 +5224,7 @@ control_pin:
 #samples_tolerance_retries:
 #   See the &quot;probe&quot; section for information on these parameters.
 </code></pre></div>
+
 <h3 id="smart_effector">[smart_effector]<a class="headerlink" href="#smart_effector" title="Permanent link">&para;</a></h3>
 <p>The "Smart Effector" from Duet3d implements a Z probe using a force sensor. One may define this section instead of <code>[probe]</code> to enable the Smart Effector specific features. This also enables <a href="G-Codes.html#smart_effector">runtime commands</a> to adjust the parameters of the Smart Effector at run time.</p>
 <div class="highlight"><pre><span></span><code>[smart_effector]
@@ -5219,6 +5271,7 @@ z_offset:
 #deactivate_on_each_sample:
 #   See the &quot;probe&quot; section for more information on the parameters above.
 </code></pre></div>
+
 <h3 id="axis_twist_compensation">[axis_twist_compensation]<a class="headerlink" href="#axis_twist_compensation" title="Permanent link">&para;</a></h3>
 <p>A tool to compensate for inaccurate probe readings due to twist in X gantry. See the <a href="Axis_Twist_Compensation.html">Axis Twist Compensation Guide</a> for more detailed information regarding symptoms, configuration and setup.</p>
 <div class="highlight"><pre><span></span><code>[axis_twist_compensation]
@@ -5242,6 +5295,7 @@ calibrate_y: 112.5
 #   calibration process. This parameter must be provided and is recommended to
 #   be near the center of the bed
 </code></pre></div>
+
 <h2 id="_16">額外的步進電機和擠出機<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <h3 id="stepper_z1">[stepper_z1]<a class="headerlink" href="#stepper_z1" title="Permanent link">&para;</a></h3>
 <p>多步進軸。在XYZ機型打印機上，控制給定軸的步進器可能具有額外的配置塊，這些配置塊定義了應該與主步進器一起步進的步進器。可以使用從 1 開始的數字後綴定義任意數量的部分（例如，“stepper_z1”、“stepper_z2”等）。</p>
@@ -5258,6 +5312,7 @@ calibrate_y: 112.5
 # 步進器將返回原位，直到主步進器上的 endstop 為
 # 軸被觸發。
 </code></pre></div>
+
 <h3 id="extruder1">[extruder1]<a class="headerlink" href="#extruder1" title="Permanent link">&para;</a></h3>
 <p>在一個多擠出機的印表機中，為每個額外的擠出機新增一個額外擠出機分段。額外擠出機分段應被命名為"extruder1"、"extruder2"、"extruder3"，以此類推。有關可用參數，參見"extruder"章節。</p>
 <p>有關示例配置，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-multi-extruder.cfg">sample-multi-extruder.cfg</a>。</p>
@@ -5270,6 +5325,7 @@ calibrate_y: 112.5
 #shared_heater:
 # 此選項已棄用，不應再指定。
 </code></pre></div>
+
 <h3 id="dual_carriage">[dual_carriage]<a class="headerlink" href="#dual_carriage" title="Permanent link">&para;</a></h3>
 <p>Support for cartesian and hybrid_corexy/z printers with dual carriages on a single axis. The carriage mode can be set via the SET_DUAL_CARRIAGE extended g-code command. For example, "SET_DUAL_CARRIAGE CARRIAGE=1" command will activate the carriage defined in this section (CARRIAGE=0 will return activation to the primary carriage). Dual carriage support is typically combined with extra extruders - the SET_DUAL_CARRIAGE command is often called at the same time as the ACTIVATE_EXTRUDER command. Be sure to park the carriages during deactivation. Note that during G28 homing, typically the primary carriage is homed first followed by the carriage defined in the <code>[dual_carriage]</code> config section. However, the <code>[dual_carriage]</code> carriage will be homed first if both carriages home in a positive direction and the [dual_carriage] carriage has a <code>position_endstop</code> greater than the primary carriage, or if both carriages home in a negative direction and the <code>[dual_carriage]</code> carriage has a <code>position_endstop</code> less than the primary carriage.</p>
 <p>Additionally, one could use "SET_DUAL_CARRIAGE CARRIAGE=1 MODE=COPY" or "SET_DUAL_CARRIAGE CARRIAGE=1 MODE=MIRROR" commands to activate either copying or mirroring mode of the dual carriage, in which case it will follow the motion of the carriage 0 accordingly. These commands can be used to print two parts simultaneously - either two identical parts (in COPY mode) or mirrored parts (in MIRROR mode). Note that COPY and MIRROR modes also require appropriate configuration of the extruder on the dual carriage, which can typically be achieved with "SYNC_EXTRUDER_MOTION MOTION_QUEUE=extruder EXTRUDER=<dual_carriage_extruder>" or a similar command.</p>
@@ -5298,6 +5354,7 @@ axis:
 #position_max:
 #   See the &quot;stepper&quot; section for the definition of the above parameters.
 </code></pre></div>
+
 <h3 id="extruder_stepper">[extruder_stepper]<a class="headerlink" href="#extruder_stepper" title="Permanent link">&para;</a></h3>
 <p>支持與擠出機運動同步的附加步進器（可以定義任意數量的帶有“extruder_stepper”前綴的部分）。</p>
 <p>有關詳細信息，請參閱 <a href="G-Codes.html#extruder">命令參考</a>。</p>
@@ -5314,6 +5371,7 @@ extruder:
 #   See the &quot;stepper&quot; section for the definition of the above
 #   parameters.
 </code></pre></div>
+
 <h3 id="manual_stepper">[manual_stepper]<a class="headerlink" href="#manual_stepper" title="Permanent link">&para;</a></h3>
 <p>手動步進器（可以使用“manual_stepper”前綴定義任意數量的部分）。這些是由 MANUAL_STEPPER g-code 命令控制的步進器。例如：“MANUAL_STEPPER STEPPER=my_stepper MOVE=10 SPEED=5”。有關 MANUAL_STEPPER 命令的說明，請參見 <a href="G-Codes.html#manual_stepper">G-Codes</a> 文件。步進器未連接到正常的打印機運動學。</p>
 <div class="highlight"><pre><span></span><code>[manual_stepper my_stepper]。
@@ -5336,6 +5394,7 @@ extruder:
 #   限位開關檢測引腳。如果定義了這個參數，可以通過在 MANUAL_STEPPER
 #   運動命令中新增一個 STOP_ON_ENDSTOP 參數來執行 &quot;歸位動作&quot; 。
 </code></pre></div>
+
 <h2 id="_17">自定義加熱器和感測器<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <h3 id="verify_heater">[verify_heater]<a class="headerlink" href="#verify_heater" title="Permanent link">&para;</a></h3>
 <p>加熱器和溫度感測器驗證。預設在印表機上每個配置的加熱器上啟用加熱器驗證。使用 verify_heater 分段來覆蓋預設設定。</p>
@@ -5369,6 +5428,7 @@ extruder:
 #   by during the check_gain_time check. It is rare to customize this
 #   value. The default is 2.
 </code></pre></div>
+
 <h3 id="homing_heaters">[homing_heaters]<a class="headerlink" href="#homing_heaters" title="Permanent link">&para;</a></h3>
 <p>在歸位或探測軸時禁用加熱器的工具。</p>
 <div class="highlight"><pre><span></span><code>[homing_heaters]
@@ -5381,6 +5441,7 @@ extruder:
 #   預設禁用全部加熱器。
 #   例如：extruder, heater_bed
 </code></pre></div>
+
 <h3 id="thermistor">[thermistor]<a class="headerlink" href="#thermistor" title="Permanent link">&para;</a></h3>
 <p>自定義熱敏電阻（可以定義任意數量的帶有「熱敏電阻」字首的分段）。可以在加熱器配置分段的 sensor_type 欄位中使用自定義熱敏電阻。 （例如，如果定義了「[thermistor my_thermistor]」分段，那麼在定義加熱器時可以使用「sensor_type: my_thermistor」。）確保將熱敏電阻分段放在配置檔案中第一次使用這個感測器的加熱器分段的上方。</p>
 <div class="highlight"><pre><span></span><code>[thermistor my_thermistor]
@@ -5400,6 +5461,7 @@ extruder:
 #   to define the thermistor parameters. This parameter must be
 #   provided when using &quot;beta&quot; to define the thermistor.
 </code></pre></div>
+
 <h3 id="adc_temperature">[adc_temperature]<a class="headerlink" href="#adc_temperature" title="Permanent link">&para;</a></h3>
 <p>自定義 ADC 溫度感測器（可以使用 「adc_temperature」 字首定義任意數量的分段）。這允許定義一個自定義溫度感測器，該感測器測量一個模數轉換器 (ADC) 引腳上的電壓，並在一組配置的溫度/電壓（或溫度/電阻）測量值之間使用線性插值來確定溫度。設定的感測器可被用作加熱器分段中的 sensor_type。 （例如，如果定義了 「[adc_temperature my_sensor]」 分段，則在定義加熱器時可以使用 「sensor_type: my_sensor」 。）確保將感測器分段放在配置檔案中第一次使用這個感測器的加熱器分段的上方。</p>
 <div class="highlight"><pre><span></span><code>[adc_temperature my_sensor]
@@ -5422,6 +5484,7 @@ extruder:
 #   可以指定一個 pullup_resistor 參數（詳見「擠出機」章節）。至少要
 #   提供兩個測量點。
 </code></pre></div>
+
 <h3 id="heater_generic">[heater_generic]<a class="headerlink" href="#heater_generic" title="Permanent link">&para;</a></h3>
 <p>通用加熱器（可以使用“heater_generic”前綴定義任意數量的部分）。這些加熱器的行為類似於標準加熱器（擠出機、加熱床）。使用 SET_HEATER_TEMPERATURE 命令（詳見 <a href="G-Codes.html#heaters">G-Codes</a>）設置目標溫度。</p>
 <div class="highlight"><pre><span></span><code>[heater_generic my_generic_heater]
@@ -5442,6 +5505,7 @@ extruder:
 #max_temp:
 #   以上參數詳見「extruder」分段。
 </code></pre></div>
+
 <h3 id="temperature_sensor">[temperature_sensor]<a class="headerlink" href="#temperature_sensor" title="Permanent link">&para;</a></h3>
 <p>通用溫度感測器（可以定義任意數量的通用溫度感測器）。通過 M105 命令查詢溫度。</p>
 <div class="highlight"><pre><span></span><code>[temperature_sensor my_sensor]
@@ -5455,6 +5519,7 @@ extruder:
 #   See the &quot;heater_generic&quot; section for the definition of this
 #   parameter.
 </code></pre></div>
+
 <h2 id="_18">溫度傳感器<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <p>Klipper includes definitions for many types of temperature sensors. These sensors may be used in any config section that requires a temperature sensor (such as an <code>[extruder]</code> or <code>[heater_bed]</code> section).</p>
 <h3 id="_19">常見熱敏電阻<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
@@ -5475,6 +5540,7 @@ sensor_pin:
 #   that is placed inline with the thermistor. It is rare to set this.
 #   The default is 0 ohms.
 </code></pre></div>
+
 <h3 id="_20">常見溫度放大器<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <p>常見溫度放大器。在使用這些感測器之一的加熱器分段中可以使用以下參數。</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5489,6 +5555,7 @@ sensor_pin:
 #voltage_offset: 0
 # ADC 電壓偏移（以伏特為單位）。默認值為 0。
 </code></pre></div>
+
 <h3 id="pt1000">直接連線的 PT1000 感測器<a class="headerlink" href="#pt1000" title="Permanent link">&para;</a></h3>
 <p>直接連線到控制板的 PT1000 感測器。以下參數可用於使用這些感測器之一的加熱器分段。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: PT1000
@@ -5499,6 +5566,7 @@ sensor_pin:
 # 連接到傳感器的上拉電阻（以歐姆為單位）。這
 # 默認為 4700 歐姆。
 </code></pre></div>
+
 <h3 id="maxxxxxx">MAXxxxxx 溫度感測器<a class="headerlink" href="#maxxxxxx" title="Permanent link">&para;</a></h3>
 <p>MAXxxxxx 序列外設介面（SPI）溫度感測器。以下參數在使用該型別感測器的加熱器分段中可用。</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5529,6 +5597,7 @@ sensor_pin:
 #   chips. The defaults for each parameter are next to the parameter
 #   name in the above list.
 </code></pre></div>
+
 <h3 id="bmp280bme280bme680">BMP280/BME280/BME680 溫度感測器<a class="headerlink" href="#bmp280bme280bme680" title="Permanent link">&para;</a></h3>
 <p>BMP280/BME280/BME680 兩線介面 (I2C) 環境感測器。注意，這些感測器不適用于擠出機和加熱床。它們可以用於監測環境溫度 (C)、壓力 (hPa)、相對濕度以及氣體水平（僅在BME680上）。請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> 以獲取可用於報告壓力和濕度以及溫度的gcode_macro。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: BME280
@@ -5543,6 +5612,7 @@ sensor_pin:
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
+
 <h3 id="aht10aht20aht21-temperature-sensor">AHT10/AHT20/AHT21 temperature sensor<a class="headerlink" href="#aht10aht20aht21-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>AHT10/AHT20/AHT21 two wire interface (I2C) environmental sensors. Note that these sensors are not intended for use with extruders and heater beds, but rather for monitoring ambient temperature (C) and relative humidity. See <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> for a gcode_macro that may be used to report humidity in addition to temperature.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: AHT10
@@ -5558,6 +5628,7 @@ sensor_pin:
 #aht10_report_time:
 #   Interval in seconds between readings. Default is 30, minimum is 5
 </code></pre></div>
+
 <h3 id="htu21d">HTU21D 感測器<a class="headerlink" href="#htu21d" title="Permanent link">&para;</a></h3>
 <p>HTU21D 系列雙線介面（I2C）環境感測器。注意，這種感測器不適用于擠出機和加熱床，它們可以用於監測環境溫度（C）和相對濕度。參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> 中可以報告溫度和濕度的 gcode_macro。</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5586,6 +5657,7 @@ sensor_pin:
 #htu21d_report_time:
 #   Interval in seconds between readings. Default is 30
 </code></pre></div>
+
 <h3 id="lm75">LM75 溫度感測器<a class="headerlink" href="#lm75" title="Permanent link">&para;</a></h3>
 <p>LM75/LM75A 兩線 (I2C) 連接的溫度傳感器。這些傳感器的範圍為 -55~125 C，因此可用於例如室溫度監測。它們還可以用作簡單的風扇/加熱器控制器。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: LM75
@@ -5604,6 +5676,7 @@ sensor_pin:
 #   Interval in seconds between readings. Default is 0.8, with minimum
 #   0.5.
 </code></pre></div>
+
 <h3 id="_21">微控制器的內建溫度感測器<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>atsam、atsamd 和 stm32 微控制器包含一個內部溫度傳感器。可以使用“temperature_mcu”傳感器來監控這些溫度。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_mcu
@@ -5632,6 +5705,7 @@ sensor_pin:
 #   micro-controller (if applicable) or the nominal values from the
 #   micro-controller specification.
 </code></pre></div>
+
 <h3 id="_22">主機溫度感測器<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <p>運行主機軟件的機器（例如 Raspberry Pi）的溫度。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_host
@@ -5640,6 +5714,7 @@ sensor_pin:
 #   &quot;/sys/class/thermal/thermal_zone0/temp&quot; which is the temperature
 #   system file on a Raspberry Pi computer.
 </code></pre></div>
+
 <h3 id="ds18b20">DS18B20 溫度感測器<a class="headerlink" href="#ds18b20" title="Permanent link">&para;</a></h3>
 <p>DS18B20 是一個單匯流排 (1-wire (w1)) 數值溫度感測器。注意，這個感測器不是被設計用於熱端或熱床， 而是用於監測環境溫度(C)。這些感測器最高量程是125 C，因此可用於例如箱體溫度監測。它們也可以被當作簡單的風扇/加熱器控制器。DS18B20 感測器僅在「主機 mcu」上支援，例如樹莓派。w1-gpio Linux 內核模組必須被安裝。</p>
 <div class="highlight"><pre><span></span><code>sensor_type: DS18B20
@@ -5653,6 +5728,7 @@ serial_no:
 #sensor_mcu:
 #   The micro-controller to read from. Must be the host_mcu
 </code></pre></div>
+
 <h3 id="combined-temperature-sensor">Combined temperature sensor<a class="headerlink" href="#combined-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>Combined temperature sensor is a virtual temperature sensor based on several other sensors. This sensor can be used with extruders, heater_generic and heater beds.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_combined
@@ -5667,6 +5743,7 @@ serial_no:
 #   Must be provided. Maximum permissible deviation between the sensors
 #   to combine (e.g. 5 degrees). To disable it, use a large value (e.g. 999.9)
 </code></pre></div>
+
 <h2 id="_23">風扇<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
 <h3 id="fan">[fan]<a class="headerlink" href="#fan" title="Permanent link">&para;</a></h3>
 <p>列印冷卻風扇。</p>
@@ -5735,6 +5812,7 @@ pin:
 #   ground-switched FET(standard fan pin) can be used to control power to
 #   the fan.
 </code></pre></div>
+
 <h3 id="heater_fan">[heater_fan]<a class="headerlink" href="#heater_fan" title="Permanent link">&para;</a></h3>
 <p>加熱器冷卻風扇（可以用"heater_fan"字首定義任意數量的分段）。"加熱器風扇"是一種當其關聯的加熱器活躍時會啟用的風扇。預設情況下，heater_fan shutdown_speed 等於 max_power。</p>
 <div class="highlight"><pre><span></span><code>[heater_fan heatbreak_cooling_fan]
@@ -5763,6 +5841,7 @@ pin:
 #   will be set to when its associated heater is enabled. The default
 #   is 1.0
 </code></pre></div>
+
 <h3 id="controller_fan">[controller_fan]<a class="headerlink" href="#controller_fan" title="Permanent link">&para;</a></h3>
 <p>控制器冷卻風扇（可以定義任意數量帶有"controller_fan"字首的分段）。"控制器風扇"(Controller fan)是一個只要關聯的加熱器或步進驅動程式處於活動狀態就會啟動的風扇。風扇會在空閑超時(idle_timeout)后停止，以確保被監視元件不再活躍后不會過熱。</p>
 <div class="highlight"><pre><span></span><code>[controller_fan my_controller_fan]
@@ -5798,6 +5877,7 @@ pin:
 #   heaters/steppers are enabled. The default heater is &quot;extruder&quot;, the
 #   default stepper is all of them.
 </code></pre></div>
+
 <h3 id="temperature_fan">[temperature_fan]<a class="headerlink" href="#temperature_fan" title="Permanent link">&para;</a></h3>
 <p>溫度觸發的冷卻風扇（可以定義任意數量的帶有“temperature_fan”前綴的部分）。 “溫度風扇”是一種風扇，只要其關聯的傳感器高於設定溫度，就會啟用該風扇。默認情況下，temperature_fan 的 shutdown_speed 等於 max_power。</p>
 <p>有關更多信息，請參閱 <a href="G-Codes.html#temperature_fan">command reference</a>。</p>
@@ -5851,6 +5931,7 @@ pin:
 #   If set, the temperature will be reported in M105 queries using the
 #   given id. The default is to not report the temperature via M105.
 </code></pre></div>
+
 <h3 id="fan_generic">[fan_generic]<a class="headerlink" href="#fan_generic" title="Permanent link">&para;</a></h3>
 <p>手動控制的風扇（可以定義任意數量的帶有“fan_generic”前綴的部分）。手動控制風扇的速度使用 SET_FAN_SPEED <a href="G-Codes.html#fan_generic">gcode 命令</a> 設置。</p>
 <div class="highlight"><pre><span></span><code>[fan_generic extruder_partfan]
@@ -5867,6 +5948,7 @@ pin:
 #enable_pin:
 #   See the &quot;fan&quot; section for a description of the above parameters.
 </code></pre></div>
+
 <h2 id="leds">LEDs<a class="headerlink" href="#leds" title="Permanent link">&para;</a></h2>
 <h3 id="led">[led]<a class="headerlink" href="#led" title="Permanent link">&para;</a></h3>
 <p>Support for LEDs (and LED strips) controlled via micro-controller PWM pins (one may define any number of sections with an "led" prefix). See the <a href="G-Codes.html#led">command reference</a> for more information.</p>
@@ -5893,6 +5975,7 @@ pin:
 #   Sets the initial LED color. Each value should be between 0.0 and
 #   1.0. The default for each color is 0.
 </code></pre></div>
+
 <h3 id="neopixel">[neopixel]<a class="headerlink" href="#neopixel" title="Permanent link">&para;</a></h3>
 <p>Neopixel (aka WS2812) LED support (one may define any number of sections with a "neopixel" prefix). See the <a href="G-Codes.html#led">command reference</a> for more information.</p>
 <p>Note that the <a href="RPi_microcontroller.html">linux mcu</a> implementation does not currently support directly connected neopixels. The current design using the Linux kernel interface does not allow this scenario because the kernel GPIO interface is not fast enough to provide the required pulse rates.</p>
@@ -5915,6 +5998,7 @@ pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h3 id="dotstar">[dotstar]<a class="headerlink" href="#dotstar" title="Permanent link">&para;</a></h3>
 <p>Dotstar (aka APA102) LED support (one may define any number of sections with a "dotstar" prefix). See the <a href="G-Codes.html#led">command reference</a> for more information.</p>
 <div class="highlight"><pre><span></span><code>[dotstar my_dotstar]
@@ -5931,6 +6015,7 @@ clock_pin:
 #initial_BLUE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h3 id="pca9533">[pca9533]<a class="headerlink" href="#pca9533" title="Permanent link">&para;</a></h3>
 <p>PCA9533 LED支援。PCA9533 在 mightyboard上出現。</p>
 <div class="highlight"><pre><span></span><code>[pca9533 my_pca9533]
@@ -5950,6 +6035,7 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h3 id="pca9632">[pca9632]<a class="headerlink" href="#pca9632" title="Permanent link">&para;</a></h3>
 <p>PCA9632 LED support. The PCA9632 is used on the FlashForge Dreamer.</p>
 <div class="highlight"><pre><span></span><code>[pca9632 my_pca9632]
@@ -5977,6 +6063,7 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h2 id="additional-servos-buttons-and-other-pins">Additional servos, buttons, and other pins<a class="headerlink" href="#additional-servos-buttons-and-other-pins" title="Permanent link">&para;</a></h2>
 <h3 id="servo">[servo]<a class="headerlink" href="#servo" title="Permanent link">&para;</a></h3>
 <p>伺服（可以定義任意數量的帶有“伺服”前綴的部分）。可以使用 SET_SERVO <a href="G-Codes.html#servo">g-code command</a> 控制舵機。例如：SET_SERVO SERVO=my_servo ANGLE=180</p>
@@ -6002,6 +6089,7 @@ pin:
 #   is only valid if initial_angle is not set.) The default is to not
 #   send any signal at startup.
 </code></pre></div>
+
 <h3 id="gcode_button">[gcode_button]<a class="headerlink" href="#gcode_button" title="Permanent link">&para;</a></h3>
 <p>在一個按鈕被按下或放開（或當一個引腳狀態發生變化時）時執行G程式碼。你可以使用 <code>QUERY_BUTTON button=my_gcode_button</code> 來查詢按鈕的狀態。</p>
 <div class="highlight"><pre><span></span><code>[gcode_button my_gcode_button]
@@ -6021,6 +6109,7 @@ pin:
 #   當按鈕被釋放時要執行的G-Code命令序列，支援G-Code模板。
 #   預設在按鈕釋放時不執行任何命令。
 </code></pre></div>
+
 <h3 id="output_pin">[output_pin]<a class="headerlink" href="#output_pin" title="Permanent link">&para;</a></h3>
 <p>運行時可配置的輸出引腳（可以使用“output_pin”前綴定義任意數量的部分）。此處配置的引腳將設置為輸出引腳，並且可以在運行時使用“SET_PIN PIN=my_pin VALUE=.1”類型擴展 <a href="G-Codes.html#output_pin">g-code commands</a> 修改它們。</p>
 <div class="highlight"><pre><span></span><code>[output_pin my_pin]
@@ -6070,6 +6159,7 @@ pin:
 #   amperage for the stepper. The default is to not scale the &#39;value&#39;
 #   parameter.
 </code></pre></div>
+
 <h3 id="static_digital_output">[static_digital_output]<a class="headerlink" href="#static_digital_output" title="Permanent link">&para;</a></h3>
 <p>靜態配置的數字輸出引腳（可以使用“static_digital_output”前綴定義任意數量的部分）。此處配置的引腳將在 MCU 配置期間設置為 GPIO 輸出。它們不能在運行時更改。</p>
 <div class="highlight"><pre><span></span><code>[static_digital_output my_output_pins]
@@ -6078,6 +6168,7 @@ pins:
 #   pin will be set to a high level unless the pin name is prefaced
 #   with &quot;!&quot;. This parameter must be provided.
 </code></pre></div>
+
 <h3 id="multi_pin">[multi_pin]<a class="headerlink" href="#multi_pin" title="Permanent link">&para;</a></h3>
 <p>多個引腳輸出（可以定義任意數量的帶有“multi_pin”前綴的部分）。 multi_pin 輸出會創建一個內部引腳別名，每次設置別名引腳時可以修改多個輸出引腳。例如，可以定義一個包含兩個引腳的“[multi_pin my_fan]”對象，然後在“[fan]”部分設置“pin=multi_pin:my_fan”——在每次風扇更改時，兩個輸出引腳都會更新。這些別名可能不適用於步進電機引腳。</p>
 <div class="highlight"><pre><span></span><code>[multi_pin my_multi_pin]
@@ -6085,6 +6176,7 @@ pins:
 #   與此別名關聯的引腳的逗號分隔列表。
 #   必須提供此參數。
 </code></pre></div>
+
 <h2 id="tmc">TMC 步進驅動器配置<a class="headerlink" href="#tmc" title="Permanent link">&para;</a></h2>
 <p>在 UART/SPI 模式下配置 Trinamic 步進電機驅動器。其他信息在 <a href="TMC_Drivers.html">TMC Drivers guide</a> 和 <a href="G-Codes.html#tmcxxxx">command reference</a> 中。</p>
 <h3 id="tmc2130">[tmc2130]<a class="headerlink" href="#tmc2130" title="Permanent link">&para;</a></h3>
@@ -6178,6 +6270,7 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h3 id="tmc2208">[tmc2208]<a class="headerlink" href="#tmc2208" title="Permanent link">&para;</a></h3>
 <p>通過單線 UART 配置 TMC2208（或 TMC2224）步進電機驅動。要使用此功能，請定義一個帶有 「tmc2208」 字首並後跟步進驅動配置分段相應名稱的配置分段（例如，「[tmc2208 stepper_x]」）。</p>
 <div class="highlight"><pre><span></span><code>[tmc2208 stepper_x]
@@ -6233,6 +6326,7 @@ run_current:
 #   defaults for each parameter are next to the parameter name in the
 #   above list.
 </code></pre></div>
+
 <h3 id="tmc2209">[tmc2209]<a class="headerlink" href="#tmc2209" title="Permanent link">&para;</a></h3>
 <p>通過單線 UART 配置 TMC2209 步進電機驅動。要使用此功能，請定義一個帶有 「tmc2209」 字首並後跟步進驅動配置分段相應名稱的配置分段（例如，「[tmc2209 stepper_x]」）。</p>
 <div class="highlight"><pre><span></span><code>[tmc2209 stepper_x]
@@ -6277,6 +6371,7 @@ run_current:
 #   an appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h3 id="tmc2660">[tmc2660]<a class="headerlink" href="#tmc2660" title="Permanent link">&para;</a></h3>
 <p>通過 SPI 匯流排配置 TMC2660 步進電機驅動。要使用此功能，請定義一個帶有 「tmc 2660」 字首並後跟步進驅動配置分段相應名稱的配置分段（例如，「[tmc2660 stepper_x]」）。</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
@@ -6342,6 +6437,7 @@ run_current:
 #   either zero or one will lead to layout changes (the first bit of
 #   HDEC) is interpreted as the MSB of HSTRT in this case).
 </code></pre></div>
+
 <h3 id="tmc2240">[tmc2240]<a class="headerlink" href="#tmc2240" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2240 stepper motor driver via SPI bus or UART. To use this feature, define a config section with a "tmc2240" prefix followed by the name of the corresponding stepper config section (for example, "[tmc2240 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc2240 stepper_x]
@@ -6459,6 +6555,7 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h3 id="tmc5160">[tmc5160]<a class="headerlink" href="#tmc5160" title="Permanent link">&para;</a></h3>
 <p>通過 SPI 匯流排配置 TMC5160 步進電機驅動。要使用此功能，請定義一個帶有 「tmc5160」 字首並後跟步進驅動配置分段相應名稱的配置分段（例如，「[tmc5160 stepper_x]」）。</p>
 <div class="highlight"><pre><span></span><code>[tmc5160 stepper_x]
@@ -6570,6 +6667,7 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h2 id="_24">運行時步進電機電流配置<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
 <h3 id="ad5206">[ad5206]<a class="headerlink" href="#ad5206" title="Permanent link">&para;</a></h3>
 <p>通過 SPI 總線連接的靜態配置 AD5206 數字電位器（可以定義任意數量的帶有“ad5206”前綴的部分）。</p>
@@ -6601,6 +6699,7 @@ enable_pin:
 #   以設定為步進電機的期望電流安培。預設為不對 &#39;channel_x&#39; 參
 #   數進行縮放。
 </code></pre></div>
+
 <h3 id="mcp4451">[mcp4451]<a class="headerlink" href="#mcp4451" title="Permanent link">&para;</a></h3>
 <p>通過 I2C 總線連接的靜態配置 MCP4451 數字電位器（可以定義任意數量的帶有“mcp4451”前綴的部分）。</p>
 <div class="highlight"><pre><span></span><code>[mcp4451 my_digipot]
@@ -6633,6 +6732,7 @@ i2c_address:
 #   using the desired amperage value for the stepper. The default is
 #   to not scale the &#39;wiper_x&#39; parameters.
 </code></pre></div>
+
 <h3 id="mcp4728">[mcp4728]<a class="headerlink" href="#mcp4728" title="Permanent link">&para;</a></h3>
 <p>通過 I2C 總線連接的靜態配置的 MCP4728 數模轉換器（可以使用“mcp4728”前綴定義任意數量的部分）。</p>
 <div class="highlight"><pre><span></span><code>[mcp4728 my_dac]
@@ -6666,6 +6766,7 @@ i2c_address:
 #   can be specified using the desired amperage value for the
 #   stepper. The default is to not scale the &#39;channel_x&#39; parameters.
 </code></pre></div>
+
 <h3 id="mcp4018">[mcp4018]<a class="headerlink" href="#mcp4018" title="Permanent link">&para;</a></h3>
 <p>靜態配置的 MCP4018 數字電位器通過兩個 gpio“bit banging”引腳連接（可以定義任意數量的帶有“mcp4018”前綴的部分）。</p>
 <div class="highlight"><pre><span></span><code>[mcp4018 my_digipot]
@@ -6691,6 +6792,7 @@ wiper:
 #   the desired amperage value for the stepper. The default is to not
 #   scale the &#39;wiper&#39; parameter.
 </code></pre></div>
+
 <h2 id="_25">顯示屏支援<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
 <h3 id="display">[display]<a class="headerlink" href="#display" title="Permanent link">&para;</a></h3>
 <p>支持連接到微控制器的顯示屏。</p>
@@ -6763,6 +6865,7 @@ lcd_type:
 #   &#39;kill&#39;按鈕的阻值範圍。
 #   在使用模擬按鈕時必須提供由逗號分隔最小和最大值。
 </code></pre></div>
+
 <h4 id="hd44780">hd44780顯示屏<a class="headerlink" href="#hd44780" title="Permanent link">&para;</a></h4>
 <p>有關配置 hd44780 顯示屏（在"RepRapDiscount 2004 Smart Controller"型別顯示屏中可以找到）的資訊。</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6786,6 +6889,7 @@ d7_pin:
 #   和16。行數被鎖定為4行。
 ...
 </code></pre></div>
+
 <h4 id="hd44780_spi">hd44780_spi顯示屏<a class="headerlink" href="#hd44780_spi" title="Permanent link">&para;</a></h4>
 <p>有關配置 hd44780_spi 顯示屏的資訊 - 通過硬體"移位暫存器"（用於基於 mightyboard 的印表機）控制的20x04顯示屏。</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6809,6 +6913,7 @@ spi_software_miso_pin:
 #   （預設）和 16。行數固定為4。
 ...
 </code></pre></div>
+
 <h4 id="st7920">st7920 顯示屏<a class="headerlink" href="#st7920" title="Permanent link">&para;</a></h4>
 <p>有關配置 st7920 類顯示屏的資訊（可用於 "RepRapDiscount 12864 Full Graphic Smart Controller" 型別的顯示屏）。</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6821,6 +6926,7 @@ sid_pin:
 #   這些參數必須被提供。
 ...
 </code></pre></div>
+
 <h4 id="emulated_st7920st7920">emulated_st7920（模擬ST7920）顯示屏<a class="headerlink" href="#emulated_st7920st7920" title="Permanent link">&para;</a></h4>
 <p>有關配置模擬 st7920 顯示屏的資訊 —它可以在一些"2.4 寸觸控式螢幕"和其他類似裝置中找到。</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6838,6 +6944,7 @@ spi_software_miso_pin:
 #   使用的引腳。
 ...
 </code></pre></div>
+
 <h4 id="uc1701">uc1701顯示屏<a class="headerlink" href="#uc1701" title="Permanent link">&para;</a></h4>
 <p>有關配置 uc1701 顯示屏的資訊（用於「MKS Mini 12864」型顯示屏）。</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6855,6 +6962,7 @@ a0_pin:
 #   預設為40。
 ...
 </code></pre></div>
+
 <h4 id="ssd1306-sh1106">ssd1306 和 sh1106 顯示屏<a class="headerlink" href="#ssd1306-sh1106" title="Permanent link">&para;</a></h4>
 <p>ssd1306 和 sh1106 顯示屏的配置資訊.</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6898,6 +7006,7 @@ lcd_type:
 #   0.
 ...
 </code></pre></div>
+
 <h3 id="display_data">[display_data]<a class="headerlink" href="#display_data" title="Permanent link">&para;</a></h3>
 <p>支持在液晶屏上顯示自定義數據。可以在這些組下創建任意數量的顯示組和任意數量的數據項。如果 [display] 部分中的 display_group 選項設置為給定組名稱，則顯示將顯示給定組的所有數據項。</p>
 <p>一套<a href="https://github.com/Klipper3d/klipper/blob/master/klippy/extras/display/display.cfg">預設顯示組</a>將被自動建立。通過覆蓋印表機的 printer.cfg 主配置檔案中的預設值可以替換或擴充套件這些 display_data 項。</p>
@@ -6910,6 +7019,7 @@ text:
 #   （檢視 docs/Command_Templates.md）。
 #   這個參數必須被提供。
 </code></pre></div>
+
 <h3 id="display_template">[display_template]<a class="headerlink" href="#display_template" title="Permanent link">&para;</a></h3>
 <p>Display data text "macros" (one may define any number of sections with a display_template prefix). See the <a href="Command_Templates.html">command templates</a> document for information on template evaluation.</p>
 <p>This feature allows one to reduce repetitive definitions in display_data sections. One may use the builtin <code>render()</code> function in display_data sections to evaluate a template. For example, if one were to define <code>[display_template my_template]</code> then one could use <code>{ render('my_template') }</code> in a display_data section.</p>
@@ -6929,6 +7039,7 @@ text:
 #   is evaluated using command templates (see
 #   docs/Command_Templates.md). This parameter must be provided.
 </code></pre></div>
+
 <h3 id="display_glyph">[display_glyph]<a class="headerlink" href="#display_glyph" title="Permanent link">&para;</a></h3>
 <p>在支援自定義字形的顯示屏上顯示一個自定義字形。給定的名稱將被分配給給定的顯示數據，然後可以在顯示模板中通過用「波浪形（～）」符號包圍的名稱來引用，即 <code>~my_display_glyph~</code></p>
 <p>有關一些示例，請參閱 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-glyphs.cfg">sample-glyphs.cfg</a>。</p>
@@ -6949,11 +7060,13 @@ text:
 #   了相同的索引位置，需要保證在任何螢幕上只使用其中一個圖片。
 #   如果定義了 hd44780_data ，則必須提供此參數。
 </code></pre></div>
+
 <h3 id="display-my_extra_display">[display my_extra_display]<a class="headerlink" href="#display-my_extra_display" title="Permanent link">&para;</a></h3>
 <p>如果如上所示在 printer.cfg 中定義了主要的 [display] 分段，還可以定義多個輔助顯示屏。注意，輔助顯示屏目前不支援菜單功能，因此它們不支援「menu」選項或按鈕配置。</p>
 <div class="highlight"><pre><span></span><code>[display my_extra_display] 。
 #   可用參數參見 &quot;顯示 &quot;分段。
 </code></pre></div>
+
 <h3 id="menu">[menu]<a class="headerlink" href="#menu" title="Permanent link">&para;</a></h3>
 <p>可自定義液晶顯示屏菜單。</p>
 <p>一套<a href="https://github.com/Klipper3d/klipper/blob/master/klippy/extras/display/menu.cfg">預設菜單</a>將被自動建立。通過覆蓋 printer.cfg 主配置檔案中的預設值可以替換或擴充套件該菜單。</p>
@@ -7019,6 +7132,7 @@ text:
 #   點選按鈕、長按或數值變化時執行的G程式碼指令碼。
 #   被視為模板。點選按鈕會進入或退出修改模式。
 </code></pre></div>
+
 <h2 id="_26">耗材感測器<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h2>
 <h3 id="filament_switch_sensor">[filament_switch_sensor]<a class="headerlink" href="#filament_switch_sensor" title="Permanent link">&para;</a></h3>
 <p>耗材開關感測器。支援使用開關感測器（如限位開關）進行耗材插入和耗盡檢測。</p>
@@ -7053,6 +7167,7 @@ text:
 #   連線到檢測開關的引腳。
 #   必須提供此參數。
 </code></pre></div>
+
 <h3 id="filament_motion_sensor">[filament_motion_sensor]<a class="headerlink" href="#filament_motion_sensor" title="Permanent link">&para;</a></h3>
 <p>耗材移動感測器。使用一個在耗材通過感測器時輸出引腳狀態會發生變化來檢測耗材插入和耗盡。</p>
 <p>有關詳細信息，請參閱 <a href="G-Codes.html#filament_switch_sensor">命令參考</a>。</p>
@@ -7071,6 +7186,7 @@ switch_pin:
 #pause_delay:
 #   以上參數詳見「filament_switch_sensor」章節。
 </code></pre></div>
+
 <h3 id="tsl1401cl_filament_width_sensor">[tsl1401cl_filament_width_sensor]<a class="headerlink" href="#tsl1401cl_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>基於 TSLl401CL 的印絲寬度傳感器。有關詳細信息，請參閱 <a href="TSL1401CL_Filament_Width_Sensor.html">guide</a>。</p>
 <div class="highlight"><pre><span></span><code>[tsl1401cl_filament_width_sensor]
@@ -7081,6 +7197,7 @@ switch_pin:
 #   The distance from sensor to the melting chamber as mm.
 #measurement_delay: 100
 </code></pre></div>
+
 <h3 id="hall_filament_width_sensor">[hall_filament_width_sensor]<a class="headerlink" href="#hall_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>霍爾耗材寬度感測器（詳見<a href="Hall_Filament_Width_Sensor.html">霍爾耗材寬度感測器</a>）。</p>
 <div class="highlight"><pre><span></span><code>[hall_filament_width_sensor]
@@ -7131,6 +7248,7 @@ adc2:
 #pause_delay:
 #   關於上述參數的描述請參見&quot;filament_switch_sensor&quot;章節。
 </code></pre></div>
+
 <h2 id="_27">控制板特定硬體支援<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h2>
 <h3 id="sx1509">[sx1509]<a class="headerlink" href="#sx1509" title="Permanent link">&para;</a></h3>
 <p>將一個 SX1509 I2C 配置為 GPIO 擴充套件器。由於 I2C 通訊本身的延遲，不應將 SX1509 引腳用作步進電機的 enable （啟用)、step（步進）或 dir （方向）引腳或任何其他需要快速 bit-banging（位拆裂）的引腳。它們最適合用作靜態或G程式碼控制的數字輸出或硬體 pwm 引腳，例如風扇。可以使用「sx1509」字首定義任意數量的分段。每個擴充套件器提供可用於印表機配置的一組 16 個引腳（sx1509_my_sx1509:PIN_0 到 sx1509_my_sx1509:PIN_15）。</p>
@@ -7148,6 +7266,7 @@ i2c_address:
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
+
 <h3 id="samd_sercom">[samd_sercom]<a class="headerlink" href="#samd_sercom" title="Permanent link">&para;</a></h3>
 <p>SAMD SERCOM 配置以指定在給定 SERCOM 上使用哪些引腳。可以使用“samd_sercom”前綴定義任意數量的部分。在將每個 SERCOM 用作 SPI 或 I2C 外設之前，必須對其進行配置。將此配置部分放在使用 SPI 或 I2C 總線的任何其他部分之上。</p>
 <div class="highlight"><pre><span></span><code>[samd_sercom my_sercom]
@@ -7169,6 +7288,7 @@ clk_pin:
 #   communication. The pin must have a valid pinmux configuration
 #   for the given SERCOM peripheral. This parameter must be provided.
 </code></pre></div>
+
 <h3 id="adc_scaled">[adc_scaled]<a class="headerlink" href="#adc_scaled" title="Permanent link">&para;</a></h3>
 <p>Duet 2 Maestro 通過vref和vssa讀數進行模擬縮放。定義一個adc_scaled分段來啟用根據板載vref和vssa監視引腳調節的虛擬adc引腳（例如「my_name:PB0"）。虛擬引腳必須先被Duet 2 Maestro 通過vref和vssa讀數進行模擬縮放。定義一個adc_scaled分段來啟用根據板載vref和vssa監視引腳調節的虛擬adc引腳（例如「my_name:PB0"）。虛擬引腳必須先被定義才能用在其他配置分段中。</p>
 <p>有關示例，請參見 <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-duet2-maestro.cfg">generic-duet2-maestro.cfg</a> 文件。</p>
@@ -7181,6 +7301,7 @@ vssa_pin:
 #   一個時間參數（以秒為計）區間用於平滑 VREF 和
 #   VSSA 測量來減少測量的干擾。預設為2秒。
 </code></pre></div>
+
 <h3 id="replicape">[replicape]<a class="headerlink" href="#replicape" title="Permanent link">&para;</a></h3>
 <p>副本支持 - 有關示例，請參見 <a href="Beaglebone.html">beaglebone guide</a> 和 <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-replicape.cfg">generic-replicape.cfg</a> 文件。</p>
 <div class="highlight"><pre><span></span><code># The &quot;replicape&quot; config section adds &quot;replicape:stepper_x_enable&quot;
@@ -7241,6 +7362,7 @@ host_mcu:
 #   This parameter controls the CFG5 pin of the stepper motor driver
 #   (True sets CFG5 high, False sets it low). The default is True.
 </code></pre></div>
+
 <h2 id="_28">其他自定義模組<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h2>
 <h3 id="palette2">[palette2]<a class="headerlink" href="#palette2" title="Permanent link">&para;</a></h3>
 <p>Palette 2 多材料支援 - 提供更緊密的整合，支援處於連線模式的 Palette 2 裝置。</p>
@@ -7261,6 +7383,7 @@ serial:
 #auto_cancel_variation: 0.1
 #   Auto cancel print when ping variation is above this threshold
 </code></pre></div>
+
 <h3 id="angle">[angle]<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <p>Magnetic hall angle sensor support for reading stepper motor angle shaft measurements using a1333, as5047d, or tle5012b SPI chips. The measurements are available via the <a href="API_Server.html">API Server</a> and <a href="Debugging.html#motion-analysis-and-data-logging">motion analysis tool</a>. See the <a href="G-Codes.html#angle">G-Code reference</a> for available commands.</p>
 <div class="highlight"><pre><span></span><code>[angle my_angle_sensor]
@@ -7287,6 +7410,7 @@ cs_pin:
 #   See the &quot;common SPI settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
+
 <h2 id="_29">通用匯流排參數<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h2>
 <h3 id="spi">常見 SPI 設定<a class="headerlink" href="#spi" title="Permanent link">&para;</a></h3>
 <p>以下參數通常適用於使用 SPI 總線的設備。</p>
@@ -7305,6 +7429,7 @@ cs_pin:
 #   any general purpose pins may be used). The default is to not use
 #   &quot;software spi&quot;.
 </code></pre></div>
+
 <h3 id="i2c">通用 I2C 設定<a class="headerlink" href="#i2c" title="Permanent link">&para;</a></h3>
 <p>以下參數通常適用於使用 I2C 總線的設備。</p>
 <p>Note that Klipper's current micro-controller support for I2C is generally not tolerant to line noise. Unexpected errors on the I2C wires may result in Klipper raising a run-time error. Klipper's support for error recovery varies between each micro-controller type. It is generally recommended to only use I2C devices that are on the same printed circuit board as the micro-controller.</p>
@@ -7402,7 +7527,7 @@ cs_pin:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u62f7\u8c9d", "clipboard.copied": "\u5df2\u62f7\u8c9d", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u5c0b", "search.result.placeholder": "\u9375\u5165\u4ee5\u958b\u59cb\u6aa2\u7d22", "search.result.none": "\u6c92\u6709\u627e\u5230\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.other": "# \u500b\u7b26\u5408\u689d\u4ef6\u7684\u7d50\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

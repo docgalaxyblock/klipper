@@ -1441,6 +1441,7 @@
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
+
 <p>Ha a BL-Touch-ot a Z tengely alaphelyzetbe állítására használjuk, akkor állítsuk be az <code>endstop_pin:probe:z_virtual_endstop</code>-ra és távolítsuk el a <code>position_endstop</code> és a <code>[stepper_z]</code>-t a config szakaszban, majd adjuk hozzá a <code>[safe_z_home]</code> config szakaszt a Z tengely megemeléséhez, az X,Y tengelyek kezdőpont felvételére a tárgyasztal közepére való elmozduláshoz és a Z tengely kezdőpont felvételére. Például:</p>
 <div class="highlight"><pre><span></span><code>[safe_z_home]
 home_xy_position: 100, 100 # A koordinátákat a tárgyasztal közepére módosítjuk.
@@ -1448,6 +1449,7 @@ speed: 50
 z_hop: 10 # Mozgás felfelé 10mm
 z_hop_speed: 5
 </code></pre></div>
+
 <p>Fontos, hogy a z_hop mozgás a safe_z_home-ban elég nagy legyen ahhoz, hogy a mérőcsúcs ne ütközzön semmibe, még akkor sem, ha a BL-Touch mérőtüskéje a legalacsonyabb állásban van.</p>
 <h2 id="kezdeti-tesztek">Kezdeti tesztek<a class="headerlink" href="#kezdeti-tesztek" title="Permanent link">&para;</a></h2>
 <p>Mielőtt továbblépnél, ellenőrizd, hogy a BL-Touch a megfelelő magasságban van-e felszerelve. A mérőtüskének behúzott állapotban nagyjából 2 mm-rel a fúvóka fölött kell lennie</p>
@@ -1563,7 +1565,7 @@ Ha V3.1 szondával rendelkezel, ne automatizáld vagy ismételd a kimeneti üzem
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

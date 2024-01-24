@@ -1450,6 +1450,7 @@ example:</p>
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
+
 <p>If the BL-Touch will be used to home the Z axis then set <code>endstop_pin:
 probe:z_virtual_endstop</code> and remove <code>position_endstop</code> in the <code>[stepper_z]</code> config section,
 then add a <code>[safe_z_home]</code> config section to raise the z axis, home the xy axes,
@@ -1460,6 +1461,7 @@ speed: 50
 z_hop: 10                 # Move up 10mm
 z_hop_speed: 5
 </code></pre></div>
+
 <p>It's important that the z_hop movement in safe_z_home is high enough
 that the probe doesn't hit anything even if the probe pin happens to
 be in its lowest state.</p>
@@ -1725,7 +1727,7 @@ used when first integrating the probe into a printers electronics.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

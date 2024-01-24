@@ -1430,6 +1430,7 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
+
 <h2 id="resistori-di-terminazione">Resistori di terminazione<a class="headerlink" href="#resistori-di-terminazione" title="Permanent link">&para;</a></h2>
 <p>Un bus CAN dovrebbe avere due resistori da 120 ohm tra i cavi CANH e CANL. Idealmente, un resistore situato a ciascuna estremità del bus.</p>
 <p>Note that some devices have a builtin 120 ohm resistor that can not be easily removed. Some devices do not include a resistor at all. Other devices have a mechanism to select the resistor (typically by connecting a "pin jumper"). Be sure to check the schematics of all devices on the CAN bus to verify that there are two and only two 120 Ohm resistors on the bus.</p>
@@ -1438,9 +1439,11 @@ iface can0 can static
 <p>A ogni microcontrollore sul bus CAN viene assegnato un ID univoco basato sull'identificatore del chip di fabbrica codificato in ciascun microcontrollore. Per trovare l'ID di ciascun dispositivo del microcontrollore, assicurati che l'hardware sia alimentato e cablato correttamente, quindi esegui:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0
 </code></pre></div>
+
 <p>Se vengono rilevati dispositivi CAN non inizializzati, il comando precedente riporterà righe come le seguenti:</p>
 <div class="highlight"><pre><span></span><code>Found canbus_uuid=11aa22bb33cc, Application: Klipper
 </code></pre></div>
+
 <p>Ogni dispositivo avrà un identificatore univoco. Nell'esempio sopra, <code>11aa22bb33cc</code> è il "canbus_uuid" del microcontrollore.</p>
 <p>Nota che lo strumento <code>canbus_query.py</code> riporterà solo i dispositivi non inizializzati - se Klipper (o uno strumento simile) configura il dispositivo, non apparirà più nell'elenco.</p>
 <h2 id="configurare-klipper">Configurare Klipper<a class="headerlink" href="#configurare-klipper" title="Permanent link">&para;</a></h2>
@@ -1448,6 +1451,7 @@ iface can0 can static
 <div class="highlight"><pre><span></span><code>[mcu my_can_mcu]
 canbus_uuid: 11aa22bb33cc
 </code></pre></div>
+
 <h2 id="modalita-bridge-da-usb-a-can-bus">Modalità bridge da USB a CAN bus<a class="headerlink" href="#modalita-bridge-da-usb-a-can-bus" title="Permanent link">&para;</a></h2>
 <p>Some micro-controllers support selecting "USB to CAN bus bridge" mode during Klipper's "make menuconfig". This mode may allow one to use a micro-controller as both a "USB to CAN bus adapter" and as a Klipper node.</p>
 <p>When Klipper uses this mode the micro-controller appears as a "USB CAN bus adapter" under Linux. The "Klipper bridge mcu" itself will appear as if it was on this CAN bus - it can be identified via <code>canbus_query.py</code> and it must be configured like other CAN bus Klipper nodes.</p>
@@ -1461,6 +1465,7 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
+
 <ul>
 <li>
 <p>The "bridge mcu" is not actually on the CAN bus. Messages to and from the bridge mcu will not be seen by other adapters that may be on the CAN bus.</p>
@@ -1542,7 +1547,7 @@ iface can0 can static
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

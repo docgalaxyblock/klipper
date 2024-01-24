@@ -1403,16 +1403,18 @@ improve the accuracy of the switch.</p>
 to move to a Z position that is at least five millimeters above the
 bed (if it is not already), command the head to move to an XY position
 near the center of the bed, then navigate to the OctoPrint terminal
-tab and run:
+tab and run:</p>
 <div class="highlight"><pre><span></span><code>Z_ENDSTOP_CALIBRATE
 </code></pre></div>
-Then follow the steps described at
+
+<p>Then follow the steps described at
 <a href="Bed_Level.html#the-paper-test">"the paper test"</a> to determine the
 actual distance between the nozzle and bed at the given location. Once
 those steps are complete one can <code>ACCEPT</code> the position and save the
-results to the config file with:
+results to the config file with:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
-</code></pre></div></p>
+</code></pre></div>
+
 <p>It's preferable to use a Z endstop switch on the opposite end of the Z
 axis from the bed. (Homing away from the bed is more robust as then it
 is generally always safe to home the Z.) However, if one must home
@@ -1439,20 +1441,22 @@ bed is a set distance from the nozzle. Klipper has a tool to assist
 with this. In order to use the tool it is necessary to specify each
 screw XY location.</p>
 <p>This is done by creating a <code>[bed_screws]</code> config section. For example,
-it might look something similar to:
+it might look something similar to:</p>
 <div class="highlight"><pre><span></span><code>[bed_screws]
 screw1: 100, 50
 screw2: 100, 150
 screw3: 150, 100
-</code></pre></div></p>
+</code></pre></div>
+
 <p>If a bed screw is under the bed, then specify the XY position directly
 above the screw. If the screw is outside the bed then specify an XY
 position closest to the screw that is still within the range of the
 bed.</p>
 <p>Once the config file is ready, run <code>RESTART</code> to load that config, and
-then one can start the tool by running:
+then one can start the tool by running:</p>
 <div class="highlight"><pre><span></span><code>BED_SCREWS_ADJUST
-</code></pre></div></p>
+</code></pre></div>
+
 <p>This tool will move the printer's nozzle to each screw XY location
 and then move the nozzle to a Z=0 height. At this point one can use the
 "paper test" to adjust the bed screw directly under the nozzle. See
@@ -1489,7 +1493,7 @@ directly at C. It is thus possible to make an improved C screw
 adjustment when the nozzle is at position D.</p>
 <p>To enable this feature, one would determine the additional nozzle
 coordinates and add them to the config file. For example, it might
-look like:
+look like:</p>
 <div class="highlight"><pre><span></span><code>[bed_screws]
 screw1: 100, 50
 screw1_fine_adjust: 0, 0
@@ -1497,7 +1501,8 @@ screw2: 100, 150
 screw2_fine_adjust: 300, 300
 screw3: 150, 100
 screw3_fine_adjust: 0, 100
-</code></pre></div></p>
+</code></pre></div>
+
 <p>When this feature is enabled, the <code>BED_SCREWS_ADJUST</code> tool will first
 prompt for coarse adjustments directly above each screw position, and
 once those are accepted, it will prompt for fine adjustments at the
@@ -1522,10 +1527,11 @@ horizontal_move_z: 10.
 speed: 50.
 screw_thread: CW-M3
 </code></pre></div>
+
 <p>The screw1 is always the reference point for the others, so the system
 assumes that screw1 is at the correct height. Always run <code>G28</code> first
 and then run <code>SCREWS_TILT_CALCULATE</code> - it should produce output
-similar to:
+similar to:</p>
 <div class="highlight"><pre><span></span><code>Send: G28
 Recv: ok
 Send: SCREWS_TILT_CALCULATE
@@ -1535,7 +1541,8 @@ Recv: // front right screw : x=155.0, y=30.0, z=2.36000 : adjust CW 01:15
 Recv: // rear right screw : y=155.0, y=190.0, z=2.71500 : adjust CCW 00:50
 Recv: // read left screw : x=-5.0, y=190.0, z=2.47250 : adjust CW 00:02
 Recv: ok
-</code></pre></div></p>
+</code></pre></div>
+
 <p>This means that:</p>
 <ul>
 <li>front left screw is the reference point you must not change it.</li>
@@ -1636,7 +1643,7 @@ by turning all the screws in the given direction.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

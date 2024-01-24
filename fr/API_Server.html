@@ -1673,15 +1673,18 @@
 <p>Pour pouvoir utiliser les Serveur API, le logiciel hôte klippy.py doit être démarré avec le paramètre <code>-a</code>. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log
 </code></pre></div>
+
 <p>Cela force le logiciel hôte à créer un socket de domaine Unix. Un client peut alors ouvrir une connexion sur ce socket et envoyer des commandes à Klipper.</p>
 <p>Voir le projet <a href="https://github.com/Arksine/moonraker">Moonraker</a> pour un outil populaire qui peut transférer les requêtes HTTP vers le socket du serveur d'API de Klipper.</p>
 <h2 id="format-de-la-demande">Format de la demande<a class="headerlink" href="#format-de-la-demande" title="Permanent link">&para;</a></h2>
 <p>Les messages envoyés et reçus sur le socket sont des chaînes au format JSON et terminées par le caractère ASCII 0x03 :</p>
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
 </code></pre></div>
+
 <p>Klipper contiens un outil <code>scripts/whconsole.py</code> qui peut effectuer la mise en forme du message ci-dessus. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/whconsole.py /tmp/klippy_uds
 </code></pre></div>
+
 <p>Cet outil peut lire une série de commandes JSON à partir de l'entrée standard stdin, les envoyer à Klipper et afficher les résultats. Cet outil s'attend à avoir une commande JSON par ligne et il ajoute automatiquement le terminateur 0x03 avant d'envoyer les requêtes. (Le serveur d'API de Klipper ne attend pas un saut de ligne.)</p>
 <h2 id="protocole-de-lapi">Protocole de l'API<a class="headerlink" href="#protocole-de-lapi" title="Permanent link">&para;</a></h2>
 <p>Le protocole de commande utilisé sur le socket de communications est inspiré par <a href="https://www.jsonrpc.org/">json-rpc</a>.</p>
@@ -1719,6 +1722,7 @@
 gcode:
   {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
 </code></pre></div>
+
 <p>Lorsque la macro gcode PANELDUE_BEEP est exécutée, Klipper enverra ce qui suit sur le socket : <code>{"action": "run_paneldue_beep", "params": {"frequency": 300, "duration": 1.0}}</code></p>
 <h3 id="objectslist">objects/list<a class="headerlink" href="#objectslist" title="Permanent link">&para;</a></h3>
 <p>Ce point de terminaison remonte la liste des "objets" disponibles de l'imprimante que l'on peut interroger (via le point de terminaison "objects/query"). Par exemple : <code>{"id": 123, "method": "objects/list"}</code> peut renvoyer : <code>{"id": 123, "result": {"objects": [" webhooks", "configfile", "heaters", "gcode_move", "query_endstops", "idle_timeout", "toolhead", "extruder"]}}</code></p>
@@ -1842,7 +1846,7 @@ gcode:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

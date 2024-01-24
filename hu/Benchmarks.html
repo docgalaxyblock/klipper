@@ -1641,14 +1641,17 @@ queue_step oid=2 interval={ticks} count=60000 add=0
 set_next_step_dir oid=2 dir=1
 queue_step oid=2 interval=3000 count=1 add=0
 </code></pre></div>
+
 <p>A fentiekben három léptető egyidejű léptetését teszteljük. Ha a fentiek futtatása egy "Rescheduled timer in the past" a "Stepper too far in pas" hibát eredményez, akkor ez azt jelzi, hogy a <code>ticks</code> paraméter túl alacsony (túl gyors léptetési sebességet eredményez). A cél az, hogy megtaláljuk a ticks paraméter legalacsonyabb beállítását, amely megbízhatóan eredményezi a teszt sikeres befejezését. A ticks paramétert addig kell felezni, amíg stabil értéket nem találunk.</p>
 <p>Sikertelenség esetén az alábbiakat másolva és beillesztve törölheted a hibát a következő tesztre való felkészüléshez:</p>
 <div class="highlight"><pre><span></span><code>clear_shutdown
 </code></pre></div>
+
 <p>Az egylépcsős referenciaértékek eléréséhez ugyanazt a konfigurációs sorrendet kell használni, de a fenti tesztnek csak az első blokkja a másolás és beillesztés a console.py ablakba.</p>
 <p>A <a href="Features.html">Funkciók</a> dokumentumban található referenciatesztek előállításához a másodpercenkénti lépések teljes számát úgy kell kiszámítani, hogy az aktív léptetők számát megszorozzuk a névleges MCU frekvenciával, és elosztjuk a végső "ticks" paraméterrel. Az eredményeket a legközelebbi K-ra kerekítjük. Például három aktív léptetővel:</p>
 <div class="highlight"><pre><span></span><code>ECHO A teszt eredménye: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
 </code></pre></div>
+
 <p>A referenciaértékeket a TMC vezérlők számára megfelelő paraméterekkel futtatjuk. Az olyan mikrovezérlők esetében, amelyek támogatják a <code>STEPPER_BOTH_EDGE=1</code> (amint azt az <code>MCU config</code> sorban a konzolnál console.py első indításakor) a <code>step_pulse_duration=0</code> és <code>invert_step=-1</code> használatával engedélyezzük az optimalizált lépést a lépésimpulzus mindkét élére. Más mikrovezérlők esetében használd a 100ns-nak megfelelő <code>step_pulse_duration</code> értéket.</p>
 <h3 id="avr-lepesi-sebesseg-referenciaertek">AVR lépési sebesség referenciaérték<a class="headerlink" href="#avr-lepesi-sebesseg-referenciaertek" title="Permanent link">&para;</a></h3>
 <p>Az AVR chipeknél a következő konfigurációs sorrend használatos:</p>
@@ -1658,6 +1661,7 @@ config_stepper oid=1 step_pin=PA3 dir_pin=PA2 invert_step=0 step_pulse_ticks=32
 config_stepper oid=2 step_pin=PC7 dir_pin=PC6 invert_step=0 step_pulse_ticks=32
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízáson futtattuk, a gcc <code>avr-gcc (GCC) 5.4.0</code> verziójával. Mind a 16Mhz-es, mind a 20Mhz-es teszteket egy atmega644p-re konfigurált simulavr segítségével futtattuk (korábbi tesztek megerősítették, hogy a simulavr eredményei egyeznek a 16Mhz-es at90usb és a 16Mhz-es atmega2560-as tesztekkel).</p>
 <table>
 <thead>
@@ -1685,6 +1689,7 @@ config_stepper oid=1 step_pin=PB26 dir_pin=PC30 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PA21 dir_pin=PC30 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta.</p>
 <table>
 <thead>
@@ -1712,6 +1717,7 @@ config_stepper oid=1 step_pin=PC26 dir_pin=PA8 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PC26 dir_pin=PB4 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta.</p>
 <table>
 <thead>
@@ -1739,6 +1745,7 @@ config_stepper oid=1 step_pin=PD7 dir_pin=PD12 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PD8 dir_pin=PD13 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>gcc 10.3.1 20210621 (release) (GNU Arm Embedded Toolchain 10.3-2021.07)</code> futtatta.</p>
 <table>
 <thead>
@@ -1766,6 +1773,7 @@ config_stepper oid=1 step_pin=gpio1_15 dir_pin=gpio0_26 invert_step=0 step_pulse
 config_stepper oid=2 step_pin=gpio0_22 dir_pin=gpio2_1 invert_step=0 step_pulse_ticks=20
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>pru-gcc (GCC) 8.0.0 20170530 (experimental)</code> futtatta.</p>
 <table>
 <thead>
@@ -1793,6 +1801,7 @@ config_stepper oid=1 step_pin=PA3 dir_pin=PA2 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB8 dir_pin=PA2 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta.</p>
 <table>
 <thead>
@@ -1820,6 +1829,7 @@ config_stepper oid=1 step_pin=PB3 dir_pin=PB6 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PA4 dir_pin=PB7 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta.</p>
 <table>
 <thead>
@@ -1847,6 +1857,7 @@ config_stepper oid=1 step_pin=PB2 dir_pin=PB6 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB3 dir_pin=PB7 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára az <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta. Az STM32F407-es eredményeket úgy kaptuk, hogy egy STM32F407-es bináris programot futtattunk egy STM32F446-oson (és így 168 MHz-es órajelet használtunk).</p>
 <table>
 <thead>
@@ -1892,6 +1903,7 @@ config_stepper oid=1 step_pin=PA15 dir_pin=PA8 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PE2 dir_pin=PE3 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A teszt utoljára <code>00191b5c</code> véglegesítéssel futott a gcc <code>arm-none-eabi-gcc (15:8-2019-q3-1+b1) 8.3.1 20190703 (release) [gcc-8-branch revision 273027]</code> véglegesítéssel.</p>
 <table>
 <thead>
@@ -1919,6 +1931,7 @@ config_stepper oid=1 step_pin=PB10 dir_pin=PB2 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PB0 dir_pin=PC5 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>247cd753</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta.</p>
 <table>
 <thead>
@@ -1946,6 +1959,7 @@ config_stepper oid=1 step_pin=P1.21 dir_pin=P1.18 invert_step=-1 step_pulse_tick
 config_stepper oid=2 step_pin=P1.23 dir_pin=P1.18 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta. A 120Mhz-es LPC1769-es eredményeket egy LPC1768-as 120Mhz-re való túlhajtásával kaptuk.</p>
 <table>
 <thead>
@@ -1991,6 +2005,7 @@ config_stepper oid=1 step_pin=PB3 dir_pin=PA21 invert_step=-1 step_pulse_ticks=0
 config_stepper oid=2 step_pin=PA17 dir_pin=PA21 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet legutóbb a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta egy SAMD21G18 mikrokontrollerrel.</p>
 <table>
 <thead>
@@ -2018,6 +2033,7 @@ config_stepper oid=1 step_pin=PA22 dir_pin=PA21 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PA22 dir_pin=PA19 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet legutóbb a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> futtatta egy SAMD51J19A mikrokontrollerrel.</p>
 <table>
 <thead>
@@ -2053,6 +2069,7 @@ config_stepper oid=1 step_pin=PL11 dir_pin=PE15 invert_step=-1 step_pulse_ticks=
 config_stepper oid=2 step_pin=PL12 dir_pin=PE16 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet utoljára a <code>08d037c6</code> <code>or1k-linux-musl-gcc (GCC) 9.2.0</code> gcc verzióval futtatták egy Allwinner A64-H mikrokontrollerrel.</p>
 <table>
 <thead>
@@ -2080,6 +2097,7 @@ config_stepper oid=1 step_pin=gpio26 dir_pin=gpio4 invert_step=-1 step_pulse_tic
 config_stepper oid=2 step_pin=gpio27 dir_pin=gpio5 invert_step=-1 step_pulse_ticks=0
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet legutóbb a <code>59314d99</code> megbízási gcc verzióval <code>arm-none-eabi-gcc (Fedora 10.2.0-4.fc34) 10.2.0</code> Raspberry Pi Pico kártyán futtattuk.</p>
 <table>
 <thead>
@@ -2107,6 +2125,7 @@ config_stepper oid=1 step_pin=gpio4 dir_pin=gpio5 invert_step=0 step_pulse_ticks
 config_stepper oid=2 step_pin=gpio6 dir_pin=gpio17 invert_step=0 step_pulse_ticks=5
 finalize_config crc=0
 </code></pre></div>
+
 <p>A tesztet legutóbb a <code>59314d99</code> megbízási gcc verzióval <code>gcc (Raspbian 8.3.0-6+rpi1) 8.3.0</code> Raspberry Pi 3-on (revision a02082) futtatták. Ebben a referenciatesztben nehéz volt stabil eredményeket elérni.</p>
 <table>
 <thead>
@@ -2132,6 +2151,7 @@ finalize_config crc=0
 FLOOD 100000 0.0 debug_nop
 get_uptime
 </code></pre></div>
+
 <p>A teszt befejezésekor határozd meg a két "üzemidő" válaszüzenetben jelentett órák közötti különbséget. A másodpercenkénti parancsok teljes száma ekkor <code>100000 * mcu_frequency / clock_diff</code>.</p>
 <p>Vedd figyelembe, hogy ez a teszt telítheti a Raspberry Pi USB/CPU kapacitását. Ha Raspberry Pi, Beaglebone vagy hasonló gazdagépen fut, akkor növeld a késleltetést (pl. <code>DELAY {clock + 20*freq} get_uptime</code>). Ahol alkalmazható, az alábbi referenciák a console.py futtatásával készültek egy asztali számítógépen, ahol az eszköz egy nagy sebességű HUB-on keresztül van csatlakoztatva.</p>
 <table>
@@ -2310,7 +2330,7 @@ get_uptime
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

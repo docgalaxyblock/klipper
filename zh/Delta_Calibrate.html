@@ -1420,9 +1420,11 @@
 <div class="highlight"><pre><span></span><code>G28
 DELTA_CALIBRATE METHOD=manual
 </code></pre></div>
+
 <p>在测量了7个点，并计算得出新三角洲参数后，运行下面的命令来保存参数：</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>简单校准获得的参数，其准确性可以满足日常打印的需求。对于新打印机，可以尝试打印几个简单模型，确定功能正常。</p>
 <h2 id="_3">进阶三角洲校准<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>简单三角洲校准获得的三角洲参数可以很好地修正喷嘴距离之类问题。然而，该模式不能校准X，Y轴上的准确度。而进阶三角洲校准则是针对维度准确性地问题。</p>
@@ -1438,6 +1440,7 @@ DELTA_CALIBRATE METHOD=manual
 <p>以 逗号分隔的浮点数 的形式将数据输入到Klipper：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_DISTS=&lt;a_dist&gt;,&lt;far_c_dist&gt;,&lt;b_dist&gt;,&lt;far_a_dist&gt;,&lt;c_dist&gt;,&lt;far_b_dist&gt;
 </code></pre></div>
+
 <p>数据之间不要插入 空格 。</p>
 <p>之后测量A柱和C柱之间的距离。</p>
 <p><img alt="delta-ab-distance" src="img/delta-outer-distance.jpg" /></p>
@@ -1446,12 +1449,14 @@ DELTA_CALIBRATE METHOD=manual
 <p>将参数输入到Klipper：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_DISTS=&lt;a_to_far_c&gt;,&lt;far_c_to_b&gt;,&lt;b_to_far_a&gt;,&lt;far_a_to_c&gt;,&lt;c_to_far_b&gt;,&lt;far_b_to_a&gt;
 </code></pre></div>
+
 <p>此时可以拆除床上的模型。最后要测量的是柱子的尺寸。首先测量中心柱在A柱方向上，B柱方向上以及C柱方向上的尺寸。</p>
 <p><img alt="delta-a-pillar" src="img/delta-a-pillar.jpg" /></p>
 <p><img alt="delta_cal_e_step3" src="img/delta_cal_e_step3.png" /></p>
 <p>将结果输入Klipper：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;b&gt;,&lt;c&gt;
 </code></pre></div>
+
 <p>然后侧向外侧柱子的尺寸。首先测量A柱朝向C柱内侧的面之间的尺寸（见下图）。</p>
 <p><img alt="delta-ab-pillar" src="img/delta-outer-pillar.jpg" /></p>
 <p>之后逆时针逐一测量外则柱子的尺寸（测量C柱朝向B柱内侧的面之间的尺寸，测量B柱朝向A柱内侧的面之间的尺寸等）。</p>
@@ -1459,16 +1464,20 @@ DELTA_CALIBRATE METHOD=manual
 <p>并将参数输入Klipper：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;far_c&gt;,&lt;b&gt;,&lt;far_a&gt;,&lt;c&gt;,&lt;far_b&gt;
 </code></pre></div>
+
 <p>如果模型经过了缩放，则输入切片时使用的缩放系数：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE SCALE=1.0
 </code></pre></div>
+
 <p>（输入系数2.0则模型被放大一倍，输入系数0.5则模型被缩小至一半。）</p>
 <p>最后输入下列面命令进行三角校准：</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CALIBRATE=extended
 </code></pre></div>
+
 <p>该命令将进行数分钟的计算。计算将给出三角洲参数（三角半径，柱夹角，限位位置，臂长）。之后使用SAVE_CONFIG 保存并应用结果：</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>SAVE_CONFIG 会保存计算并更新后的三角参数。之后的DELTA_CALIBRATE 命令也会给予进阶计算的结果。请勿在SAVE_CONFIG 重新输入原始测量数据，因为此时原始测量数据已不会应用至三角参数上。</p>
 <h3 id="_4">额外要点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1548,7 +1557,7 @@ DELTA_CALIBRATE METHOD=manual
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

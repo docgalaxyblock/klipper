@@ -1430,6 +1430,7 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
+
 <h2 id="resistances-de-terminaison">Résistances de terminaison<a class="headerlink" href="#resistances-de-terminaison" title="Permanent link">&para;</a></h2>
 <p>Un bus CAN doit avoir deux résistances de 120 ohms entre les fils CANH et CANL. Idéalement, une résistance située à chaque extrémité du bus.</p>
 <p>Certains appareils ont une résistance intégrée de 120 ohm qui ne peut pas être facilement supprimée, d'autres n'ont pas de résistance et d'autres ont un mécanisme pour sélectionner la résistance (généralement en connectant un "cavalier"). Assurez-vous de vérifier les schémas de tous les appareils du bus CAN pour vérifier qu'il y a deux et seulement deux résistances de 120 Ohm sur le bus .</p>
@@ -1438,9 +1439,11 @@ iface can0 can static
 <p>Chaque microcontrôleur sur le bus CAN se voit attribuer un identifiant unique basé sur un identifiant de puce codé en usine dans chaque microcontrôleur. Pour trouver les identifiant canbus des microcontrôleurs, assurez-vous que le matériel est correctement alimenté et câblé, puis exécutez :</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0
 </code></pre></div>
+
 <p>Si des périphériques CAN non initialisés sont détectés, la commande ci-dessus remontera des lignes comme celles-ci :</p>
 <div class="highlight"><pre><span></span><code>Found canbus_uuid=11aa22bb33cc, Application: Klipper
 </code></pre></div>
+
 <p>Chaque appareil aura un identifiant unique. Dans l'exemple ci-dessus, <code>11aa22bb33cc</code> est le "canbus_uuid" du microcontrôleur.</p>
 <p>Notez que l'outil <code>canbus_query.py</code> ne signalera que les appareils non initialisés - si Klipper (ou un outil similaire) configure l'appareil, il n'apparaîtra plus dans la liste.</p>
 <h2 id="configuration-de-klipper">Configuration de Klipper<a class="headerlink" href="#configuration-de-klipper" title="Permanent link">&para;</a></h2>
@@ -1448,6 +1451,7 @@ iface can0 can static
 <div class="highlight"><pre><span></span><code>[mcu my_can_mcu]
 canbus_uuid: 11aa22bb33cc
 </code></pre></div>
+
 <h2 id="mode-pont-usb-vers-bus-can">Mode pont USB vers bus CAN<a class="headerlink" href="#mode-pont-usb-vers-bus-can" title="Permanent link">&para;</a></h2>
 <p>Certains microcontrôleurs prennent en charge la sélection du mode "USB to CAN bus bridge" pendant la phase "make menuconfig" de Klipper". Ce mode peut permettre d'utiliser un microcontrôleur à la fois comme un adaptateur de bus USB vers CAN et comme nœud Klipper (mcu).</p>
 <p>Lorsque Klipper utilise ce mode, le microcontrôleur apparaît comme un "USB CAN bus adapter" sous Linux. Le mcu "Klipper apparaîtra comme s'il était sur le bus CAN - il peut être identifié via <code>canbus_query.py</code> et il doit être configuré comme les autres noeuds Klipper de bus CAN.</p>
@@ -1461,6 +1465,7 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
+
 <ul>
 <li>
 <p>Le « pont mcu » n'est pas en fait sur le bus CAN. Les messages entrant et sortant du bridge mcu ne seront pas vus par les autres adaptateurs présents sur le bus CAN.</p>
@@ -1542,7 +1547,7 @@ iface can0 can static
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.term.missing": "Non trouv\u00e9", "select.version.title": "S\u00e9lectionner la version"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

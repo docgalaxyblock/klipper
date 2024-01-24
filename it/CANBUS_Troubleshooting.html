@@ -1422,14 +1422,17 @@ resistors</a> on the CAN bus. If the resistors are not properly installed then m
 <p>The Linux <a href="https://github.com/linux-can/can-utils">can-utils</a> tool provides the capture software. It is typically installed on a machine by running:</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get update &amp;&amp; sudo apt-get install can-utils
 </code></pre></div>
+
 <p>Once installed, one may obtain a capture of all CAN bus messages on an interface with the following command:</p>
 <div class="highlight"><pre><span></span><code>candump -tz -Ddex can0,#FFFFFFFF &gt; mycanlog
 </code></pre></div>
+
 <p>One can view the resulting log file (<code>mycanlog</code> in the example above) to see each raw CAN bus message that was sent and received by Klipper. Understanding the content of these messages will likely require low-level knowledge of Klipper's <a href="CANBUS_protocol.html">CANBUS protocol</a> and Klipper's <a href="MCU_Commands.html">MCU commands</a>.</p>
 <h3 id="parsing-klipper-messages-in-a-candump-log">Parsing Klipper messages in a candump log<a class="headerlink" href="#parsing-klipper-messages-in-a-candump-log" title="Permanent link">&para;</a></h3>
 <p>One may use the <code>parsecandump.py</code> tool to parse the low-level Klipper micro-controller messages contained in a candump log. Using this tool is an advanced topic that requires knowledge of Klipper <a href="MCU_Commands.html">MCU commands</a>. For example:</p>
 <div class="highlight"><pre><span></span><code>./scripts/parsecandump.py mycanlog 108 ./out/klipper.dict
 </code></pre></div>
+
 <p>This tool produces output similar to the <a href="Debugging.html#translating-gcode-files-to-micro-controller-commands">parsedump
 tool</a>. See the documentation for that tool for information on generating the Klipper micro-controller data dictionary.</p>
 <p>In the above example, <code>108</code> is the <a href="CANBUS_protocol.html#micro-controller-id-assignment">CAN bus
@@ -1511,7 +1514,7 @@ id</a>. It is a hexadecimal number. The id <code>108</code> is assigned by Klipp
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

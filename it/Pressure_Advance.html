@@ -1356,12 +1356,15 @@
 <p>Prepararsi per il test emettendo il seguente comando G-Code:</p>
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
+
 <p>Questo comando fa viaggiare l'ugello più lentamente attraverso gli angoli per enfatizzare gli effetti della pressione dell'estrusore. Quindi per le stampanti con un estrusore a trasmissione diretta eseguire il comando:</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
+
 <p>Per estrusori bowden lunghi utilizzare:</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
+
 <p>Quindi stampare l'oggetto. Una volta stampata completamente, la stampa di prova avrà il seguente aspetto:</p>
 <p><img alt="tuning_tower" src="img/tuning_tower.jpg" /></p>
 <p>Il comando TUNING_TOWER sopra indica a Klipper di modificare l'impostazione pressure_advance su ogni strato della stampa. Gli strati più alti nella stampa avranno un valore di anticipo della pressione maggiore impostato. Gli strati al di sotto dell'impostazione pressione_anticipo ideale avranno macchie agli angoli e gli strati al di sopra dell'impostazione ideale possono portare a angoli arrotondati e una scarsa estrusione all'angolo.</p>
@@ -1453,7 +1456,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "Copia", "clipboard.copied": "Copiato", "search.config.lang": "it", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Cerca", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.term.missing": "Non presente", "select.version.title": "Seleziona la versione"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>

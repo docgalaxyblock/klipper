@@ -1632,6 +1632,7 @@ mesh_min: 35, 6
 mesh_max: 240, 198
 probe_count: 5, 3
 </code></pre></div>
+
 <ul>
 <li><code>speed: 120</code> <em>默认值：50</em> 探针在两个点之间移动的速度。</li>
 <li><code>horizontal_move_z: 5</code> <em>默认值：5</em> 探针前往下一个点之前Z需要抬升的高度。</li>
@@ -1650,6 +1651,7 @@ mesh_radius: 75
 mesh_origin: 0, 0
 round_probe_count: 5
 </code></pre></div>
+
 <ul>
 <li><code>mesh_radius: 75</code> <em>必须配置</em> 探测网格范围的半径（单位：mm），相对于 <code>mesh_origin</code>。 请注意，探针的偏移会限制网格半径的大小。 在此示例中，大于 76 mm的半径会将打印头移动到打印机的范围之外。</li>
 <li><code>mesh_origin: 0, 0</code> <em>默认值：0, 0</em> 探测网格的中心点。 该坐标相对于探针的位置。 虽然默认值为 0,0，但如果希望探测床的边角可以修改该值。 请参阅下图。</li>
@@ -1671,6 +1673,7 @@ mesh_pps: 2, 3
 algorithm: bicubic
 bicubic_tension: 0.2
 </code></pre></div>
+
 <ul>
 <li><code>mesh_pps: 2,3</code> <em>默认值：2,2</em><code>mesh_pps</code> 选项是每段的网格点数的简写。 此选项指定沿 x 轴和 y 轴为每个线段插值的点数。 “段”被视为每个探测点之间的间隔。 与 <code>probe_count</code> 一样，<code>mesh_pps</code> 可以是 X, Y 整数对，也可以是同时应用于两个轴的单个整数。 在此示例中，沿 X 轴有 4 个线段，沿 Y 轴有 2 个线段。 这计算为沿 X 的 8 个插值点，沿 Y 的 6 个插值点，从而产生 13x8 网格。 请注意，如果 mesh_pps 设置为 0，则禁用网格插值，并且将直接对探测网格进行采样。</li>
 <li><code>algorithm: lagrange</code> <em>默认值：lagrange</em> 用于插入网格的算法。 可能是 <code>lagrange</code> or <code>bicubic</code>。 拉格朗日插值最多为 6 个探测点，因为大量样本容易发生振荡。 双三次插值要求沿每个轴至少有 4 个探测点，如果指定的点少于 4 个，则强制拉格朗日采样。 如果 <code>mesh_pps</code> 设置为 0，则该值将被忽略，因为没有进行网格插值。</li>
@@ -1689,6 +1692,7 @@ probe_count: 5, 3
 move_check_distance: 5
 split_delta_z: .025
 </code></pre></div>
+
 <ul>
 <li><code>move_check_distance: 5</code> <em>默认值：5</em> 在执行拆分之前检查 Z 中需要变化的最小距离。 在此示例中，算法将遍历超过 5 毫米的移动。 每 5mm 将查找一次网格的Z ，并将其与前一次移动的 Z 值进行比较。 如果三角洲满足 <code>split_delta_z</code> 设置的阈值，则移动将被拆分并继续遍历。 重复此过程，直到到达移动结束处，在此将应用最终调整。 比 <code>move_check_distance</code> 短的移动将正确的 Z 调整直接应用于移动，无需遍历或拆分。</li>
 <li><code>split_delta_z: .025</code> <em>默认值：.025</em> 如上所述，这是触发移动拆分所需的最小偏差。 在上面的示例中，任何偏差为 +/- .025 mm的 Z 值都将触发拆分。</li>
@@ -1706,6 +1710,7 @@ fade_start: 1
 fade_end: 10
 fade_target: 0
 </code></pre></div>
+
 <ul>
 <li><code>fade_start: 1</code> <em>默认值：1</em> 开始网格淡出的值，在设定的fade_start值之后逐步停止调整Z的高度。 建议在打印几层之后再开始淡出层高。</li>
 <li><code>fade_end: 10</code> <em>默认值：0</em> 网格淡出完成的 Z 高度。 如果此值低于<code>fade_start</code>，则禁用网格淡出。 该值可以根据打印表面的弯曲程度进行调整。 明显弯曲的表面应该在将网格淡出的距离长。 接近平坦的表面可能能够降低该值以更快地逐步淘汰。 如果对 <code>fade_start</code> 使用默认值 1，则 10mm 是一个合理的值。</li>
@@ -1721,6 +1726,7 @@ mesh_max: 240, 198
 zero_reference_position: 125, 110
 probe_count: 5, 3
 </code></pre></div>
+
 <ul>
 <li><code>zero_reference_position:</code> <em>Default Value: None (disabled)</em> The <code>zero_reference_position</code> expects an (X, Y) coordinate matching that of the <code>reference position</code> described above. If the coordinate lies within the mesh then the mesh will be offset so the reference position applies zero adjustment. If the coordinate lies outside of the mesh then the coordinate will be probed after calibration, with the resulting z-value used as the z-offset. Note that this coordinate must NOT be in a location specified as a <code>faulty_region</code> if a probe is necessary.</li>
 </ul>
@@ -1735,6 +1741,7 @@ probe_count: 5, 3
 ... (additional generated points)
 // bed_mesh: relative_reference_index 24 is (131.5, 108.0)
 </code></pre></div>
+
 <p><em>Note: The above output is also printed in <code>klippy.log</code> during initialization.</em></p>
 <p>Using the example above we see that the <code>relative_reference_index</code> is printed along with its coordinate. Thus the <code>zero_reference_position</code> is <code>131.5, 108</code>.</p>
 <h3 id="_9">故障区域<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
@@ -1755,6 +1762,7 @@ faulty_region_3_max: 205.0, 110.0
 faulty_region_4_min: 30.0, 170.0
 faulty_region_4_max: 45.0, 210.0
 </code></pre></div>
+
 <ul>
 <li><code>faulty_region_{1...99}_min</code> <code>faulty_region_{1...99}_max</code> <em>默认值：None （无）(disabled（禁用）)</em> 故障区域的定义方式类似床网本身，必须为每个区域指定最小和最大（X, Y）坐标。一个故障区域可以延伸到网格之外，但是产生的替代探测点总是在网格的边界内。两个区域不可以重叠。</li>
 </ul>
@@ -1800,6 +1808,7 @@ faulty_region_4_max: 45.0, 210.0
 <span class="na">gcode</span><span class="o">:</span>
 <span class="w">  </span><span class="na">BED_MESH_PROFILE LOAD</span><span class="o">=</span><span class="s">default</span>
 </code></pre></div>
+
 <h3 id="_13">输出<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p><code>BED_MESH_OUTPUT PGP=[0 | 1]</code></p>
 <p>将当前网格状态输出到终端。请注意，输出的是网格本身</p>
@@ -1822,6 +1831,7 @@ faulty_region_4_max: 45.0, 210.0
 // 13 | (164.8, 193.0) | (188.8, 198.0)
 // 14 | (216.0, 193.0) | (240.0, 198.0)
 </code></pre></div>
+
 <p>"Tool Adjusted"（工具调整）点指每个点的喷嘴位置，"Probe"（探针）点指探头位置。请注意，手动探测时"Probe"（探针）点时将同时指工具和喷嘴位置。</p>
 <h3 id="_14">清除网格状态<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p><code>BED_MESH_CLEAR</code></p>
@@ -1899,7 +1909,7 @@ faulty_region_4_max: 45.0, 210.0
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "search.suggest", "search.highlight", "search.share"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.e1a181d9.min.js"></script>
