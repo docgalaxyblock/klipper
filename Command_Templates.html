@@ -1534,7 +1534,6 @@ gcode:
   G4 P2000
   SET_PIN PIN=my_led VALUE=0
 </code></pre></div>
-
 <p>Note how the <code>gcode:</code> config option always starts at the beginning of
 the line and subsequent lines in the G-Code macro never start at the
 beginning.</p>
@@ -1550,7 +1549,6 @@ gcode:
   G4 P2000
   SET_PIN PIN=my_led VALUE=0
 </code></pre></div>
-
 <p>The terminal will display the description when you use the <code>HELP</code> command or the autocomplete function.</p>
 <h2 id="saverestore-state-for-g-code-moves">Save/Restore state for G-Code moves<a class="headerlink" href="#saverestore-state-for-g-code-moves" title="Permanent link">&para;</a></h2>
 <p>Unfortunately, the G-Code command language can be challenging to use.
@@ -1571,7 +1569,6 @@ gcode:
   G1 Z10 F300
   RESTORE_GCODE_STATE NAME=my_move_up_state
 </code></pre></div>
-
 <p>The <code>G91</code> command places the G-Code parsing state into "relative move
 mode" and the <code>RESTORE_GCODE_STATE</code> command restores the state to what
 it was prior to entering the macro. Be sure to specify an explicit
@@ -1583,7 +1580,7 @@ wrapping them in <code>{ }</code> characters or use conditional statements
 wrapped in <code>{% %}</code>. See the
 <a href="http://jinja.pocoo.org/docs/2.10/templates/">Jinja2 documentation</a>
 for further information on the syntax.</p>
-<p>An example of a complex macro:</p>
+<p>An example of a complex macro:
 <div class="highlight"><pre><span></span><code>[gcode_macro clean_nozzle]
 gcode:
   {% set wipe_count = 8 %}
@@ -1596,8 +1593,7 @@ gcode:
     {% endfor %}
   {% endfor %}
   RESTORE_GCODE_STATE NAME=clean_nozzle_state
-</code></pre></div>
-
+</code></pre></div></p>
 <h3 id="macro-parameters">Macro parameters<a class="headerlink" href="#macro-parameters" title="Permanent link">&para;</a></h3>
 <p>It is often useful to inspect parameters passed to the macro when
 it is called. These parameters are available via the <code>params</code>
@@ -1606,7 +1602,6 @@ pseudo-variable. For example, if the macro:</p>
 gcode:
   M117 Now at { params.VALUE|float * 100 }%
 </code></pre></div>
-
 <p>were invoked as <code>SET_PERCENT VALUE=.2</code> it would evaluate to <code>M117 Now
 at 20%</code>. Note that parameter names are always in upper-case when
 evaluated in the macro and are always passed as strings. If performing
@@ -1618,7 +1613,6 @@ gcode:
   {% set bed_temp = params.TEMPERATURE|default(40)|float %}
   M140 S{bed_temp}
 </code></pre></div>
-
 <h3 id="the-rawparams-variable">The "rawparams" variable<a class="headerlink" href="#the-rawparams-variable" title="Permanent link">&para;</a></h3>
 <p>The full unparsed parameters for the running macro can be access via the
 <code>rawparams</code> pseudo-variable.</p>
@@ -1632,7 +1626,6 @@ via the <code>printer</code> pseudo-variable. For example:</p>
 gcode:
   M106 S{ printer.fan.speed * 0.9 * 255}
 </code></pre></div>
-
 <p>Available fields are defined in the
 <a href="Status_Reference.html">Status Reference</a> document.</p>
 <p>Important! Macros are first evaluated in entirety and only then are
@@ -1651,13 +1644,12 @@ access it via the <code>[ ]</code> accessor - for example:
 <code>printer["generic_heater my_chamber_heater"].temperature</code>.</p>
 <p>Note that the Jinja2 <code>set</code> directive can assign a local name to an
 object in the <code>printer</code> hierarchy. This can make macros more readable
-and reduce typing. For example:</p>
+and reduce typing. For example:
 <div class="highlight"><pre><span></span><code>[gcode_macro QUERY_HTU21D]
 gcode:
     {% set sensor = printer[&quot;htu21d my_sensor&quot;] %}
     M117 Temp:{sensor.temperature} Humidity:{sensor.humidity}
-</code></pre></div>
-
+</code></pre></div></p>
 <h2 id="actions">Actions<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
 <p>There are some commands available that can alter the state of the
 printer. For example, <code>{ action_emergency_stop() }</code> would cause the
@@ -1702,7 +1694,6 @@ gcode:
   # Restore temperature
   M140 S{printer[&quot;gcode_macro start_probe&quot;].bed_temp}
 </code></pre></div>
-
 <p>Be sure to take the timing of macro evaluation and command execution
 into account when using SET_GCODE_VARIABLE.</p>
 <h2 id="delayed-gcodes">Delayed Gcodes<a class="headerlink" href="#delayed-gcodes" title="Permanent link">&para;</a></h2>
@@ -1721,7 +1712,6 @@ gcode:
  M117 Load Complete!
  UPDATE_DELAYED_GCODE ID=clear_display DURATION=10
 </code></pre></div>
-
 <p>When the <code>load_filament</code> macro above executes, it will display a
 "Load Complete!" message after the extrusion is finished.  The
 last line of gcode enables the "clear_display" delayed_gcode, set
@@ -1736,7 +1726,6 @@ initial_duration: 5.
 gcode:
   M117 Welcome!
 </code></pre></div>
-
 <p>Its possible for a delayed gcode to repeat by updating itself in
 the gcode option:</p>
 <div class="highlight"><pre><span></span><code>[delayed_gcode report_temp]
@@ -1745,13 +1734,11 @@ gcode:
   {action_respond_info(&quot;Extruder Temp: %.1f&quot; % (printer.extruder0.temperature))}
   UPDATE_DELAYED_GCODE ID=report_temp DURATION=2
 </code></pre></div>
-
 <p>The above delayed_gcode will send "// Extruder Temp: [ex0_temp]" to
 Octoprint every 2 seconds.  This can be canceled with the following
 gcode:</p>
 <div class="highlight"><pre><span></span><code>UPDATE_DELAYED_GCODE ID=report_temp DURATION=0
 </code></pre></div>
-
 <h2 id="menu-templates">Menu templates<a class="headerlink" href="#menu-templates" title="Permanent link">&para;</a></h2>
 <p>If a <a href="Config_Reference.html#display">display config section</a> is enabled,
 then it is possible to customize the menu with
@@ -1788,10 +1775,9 @@ used to save the variable to disk so that it can be used across
 restarts. All stored variables are loaded into the
 <code>printer.save_variables.variables</code> dict at startup and can be used in
 gcode macros. to avoid overly long lines you can add the following at
-the top of the macro:</p>
+the top of the macro:
 <div class="highlight"><pre><span></span><code>{% set svv = printer.save_variables.variables %}
-</code></pre></div>
-
+</code></pre></div></p>
 <p>As an example, it could be used to save the state of 2-in-1-out hotend
 and when starting a print ensure that the active extruder is used,
 instead of T0:</p>

@@ -1390,24 +1390,20 @@
 Recv: // Finish with ACCEPT or ABORT command.
 Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
 </code></pre></div>
-
 <p>噴嘴的（按照印表機目前的定義的）目前高度顯示在"--&gt; &lt;--"之間。右邊的數字是剛剛大於目前高度的最後一次探測高度，左邊的數字是小於目前高度的最後一次探測高度（如果沒有嘗試，則??????）。</p>
 <p>將紙放在噴嘴和床面之間。摺疊紙張的一角可以讓它更容易被抓在手裡。(來回移動紙張時，儘量不要下壓床面。）</p>
 <p><img alt="paper-test" src="img/paper-test.jpg" /></p>
 <p>使用 TESTZ 命令將噴嘴向紙條靠近。例如：</p>
 <div class="highlight"><pre><span></span><code>TESTZ Z=-.1
 </code></pre></div>
-
 <p>TESTZ命令將相對噴嘴的當前位置移動指定距離。(因此，<code>Z=-.1</code> 命令噴嘴向床身靠近 0.1mm。）噴嘴停止移動後，來回推動紙張，檢查噴嘴是否與紙張接觸，並感受摩擦力的大小。繼續發出 TESTZ 命令，直到塞紙測試時感覺到少量的摩擦。</p>
 <p>如果發現摩擦力太大，那麼可以用一個正的 Z 值將噴嘴向上移動，或者用<code>TESTZ Z=+</code>或<code>TESTZ Z=-</code>來二分上一次位置和目前位置-也就是移動到兩個位置之間的一半位置。例如，如果從 TESTZ 命令後收到以下反饋：</p>
 <div class="highlight"><pre><span></span><code>Recv: // Z position: 0.130 --&gt; 0.230 &lt;-- 0.280
 </code></pre></div>
-
 <p>然後 <code>TESTZ Z=-</code> 會將噴嘴移動到 Z 座標 0.180 （0.130 和 0.230之間）。這個功能可以快速的找到一致阻力的位置。也可以用 <code>Z=++</code> 和 <code>Z=--</code> 直接回到上一次測量位置。例如，在上面反饋後執行<code>TESTZ Z=--</code>命令會將 Z 座標移動到 0.130。</p>
 <p>感受到少量的摩擦後，執行 ACCEPT 命令：</p>
 <div class="highlight"><pre><span></span><code>ACCEPT
 </code></pre></div>
-
 <p>這將接受給定的 Z 高度，並繼續使用給定的校準工具。</p>
 <p>確切的阻力並不重要，就像熱膨脹量和紙張的確切寬度並不重要一樣。只需要每次測試時儘量達到相同的阻力就行了。</p>
 <p>如果在測試過程中出了問題，可以使用 <code>ABORT</code> 命令來退出校準工具。</p>

@@ -1420,11 +1420,9 @@
 <div class="highlight"><pre><span></span><code>G28
 DELTA_CALIBRATE METHOD=manual
 </code></pre></div>
-
 <p>Dopo aver sondato i sette punti verranno calcolati i nuovi parametri delta. Salva e applica questi parametri eseguendo:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>La calibrazione di base dovrebbe fornire parametri delta sufficientemente accurati per la stampa di base. Se si tratta di una nuova stampante, questo è un buon momento per stampare alcuni oggetti di base e verificarne la funzionalità generale.</p>
 <h2 id="calibrazione-delta-migliorata">Calibrazione delta migliorata<a class="headerlink" href="#calibrazione-delta-migliorata" title="Permanent link">&para;</a></h2>
 <p>La calibrazione delta di base generalmente fa un buon lavoro nel calcolo dei parametri delta in modo tale che l'ugello sia alla distanza corretta dal letto. Tuttavia, non tenta di calibrare la precisione dimensionale X e Y. È una buona idea eseguire una calibrazione delta avanzata per verificare l'accuratezza dimensionale.</p>
@@ -1440,7 +1438,6 @@ DELTA_CALIBRATE METHOD=manual
 <p>Inserisci questi parametri in Klipper con un elenco separato da virgole di numeri in virgola mobile:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_DISTS=&lt;a_dist&gt;,&lt;far_c_dist&gt;,&lt;b_dist&gt;,&lt;far_a_dist&gt;,&lt;c_dist&gt;,&lt;far_b_dist&gt;
 </code></pre></div>
-
 <p>Fornisci i valori senza spazi tra di loro.</p>
 <p>Quindi misurare la distanza tra il montante A e il montante di fronte all'etichetta C.</p>
 <p><img alt="delta-ab-distance" src="img/delta-outer-distance.jpg" /></p>
@@ -1449,14 +1446,12 @@ DELTA_CALIBRATE METHOD=manual
 <p>Inserisci questi parametri in Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_DISTS=&lt;a_to_far_c&gt;,&lt;far_c_to_b&gt;,&lt;b_to_far_a&gt;,&lt;far_a_to_c&gt;,&lt;c_to_far_b&gt;,&lt;far_b_to_a&gt;
 </code></pre></div>
-
 <p>A questo punto va bene rimuovere l'oggetto dal letto. Le misure finali sono dei pilastri stessi. Misurare la dimensione del pilastro centrale lungo il raggio A, poi il raggio B e poi il raggio C.</p>
 <p><img alt="delta-a-pillar" src="img/delta-a-pillar.jpg" /></p>
 <p><img alt="delta_cal_e_step3" src="img/delta_cal_e_step3.png" /></p>
 <p>Inseriscili in Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;b&gt;,&lt;c&gt;
 </code></pre></div>
-
 <p>Le misure finali sono dei pilastri esterni. Inizia misurando la distanza del pilastro A lungo la linea da A al pilastro di fronte a C.</p>
 <p><img alt="delta-ab-pillar" src="img/delta-outer-pillar.jpg" /></p>
 <p>Quindi andare in senso antiorario e misurare i restanti pilastri esterni (pilastro di fronte a C lungo la linea a B, pilastro B lungo la linea a pilastro di fronte ad A, ecc.).</p>
@@ -1464,20 +1459,16 @@ DELTA_CALIBRATE METHOD=manual
 <p>E inseriscili in Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;far_c&gt;,&lt;b&gt;,&lt;far_a&gt;,&lt;c&gt;,&lt;far_b&gt;
 </code></pre></div>
-
 <p>Se l'oggetto è stato ridimensionato a una dimensione inferiore o superiore, fornire il fattore di scala utilizzato durante il taglio dell'oggetto:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE SCALE=1.0
 </code></pre></div>
-
 <p>(Un valore di scala di 2,0 significherebbe che l'oggetto è il doppio della sua dimensione originale, 0,5 sarebbe la metà della sua dimensione originale.)</p>
 <p>Infine, esegui la calibrazione delta avanzata eseguendo:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CALIBRATE=extended
 </code></pre></div>
-
 <p>Il completamento di questo comando può richiedere diversi minuti. Dopo il completamento, calcolerà i parametri delta aggiornati (raggio delta, angoli della torre, posizioni dei finecorsa e lunghezze dei bracci). Utilizzare il comando SAVE_CONFIG per salvare e applicare le impostazioni:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>Il comando SAVE_CONFIG salverà sia i parametri delta aggiornati che le informazioni dalle misurazioni della distanza. Anche i futuri comandi DELTA_CALIBRATE utilizzeranno queste informazioni sulla distanza. Non tentare di reinserire le misurazioni grezze della distanza dopo aver eseguito SAVE_CONFIG, poiché questo comando modifica la configurazione della stampante e le misurazioni grezze non vengono più applicate.</p>
 <h3 id="note-aggiuntive">Note aggiuntive<a class="headerlink" href="#note-aggiuntive" title="Permanent link">&para;</a></h3>
 <ul>

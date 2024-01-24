@@ -1459,16 +1459,13 @@
 <p>在 Cura 中，要传递温度参数，使用以下开始G代码：</p>
 <div class="highlight"><pre><span></span><code>START_PRINT BED_TEMP={material_bed_temperature_layer_0} EXTRUDER_TEMP={material_print_temperature_layer_0}
 </code></pre></div>
-
 <p>在PrusaSlicer和SuperSlicer等sli3er衍生版本中，使用以下G代码：</p>
 <div class="highlight"><pre><span></span><code>START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
 </code></pre></div>
-
 <p>还要注意，当某些条件不满足时，这些切片软件会插入自己的加热代码。在Cura中，存在<code>{material_bed_temperature_layer_0}</code>和<code>{material_print_temperature_layer_0}</code>这两个变量就足够了。在slic3r衍生品中，你需要使用：</p>
 <div class="highlight"><pre><span></span><code>M140 S0
 M104 S0
 </code></pre></div>
-
 <p>在宏调用之前。还要注意的是，SuperSlicer有一个 "仅包含定制G代码"的按钮选项，可以达到同样的效果。</p>
 <p>在config/sample-macros.cfg中可以找到一个使用这些参数的START_PRINT宏的例子</p>
 

@@ -1367,21 +1367,18 @@ running the test.</p>
 speed (eg, 100mm/s), zero infill, and a coarse layer height (the layer
 height should be around 75% of the nozzle diameter). Make sure any
 "dynamic acceleration control" is disabled in the slicer.</p>
-<p>Prepare for the test by issuing the following G-Code command:</p>
+<p>Prepare for the test by issuing the following G-Code command:
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
-
-<p>This command makes the nozzle travel slower through corners to
+This command makes the nozzle travel slower through corners to
 emphasize the effects of extruder pressure. Then for printers with a
-direct drive extruder run the command:</p>
+direct drive extruder run the command:
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
-
-<p>For long bowden extruders use:</p>
+For long bowden extruders use:
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
-
-<p>Then print the object. When fully printed the test print looks like:</p>
+Then print the object. When fully printed the test print looks like:</p>
 <p><img alt="tuning_tower" src="img/tuning_tower.jpg" /></p>
 <p>The above TUNING_TOWER command instructs Klipper to alter the
 pressure_advance setting on each layer of the print. Higher layers in

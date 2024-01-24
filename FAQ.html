@@ -1662,23 +1662,20 @@ information.</p>
 <h2 id="wheres-my-serial-port">Where's my serial port?<a class="headerlink" href="#wheres-my-serial-port" title="Permanent link">&para;</a></h2>
 <p>The general way to find a USB serial port is to run <code>ls
 /dev/serial/by-id/*</code> from an ssh terminal on the host machine. It will
-likely produce output similar to the following:</p>
+likely produce output similar to the following:
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
-</code></pre></div>
-
+</code></pre></div></p>
 <p>The name found in the above command is stable and it is possible to
 use it in the config file and while flashing the micro-controller
-code. For example, a flash command might look similar to:</p>
+code. For example, a flash command might look similar to:
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
-
-<p>and the updated config might look like:</p>
+and the updated config might look like:
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
-</code></pre></div>
-
+</code></pre></div></p>
 <p>Be sure to copy-and-paste the name from the "ls" command that you ran
 above as the name will be different for each printer.</p>
 <p>If you are using multiple micro-controllers and they do not have
@@ -1718,11 +1715,10 @@ menuconfig</strong>) and that updated code will need to be compiled and
 flashed to the micro-controller. The Klipper printer.cfg file will
 also need to be updated to match that baud rate (see the
 <a href="Config_Reference.html#mcu">config reference</a> for details).  For
-example:</p>
+example:
 <div class="highlight"><pre><span></span><code>[mcu]
 baud: 250000
-</code></pre></div>
-
+</code></pre></div></p>
 <p>The baud rate shown on the OctoPrint web page has no impact on the
 internal Klipper micro-controller baud rate. Always set the OctoPrint
 baud rate to 250000 when using Klipper.</p>
@@ -1768,16 +1764,14 @@ package.</p>
 <h2 id="can-i-run-multiple-instances-of-klipper-on-the-same-host-machine">Can I run multiple instances of Klipper on the same host machine?<a class="headerlink" href="#can-i-run-multiple-instances-of-klipper-on-the-same-host-machine" title="Permanent link">&para;</a></h2>
 <p>It is possible to run multiple instances of the Klipper host software,
 but doing so requires Linux admin knowledge. The Klipper installation
-scripts ultimately cause the following Unix command to be run:</p>
+scripts ultimately cause the following Unix command to be run:
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -l /tmp/klippy.log
 </code></pre></div>
-
-<p>One can run multiple instances of the above command as long as each
+One can run multiple instances of the above command as long as each
 instance has its own printer config file, its own log file, and its
-own pseudo-tty. For example:</p>
+own pseudo-tty. For example:
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer2.cfg -l /tmp/klippy2.log -I /tmp/printer2
-</code></pre></div>
-
+</code></pre></div></p>
 <p>If you choose to do this, you will need to implement the necessary
 start, stop, and installation scripts (if any). The
 <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a> script and the
@@ -2014,7 +2008,6 @@ Pi and run:</p>
 git pull
 ~/klipper/scripts/install-octopi.sh
 </code></pre></div>
-
 <p>Then one can recompile and flash the micro-controller code. For
 example:</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
@@ -2025,14 +2018,12 @@ sudo service klipper stop
 make flash FLASH_DEVICE=/dev/ttyACM0
 sudo service klipper start
 </code></pre></div>
-
 <p>However, it's often the case that only the host software changes. In
 this case, one can update and restart just the host software with:</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper
 git pull
 sudo service klipper restart
 </code></pre></div>
-
 <p>If after using this shortcut the software warns about needing to
 reflash the micro-controller or some other unusual error occurs, then
 follow the full upgrade steps outlined above.</p>
@@ -2047,10 +2038,10 @@ flash" commands are needed for a software change to take effect.</p>
 flashing directions for the new firmware.</p>
 <p>On the raspberry pi end, an uninstall script is available in
 <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-uninstall.sh">scripts/klipper-uninstall.sh</a>. For
-example:</p>
+example:
 <div class="highlight"><pre><span></span><code>sudo ~/klipper/scripts/klipper-uninstall.sh
 rm -rf ~/klippy-env ~/klipper
-</code></pre></div>
+</code></pre></div></p>
 
               
             </article>
