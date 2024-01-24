@@ -1660,10 +1660,13 @@ information.</p>
 <h2 id="how-do-i-calculate-the-rotation_distance-config-parameter">How do I calculate the rotation_distance config parameter?<a class="headerlink" href="#how-do-i-calculate-the-rotation_distance-config-parameter" title="Permanent link">&para;</a></h2>
 <p>See the <a href="Rotation_Distance.html">rotation distance document</a>.</p>
 <h2 id="wheres-my-serial-port">Where's my serial port?<a class="headerlink" href="#wheres-my-serial-port" title="Permanent link">&para;</a></h2>
-<p>The general way to find a USB serial port is to run <code>ls
-/dev/serial/by-id/*</code> from an ssh terminal on the host machine. It will
+<p>The general way to find a USB serial port is to run
+<div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
+``
+from an ssh terminal on the host machine. It will
 likely produce output similar to the following:
-<div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
+```.no-copy
+/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div></p>
 <p>The name found in the above command is stable and it is possible to
 use it in the config file and while flashing the micro-controller
@@ -1680,7 +1683,9 @@ serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 above as the name will be different for each printer.</p>
 <p>If you are using multiple micro-controllers and they do not have
 unique ids (common on boards with a CH340 USB chip) then follow the
-directions above using the command <code>ls /dev/serial/by-path/*</code> instead.</p>
+directions above using the command `` instead.
+<div class="highlight"><pre><span></span><code>ls /dev/serial/by-path/*
+</code></pre></div></p>
 <h2 id="when-the-micro-controller-restarts-the-device-changes-to-devttyusb1">When the micro-controller restarts the device changes to /dev/ttyUSB1<a class="headerlink" href="#when-the-micro-controller-restarts-the-device-changes-to-devttyusb1" title="Permanent link">&para;</a></h2>
 <p>Follow the directions in the
 "<a href="#wheres-my-serial-port">Where's my serial port?</a>" section to prevent
@@ -1698,7 +1703,7 @@ and make sure FLASH_DEVICE is set correctly for your board (see the
 <a href="#wheres-my-serial-port">question above</a>).</p>
 <p>However, if "make flash" just doesn't work for your board, then you
 will need to manually flash. See if there is a config file in the
-<a href="https://github.com/Klipper3d/klipper/blob/master/config">config directory</a> with specific instructions for flashing
+<a href="../config">config directory</a> with specific instructions for flashing
 the device. Also, check the board manufacturer's documentation to see
 if it describes how to flash the device. Finally, it may be possible
 to manually flash the device using tools such as "avrdude" or
@@ -1743,7 +1748,7 @@ feature when printing (see
 requires Python running on a Linux (or similar) computer. However, if
 you wish to run it on a different machine you will need Linux admin
 knowledge to install the system prerequisites for that particular
-machine. See the <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a>
+machine. See the <a href="../scripts/install-octopi.sh">install-octopi.sh</a>
 script for further information on the necessary Linux admin steps.</p>
 <p>If you are looking to run the Klipper host software on a low-end chip,
 then be aware that, at a minimum, a machine with "double precision
@@ -1774,8 +1779,8 @@ own pseudo-tty. For example:
 </code></pre></div></p>
 <p>If you choose to do this, you will need to implement the necessary
 start, stop, and installation scripts (if any). The
-<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a> script and the
-<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-start.sh">klipper-start.sh</a> script may be useful
+<a href="../scripts/install-octopi.sh">install-octopi.sh</a> script and the
+<a href="../scripts/klipper-start.sh">klipper-start.sh</a> script may be useful
 as examples.</p>
 <h2 id="do-i-have-to-use-octoprint">Do I have to use OctoPrint?<a class="headerlink" href="#do-i-have-to-use-octoprint" title="Permanent link">&para;</a></h2>
 <p>The Klipper software is not dependent on OctoPrint. It is possible to
@@ -1899,7 +1904,7 @@ heaters and temperature sensors are functioning correctly. See the
 details.</p>
 <h2 id="how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name">How do I convert a Marlin pin number to a Klipper pin name?<a class="headerlink" href="#how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name" title="Permanent link">&para;</a></h2>
 <p>Short answer: A mapping is available in the
-<a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-aliases.cfg">sample-aliases.cfg</a> file. Use that file
+<a href="../config/sample-aliases.cfg">sample-aliases.cfg</a> file. Use that file
 as a guide to finding the actual micro-controller pin names. (It is
 also possible to copy the relevant
 <a href="Config_Reference.html#board_pins">board_pins</a> config section into your
@@ -2037,7 +2042,7 @@ flash" commands are needed for a software change to take effect.</p>
 <p>On the firmware end, nothing special needs to happen. Just follow the
 flashing directions for the new firmware.</p>
 <p>On the raspberry pi end, an uninstall script is available in
-<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-uninstall.sh">scripts/klipper-uninstall.sh</a>. For
+<a href="../scripts/klipper-uninstall.sh">scripts/klipper-uninstall.sh</a>. For
 example:
 <div class="highlight"><pre><span></span><code>sudo ~/klipper/scripts/klipper-uninstall.sh
 rm -rf ~/klippy-env ~/klipper
