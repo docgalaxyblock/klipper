@@ -1612,34 +1612,14 @@ bootloader if available.</p>
 <a href="Bootloaders.html">Bootloaders</a></p>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <h3 id="stm32-dfu-warning">STM32 DFU Warning<a class="headerlink" href="#stm32-dfu-warning" title="Permanent link">&para;</a></h3>
-<p>!!! danger "STM32 DFU Warning"</p>
-<pre><code>Note that on some boards, like the Octopus Pro v1 or EBB36/42 v1.1, entering
+<div class="admonition danger">
+<p class="admonition-title">STM32 DFU Warning</p>
+<p>Note that on some boards, like the Octopus Pro v1 or EBB36/42 v1.1, entering
 DFU mode can cause undesired actions (such as powering the heater while in
 DFU mode). It is recommended to disconnect heaters, and otherwise prevent
 undesired operations when using DFU mode. Consult the documentation for your
-board for more details.
-</code></pre>
-<p>!!! success "This guide is tested with the following boards:"</p>
-<ul>
-<li>BTT EBB36 &amp; 42 v1.1</li>
-<li>BTT EBB36 &amp; 42 v1.2</li>
-<li>BTT EBB SB2209/2240 v1.0</li>
-</ul>
-<p>!!! warning "This guide will not work with the following boards:"</p>
-<ul>
-<li>BTT EBB36 &amp; 42 v1.0<p>These boards have a different MCU.</p>
-</li>
-</ul>
-<p>??? danger "Before you start the flashing process"</p>
-<pre><code>The heater output is switched to on in DFU mode while in this mode!
-This can lead to a fire! 🔥
-Like in the next picture where the door bell ringed 🔔
-In version v1.2, this pin has changed because of this issue.
-
-&lt;figure markdown&gt;
-    &lt;figcaption&gt;(only the printer was harmed)&lt;/figcaption&gt;
-&lt;/figure&gt;
-</code></pre>
+board for more details.</p>
+</div>
 
               
             </article>
