@@ -57,14 +57,15 @@ theme:
     repo: fontawesome/brands/github
     alternate: material/web
   features:
-      #- navigation.tabs
-      #- navigation.expand
-      - navigation.top
-      # if enabled, the TOC doesn't work for some pages
-      # - toc.integrate
-      - search.suggest
-      - search.highlight
-      - search.share
+    - content.code.copy
+    #- navigation.tabs
+    #- navigation.expand
+    - navigation.top
+    # if enabled, the TOC doesn't work for some pages
+    # - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
   language: fr
 extra_css:
   - _klipper3d/css/extra.css
