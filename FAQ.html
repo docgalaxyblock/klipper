@@ -1661,7 +1661,7 @@ information.</p>
 <p>See the <a href="Rotation_Distance.html">rotation distance document</a>.</p>
 <h2 id="wheres-my-serial-port">Where's my serial port?<a class="headerlink" href="#wheres-my-serial-port" title="Permanent link">&para;</a></h2>
 <p>The general way to find a USB serial port is to run
-<div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/serial/by-id/*
 </code></pre></div>
 from an ssh terminal on the host machine. It will
 likely produce output similar to the following:
@@ -1670,9 +1670,9 @@ likely produce output similar to the following:
 <p>The name found in the above command is stable and it is possible to
 use it in the config file and while flashing the micro-controller
 code. For example, a flash command might look similar to:
-<div class="highlight"><pre><span></span><code>sudo service klipper stop
-make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
-sudo service klipper start
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>stop
+make<span class="w"> </span>flash<span class="w"> </span><span class="nv">FLASH_DEVICE</span><span class="o">=</span>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>start
 </code></pre></div>
 and the updated config might look like:
 <div class="highlight"><pre><span></span><code>[mcu]
@@ -1683,7 +1683,7 @@ above as the name will be different for each printer.</p>
 <p>If you are using multiple micro-controllers and they do not have
 unique ids (common on boards with a CH340 USB chip) then follow the
 directions above using the command `` instead.
-<div class="highlight"><pre><span></span><code>ls /dev/serial/by-path/*
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/serial/by-path/*
 </code></pre></div></p>
 <h2 id="when-the-micro-controller-restarts-the-device-changes-to-devttyusb1">When the micro-controller restarts the device changes to /dev/ttyUSB1<a class="headerlink" href="#when-the-micro-controller-restarts-the-device-changes-to-devttyusb1" title="Permanent link">&para;</a></h2>
 <p>Follow the directions in the
