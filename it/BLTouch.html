@@ -1441,7 +1441,6 @@
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
-
 <p>Se il BL-Touch verrà utilizzato per l'home dell'asse Z, impostare <code>endstop_pin: probe:z_virtual_endstop</code> e rimuovere <code>position_endstop</code> nella sezione di configurazione <code>[stepper_z]</code>, quindi aggiungere una sezione di configurazione <code>[safe_z_home]</code> per aumentare il asse z, posiziona gli assi xy, spostati al centro del letto e posizionati sull'asse z. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>[safe_z_home]
 home_xy_position: 100, 100 # Cambiare le coordinate per il centro del tuo piatto
@@ -1449,7 +1448,6 @@ speed: 50
 z_hop: 10                 # Move up 10mm
 z_hop_speed: 5
 </code></pre></div>
-
 <p>È importante che il movimento z_hop in safe_z_home sia sufficientemente alto in mode che la sonda non colpisca nulla anche se il pin della sonda si trova nel suo stato più basso.</p>
 <h2 id="test-iniziali">Test iniziali<a class="headerlink" href="#test-iniziali" title="Permanent link">&para;</a></h2>
 <p>Prima di proseguire, verificare che il BL-Touch sia montato all'altezza corretta, il perno dovrebbe trovarsi a circa 2 mm sopra il nozzle quando è retratto</p>

@@ -1673,10 +1673,9 @@
 control the Klipper host software.</p>
 <h2 id="enabling-the-api-socket">Enabling the API socket<a class="headerlink" href="#enabling-the-api-socket" title="Permanent link">&para;</a></h2>
 <p>In order to use the API server, the klippy.py host software must be
-started with the <code>-a</code> parameter. For example:</p>
+started with the <code>-a</code> parameter. For example:
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log
-</code></pre></div>
-
+</code></pre></div></p>
 <p>This causes the host software to create a Unix Domain Socket. A client
 can then open a connection on that socket and send commands to
 Klipper.</p>
@@ -1685,15 +1684,13 @@ a popular tool that can forward HTTP requests to Klipper's API Server
 Unix Domain Socket.</p>
 <h2 id="request-format">Request format<a class="headerlink" href="#request-format" title="Permanent link">&para;</a></h2>
 <p>Messages sent and received on the socket are JSON encoded strings
-terminated by an ASCII 0x03 character:</p>
+terminated by an ASCII 0x03 character:
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
-</code></pre></div>
-
+</code></pre></div></p>
 <p>Klipper contains a <code>scripts/whconsole.py</code> tool that can perform the
-above message framing. For example:</p>
+above message framing. For example:
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/whconsole.py /tmp/klippy_uds
-</code></pre></div>
-
+</code></pre></div></p>
 <p>This tool can read a series of JSON commands from stdin, send them to
 Klipper, and report the results. The tool expects each JSON command to
 be on a single line, and it will automatically append the 0x03
@@ -1789,12 +1786,11 @@ will return:
 <code>{"id": 123, "result": {}}</code></p>
 <p>The remote method <code>paneldue_beep</code> may now be called from Klipper. Note
 that if the method takes parameters they should be provided as keyword
-arguments. Below is an example of how it may called from a gcode_macro:</p>
+arguments. Below is an example of how it may called from a gcode_macro:
 <div class="highlight"><pre><span></span><code>[gcode_macro PANELDUE_BEEP]
 gcode:
   {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
-</code></pre></div>
-
+</code></pre></div></p>
 <p>When the PANELDUE_BEEP gcode macro is executed, Klipper would send something
 like the following over the socket:
 <code>{"action": "run_paneldue_beep",

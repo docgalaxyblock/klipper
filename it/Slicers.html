@@ -1459,16 +1459,13 @@
 <p>In Cura, per passare le temperature, verrebbe utilizzato il seguente gcode iniziale:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT BED_TEMP={material_bed_temperature_layer_0} EXTRUDER_TEMP={material_print_temperature_layer_0}
 </code></pre></div>
-
 <p>Nei derivati di slic3r come PrusaSlicer e SuperSlicer, verrebbe utilizzato quanto segue:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
 </code></pre></div>
-
 <p>Si noti inoltre che questeislicer inseriranno i propri codici di riscaldamento quando determinate condizioni non vengono soddisfatte. In Cura, l'esistenza delle variabili <code>{material_bed_temperature_layer_0}</code> e <code>{material_print_temperature_layer_0}</code> è sufficiente per mitigare questo problema. Nei derivati slic3r, dovresti usare:</p>
 <div class="highlight"><pre><span></span><code>M140 S0
 M104 S0
 </code></pre></div>
-
 <p>prima della chiamata della macro. Tieni inoltre presente che SuperSlicer ha un'opzione del pulsante "solo gcode personalizzato", che ottiene lo stesso risultato.</p>
 <p>Un esempio di una macro START_PRINT che utilizza questi parametri può essere trovato in config/sample-macros.cfg</p>
 

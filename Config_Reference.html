@@ -3744,7 +3744,6 @@ serial:
 #   reset itself. The default is &#39;arduino&#39; if the micro-controller
 #   communicates over a serial port, &#39;command&#39; otherwise.
 </code></pre></div>
-
 <h3 id="mcu-my_extra_mcu">[mcu my_extra_mcu]<a class="headerlink" href="#mcu-my_extra_mcu" title="Permanent link">&para;</a></h3>
 <p>Additional micro-controllers (one may define any number of sections
 with an "mcu" prefix). Additional micro-controllers introduce
@@ -3755,7 +3754,6 @@ pins such as "extra_mcu:ar9" may then be used elsewhere in the config
 <div class="highlight"><pre><span></span><code>[mcu my_extra_mcu]
 # See the &quot;mcu&quot; section for configuration parameters.
 </code></pre></div>
-
 <h2 id="common-kinematic-settings">Common kinematic settings<a class="headerlink" href="#common-kinematic-settings" title="Permanent link">&para;</a></h2>
 <h3 id="printer">[printer]<a class="headerlink" href="#printer" title="Permanent link">&para;</a></h3>
 <p>The printer section controls high level printer settings.</p>
@@ -3795,7 +3793,6 @@ max_accel:
 #   changed at runtime using the SET_VELOCITY_LIMIT command. The
 #   default is 5mm/s.
 </code></pre></div>
-
 <h3 id="stepper">[stepper]<a class="headerlink" href="#stepper" title="Permanent link">&para;</a></h3>
 <p>Stepper motor definitions. Different printer types (as specified by
 the "kinematics" option in the [printer] config section) require
@@ -3877,7 +3874,6 @@ position_max:
 #   default is true if position_endstop is near position_max and false
 #   if near position_min.
 </code></pre></div>
-
 <h3 id="cartesian-kinematics">Cartesian Kinematics<a class="headerlink" href="#cartesian-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-cartesian.cfg">example-cartesian.cfg</a> for an
 example cartesian kinematics config file.</p>
@@ -3908,7 +3904,6 @@ max_z_accel:
 # the Z axis in a cartesian robot.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="linear-delta-kinematics">Linear Delta Kinematics<a class="headerlink" href="#linear-delta-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-delta.cfg">example-delta.cfg</a> for an example
 linear delta kinematics config file. See the
@@ -3990,7 +3985,6 @@ radius:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
-
 <h3 id="deltesian-kinematics">Deltesian Kinematics<a class="headerlink" href="#deltesian-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-deltesian.cfg">example-deltesian.cfg</a> for an
 example deltesian kinematics config file.</p>
@@ -4061,7 +4055,6 @@ arm_x_length:
 # the Y axis in a deltesian robot.
 [stepper_y]
 </code></pre></div>
-
 <h3 id="corexy-kinematics">CoreXY Kinematics<a class="headerlink" href="#corexy-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexy.cfg">example-corexy.cfg</a> for an example
 corexy (and h-bot) kinematics file.</p>
@@ -4092,7 +4085,6 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="corexz-kinematics">CoreXZ Kinematics<a class="headerlink" href="#corexz-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexz.cfg">example-corexz.cfg</a> for an example
 corexz kinematics config file.</p>
@@ -4120,7 +4112,6 @@ max_z_accel:
 # stepper controlling the X-Z movement.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="hybrid-corexy-kinematics">Hybrid-CoreXY Kinematics<a class="headerlink" href="#hybrid-corexy-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexy.cfg">example-hybrid-corexy.cfg</a>
 for an example hybrid corexy kinematics config file.</p>
@@ -4149,7 +4140,6 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="hybrid-corexz-kinematics">Hybrid-CoreXZ Kinematics<a class="headerlink" href="#hybrid-corexz-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexz.cfg">example-hybrid-corexz.cfg</a>
 for an example hybrid corexz kinematics config file.</p>
@@ -4178,7 +4168,6 @@ max_z_accel:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="polar-kinematics">Polar Kinematics<a class="headerlink" href="#polar-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-polar.cfg">example-polar.cfg</a> for an example
 polar kinematics config file.</p>
@@ -4216,7 +4205,6 @@ gear_ratio:
 # the Z axis.
 [stepper_z]
 </code></pre></div>
-
 <h3 id="rotary-delta-kinematics">Rotary delta Kinematics<a class="headerlink" href="#rotary-delta-kinematics" title="Permanent link">&para;</a></h3>
 <p>See <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-rotary-delta.cfg">example-rotary-delta.cfg</a> for
 an example rotary delta kinematics config file.</p>
@@ -4301,7 +4289,6 @@ radius:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
-
 <h3 id="cable-winch-kinematics">Cable winch Kinematics<a class="headerlink" href="#cable-winch-kinematics" title="Permanent link">&para;</a></h3>
 <p>See the <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-winch.cfg">example-winch.cfg</a> for an
 example cable winch kinematics config file.</p>
@@ -4329,7 +4316,6 @@ anchor_z:
 #   The X, Y, and Z position of the cable winch in cartesian space.
 #   These parameters must be provided.
 </code></pre></div>
-
 <h3 id="none-kinematics">None Kinematics<a class="headerlink" href="#none-kinematics" title="Permanent link">&para;</a></h3>
 <p>It is possible to define a special "none" kinematics to disable
 kinematic support in Klipper. This may be useful for controlling
@@ -4341,7 +4327,6 @@ max_accel: 1
 #   The max_velocity and max_accel parameters must be defined. The
 #   values are not used for &quot;none&quot; kinematics.
 </code></pre></div>
-
 <h2 id="common-extruder-and-heated-bed-support">Common extruder and heated bed support<a class="headerlink" href="#common-extruder-and-heated-bed-support" title="Permanent link">&para;</a></h2>
 <h3 id="extruder">[extruder]<a class="headerlink" href="#extruder" title="Permanent link">&para;</a></h3>
 <p>The extruder section is used to describe the heater parameters for the
@@ -4471,7 +4456,6 @@ max_temp:
 #   enough so that reasonable temperatures do not result in an error.
 #   These parameters must be provided.
 </code></pre></div>
-
 <h3 id="heater_bed">[heater_bed]<a class="headerlink" href="#heater_bed" title="Permanent link">&para;</a></h3>
 <p>The heater_bed section describes a heated bed. It uses the same heater
 settings described in the "extruder" section.</p>
@@ -4484,7 +4468,6 @@ min_temp:
 max_temp:
 #   See the &quot;extruder&quot; section for a description of the above parameters.
 </code></pre></div>
-
 <h2 id="bed-level-support">Bed level support<a class="headerlink" href="#bed-level-support" title="Permanent link">&para;</a></h2>
 <h3 id="bed_mesh">[bed_mesh]<a class="headerlink" href="#bed_mesh" title="Permanent link">&para;</a></h3>
 <p>Mesh Bed Leveling. One may define a bed_mesh config section to enable
@@ -4494,7 +4477,7 @@ recommended to define a safe_z_home section in printer.cfg to home
 toward the center of the print area.</p>
 <p>See the <a href="Bed_Mesh.html">bed mesh guide</a> and
 <a href="G-Codes.html#bed_mesh">command reference</a> for additional information.</p>
-<p>Visual Examples:</p>
+<p>Visual Examples:
 <div class="highlight"><pre><span></span><code> rectangular bed, probe_count = 3, 3:
              x---x---x (max_point)
              |
@@ -4512,8 +4495,7 @@ toward the center of the print area.</p>
              x---x---x
                    /
                  x  (0, -r) start
-</code></pre></div>
-
+</code></pre></div></p>
 <div class="highlight"><pre><span></span><code>[bed_mesh]
 #speed: 50
 #   The speed (in mm/s) of non-probing moves during the calibration.
@@ -4605,7 +4587,6 @@ toward the center of the print area.</p>
 #   for details on faulty regions.  Up to 99 faulty regions may be added.
 #   By default no faulty regions are set.
 </code></pre></div>
-
 <h3 id="bed_tilt">[bed_tilt]<a class="headerlink" href="#bed_tilt" title="Permanent link">&para;</a></h3>
 <p>Bed tilt compensation. One may define a bed_tilt config section to
 enable move transformations that account for a tilted bed. Note that
@@ -4638,7 +4619,6 @@ information.</p>
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 </code></pre></div>
-
 <h3 id="bed_screws">[bed_screws]<a class="headerlink" href="#bed_screws" title="Permanent link">&para;</a></h3>
 <p>Tool to help adjust bed leveling screws. One may define a [bed_screws]
 config section to enable a BED_SCREWS_ADJUST g-code command.</p>
@@ -4678,7 +4658,6 @@ config section to enable a BED_SCREWS_ADJUST g-code command.</p>
 #   The speed (in mm/s) when moving from a horizontal_move_z position
 #   to a probe_height position. The default is 5.
 </code></pre></div>
-
 <h3 id="screws_tilt_adjust">[screws_tilt_adjust]<a class="headerlink" href="#screws_tilt_adjust" title="Permanent link">&para;</a></h3>
 <p>Tool to help adjust bed screws tilt using Z probe. One may define a
 screws_tilt_adjust config section to enable a SCREWS_TILT_CALCULATE
@@ -4717,7 +4696,6 @@ information.</p>
 #   rotation of the knob decreases the gap between the nozzle and the
 #   bed. Conversely, a counter-clockwise rotation increases the gap.
 </code></pre></div>
-
 <h3 id="z_tilt">[z_tilt]<a class="headerlink" href="#z_tilt" title="Permanent link">&para;</a></h3>
 <p>Multiple Z stepper tilt adjustment. This feature enables independent
 adjustment of multiple z steppers (see the "stepper_z1" section) to
@@ -4755,7 +4733,6 @@ extended <a href="G-Codes.html#z_tilt">G-Code command</a> becomes available.</p>
 #   minimum value for the range of probed points which you can learn
 #   by observing command output.
 </code></pre></div>
-
 <h3 id="quad_gantry_level">[quad_gantry_level]<a class="headerlink" href="#quad_gantry_level" title="Permanent link">&para;</a></h3>
 <p>Moving gantry leveling using 4 independently controlled Z motors.
 Corrects hyperbolic parabola effects (potato chip) on moving gantry
@@ -4763,7 +4740,7 @@ which is more flexible.
 WARNING: Using this on a moving bed may lead to undesirable results.
 If this section is present then a QUAD_GANTRY_LEVEL extended G-Code
 command becomes available. This routine assumes the following Z motor
-configuration:</p>
+configuration:
 <div class="highlight"><pre><span></span><code> ----------------
  |Z1          Z2|
  |  ---------   |
@@ -4773,8 +4750,7 @@ configuration:</p>
  |Z           Z3|
  ----------------
 </code></pre></div>
-
-<p>Where x is the 0, 0 point on the bed</p>
+Where x is the 0, 0 point on the bed</p>
 <div class="highlight"><pre><span></span><code>[quad_gantry_level]
 #gantry_corners:
 #   A newline separated list of X, Y coordinates describing the two
@@ -4802,7 +4778,6 @@ configuration:</p>
 #   If retries are enabled then retry if largest and smallest probed
 #   points differ more than retry_tolerance.
 </code></pre></div>
-
 <h3 id="skew_correction">[skew_correction]<a class="headerlink" href="#skew_correction" title="Permanent link">&para;</a></h3>
 <p>Printer Skew Correction. It is possible to use software to correct
 printer skew across 3 planes, xy, xz, yz. This is done by printing a
@@ -4812,7 +4787,6 @@ the nature of skew correction these lengths are set via gcode. See
 <a href="G-Codes.html#skew_correction">Command Reference</a> for details.</p>
 <div class="highlight"><pre><span></span><code>[skew_correction]
 </code></pre></div>
-
 <h3 id="z_thermal_adjust">[z_thermal_adjust]<a class="headerlink" href="#z_thermal_adjust" title="Permanent link">&para;</a></h3>
 <p>Temperature-dependant toolhead Z position adjustment. Compensate for vertical
 toolhead movement caused by thermal expansion of the printer's frame in
@@ -4847,7 +4821,6 @@ of frame).</p>
 #   See the &quot;heater_generic&quot; section for the definition of this
 #   parameter.
 </code></pre></div>
-
 <h2 id="customized-homing">Customized homing<a class="headerlink" href="#customized-homing" title="Permanent link">&para;</a></h2>
 <h3 id="safe_z_home">[safe_z_home]<a class="headerlink" href="#safe_z_home" title="Permanent link">&para;</a></h3>
 <p>Safe Z homing. One may use this mechanism to home the Z axis at a
@@ -4874,7 +4847,6 @@ home_xy_position:
 #   When set to True, the X and Y axes are reset to their previous
 #   positions after Z axis homing. The default is False.
 </code></pre></div>
-
 <h3 id="homing_override">[homing_override]<a class="headerlink" href="#homing_override" title="Permanent link">&para;</a></h3>
 <p>Homing override. One may use this mechanism to run a series of g-code
 commands in place of a G28 found in the normal g-code input. This may
@@ -4903,7 +4875,6 @@ gcode:
 #   head must move prior to invoking the normal G28 mechanism for an
 #   axis. The default is to not force a position for an axis.
 </code></pre></div>
-
 <h3 id="endstop_phase">[endstop_phase]<a class="headerlink" href="#endstop_phase" title="Permanent link">&para;</a></h3>
 <p>Stepper phase adjusted endstops. To use this feature, define a config
 section with an "endstop_phase" prefix followed by the name of the
@@ -4936,7 +4907,6 @@ information.</p>
 #   layer height is a multiple of a full step distance then every
 #   layer will occur on a full step.) The default is False.
 </code></pre></div>
-
 <h2 id="g-code-macros-and-events">G-Code macros and events<a class="headerlink" href="#g-code-macros-and-events" title="Permanent link">&para;</a></h2>
 <h3 id="gcode_macro">[gcode_macro]<a class="headerlink" href="#gcode_macro" title="Permanent link">&para;</a></h3>
 <p>G-Code macros (one may define any number of sections with a
@@ -4967,7 +4937,6 @@ information.</p>
 #   This will add a short description used at the HELP command or while
 #   using the auto completion feature. Default &quot;G-Code macro&quot;
 </code></pre></div>
-
 <h3 id="delayed_gcode">[delayed_gcode]<a class="headerlink" href="#delayed_gcode" title="Permanent link">&para;</a></h3>
 <p>Execute a gcode on a set delay. See the
 <a href="Command_Templates.html#delayed-gcodes">command template guide</a> and
@@ -4985,7 +4954,6 @@ gcode:
 #   If set to 0 the delayed_gcode will not execute on startup.
 #   Default is 0.
 </code></pre></div>
-
 <h3 id="save_variables">[save_variables]<a class="headerlink" href="#save_variables" title="Permanent link">&para;</a></h3>
 <p>Support saving variables to disk so that they are retained across
 restarts. See
@@ -4996,7 +4964,6 @@ filename:
 #   Required - provide a filename that would be used to save the
 #   variables to disk e.g. ~/variables.cfg
 </code></pre></div>
-
 <h3 id="idle_timeout">[idle_timeout]<a class="headerlink" href="#idle_timeout" title="Permanent link">&para;</a></h3>
 <p>Idle timeout. An idle timeout is automatically enabled - add an
 explicit idle_timeout config section to change the default settings.</p>
@@ -5009,7 +4976,6 @@ explicit idle_timeout config section to change the default settings.</p>
 #   Idle time (in seconds) to wait before running the above G-Code
 #   commands. The default is 600 seconds.
 </code></pre></div>
-
 <h2 id="optional-g-code-features">Optional G-Code features<a class="headerlink" href="#optional-g-code-features" title="Permanent link">&para;</a></h2>
 <h3 id="virtual_sdcard">[virtual_sdcard]<a class="headerlink" href="#virtual_sdcard" title="Permanent link">&para;</a></h3>
 <p>A virtual sdcard may be useful if the host machine is not fast enough
@@ -5026,7 +4992,6 @@ path:
 #on_error_gcode:
 #   A list of G-Code commands to execute when an error is reported.
 </code></pre></div>
-
 <h3 id="sdcard_loop">[sdcard_loop]<a class="headerlink" href="#sdcard_loop" title="Permanent link">&para;</a></h3>
 <p>Some printers with stage-clearing features, such as a part ejector or
 a belt printer, can find use in looping sections of the sdcard file.
@@ -5037,7 +5002,6 @@ commands. See the <a href="https://github.com/Klipper3d/klipper/blob/master/conf
 file for a Marlin compatible M808 G-Code macro.</p>
 <div class="highlight"><pre><span></span><code>[sdcard_loop]
 </code></pre></div>
-
 <h3 id="force_move">[force_move]<a class="headerlink" href="#force_move" title="Permanent link">&para;</a></h3>
 <p>Support manually moving stepper motors for diagnostic purposes. Note,
 using this feature may place the printer in an invalid state - see the
@@ -5047,7 +5011,6 @@ using this feature may place the printer in an invalid state - see the
 #   Set to true to enable FORCE_MOVE and SET_KINEMATIC_POSITION
 #   extended G-Code commands. The default is false.
 </code></pre></div>
-
 <h3 id="pause_resume">[pause_resume]<a class="headerlink" href="#pause_resume" title="Permanent link">&para;</a></h3>
 <p>Pause/Resume functionality with support of position capture and
 restore. See the <a href="G-Codes.html#pause_resume">command reference</a> for more
@@ -5057,7 +5020,6 @@ information.</p>
 #   When capture/restore is enabled, the speed at which to return to
 #   the captured position (in mm/s). Default is 50.0 mm/s.
 </code></pre></div>
-
 <h3 id="firmware_retraction">[firmware_retraction]<a class="headerlink" href="#firmware_retraction" title="Permanent link">&para;</a></h3>
 <p>Firmware filament retraction. This enables G10 (retract) and G11
 (unretract) GCODE commands issued by many slicers. The parameters
@@ -5077,7 +5039,6 @@ allowing per-filament settings and runtime tuning.</p>
 #unretract_speed: 10
 #   The speed of unretraction, in mm/s. The default is 10 mm/s.
 </code></pre></div>
-
 <h3 id="gcode_arcs">[gcode_arcs]<a class="headerlink" href="#gcode_arcs" title="Permanent link">&para;</a></h3>
 <p>Support for gcode arc (G2/G3) commands.</p>
 <div class="highlight"><pre><span></span><code>[gcode_arcs]
@@ -5088,7 +5049,6 @@ allowing per-filament settings and runtime tuning.</p>
 #   the configured value will become straight lines. The default is
 #   1mm.
 </code></pre></div>
-
 <h3 id="respond">[respond]<a class="headerlink" href="#respond" title="Permanent link">&para;</a></h3>
 <p>Enable the "M118" and "RESPOND" extended
 <a href="G-Codes.html#respond">commands</a>.</p>
@@ -5103,7 +5063,6 @@ allowing per-filament settings and runtime tuning.</p>
 #   Directly sets the default prefix. If present, this value will
 #   override the &quot;default_type&quot;.
 </code></pre></div>
-
 <h3 id="exclude_object">[exclude_object]<a class="headerlink" href="#exclude_object" title="Permanent link">&para;</a></h3>
 <p>Enables support to exclude or cancel individual objects during the printing
 process.</p>
@@ -5114,7 +5073,6 @@ for additional information. See the
 Marlin/RepRapFirmware compatible M486 G-Code macro.</p>
 <div class="highlight"><pre><span></span><code>[exclude_object]
 </code></pre></div>
-
 <h2 id="resonance-compensation">Resonance compensation<a class="headerlink" href="#resonance-compensation" title="Permanent link">&para;</a></h2>
 <h3 id="input_shaper">[input_shaper]<a class="headerlink" href="#input_shaper" title="Permanent link">&para;</a></h3>
 <p>Enables <a href="Resonance_Compensation.html">resonance compensation</a>. Also see
@@ -5150,7 +5108,6 @@ the <a href="G-Codes.html#input_shaper">command reference</a>.</p>
 #   good all-round value for most printers. In most circumstances this
 #   parameter requires no tuning and should not be changed.
 </code></pre></div>
-
 <h3 id="adxl345">[adxl345]<a class="headerlink" href="#adxl345" title="Permanent link">&para;</a></h3>
 <p>Support for ADXL345 accelerometers. This support allows one to query
 accelerometer measurements from the sensor. This enables an
@@ -5183,7 +5140,6 @@ cs_pin:
 #   rates below 800 will considerably affect the quality of resonance
 #   measurements.
 </code></pre></div>
-
 <h3 id="lis2dw">[lis2dw]<a class="headerlink" href="#lis2dw" title="Permanent link">&para;</a></h3>
 <p>Support for LIS2DW accelerometers.</p>
 <div class="highlight"><pre><span></span><code>[lis2dw]
@@ -5201,7 +5157,6 @@ cs_pin:
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
-
 <h3 id="mpu9250">[mpu9250]<a class="headerlink" href="#mpu9250" title="Permanent link">&para;</a></h3>
 <p>Support for MPU-9250, MPU-9255, MPU-6515, MPU-6050, and MPU-6500
 accelerometers (one may define any number of sections with an
@@ -5219,7 +5174,6 @@ accelerometers (one may define any number of sections with an
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
-
 <h3 id="resonance_tester">[resonance_tester]<a class="headerlink" href="#resonance_tester" title="Permanent link">&para;</a></h3>
 <p>Support for resonance testing and automatic input shaper calibration.
 In order to use most of the functionality of this module, additional
@@ -5274,7 +5228,6 @@ section of the measuring resonances guide for more information on
 #   will decrease the precision of the test. The default value is 1.0
 #   (Hz/sec == sec^-2).
 </code></pre></div>
-
 <h2 id="config-file-helpers">Config file helpers<a class="headerlink" href="#config-file-helpers" title="Permanent link">&para;</a></h2>
 <h3 id="board_pins">[board_pins]<a class="headerlink" href="#board_pins" title="Permanent link">&para;</a></h3>
 <p>Board pin aliases (one may define any number of sections with a
@@ -5293,14 +5246,12 @@ aliases_&lt;name&gt;:
 #   &quot;EXP1_9=&lt;GND&gt;&quot; would reserve &quot;EXP1_9&quot;). Any number of options
 #   starting with &quot;aliases_&quot; may be specified.
 </code></pre></div>
-
 <h3 id="include">[include]<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
 <p>Include file support. One may include additional config file from the
 main printer config file. Wildcards may also be used (eg,
 "configs/*.cfg").</p>
 <div class="highlight"><pre><span></span><code>[include my_other_config.cfg]
 </code></pre></div>
-
 <h3 id="duplicate_pin_override">[duplicate_pin_override]<a class="headerlink" href="#duplicate_pin_override" title="Permanent link">&para;</a></h3>
 <p>This tool allows a single micro-controller pin to be defined multiple
 times in a config file without normal error checking. This is intended
@@ -5313,7 +5264,6 @@ pins:
 #   a config file without normal error checks. This parameter must be
 #   provided.
 </code></pre></div>
-
 <h2 id="bed-probing-hardware">Bed probing hardware<a class="headerlink" href="#bed-probing-hardware" title="Permanent link">&para;</a></h2>
 <h3 id="probe">[probe]<a class="headerlink" href="#probe" title="Permanent link">&para;</a></h3>
 <p>Z height probe. One may define this section to enable Z height probing
@@ -5382,7 +5332,6 @@ z_offset:
 #   issue any commands here that move the toolhead. The default is to
 #   not run any special G-Code commands on deactivation.
 </code></pre></div>
-
 <h3 id="bltouch">[bltouch]<a class="headerlink" href="#bltouch" title="Permanent link">&para;</a></h3>
 <p>BLTouch probe. One may define this section (instead of a probe
 section) to enable a BLTouch probe. See <a href="BLTouch.html">BL-Touch guide</a>
@@ -5437,7 +5386,6 @@ control_pin:
 #samples_tolerance_retries:
 #   See the &quot;probe&quot; section for information on these parameters.
 </code></pre></div>
-
 <h3 id="smart_effector">[smart_effector]<a class="headerlink" href="#smart_effector" title="Permanent link">&para;</a></h3>
 <p>The "Smart Effector" from Duet3d implements a Z probe using a force
 sensor. One may define this section instead of <code>[probe]</code> to enable the
@@ -5488,7 +5436,6 @@ z_offset:
 #deactivate_on_each_sample:
 #   See the &quot;probe&quot; section for more information on the parameters above.
 </code></pre></div>
-
 <h3 id="axis_twist_compensation">[axis_twist_compensation]<a class="headerlink" href="#axis_twist_compensation" title="Permanent link">&para;</a></h3>
 <p>A tool to compensate for inaccurate probe readings due to twist in X gantry. See
 the <a href="Axis_Twist_Compensation.html">Axis Twist Compensation Guide</a> for more
@@ -5514,7 +5461,6 @@ calibrate_y: 112.5
 #   calibration process. This parameter must be provided and is recommended to
 #   be near the center of the bed
 </code></pre></div>
-
 <h2 id="additional-stepper-motors-and-extruders">Additional stepper motors and extruders<a class="headerlink" href="#additional-stepper-motors-and-extruders" title="Permanent link">&para;</a></h2>
 <h3 id="stepper_z1">[stepper_z1]<a class="headerlink" href="#stepper_z1" title="Permanent link">&para;</a></h3>
 <p>Multi-stepper axes. On a cartesian style printer, the stepper
@@ -5535,7 +5481,6 @@ at 1 (for example, "stepper_z1", "stepper_z2", etc.).</p>
 #   stepper will home until the endstop on the primary stepper for the
 #   axis is triggered.
 </code></pre></div>
-
 <h3 id="extruder1">[extruder1]<a class="headerlink" href="#extruder1" title="Permanent link">&para;</a></h3>
 <p>In a multi-extruder printer add an additional extruder section for
 each additional extruder. The additional extruder sections should be
@@ -5552,7 +5497,6 @@ for an example configuration.</p>
 #shared_heater:
 #   This option is deprecated and should no longer be specified.
 </code></pre></div>
-
 <h3 id="dual_carriage">[dual_carriage]<a class="headerlink" href="#dual_carriage" title="Permanent link">&para;</a></h3>
 <p>Support for cartesian and hybrid_corexy/z printers with dual carriages
 on a single axis. The carriage mode can be set via the
@@ -5605,7 +5549,6 @@ axis:
 #position_max:
 #   See the &quot;stepper&quot; section for the definition of the above parameters.
 </code></pre></div>
-
 <h3 id="extruder_stepper">[extruder_stepper]<a class="headerlink" href="#extruder_stepper" title="Permanent link">&para;</a></h3>
 <p>Support for additional steppers synchronized to the movement of an
 extruder (one may define any number of sections with an
@@ -5624,7 +5567,6 @@ extruder:
 #   See the &quot;stepper&quot; section for the definition of the above
 #   parameters.
 </code></pre></div>
-
 <h3 id="manual_stepper">[manual_stepper]<a class="headerlink" href="#manual_stepper" title="Permanent link">&para;</a></h3>
 <p>Manual steppers (one may define any number of sections with a
 "manual_stepper" prefix). These are steppers that are controlled by
@@ -5654,7 +5596,6 @@ printer kinematics.</p>
 #   &quot;homing moves&quot; by adding a STOP_ON_ENDSTOP parameter to
 #   MANUAL_STEPPER movement commands.
 </code></pre></div>
-
 <h2 id="custom-heaters-and-sensors">Custom heaters and sensors<a class="headerlink" href="#custom-heaters-and-sensors" title="Permanent link">&para;</a></h2>
 <h3 id="verify_heater">[verify_heater]<a class="headerlink" href="#verify_heater" title="Permanent link">&para;</a></h3>
 <p>Heater and temperature sensor verification. Heater verification is
@@ -5690,7 +5631,6 @@ printer. Use verify_heater sections to change the default settings.</p>
 #   by during the check_gain_time check. It is rare to customize this
 #   value. The default is 2.
 </code></pre></div>
-
 <h3 id="homing_heaters">[homing_heaters]<a class="headerlink" href="#homing_heaters" title="Permanent link">&para;</a></h3>
 <p>Tool to disable heaters when homing or probing an axis.</p>
 <div class="highlight"><pre><span></span><code>[homing_heaters]
@@ -5704,7 +5644,6 @@ printer. Use verify_heater sections to change the default settings.</p>
 #   moves. The default is to disable all heaters.
 #   Typical example: extruder, heater_bed
 </code></pre></div>
-
 <h3 id="thermistor">[thermistor]<a class="headerlink" href="#thermistor" title="Permanent link">&para;</a></h3>
 <p>Custom thermistors (one may define any number of sections with a
 "thermistor" prefix). A custom thermistor may be used in the
@@ -5730,7 +5669,6 @@ heater section.</p>
 #   to define the thermistor parameters. This parameter must be
 #   provided when using &quot;beta&quot; to define the thermistor.
 </code></pre></div>
-
 <h3 id="adc_temperature">[adc_temperature]<a class="headerlink" href="#adc_temperature" title="Permanent link">&para;</a></h3>
 <p>Custom ADC temperature sensors (one may define any number of sections
 with an "adc_temperature" prefix). This allows one to define a custom
@@ -5766,7 +5704,6 @@ section.</p>
 #   pullup_resistor parameter (see &quot;extruder&quot; section for details). At
 #   least two measurements must be provided.
 </code></pre></div>
-
 <h3 id="heater_generic">[heater_generic]<a class="headerlink" href="#heater_generic" title="Permanent link">&para;</a></h3>
 <p>Generic heaters (one may define any number of sections with a
 "heater_generic" prefix). These heaters behave similarly to standard
@@ -5792,7 +5729,6 @@ target temperature.</p>
 #   See the &quot;extruder&quot; section for the definition of the above
 #   parameters.
 </code></pre></div>
-
 <h3 id="temperature_sensor">[temperature_sensor]<a class="headerlink" href="#temperature_sensor" title="Permanent link">&para;</a></h3>
 <p>Generic temperature sensors. One can define any number of additional
 temperature sensors that are reported via the M105 command.</p>
@@ -5807,7 +5743,6 @@ temperature sensors that are reported via the M105 command.</p>
 #   See the &quot;heater_generic&quot; section for the definition of this
 #   parameter.
 </code></pre></div>
-
 <h2 id="temperature-sensors">Temperature sensors<a class="headerlink" href="#temperature-sensors" title="Permanent link">&para;</a></h2>
 <p>Klipper includes definitions for many types of temperature sensors.
 These sensors may be used in any config section that requires a
@@ -5832,7 +5767,6 @@ sensor_pin:
 #   that is placed inline with the thermistor. It is rare to set this.
 #   The default is 0 ohms.
 </code></pre></div>
-
 <h3 id="common-temperature-amplifiers">Common temperature amplifiers<a class="headerlink" href="#common-temperature-amplifiers" title="Permanent link">&para;</a></h3>
 <p>Common temperature amplifiers. The following parameters are available
 in heater sections that use one of these sensors.</p>
@@ -5847,7 +5781,6 @@ sensor_pin:
 #voltage_offset: 0
 #   The ADC voltage offset (in Volts). The default is 0.
 </code></pre></div>
-
 <h3 id="directly-connected-pt1000-sensor">Directly connected PT1000 sensor<a class="headerlink" href="#directly-connected-pt1000-sensor" title="Permanent link">&para;</a></h3>
 <p>Directly connected PT1000 sensor. The following parameters are
 available in heater sections that use one of these sensors.</p>
@@ -5859,7 +5792,6 @@ sensor_pin:
 #   The resistance (in ohms) of the pullup attached to the sensor. The
 #   default is 4700 ohms.
 </code></pre></div>
-
 <h3 id="maxxxxxx-temperature-sensors">MAXxxxxx temperature sensors<a class="headerlink" href="#maxxxxxx-temperature-sensors" title="Permanent link">&para;</a></h3>
 <p>MAXxxxxx serial peripheral interface (SPI) temperature based
 sensors. The following parameters are available in heater sections
@@ -5892,7 +5824,6 @@ sensor_pin:
 #   chips. The defaults for each parameter are next to the parameter
 #   name in the above list.
 </code></pre></div>
-
 <h3 id="bmp180bmp280bme280bme680-temperature-sensor">BMP180/BMP280/BME280/BME680 temperature sensor<a class="headerlink" href="#bmp180bmp280bme280bme680-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>BMP180/BMP280/BME280/BME680 two wire interface (I2C) environmental sensors.
 Note that these sensors are not intended for use with extruders and
@@ -5913,7 +5844,6 @@ temperature.</p>
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
-
 <h3 id="aht10aht20aht21-temperature-sensor">AHT10/AHT20/AHT21 temperature sensor<a class="headerlink" href="#aht10aht20aht21-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>AHT10/AHT20/AHT21 two wire interface (I2C) environmental sensors.
 Note that these sensors are not intended for use with extruders and
@@ -5934,7 +5864,6 @@ that may be used to report humidity in addition to temperature.</p>
 #aht10_report_time:
 #   Interval in seconds between readings. Default is 30, minimum is 5
 </code></pre></div>
-
 <h3 id="htu21d-sensor">HTU21D sensor<a class="headerlink" href="#htu21d-sensor" title="Permanent link">&para;</a></h3>
 <p>HTU21D family two wire interface (I2C) environmental sensor. Note that
 this sensor is not intended for use with extruders and heater beds,
@@ -5968,7 +5897,6 @@ temperature.</p>
 #htu21d_report_time:
 #   Interval in seconds between readings. Default is 30
 </code></pre></div>
-
 <h3 id="lm75-temperature-sensor">LM75 temperature sensor<a class="headerlink" href="#lm75-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>LM75/LM75A two wire (I2C) connected temperature sensors. These sensors
 have a range of -55~125 C, so are usable for e.g. chamber temperature
@@ -5989,7 +5917,6 @@ monitoring. They can also function as simple fan/heater controllers.</p>
 #   Interval in seconds between readings. Default is 0.8, with minimum
 #   0.5.
 </code></pre></div>
-
 <h3 id="builtin-micro-controller-temperature-sensor">Builtin micro-controller temperature sensor<a class="headerlink" href="#builtin-micro-controller-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>The atsam, atsamd, stm32 and rp2040 micro-controllers contain an internal
 temperature sensor. One can use the "temperature_mcu" sensor to
@@ -6020,7 +5947,6 @@ monitor these temperatures.</p>
 #   micro-controller (if applicable) or the nominal values from the
 #   micro-controller specification.
 </code></pre></div>
-
 <h3 id="host-temperature-sensor">Host temperature sensor<a class="headerlink" href="#host-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>Temperature from the machine (eg Raspberry Pi) running the host software.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_host
@@ -6029,7 +5955,6 @@ monitor these temperatures.</p>
 #   &quot;/sys/class/thermal/thermal_zone0/temp&quot; which is the temperature
 #   system file on a Raspberry Pi computer.
 </code></pre></div>
-
 <h3 id="ds18b20-temperature-sensor">DS18B20 temperature sensor<a class="headerlink" href="#ds18b20-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>DS18B20 is a 1-wire (w1) digital temperature sensor. Note that this sensor is not intended for use with extruders and heater beds, but rather for monitoring ambient temperature (C). These sensors have range up to 125 C, so are usable for e.g. chamber temperature monitoring. They can also function as simple fan/heater controllers. DS18B20 sensors are only supported on the "host mcu", e.g. the Raspberry Pi. The w1-gpio Linux kernel module must be installed.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: DS18B20
@@ -6043,7 +5968,6 @@ serial_no:
 #sensor_mcu:
 #   The micro-controller to read from. Must be the host_mcu
 </code></pre></div>
-
 <h3 id="combined-temperature-sensor">Combined temperature sensor<a class="headerlink" href="#combined-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>Combined temperature sensor is a virtual temperature sensor based on several other sensors. This sensor can be used with extruders, heater_generic and heater beds.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_combined
@@ -6058,7 +5982,6 @@ serial_no:
 #   Must be provided. Maximum permissible deviation between the sensors
 #   to combine (e.g. 5 degrees). To disable it, use a large value (e.g. 999.9)
 </code></pre></div>
-
 <h2 id="fans">Fans<a class="headerlink" href="#fans" title="Permanent link">&para;</a></h2>
 <h3 id="fan">[fan]<a class="headerlink" href="#fan" title="Permanent link">&para;</a></h3>
 <p>Print cooling fan.</p>
@@ -6127,7 +6050,6 @@ pin:
 #   ground-switched FET(standard fan pin) can be used to control power to
 #   the fan.
 </code></pre></div>
-
 <h3 id="heater_fan">[heater_fan]<a class="headerlink" href="#heater_fan" title="Permanent link">&para;</a></h3>
 <p>Heater cooling fans (one may define any number of sections with a
 "heater_fan" prefix). A "heater fan" is a fan that will be enabled
@@ -6159,7 +6081,6 @@ a shutdown_speed equal to max_power.</p>
 #   will be set to when its associated heater is enabled. The default
 #   is 1.0
 </code></pre></div>
-
 <h3 id="controller_fan">[controller_fan]<a class="headerlink" href="#controller_fan" title="Permanent link">&para;</a></h3>
 <p>Controller cooling fan (one may define any number of sections with a
 "controller_fan" prefix). A "controller fan" is a fan that will be
@@ -6200,7 +6121,6 @@ watched component.</p>
 #   heaters/steppers are enabled. The default heater is &quot;extruder&quot;, the
 #   default stepper is all of them.
 </code></pre></div>
-
 <h3 id="temperature_fan">[temperature_fan]<a class="headerlink" href="#temperature_fan" title="Permanent link">&para;</a></h3>
 <p>Temperature-triggered cooling fans (one may define any number of
 sections with a "temperature_fan" prefix). A "temperature fan" is a
@@ -6259,7 +6179,6 @@ information.</p>
 #   If set, the temperature will be reported in M105 queries using the
 #   given id. The default is to not report the temperature via M105.
 </code></pre></div>
-
 <h3 id="fan_generic">[fan_generic]<a class="headerlink" href="#fan_generic" title="Permanent link">&para;</a></h3>
 <p>Manually controlled fan (one may define any number of sections with a
 "fan_generic" prefix). The speed of a manually controlled fan is set
@@ -6278,7 +6197,6 @@ with the SET_FAN_SPEED <a href="G-Codes.html#fan_generic">gcode command</a>.</p>
 #enable_pin:
 #   See the &quot;fan&quot; section for a description of the above parameters.
 </code></pre></div>
-
 <h2 id="leds">LEDs<a class="headerlink" href="#leds" title="Permanent link">&para;</a></h2>
 <h3 id="led">[led]<a class="headerlink" href="#led" title="Permanent link">&para;</a></h3>
 <p>Support for LEDs (and LED strips) controlled via micro-controller PWM
@@ -6307,7 +6225,6 @@ the <a href="G-Codes.html#led">command reference</a> for more information.</p>
 #   Sets the initial LED color. Each value should be between 0.0 and
 #   1.0. The default for each color is 0.
 </code></pre></div>
-
 <h3 id="neopixel">[neopixel]<a class="headerlink" href="#neopixel" title="Permanent link">&para;</a></h3>
 <p>Neopixel (aka WS2812) LED support (one may define any number of
 sections with a "neopixel" prefix). See the
@@ -6336,7 +6253,6 @@ pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
-
 <h3 id="dotstar">[dotstar]<a class="headerlink" href="#dotstar" title="Permanent link">&para;</a></h3>
 <p>Dotstar (aka APA102) LED support (one may define any number of
 sections with a "dotstar" prefix). See the
@@ -6355,7 +6271,6 @@ clock_pin:
 #initial_BLUE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
-
 <h3 id="pca9533">[pca9533]<a class="headerlink" href="#pca9533" title="Permanent link">&para;</a></h3>
 <p>PCA9533 LED support. The PCA9533 is used on the mightyboard.</p>
 <div class="highlight"><pre><span></span><code>[pca9533 my_pca9533]
@@ -6375,7 +6290,6 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
-
 <h3 id="pca9632">[pca9632]<a class="headerlink" href="#pca9632" title="Permanent link">&para;</a></h3>
 <p>PCA9632 LED support. The PCA9632 is used on the FlashForge Dreamer.</p>
 <div class="highlight"><pre><span></span><code>[pca9632 my_pca9632]
@@ -6403,7 +6317,6 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
-
 <h2 id="additional-servos-buttons-and-other-pins">Additional servos, buttons, and other pins<a class="headerlink" href="#additional-servos-buttons-and-other-pins" title="Permanent link">&para;</a></h2>
 <h3 id="servo">[servo]<a class="headerlink" href="#servo" title="Permanent link">&para;</a></h3>
 <p>Servos (one may define any number of sections with a "servo"
@@ -6432,7 +6345,6 @@ pin:
 #   is only valid if initial_angle is not set.) The default is to not
 #   send any signal at startup.
 </code></pre></div>
-
 <h3 id="gcode_button">[gcode_button]<a class="headerlink" href="#gcode_button" title="Permanent link">&para;</a></h3>
 <p>Execute gcode when a button is pressed or released (or when a pin
 changes state). You can check the state of the button by using
@@ -6457,7 +6369,6 @@ pin:
 #   G-Code templates are supported. The default is to not run any
 #   commands on a button release.
 </code></pre></div>
-
 <h3 id="output_pin">[output_pin]<a class="headerlink" href="#output_pin" title="Permanent link">&para;</a></h3>
 <p>Run-time configurable output pins (one may define any number of
 sections with an "output_pin" prefix). Pins configured here will be
@@ -6511,7 +6422,6 @@ pin:
 #   amperage for the stepper. The default is to not scale the &#39;value&#39;
 #   parameter.
 </code></pre></div>
-
 <h3 id="pwm_tool">[pwm_tool]<a class="headerlink" href="#pwm_tool" title="Permanent link">&para;</a></h3>
 <p>Pulse width modulation digital output pins capable of high speed
 updates (one may define any number of sections with an "output_pin"
@@ -6529,7 +6439,6 @@ pin:
 #scale:
 #   See the &quot;output_pin&quot; section for the definition of these parameters.
 </code></pre></div>
-
 <h3 id="static_digital_output">[static_digital_output]<a class="headerlink" href="#static_digital_output" title="Permanent link">&para;</a></h3>
 <p>Statically configured digital output pins (one may define any number
 of sections with a "static_digital_output" prefix). Pins configured
@@ -6541,7 +6450,6 @@ pins:
 #   pin will be set to a high level unless the pin name is prefaced
 #   with &quot;!&quot;. This parameter must be provided.
 </code></pre></div>
-
 <h3 id="multi_pin">[multi_pin]<a class="headerlink" href="#multi_pin" title="Permanent link">&para;</a></h3>
 <p>Multiple pin outputs (one may define any number of sections with a
 "multi_pin" prefix). A multi_pin output creates an internal pin alias
@@ -6555,7 +6463,6 @@ pins:
 #   A comma separated list of pins associated with this alias. This
 #   parameter must be provided.
 </code></pre></div>
-
 <h2 id="tmc-stepper-driver-configuration">TMC stepper driver configuration<a class="headerlink" href="#tmc-stepper-driver-configuration" title="Permanent link">&para;</a></h2>
 <p>Configuration of Trinamic stepper motor drivers in UART/SPI mode.
 Additional information is in the <a href="TMC_Drivers.html">TMC Drivers guide</a>
@@ -6654,7 +6561,6 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
-
 <h3 id="tmc2208">[tmc2208]<a class="headerlink" href="#tmc2208" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2208 (or TMC2224) stepper motor driver via single wire
 UART. To use this feature, define a config section with a "tmc2208"
@@ -6713,7 +6619,6 @@ run_current:
 #   defaults for each parameter are next to the parameter name in the
 #   above list.
 </code></pre></div>
-
 <h3 id="tmc2209">[tmc2209]<a class="headerlink" href="#tmc2209" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2209 stepper motor driver via single wire UART. To use
 this feature, define a config section with a "tmc2209" prefix followed
@@ -6761,7 +6666,6 @@ run_current:
 #   an appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
-
 <h3 id="tmc2660">[tmc2660]<a class="headerlink" href="#tmc2660" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2660 stepper motor driver via SPI bus. To use this
 feature, define a config section with a tmc2660 prefix followed by the
@@ -6830,7 +6734,6 @@ run_current:
 #   either zero or one will lead to layout changes (the first bit of
 #   HDEC) is interpreted as the MSB of HSTRT in this case).
 </code></pre></div>
-
 <h3 id="tmc2240">[tmc2240]<a class="headerlink" href="#tmc2240" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2240 stepper motor driver via SPI bus or UART. To use this
 feature, define a config section with a "tmc2240" prefix followed by
@@ -6951,7 +6854,6 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
-
 <h3 id="tmc5160">[tmc5160]<a class="headerlink" href="#tmc5160" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC5160 stepper motor driver via SPI bus. To use this
 feature, define a config section with a "tmc5160" prefix followed by
@@ -7066,7 +6968,6 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
-
 <h2 id="run-time-stepper-motor-current-configuration">Run-time stepper motor current configuration<a class="headerlink" href="#run-time-stepper-motor-current-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="ad5206">[ad5206]<a class="headerlink" href="#ad5206" title="Permanent link">&para;</a></h3>
 <p>Statically configured AD5206 digipots connected via SPI bus (one may
@@ -7104,7 +7005,6 @@ enable_pin:
 #   specified using the desired amperage value for the stepper. The
 #   default is to not scale the &#39;channel_x&#39; parameters.
 </code></pre></div>
-
 <h3 id="mcp4451">[mcp4451]<a class="headerlink" href="#mcp4451" title="Permanent link">&para;</a></h3>
 <p>Statically configured MCP4451 digipot connected via I2C bus (one may
 define any number of sections with an "mcp4451" prefix).</p>
@@ -7138,7 +7038,6 @@ i2c_address:
 #   using the desired amperage value for the stepper. The default is
 #   to not scale the &#39;wiper_x&#39; parameters.
 </code></pre></div>
-
 <h3 id="mcp4728">[mcp4728]<a class="headerlink" href="#mcp4728" title="Permanent link">&para;</a></h3>
 <p>Statically configured MCP4728 digital-to-analog converter connected
 via I2C bus (one may define any number of sections with an "mcp4728"
@@ -7174,7 +7073,6 @@ prefix).</p>
 #   can be specified using the desired amperage value for the
 #   stepper. The default is to not scale the &#39;channel_x&#39; parameters.
 </code></pre></div>
-
 <h3 id="mcp4018">[mcp4018]<a class="headerlink" href="#mcp4018" title="Permanent link">&para;</a></h3>
 <p>Statically configured MCP4018 digipot connected via two gpio "bit
 banging" pins (one may define any number of sections with an "mcp4018"
@@ -7200,7 +7098,6 @@ wiper:
 #   the desired amperage value for the stepper. The default is to not
 #   scale the &#39;wiper&#39; parameter.
 </code></pre></div>
-
 <h2 id="display-support">Display support<a class="headerlink" href="#display-support" title="Permanent link">&para;</a></h2>
 <h3 id="display">[display]<a class="headerlink" href="#display" title="Permanent link">&para;</a></h3>
 <p>Support for a display attached to the micro-controller.</p>
@@ -7282,7 +7179,6 @@ lcd_type:
 #   maximum comma-separated values must be provided when using analog
 #   button.
 </code></pre></div>
-
 <h4 id="hd44780-display">hd44780 display<a class="headerlink" href="#hd44780-display" title="Permanent link">&para;</a></h4>
 <p>Information on configuring hd44780 displays (which is used in
 "RepRapDiscount 2004 Smart Controller" type displays).</p>
@@ -7307,7 +7203,6 @@ d7_pin:
 #   fixed to 4.
 ...
 </code></pre></div>
-
 <h4 id="hd44780_spi-display">hd44780_spi display<a class="headerlink" href="#hd44780_spi-display" title="Permanent link">&para;</a></h4>
 <p>Information on configuring an hd44780_spi display - a 20x04 display
 controlled via a hardware "shift register" (which is used in
@@ -7334,7 +7229,6 @@ spi_software_miso_pin:
 #   fixed to 4.
 ...
 </code></pre></div>
-
 <h4 id="st7920-display">st7920 display<a class="headerlink" href="#st7920-display" title="Permanent link">&para;</a></h4>
 <p>Information on configuring st7920 displays (which is used in
 "RepRapDiscount 12864 Full Graphic Smart Controller" type displays).</p>
@@ -7348,7 +7242,6 @@ sid_pin:
 #   provided.
 ...
 </code></pre></div>
-
 <h4 id="emulated_st7920-display">emulated_st7920 display<a class="headerlink" href="#emulated_st7920-display" title="Permanent link">&para;</a></h4>
 <p>Information on configuring an emulated st7920 display - found in some
 "2.4 inch touchscreen devices" and similar.</p>
@@ -7368,7 +7261,6 @@ spi_software_miso_pin:
 #   spi implementation requires this pin to be configured.
 ...
 </code></pre></div>
-
 <h4 id="uc1701-display">uc1701 display<a class="headerlink" href="#uc1701-display" title="Permanent link">&para;</a></h4>
 <p>Information on configuring uc1701 displays (which is used in "MKS Mini
 12864" type displays).</p>
@@ -7388,7 +7280,6 @@ a0_pin:
 #   default is 40.
 ...
 </code></pre></div>
-
 <h4 id="ssd1306-and-sh1106-displays">ssd1306 and sh1106 displays<a class="headerlink" href="#ssd1306-and-sh1106-displays" title="Permanent link">&para;</a></h4>
 <p>Information on configuring ssd1306 and sh1106 displays.</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -7432,7 +7323,6 @@ lcd_type:
 #   0.
 ...
 </code></pre></div>
-
 <h3 id="display_data">[display_data]<a class="headerlink" href="#display_data" title="Permanent link">&para;</a></h3>
 <p>Support for displaying custom data on an lcd screen. One may create
 any number of display groups and any number of data items under those
@@ -7454,7 +7344,6 @@ text:
 #   using command templates (see docs/Command_Templates.md). This
 #   parameter must be provided.
 </code></pre></div>
-
 <h3 id="display_template">[display_template]<a class="headerlink" href="#display_template" title="Permanent link">&para;</a></h3>
 <p>Display data text "macros" (one may define any number of sections with
 a display_template prefix). See the
@@ -7482,7 +7371,6 @@ text:
 #   is evaluated using command templates (see
 #   docs/Command_Templates.md). This parameter must be provided.
 </code></pre></div>
-
 <h3 id="display_glyph">[display_glyph]<a class="headerlink" href="#display_glyph" title="Permanent link">&para;</a></h3>
 <p>Display a custom glyph on displays that support it. The given name
 will be assigned the given display data which can then be referenced
@@ -7508,7 +7396,6 @@ examples.</p>
 #   use one of those images in any given screen. This parameter is
 #   required if hd44780_data is specified.
 </code></pre></div>
-
 <h3 id="display-my_extra_display">[display my_extra_display]<a class="headerlink" href="#display-my_extra_display" title="Permanent link">&para;</a></h3>
 <p>If a primary [display] section has been defined in printer.cfg as
 shown above it is possible to define multiple auxiliary displays. Note
@@ -7517,7 +7404,6 @@ thus they do not support the "menu" options or button configuration.</p>
 <div class="highlight"><pre><span></span><code>[display my_extra_display]
 # See the &quot;display&quot; section for available parameters.
 </code></pre></div>
-
 <h3 id="menu">[menu]<a class="headerlink" href="#menu" title="Permanent link">&para;</a></h3>
 <p>Customizable lcd display menus.</p>
 <p>A <a href="https://github.com/Klipper3d/klipper/blob/master/klippy/extras/display/menu.cfg">default set of menus</a> are
@@ -7592,7 +7478,6 @@ information on menu attributes available during template rendering.</p>
 #   Evaluated as a template. The button click will trigger the edit
 #   mode start or end.
 </code></pre></div>
-
 <h2 id="filament-sensors">Filament sensors<a class="headerlink" href="#filament-sensors" title="Permanent link">&para;</a></h2>
 <h3 id="filament_switch_sensor">[filament_switch_sensor]<a class="headerlink" href="#filament_switch_sensor" title="Permanent link">&para;</a></h3>
 <p>Filament Switch Sensor. Support for filament insert and runout
@@ -7628,7 +7513,6 @@ more information.</p>
 #   The pin on which the switch is connected. This parameter must be
 #   provided.
 </code></pre></div>
-
 <h3 id="filament_motion_sensor">[filament_motion_sensor]<a class="headerlink" href="#filament_motion_sensor" title="Permanent link">&para;</a></h3>
 <p>Filament Motion Sensor. Support for filament insert and runout
 detection using an encoder that toggles the output pin during filament
@@ -7652,7 +7536,6 @@ switch_pin:
 #   See the &quot;filament_switch_sensor&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
-
 <h3 id="tsl1401cl_filament_width_sensor">[tsl1401cl_filament_width_sensor]<a class="headerlink" href="#tsl1401cl_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>TSLl401CL Based Filament Width Sensor. See the
 <a href="TSL1401CL_Filament_Width_Sensor.html">guide</a> for more information.</p>
@@ -7664,7 +7547,6 @@ switch_pin:
 #   The distance from sensor to the melting chamber as mm.
 #measurement_delay: 100
 </code></pre></div>
-
 <h3 id="hall_filament_width_sensor">[hall_filament_width_sensor]<a class="headerlink" href="#hall_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>Hall filament width sensor (see
 <a href="Hall_Filament_Width_Sensor.html">Hall Filament Width Sensor</a>).</p>
@@ -7720,7 +7602,6 @@ adc2:
 #   See the &quot;filament_switch_sensor&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
-
 <h2 id="board-specific-hardware-support">Board specific hardware support<a class="headerlink" href="#board-specific-hardware-support" title="Permanent link">&para;</a></h2>
 <h3 id="sx1509">[sx1509]<a class="headerlink" href="#sx1509" title="Permanent link">&para;</a></h3>
 <p>Configure an SX1509 I2C to GPIO expander. Due to the delay incurred by
@@ -7746,7 +7627,6 @@ i2c_address:
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
-
 <h3 id="samd_sercom">[samd_sercom]<a class="headerlink" href="#samd_sercom" title="Permanent link">&para;</a></h3>
 <p>SAMD SERCOM configuration to specify which pins to use on a given
 SERCOM. One may define any number of sections with a "samd_sercom"
@@ -7772,7 +7652,6 @@ clk_pin:
 #   communication. The pin must have a valid pinmux configuration
 #   for the given SERCOM peripheral. This parameter must be provided.
 </code></pre></div>
-
 <h3 id="adc_scaled">[adc_scaled]<a class="headerlink" href="#adc_scaled" title="Permanent link">&para;</a></h3>
 <p>Duet2 Maestro analog scaling by vref and vssa readings. Defining an
 adc_scaled section enables virtual adc pins (such as "my_name:PB0")
@@ -7794,7 +7673,6 @@ vssa_pin:
 #   measurements will be smoothed to reduce the impact of measurement
 #   noise. The default is 2 seconds.
 </code></pre></div>
-
 <h3 id="replicape">[replicape]<a class="headerlink" href="#replicape" title="Permanent link">&para;</a></h3>
 <p>Replicape support - see the <a href="Beaglebone.html">beaglebone guide</a> and the
 <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-replicape.cfg">generic-replicape.cfg</a> file for an
@@ -7857,7 +7735,6 @@ host_mcu:
 #   This parameter controls the CFG5 pin of the stepper motor driver
 #   (True sets CFG5 high, False sets it low). The default is True.
 </code></pre></div>
-
 <h2 id="other-custom-modules">Other Custom Modules<a class="headerlink" href="#other-custom-modules" title="Permanent link">&para;</a></h2>
 <h3 id="palette2">[palette2]<a class="headerlink" href="#palette2" title="Permanent link">&para;</a></h3>
 <p>Palette 2 multimaterial support - provides a tighter integration
@@ -7886,7 +7763,6 @@ serial:
 #auto_cancel_variation: 0.1
 #   Auto cancel print when ping variation is above this threshold
 </code></pre></div>
-
 <h3 id="angle">[angle]<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <p>Magnetic hall angle sensor support for reading stepper motor angle
 shaft measurements using a1333, as5047d, or tle5012b SPI chips.  The
@@ -7917,7 +7793,6 @@ cs_pin:
 #   See the &quot;common SPI settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
-
 <h2 id="common-bus-parameters">Common bus parameters<a class="headerlink" href="#common-bus-parameters" title="Permanent link">&para;</a></h2>
 <h3 id="common-spi-settings">Common SPI settings<a class="headerlink" href="#common-spi-settings" title="Permanent link">&para;</a></h3>
 <p>The following parameters are generally available for devices using an
@@ -7937,7 +7812,6 @@ SPI bus.</p>
 #   any general purpose pins may be used). The default is to not use
 #   &quot;software spi&quot;.
 </code></pre></div>
-
 <h3 id="common-i2c-settings">Common I2C settings<a class="headerlink" href="#common-i2c-settings" title="Permanent link">&para;</a></h3>
 <p>The following parameters are generally available for devices using an
 I2C bus.</p>

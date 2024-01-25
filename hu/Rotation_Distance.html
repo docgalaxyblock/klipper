@@ -1437,11 +1437,9 @@
 <p>A 3D nyomtató tervezői eredetileg <code>steps_per_mm</code> forgatási távolságból számították ki. Ha ismered a steps_per_mm értéket, akkor ezzel az általános képlettel megkaphatod az eredeti forgatási távolságot:</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; / &lt;steps_per_mm&gt;
 </code></pre></div>
-
 <p>Vagy ha régebbi Klipper konfigurációval rendelkezel, és ismered a <code>step_distance</code> paramétert, akkor használhatod ezt a képletet:</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; * &lt;step_distance&gt;
 </code></pre></div>
-
 <p>A <code>&lt;full_steps_per_rotation&gt;</code> beállítást a léptetőmotor típusa határozza meg. A legtöbb léptetőmotor "1,8 fokos lépésszögű" és ezért 200 teljes lépés/fordulat (360 osztva 1,8-al az a 200). Egyes léptetőmotorok "0,9 fokos lépésszögűek" és így 400 teljes lépést tesznek meg fordulatonként. Más léptetőmotorok ritkábbak. Ha bizonytalan vagy, ne állítsd be a full_steps_per_rotation értéket a konfigurációs fájlban, és használd a 200-at a fenti képletben.</p>
 <p>A <code>&lt;microsteps&gt;</code> beállítást a léptetőmotor-meghajtó határozza meg. A legtöbb meghajtó 16 mikrolépést használ. Ha bizonytalan vagy, állítsd be a <code>microsteps: 16</code> a konfigurációban, és használd a 16-ot a fenti képletben.</p>
 <p>Szinte minden nyomtatónak egész számot kell megadnia a <code>rotation_distance</code> X, Y és Z típusú tengelyeknél. Ha a fenti képlet olyan rotation_distance-ot eredményez, amely 0,01 egész számon belül van, akkor kerekítsd a végső értéket erre az egész számra.</p>
@@ -1465,13 +1463,11 @@
 <p>Először határozd meg a szíj típusát. A legtöbb nyomtató 2 mm-es fogosztást használ (azaz a szíj minden egyes foga 2 mm távolságra van egymástól). Ezután számold meg a léptetőmotor szíjtárcsája fogainak számát. A rotation_distance ezután a következőképpen számítható ki:</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;belt_pitch&gt; * &lt;number_of_teeth_on_pulley&gt;
 </code></pre></div>
-
 <p>Ha például egy nyomtató 2 mm-es fogosztású szíjjal rendelkezik, és 20 fogú tárcsát használ, akkor a forgatási távolság 40.</p>
 <h3 id="tengelyek-trapezmenetes-orsoval">Tengelyek trapézmenetes orsóval<a class="headerlink" href="#tengelyek-trapezmenetes-orsoval" title="Permanent link">&para;</a></h3>
 <p>A rotation_distance a szokásos csavarok esetében könnyen kiszámítható a következő képlet segítségével:</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;screw_pitch&gt; * &lt;number_of_separate_threads&gt;
 </code></pre></div>
-
 <p>Például a szokásos "T8-as trapézmenetes orsó" forgatási távolsága 8 (2 mm-es lépésközzel és 4 különálló menettel rendelkezik).</p>
 <p>A "menetes szárakkal" ellátott régebbi nyomtatóknak csak egy "menet" van a menetes száron, és így a forgatási távolság a csavar lépésszöge. (A csavar lépésköze a csavaron lévő egyes hornyok közötti távolság.) Így például egy M6-os metrikus menetes szár forgatási távolsága 1, és egy M8-as menetes száré pedig 1,25mm-es.</p>
 <h3 id="extruder">Extruder<a class="headerlink" href="#extruder" title="Permanent link">&para;</a></h3>

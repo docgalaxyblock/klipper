@@ -1356,15 +1356,12 @@
 <p>Préparez le test en exécutant la commande G-Code suivante :</p>
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
-
 <p>Cette commande ralentit le déplacement de la buse dans les angles pour maximiser les effets de la pression de l'extrudeur. Pour les imprimantes munies de direct drive exécutez cette commande :</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
-
 <p>Pour les longs extrudeurs bowden , utilisez :</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
-
 <p>Puis imprimez la pièce. Une fois l'impression terminée, l'objet ressemble à :</p>
 <p><img alt="tour de réglage" src="img/tuning_tower.jpg" /></p>
 <p>La commande TUNING_TOWER ci-dessus demande à Klipper de modifier le paramètre pressure_advance après chaque couche de l'impression. Les couches supérieures de l'impression auront une valeur de pressure_advance plus élevée. Les couches en dessous du réglage de pressure_advance optimal auront des bavures dans les angles et celles au-dessus du réglage idéale pourront avoir des coins arrondis ou une mauvaise extrusion dans les angles.</p>

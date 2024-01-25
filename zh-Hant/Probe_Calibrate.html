@@ -1398,17 +1398,14 @@
 <p>探針下方的熱床上貼上一片美紋紙（或類似的薄片）。轉到OctoPrint的「命令列（Terminal）」子頁，輸入PROBE 命令並回車：</p>
 <div class="highlight"><pre><span></span><code>PROBE
 </code></pre></div>
-
 <p>在探針正下方的美紋紙上，用記號筆標註探針觸發的位置（或使用其他方法記錄下探針觸發時的物理位置）。</p>
 <p>在命令列中輸入<code>GET_POSITION</code>命令，回車，記錄下此時列印頭的XY位置。輸出如下：</p>
 <div class="highlight"><pre><span></span><code>Recv: // toolhead: X:46.500000 Y:27.000000 Z:15.000000 E:0.000000
 </code></pre></div>
-
 <p>此時，我們可以知道探針觸發的X座標為46.5，Y座標為27。</p>
 <p>記錄下上述的座標后，在命令列使用一系列的 G1 命令，使噴嘴移動到熱床的記號的正上方。例如：</p>
 <div class="highlight"><pre><span></span><code>G1 F300 X57 Y30 Z15
 </code></pre></div>
-
 <p>將噴嘴移動到X 57， Y 30上。當噴嘴的位置剛好位於幾號上時，在命令列鍵入 <code>GET_POSITION</code> 獲得此時噴嘴所在的座標。</p>
 <p>X偏移值為 <code>噴嘴X座標值 - 探針X座標值</code>， 類似地， Y偏移值為 <code>噴嘴Y座標值 - 探針Y座標值</code>。將上述數值更新到printer.cfg檔案內，掀掉熱床上的美紋紙/膠帶，並重啟Klipper以使設定生效。</p>
 <h2 id="z">探針Z偏移值校準<a class="headerlink" href="#z" title="Permanent link">&para;</a></h2>
@@ -1418,7 +1415,6 @@
 <p>進入手動調平的過程后，請按照<a href="Bed_Level.html#the-paper-test">「紙片測試」</a>的流程，確定在探針探測位置上，噴嘴與熱床之間的距離。完成上述流程后，使用<code>ACCEPT</code>命令將測量到的z_offset應用到目前配置，如需要儲存配置到檔案，則鍵入：</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>注意！如果修改了印表機的運動系統、噴嘴位置或探針位置中的任意一項，PROBE_CALIBRATE的結果將會需要重新測量。</p>
 <p>如果探針的物理X、Y偏移量，或熱床的傾斜度發生變化（如 調整了熱床調平螺母，進行DELTA_CALIBRATE，進行Z_TILT_ADJUST，進行QUAD_GANTRY_LEVEL或其他行為），也應進行一次PROBE_CALiRATE。</p>
 <p>上述使PROBE_CALIBRATE結果失效的行為，同樣會使使用探針測量的<a href="Bed_Mesh.html">床網</a>結果失效。推薦在完成PROBE_CALIBRATE后再進行一次BED_MESH_CALIBRATE。</p>
@@ -1439,7 +1435,6 @@ Recv: // probe at -0.003,0.005 is z=2.519448
 Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe accuracy results: maximum 2.519448, minimum 2.506948, range 0.012500, average 2.513198, median 2.513198, standard deviation 0.006250
 </code></pre></div>
-
 <p>理想狀況下，使用探針測量的所有結果應該一致（也就是10次測量的結果為同一值）。然而，測量結果的最大值和最小值之間差距 「一個z電機步長」或5微米，也是正常的情況。一個「電機步長」是<code>旋轉一週的長度/(旋轉一週需要的步數*驅動微步設定)</code>。測量最大值和最小值的差值稱為偏差範圍。故在上述的例子中，因為印表機的z步長為0.0125，因此誤差範圍在0.012500mm可以認為是正常值。</p>
 <p>如果測試結果顯示範圍(range)值大於25微米（0.025毫米），那麼探針不滿足典型的床面調平流程的精確度要求。可以嘗試調整探測速度和/或探測起點高度以提高探頭的重複性。<code>PROBE_ACCURACY</code>命令允許使用不同的參數進行測試，以瞭解它們的影響 - 請參閱<a href="G-Code.md#probe_accuracy">G-Code文件</a>瞭解更多細節。如果探針在大多數情況下能獲得可重複的結果，但偶爾會出現異常值，那麼可以增加在每個探測點的探測次數來解決這個問題--詳見<a href="Config_Reference.html#probe">配置參考</a>中關於探針<code>samples</code>配置參數的描述。</p>
 <p>要更改探針測試速度，重複採樣或其他設定，應在修改printer.cfg使用<code>RESTART</code>命令以應用修改值。推薦在使用新設定值后再進行一次<a href="#calibrating-probe-z-offset">Z偏移校準</a>。如果重複性測試結論不能接受，建議不要使用自動熱床調平功能。Klipper提供了數種手動調平的工具，詳情請見<a href="Bed_Level.html">列印床調平</a>。</p>
