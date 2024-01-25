@@ -1456,7 +1456,7 @@ via ssh.</p>
 <p>The procedure for updating MCU firmware using the SD Card is similar to that
 of other methods.  Instead of using <code>make flash</code> it is necessary to run a
 helper script, <code>flash-sdcard.sh</code>.  Updating a BigTreeTech SKR 1.3 might look
-like the following:</p>
+like the following:
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 cd ~/klipper
 git pull
@@ -1465,23 +1465,21 @@ make menuconfig
 make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-skr-v1.3
 sudo service klipper start
-</code></pre></div>
-
+</code></pre></div></p>
 <p>It is up to the user to determine the device location and board name.
 If a user needs to flash multiple boards, <code>flash-sdcard.sh</code> (or
 <code>make flash</code> if appropriate) should be run for each board prior to
 restarting the Klipper service.</p>
-<p>Supported boards can be listed with the following command:</p>
+<p>Supported boards can be listed with the following command:
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -l
 </code></pre></div>
-
-<p>If you do not see your board listed it may be necessary to add a new
+If you do not see your board listed it may be necessary to add a new
 board definition as <a href="#board-definitions">described below</a>.</p>
 <h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
 <p>The above commands assume that your MCU connects at the default baud rate
-of 250000 and the firmware is located at <code>~/klipper/out/klipper.bin</code>.  The
+of 250000 and the firmware is located at <code>out/klipper.bin</code>.  The
 <code>flash-sdcard.sh</code> script provides options for changing these defaults.
-All options can be viewed by the help screen:</p>
+All options can be viewed by the help screen:
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -h
 SD Card upload utility for Klipper
 
@@ -1498,18 +1496,15 @@ optional arguments:
   -c              run flash check/verify only (skip upload)
   -b &lt;baud&gt;       serial baud rate (default is 250000)
   -f &lt;firmware&gt;   path to klipper.bin
-</code></pre></div>
-
+</code></pre></div></p>
 <p>If your board is flashed with firmware that connects at a custom baud
-rate it is possible to upgrade by specifying the <code>-b</code> option:</p>
+rate it is possible to upgrade by specifying the <code>-b</code> option:
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -b 115200 /dev/ttyAMA0 btt-skr-v1.3
-</code></pre></div>
-
+</code></pre></div></p>
 <p>If you wish to flash a build of Klipper located somewhere other than
-the default location it can be done by specifying the <code>-f</code> option:</p>
+the default location it can be done by specifying the <code>-f</code> option:
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -f ~/downloads/klipper.bin /dev/ttyAMA0 btt-skr-v1.3
-</code></pre></div>
-
+</code></pre></div></p>
 <p>Note that when upgrading a MKS Robin E3 it is not necessary to manually run
 <code>update_mks_robin.py</code> and supply the resulting binary to <code>flash-sdcard.sh</code>.
 This procedure is automated during the upload process.</p>
@@ -1546,7 +1541,7 @@ matches the version in your build folder on any supported board.</p>
 <p>Most common boards should be available, however it is possible to add a new
 board definition if necessary.  Board definitions are located in
 <code>~/klipper/scripts/spi_flash/board_defs.py</code>.  The definitions are stored
-in dictionary, for example:</p>
+in dictionary, for example:
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_DEFS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;mcu&#39;</span><span class="p">:</span> <span class="s2">&quot;lpc1768&quot;</span><span class="p">,</span>
@@ -1555,8 +1550,7 @@ in dictionary, for example:</p>
     <span class="p">},</span>
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
-</code></pre></div>
-
+</code></pre></div></p>
 <p>The following fields may be specified:</p>
 <ul>
 <li><code>mcu</code>: The mcu type.  This can be retrieved after configuring the build
@@ -1592,13 +1586,12 @@ provides an example of the latter.</p>
 existing board definition meets the criteria necessary for the new board.
 If this is the case, a <code>BOARD_ALIAS</code> may be specified.  For example, the
 following alias may be added to specify <code>my-new-board</code> as an alias for
-<code>generic-lpc1768</code>:</p>
+<code>generic-lpc1768</code>:
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">...&lt;</span><span class="n">previous</span> <span class="n">aliases</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
 <span class="p">}</span>
-</code></pre></div>
-
+</code></pre></div></p>
 <p>If you need a new board definition and you are uncomfortable with the
 procedure outlined above it is recommended that you request one in
 the <a href="Contact.html">Klipper Discord</a>.</p>
@@ -1620,7 +1613,7 @@ verification can be done immediately.  Here's examples of the two scenarios:</p>
 <h3 id="sdio-programming-with-rpi-on-separate-power-supply">SDIO Programming with RPi on Separate Power Supply<a class="headerlink" href="#sdio-programming-with-rpi-on-separate-power-supply" title="Permanent link">&para;</a></h3>
 <p>A typical session with the RPi on a Separate Power Supply looks like the
 following.  You will, of course, need to use your proper device path and
-board name:</p>
+board name:
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 cd ~/klipper
 git pull
@@ -1631,12 +1624,11 @@ make
 [[[manually power-cycle the printer board here when instructed]]]
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
-</code></pre></div>
-
+</code></pre></div></p>
 <h3 id="sdio-programming-with-rpi-on-the-same-power-supply">SDIO Programming with RPi on the Same Power Supply<a class="headerlink" href="#sdio-programming-with-rpi-on-the-same-power-supply" title="Permanent link">&para;</a></h3>
 <p>A typical session with the RPi on the Same Power Supply looks like the
 following.  You will, of course, need to use your proper device path and
-board name:</p>
+board name:
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 cd ~/klipper
 git pull
@@ -1650,8 +1642,7 @@ sudo service klipper stop
 cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
-</code></pre></div>
-
+</code></pre></div></p>
 <p>In this case, since the RPi Host is being restarted, which will restart
 the <code>klipper</code> service, it's necessary to stop <code>klipper</code> again before doing
 the verification step and restart it after verification is complete.</p>

@@ -1370,17 +1370,14 @@
 <p>Ha Trinamic léptetőmotor-meghajtókat használunk futásidejű konfigurációval, akkor az ENDSTOP_PHASE_CALIBRATE paranccsal kalibrálhatjuk a végállási fázisokat. Kezd a következők hozzáadásával a konfigurációs fájlhoz:</p>
 <div class="highlight"><pre><span></span><code>[endstop_phase]
 </code></pre></div>
-
 <p>Ezután indítsd újra a nyomtatót, és futtass egy <code>G28</code> parancsot, amelyet egy <code>ENDSTOP_PHASE_CALIBRATE</code> parancs követ. Ezután mozgasd a nyomtatófejet egy új helyre, és futtasd újra a <code>G28</code> parancsot. Próbáld meg a nyomtatófejet több különböző helyre mozgatni, és minden egyes pozícióból futtasd újra a <code>G28</code> parancsot. Futtass legalább öt <code>G28</code> parancsot.</p>
 <p>A fentiek elvégzése után a <code>ENDSTOP_PHASE_CALIBRATE</code> parancs gyakran ugyanazt (vagy közel ugyanazt) a fázist fogja jelenteni a léptető számára. Ezt a fázist el lehet menteni a konfigurációs fájlban, hogy a jövőben minden G28 parancs ezt a fázist használja. (Így a jövőbeni kezdőpont kérési műveletek során a Klipper ugyanazt a pozíciót fogja elérni, még akkor is, ha a végállás egy kicsit korábban vagy egy kicsit később lép működésbe.)</p>
 <p>Egy adott léptetőmotor végállási fázisának elmentéséhez futtass valami hasonlót, mint a következő:</p>
 <div class="highlight"><pre><span></span><code>ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z
 </code></pre></div>
-
 <p>Futtasd a fenti lépéseket az összes menteni kívánt léptetőre. Általában ezt a stepper_z-nél használjuk cartesian és corexy-nyomtatóknál, illetve stepper_a, stepper_b és stepper_c a delta nyomtatóknál. Végül futtasd a következőt a konfigurációs fájl adatainak frissítéséhez:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <h3 id="tovabbi-megjegyzesek">További megjegyzések<a class="headerlink" href="#tovabbi-megjegyzesek" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Ez a funkció a leghasznosabb a delta nyomtatókon és a cartesian/corexy nyomtatók Z végpontján. A funkciót a cartesian nyomtatók XY végállásainál is lehet használni, de ez nem túl hasznos, mivel az X/Y végállás pozíciójának kisebb hibája valószínűleg nem befolyásolja a nyomtatás minőségét. Nem érvényes ezt a funkciót a corexy nyomtatók XY végállásainál használni (mivel az XY pozíciót nem egyetlen léptető határozza meg a corexy kinematikánál). Nem érvényes ezt a funkciót olyan nyomtatókon használni, amelyek "probe:z_virtual_endstop" Z végállást használnak (mivel a léptetőfázis csak akkor stabil, ha a végállás egy sín statikus helyén van).</li>

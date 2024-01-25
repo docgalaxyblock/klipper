@@ -1390,24 +1390,20 @@
 Recv: // Finish with ACCEPT or ABORT command.
 Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
 </code></pre></div>
-
 <p>A fúvóka aktuális magassága (ahogyan azt a nyomtató jelenleg értelmezi) a "--&gt; &lt;--" között jelenik meg. A jobb oldali szám a legutóbbi mérés magassága, amely éppen nagyobb, mint az aktuális magasság, a bal oldali pedig a legutóbbi mérés magassága, amely kisebb, mint az aktuális magasság (vagy ??????, ha nem történt kísérlet).</p>
 <p>Helyezd a papírt a fúvóka és a tárgyasztal közé. Hasznos lehet a papír egyik sarkát behajtani, hogy könnyebb legyen megfogni. (Próbáld úgy, hogy ne nyomd le a tárgyasztalt, amikor a papírt előre-hátra mozgatod).</p>
 <p><img alt="paper-test" src="img/paper-test.jpg" /></p>
 <p>A TESTZ paranccsal kérheted, hogy a fúvóka közelebb menjen a papírhoz. Például:</p>
 <div class="highlight"><pre><span></span><code>TESTZ Z=-.1
 </code></pre></div>
-
 <p>A TESTZ parancs a fúvókát az aktuális pozíciójától relatív távolságra mozgatja. (Tehát a <code>Z=-.1</code> azt kéri, hogy a fúvóka 0,1 mm-rel közelebb kerüljön a tárgyasztalhoz). Miután a fúvóka megállt, told előre-hátra a papírt, hogy ellenőrizd, hogy a fúvóka érintkezik-e a papírral, és hogy érezd a súrlódás mértékét. Folytasd a TESTZ parancsok kiadását mindaddig, amíg a papírral való tesztelésekkor nem érzel egy kis súrlódást.</p>
 <p>Ha túl nagy a súrlódás, akkor egy pozitív Z értéket használhatunk a fúvóka felfelé mozgatására. Lehetőség van a <code>TESTZ Z=+</code> vagy a <code>TESTZ Z=-</code> használatára is, hogy "felezzük" az utolsó pozíciót - azaz két pozíció között félúton lévő pozícióba lépjünk. Például, ha a TESTZ parancs a következő felszólítást adná:</p>
 <div class="highlight"><pre><span></span><code>Recv: // Z position: 0.130 --&gt; 0.230 &lt;-- 0.280
 </code></pre></div>
-
 <p>Ezután egy <code>TESTZ Z=-</code> a fúvókát 0,180 Z pozícióba (a 0,130 és 0,230 közötti félútra) mozgatja. Ezt a funkciót arra lehet használni, hogy segítsen gyorsan leszűkíteni egy konzisztens súrlódást. A <code>Z=++</code> és <code>Z=--</code> parancsok használatával közvetlenül visszatérhetünk egy korábbi méréshez - például a fenti felszólítás után a <code>TESTZ Z=--</code> parancs a fúvókát a 0,130-as Z pozícióba mozgatná.</p>
 <p>Miután érzékelhető egy kis súrlódás, add ki az ACCEPT parancsot:</p>
 <div class="highlight"><pre><span></span><code>ACCEPT
 </code></pre></div>
-
 <p>Ez elfogadja a megadott Z magasságot, és az adott kalibrációs eszközzel folytatja a munkát.</p>
 <p>Az érzékelt súrlódás pontos mértéke nem döntő fontosságú, ahogyan a hőtágulás mértéke és a papír pontos szélessége sem döntő fontosságú. Csak próbálj meg minden egyes alkalommal ugyanannyi súrlódást elérni, amikor a tesztet lefuttatod.</p>
 <p>Ha a teszt során valami rosszul megy, az <code>ABORT</code> paranccsal kiléphetünk a kalibrációs eszközből.</p>

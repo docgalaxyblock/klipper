@@ -1356,15 +1356,12 @@
 <p>在打印G-Code前输入下面的命令：</p>
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
-
 <p>上述命令将使喷嘴在打印转角时减速，从而显著增加转角时挤出的压力。接着，如果您使用的是近程挤出结构，请输入下面的命令：</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
-
 <p>使用远程挤出的话，则输入：</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
-
 <p>接着，开始打印。打印后的测试模型将如下图：</p>
 <p><img alt="测试塔" src="img/tuning_tower.jpg" /></p>
 <p>上面的调试塔（TUNING_TOWER）G-Code将会使Klipper在打印每一层时逐渐改变压力提前（pressure_advance）的设定值。打印的高度越高，压力提前的设置值越大。在理想的压力提前设定值以下的层，将会在转角出现过度挤出，出现塑料团块；而在理想值之上的层则会出现挤出不足，乃至转角缺失。</p>

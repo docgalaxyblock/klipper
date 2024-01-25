@@ -1443,24 +1443,20 @@
 sudo cp ./scripts/klipper-mcu.service /etc/systemd/system/
 sudo systemctl enable klipper-mcu.service
 </code></pre></div>
-
 <h2 id="construire-le-code-du-microcontroleur">Construire le code du microcontrôleur<a class="headerlink" href="#construire-le-code-du-microcontroleur" title="Permanent link">&para;</a></h2>
 <p>Pour compiler le code du micro-contrôleur Klipper, commencez par le configurer pour le "Linux process" :</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
-
 <p>Dans le menu, définissez "Architecture du microcontrôleur" sur "Processus Linux", puis enregistrez et quittez.</p>
 <p>Pour compiler et installer le nouveau code du microcontrôleur, exécutez :</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
-
 <p>Si klippy.log signale une erreur "Autorisation refusée" lors de la tentative de connexion à <code>/tmp/klipper_host_mcu</code>, vous devez ajouter votre utilisateur au groupe tty. La commande suivante ajoutera l'utilisateur "pi" au groupe tty :</p>
 <div class="highlight"><pre><span></span><code>sudo usermod -a -G tty pi
 </code></pre></div>
-
 <h2 id="configuration-restante">Configuration restante<a class="headerlink" href="#configuration-restante" title="Permanent link">&para;</a></h2>
 <p>Terminez l'installation en configurant le MCU secondaire de Klipper en suivant les instructions dans <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-raspberry-pi.cfg">RaspberryPi exemlple de configuration</a> et <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-multi-mcu.cfg">Exemples de configuration Multi MCU</a>.</p>
 <h2 id="facultatif-activer-spi">Facultatif : Activer SPI<a class="headerlink" href="#facultatif-activer-spi" title="Permanent link">&para;</a></h2>
@@ -1472,15 +1468,12 @@ sudo service klipper start
 <p>Pour installer le périphérique de caractères *Linux GPIO - binaire * sur une distribution basée sur Debian comme Octopi, exécutez :</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get install gpiod
 </code></pre></div>
-
 <p>Pour vérifier la puce gpio disponible exécutez :</p>
 <div class="highlight"><pre><span></span><code>gpiodetect
 </code></pre></div>
-
 <p>Pour vérifier la numérotation des broches du connecteur GPIO et leur disponibilité, exécutez :</p>
 <div class="highlight"><pre><span></span><code>gpioinfo
 </code></pre></div>
-
 <p>La broche choisie peut donc être utilisée dans la configuration comme <code>gpiochip&lt;n&gt;/gpio&lt;o&gt;</code> où <strong>n</strong> est le numéro de puce tel qu'il est vu par la commande <code>gpiodetect</code> et <strong>o</strong> est le numéro de ligne vu par la commande <code>gpioinfo</code>.</p>
 <p><strong><em>Avertissement :</em></strong> seul les broches gpio marquées comme <code>inutilisées</code> peuvent être utilisées. Il n'est pas possible qu'une <em>ligne</em> soit utilisée par plusieurs processus simultanément.</p>
 <p>Par exemple sur un RPi 3B+ où klipper utilise le GPIO20 comme un interrupteur :</p>
@@ -1554,30 +1547,25 @@ gpiochip1 - 8 lines:
         line   6:      unnamed       unused   input  active-high
         line   7:      unnamed       unused   input  active-high
 </code></pre></div>
-
 <h2 id="facultatif-pwm-materiel">Facultatif : PWM matériel<a class="headerlink" href="#facultatif-pwm-materiel" title="Permanent link">&para;</a></h2>
 <p>Les Raspberry Pi ont deux canaux PWM (PWM0 et PWM1) qui sont disponibles sur le connecteur ou, sinon, peuvent être redirigés vers des broches gpio existantes. Le service mcu Linux utilise l'interface pwmchip sysfs pour contrôler les périphériques matériels pwm sur les hôtes Linux. L'interface pwm sysfs n'est pas disponible par défaut sur un Raspberry et peut être activée en ajoutant une ligne à <code>/boot/config.txt</code> :</p>
 <div class="highlight"><pre><span></span><code># Activer l&#39;interface pwmchip sysfs
 dtoverlay=pwm,pin=12,func=4
 </code></pre></div>
-
 <p>This example enables only PWM0 and routes it to gpio12. If both PWM channels need to be enabled you can use <code>pwm-2chan</code>:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 dtoverlay=pwm-2chan,pin=12,func=4,pin2=13,func2=4
 </code></pre></div>
-
 <p>This example additionally enables PWM1 and routes it to gpio13.</p>
 <p>The overlay does not expose the pwm line on sysfs on boot and needs to be exported by echo'ing the number of the pwm channel to <code>/sys/class/pwm/pwmchip0/export</code>. This will create device <code>/sys/class/pwm/pwmchip0/pwm0</code> in the filesystem. The easiest way to do this is by adding this to <code>/etc/rc.local</code> before the <code>exit 0</code> line:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
-
 <p>When using both PWM channels, the number of the second channel needs to be echo'd as well:</p>
 <div class="highlight"><pre><span></span><code># Enable pwmchip sysfs interface
 echo 0 &gt; /sys/class/pwm/pwmchip0/export
 echo 1 &gt; /sys/class/pwm/pwmchip0/export
 </code></pre></div>
-
 <p>Avec le sysfs en place, vous pouvez maintenant utiliser l'un ou l'autre des canaux pwm en ajoutant la configuration suivante à votre <code>printer.cfg</code> :</p>
 <div class="highlight"><pre><span></span><code>[output_pin caselight]
 pin: host:pwmchip0/pwm0
@@ -1593,7 +1581,6 @@ value: 0
 shutdown_value: 0
 cycle_time: 0.0005
 </code></pre></div>
-
 <p>This will add hardware pwm control to gpio12 and gpio13 on the Pi (because the overlay was configured to route pwm0 to pin=12 and pwm1 to pin=13).</p>
 <p>PWM0 peut être redirigé vers gpio12 et gpio18, PWM1 peut être redirigé vers gpio13 et gpio19 :</p>
 <table>

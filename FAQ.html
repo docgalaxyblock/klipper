@@ -1660,30 +1660,31 @@ information.</p>
 <h2 id="how-do-i-calculate-the-rotation_distance-config-parameter">How do I calculate the rotation_distance config parameter?<a class="headerlink" href="#how-do-i-calculate-the-rotation_distance-config-parameter" title="Permanent link">&para;</a></h2>
 <p>See the <a href="Rotation_Distance.html">rotation distance document</a>.</p>
 <h2 id="wheres-my-serial-port">Where's my serial port?<a class="headerlink" href="#wheres-my-serial-port" title="Permanent link">&para;</a></h2>
-<p>The general way to find a USB serial port is to run <code>ls
-/dev/serial/by-id/*</code> from an ssh terminal on the host machine. It will
-likely produce output similar to the following:</p>
+<p>The general way to find a USB serial port is to run
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/serial/by-id/*
+</code></pre></div>
+from an ssh terminal on the host machine. It will
+likely produce output similar to the following:
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
+</code></pre></div></p>
+<p>The name found in the above command is stable and it is possible to use
+it in the config file and while flashing the micro-controller code.
+For example, a flash command might look similar to:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>stop
+make<span class="w"> </span>flash<span class="w"> </span><span class="nv">FLASH_DEVICE</span><span class="o">=</span>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>start
 </code></pre></div>
-
-<p>The name found in the above command is stable and it is possible to
-use it in the config file and while flashing the micro-controller
-code. For example, a flash command might look similar to:</p>
-<div class="highlight"><pre><span></span><code>sudo service klipper stop
-make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
-sudo service klipper start
-</code></pre></div>
-
-<p>and the updated config might look like:</p>
-<div class="highlight"><pre><span></span><code>[mcu]
-serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
-</code></pre></div>
-
-<p>Be sure to copy-and-paste the name from the "ls" command that you ran
+and the updated config might look like:
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">mcu</span><span class="p p-Indicator">]</span>
+<span class="nt">serial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0</span>
+</code></pre></div></p>
+<p>Be sure to copy-and-paste the name from the "<code>ls</code>" command that you ran
 above as the name will be different for each printer.</p>
 <p>If you are using multiple micro-controllers and they do not have
 unique ids (common on boards with a CH340 USB chip) then follow the
-directions above using the command <code>ls /dev/serial/by-path/*</code> instead.</p>
+directions above using the command `` instead.
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/serial/by-path/*
+</code></pre></div></p>
 <h2 id="when-the-micro-controller-restarts-the-device-changes-to-devttyusb1">When the micro-controller restarts the device changes to /dev/ttyUSB1<a class="headerlink" href="#when-the-micro-controller-restarts-the-device-changes-to-devttyusb1" title="Permanent link">&para;</a></h2>
 <p>Follow the directions in the
 "<a href="#wheres-my-serial-port">Where's my serial port?</a>" section to prevent
@@ -1704,9 +1705,9 @@ will need to manually flash. See if there is a config file in the
 <a href="https://github.com/Klipper3d/klipper/blob/master/config">config directory</a> with specific instructions for flashing
 the device. Also, check the board manufacturer's documentation to see
 if it describes how to flash the device. Finally, it may be possible
-to manually flash the device using tools such as "avrdude" or
-"bossac" - see the <a href="Bootloaders.html">bootloader document</a> for
-additional information.</p>
+to manually flash the device using tools such as "avrdude",
+"bossac", "dfu-util" or "stm32flash" - see the
+<a href="Bootloaders.html">bootloader document</a> for additional information.</p>
 <h2 id="how-do-i-change-the-serial-baud-rate">How do I change the serial baud rate?<a class="headerlink" href="#how-do-i-change-the-serial-baud-rate" title="Permanent link">&para;</a></h2>
 <p>The recommended baud rate for Klipper is 250000. This baud rate works
 well on all micro-controller boards that Klipper supports. If you've
@@ -1718,11 +1719,10 @@ menuconfig</strong>) and that updated code will need to be compiled and
 flashed to the micro-controller. The Klipper printer.cfg file will
 also need to be updated to match that baud rate (see the
 <a href="Config_Reference.html#mcu">config reference</a> for details).  For
-example:</p>
-<div class="highlight"><pre><span></span><code>[mcu]
-baud: 250000
-</code></pre></div>
-
+example:
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">mcu</span><span class="p p-Indicator">]</span>
+<span class="nt">baud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">250000</span>
+</code></pre></div></p>
 <p>The baud rate shown on the OctoPrint web page has no impact on the
 internal Klipper micro-controller baud rate. Always set the OctoPrint
 baud rate to 250000 when using Klipper.</p>
@@ -1768,16 +1768,14 @@ package.</p>
 <h2 id="can-i-run-multiple-instances-of-klipper-on-the-same-host-machine">Can I run multiple instances of Klipper on the same host machine?<a class="headerlink" href="#can-i-run-multiple-instances-of-klipper-on-the-same-host-machine" title="Permanent link">&para;</a></h2>
 <p>It is possible to run multiple instances of the Klipper host software,
 but doing so requires Linux admin knowledge. The Klipper installation
-scripts ultimately cause the following Unix command to be run:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -l /tmp/klippy.log
+scripts ultimately cause the following Unix command to be run:
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python<span class="w"> </span>~/klipper/klippy/klippy.py<span class="w"> </span>~/printer.cfg<span class="w"> </span>-l<span class="w"> </span>/tmp/klippy.log
 </code></pre></div>
-
-<p>One can run multiple instances of the above command as long as each
+One can run multiple instances of the above command as long as each
 instance has its own printer config file, its own log file, and its
-own pseudo-tty. For example:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer2.cfg -l /tmp/klippy2.log -I /tmp/printer2
-</code></pre></div>
-
+own pseudo-tty. For example:
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python<span class="w"> </span>~/klipper/klippy/klippy.py<span class="w"> </span>~/printer2.cfg<span class="w"> </span>-l<span class="w"> </span>/tmp/klippy2.log<span class="w"> </span>-I<span class="w"> </span>/tmp/printer2
+</code></pre></div></p>
 <p>If you choose to do this, you will need to implement the necessary
 start, stop, and installation scripts (if any). The
 <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a> script and the
@@ -1795,7 +1793,7 @@ can be configured to use "/tmp/printer" for the printer serial port.</p>
 <p>The code does this to reduce the chance of accidentally commanding the
 head into the bed or a wall. Once the printer is homed the software
 attempts to verify each move is within the position_min/max defined in
-the config file. If the motors are disabled (via an M84 or M18
+the config file. If the motors are disabled (via an <code>M84</code> or <code>M18</code>
 command) then the motors will need to be homed again prior to
 movement.</p>
 <p>If you want to move the head after canceling a print via OctoPrint,
@@ -1806,8 +1804,9 @@ Settings-&gt;GCODE Scripts</p>
 the desired movement to the "custom g-code" section of your slicer.</p>
 <p>If the printer requires some additional movement as part of the homing
 process itself (or fundamentally does not have a homing process) then
-consider using a safe_z_home or homing_override section in the config
-file. If you need to move a stepper for diagnostic or debugging
+consider using a <a href="Config_Reference.html#safe_z_home">safe_z_home</a> or
+<a href="Config_Reference.html#homing_override">homing_override</a> section in the
+config file. If you need to move a stepper for diagnostic or debugging
 purposes then consider adding a force_move section to the config
 file. See <a href="Config_Reference.html#customized_homing">config reference</a>
 for further details on these options.</p>
@@ -1822,23 +1821,25 @@ bed. This way, when homing the axis, it will stop before the nozzle
 touches the bed. See the <a href="Bed_Level.html">bed level document</a> for more
 information.</p>
 <h2 id="i-converted-my-config-from-marlin-and-the-xy-axes-work-fine-but-i-just-get-a-screeching-noise-when-homing-the-z-axis">I converted my config from Marlin and the X/Y axes work fine, but I just get a screeching noise when homing the Z axis<a class="headerlink" href="#i-converted-my-config-from-marlin-and-the-xy-axes-work-fine-but-i-just-get-a-screeching-noise-when-homing-the-z-axis" title="Permanent link">&para;</a></h2>
-<p>Short answer: First, make sure you have verified the stepper
-configuration as described in the
-<a href="Config_checks.html">config check document</a>. If the problem persists,
-try reducing the max_z_velocity setting in the printer config.</p>
-<p>Long answer: In practice Marlin can typically only step at a rate of
-around 10000 steps per second. If it is requested to move at a speed
-that would require a higher step rate then Marlin will generally just
-step as fast as it can. Klipper is able to achieve much higher step
-rates, but the stepper motor may not have sufficient torque to move at
-a higher speed. So, for a Z axis with a high gearing ratio or high
-microsteps setting the actual obtainable max_z_velocity may be smaller
-than what is configured in Marlin.</p>
+<p>Short answer: <br>
+First, make sure you have verified the stepper configuration as
+described in the <a href="Config_checks.html">config check document</a>. If the
+problem persists, try reducing the max_z_velocity setting in the
+printer config.</p>
+<p>Long answer: <br>
+In practice Marlin can typically only step at a rate of around 10000
+steps per second. If it is requested to move at a speed that would
+require a higher step rate then Marlin will generally just step as fast
+as it can. Klipper is able to achieve much higher step rates, but the
+stepper motor may not have sufficient torque to move at a higher speed.
+So, for a Z axis with a high gearing ratio or high microsteps setting
+the actual obtainable max_z_velocity may be smaller than what is
+configured in Marlin.</p>
 <h2 id="my-tmc-motor-driver-turns-off-in-the-middle-of-a-print">My TMC motor driver turns off in the middle of a print<a class="headerlink" href="#my-tmc-motor-driver-turns-off-in-the-middle-of-a-print" title="Permanent link">&para;</a></h2>
 <p>If using the TMC2208 (or TMC2224) driver in "standalone mode" then
 make sure to use the
-<a href="#how-do-i-upgrade-to-the-latest-software">latest version of Klipper</a>. A
-workaround for a TMC2208 "stealthchop" driver problem was added to
+<a href="#how-do-i-upgrade-to-the-latest-software">latest version of Klipper</a>.
+An workaround for a TMC2208 "stealthchop" driver problem was added to
 Klipper in mid-March of 2020.</p>
 <h2 id="i-keep-getting-random-lost-communication-with-mcu-errors">I keep getting random "Lost communication with MCU" errors<a class="headerlink" href="#i-keep-getting-random-lost-communication-with-mcu-errors" title="Permanent link">&para;</a></h2>
 <p>This is commonly caused by hardware errors on the USB connection
@@ -1892,7 +1893,8 @@ seconds. If the micro-controller does not receive a confirmation every
 5 seconds it goes into a "shutdown" state which is designed to turn
 off all heaters and stepper motors.</p>
 <p>See the "config_digital_out" command in the
-<a href="MCU_Commands.html">MCU commands</a> document for further details.</p>
+<a href="MCU_Commands.html#common-micro-controller-objects">MCU commands</a>
+document for further details.</p>
 <p>In addition, the micro-controller software is configured with a
 minimum and maximum temperature range for each heater at startup (see
 the min_temp and max_temp parameters in the
@@ -1904,7 +1906,8 @@ heaters and temperature sensors are functioning correctly. See the
 <a href="Config_Reference.html#verify_heater">config reference</a> for further
 details.</p>
 <h2 id="how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name">How do I convert a Marlin pin number to a Klipper pin name?<a class="headerlink" href="#how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name" title="Permanent link">&para;</a></h2>
-<p>Short answer: A mapping is available in the
+<p>Short answer: <br>
+A mapping is available in the
 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-aliases.cfg">sample-aliases.cfg</a> file. Use that file
 as a guide to finding the actual micro-controller pin names. (It is
 also possible to copy the relevant
@@ -1915,7 +1918,8 @@ the sample-aliases.cfg file uses pin names that start with the prefix
 "ar" instead of "D" (eg, Arduino pin <code>D23</code> is Klipper alias <code>ar23</code>)
 and the prefix "analog" instead of "A" (eg, Arduino pin <code>A14</code> is
 Klipper alias <code>analog14</code>).</p>
-<p>Long answer: Klipper uses the standard pin names defined by the
+<p>Long answer: <br>
+Klipper uses the standard pin names defined by the
 micro-controller. On the Atmega chips these hardware pins have names
 like <code>PA4</code>, <code>PC7</code>, or <code>PD2</code>.</p>
 <p>Long ago, the Arduino project decided to avoid using the standard
@@ -1929,37 +1933,48 @@ Arduino board, but is <code>PC7</code> on another common Arduino board.</p>
 names defined by the micro-controller.</p>
 <h2 id="do-i-have-to-wire-my-device-to-a-specific-type-of-micro-controller-pin">Do I have to wire my device to a specific type of micro-controller pin?<a class="headerlink" href="#do-i-have-to-wire-my-device-to-a-specific-type-of-micro-controller-pin" title="Permanent link">&para;</a></h2>
 <p>It depends on the type of device and type of pin:</p>
-<p>ADC pins (or Analog pins): For thermistors and similar "analog"
-sensors, the device must be wired to an "analog" or "ADC" capable pin
-on the micro-controller. If you configure Klipper to use a pin that is
-not analog capable, Klipper will report a "Not a valid ADC pin" error.</p>
-<p>PWM pins (or Timer pins): Klipper does not use hardware PWM by default
-for any device. So, in general, one may wire heaters, fans, and
-similar devices to any general purpose IO pin. However, fans and
-output_pin devices may be optionally configured to use <code>hardware_pwm:
-True</code>, in which case the micro-controller must support hardware PWM on
-the pin (otherwise, Klipper will report a "Not a valid PWM pin"
-error).</p>
-<p>IRQ pins (or Interrupt pins): Klipper does not use hardware interrupts
-on IO pins, so it is never necessary to wire a device to one of these
-micro-controller pins.</p>
-<p>SPI pins: When using hardware SPI it is necessary to wire the pins to
-the micro-controller's SPI capable pins. However, most devices can be
-configured to use "software SPI", in which case any general purpose IO
-pins may be used.</p>
-<p>I2C pins: When using I2C it is necessary to wire the pins to the
-micro-controller's I2C capable pins.</p>
+<ul>
+<li>ADC pins (or Analog pins): For thermistors and similar "analog"
+  sensors, the device must be wired to an "analog" or "ADC" capable pin
+  on the micro-controller. If you configure Klipper to use a pin that
+  is not analog capable, Klipper will report a "Not a valid ADC pin"
+  error.</li>
+</ul>
+<ul>
+<li>PWM pins (or Timer pins): Klipper does not use hardware PWM by
+  default for any device. So, in general, one may wire heaters, fans,
+  and similar devices to any general purpose IO pin. However, fans and
+  output_pin devices may be optionally configured to use <code>hardware_pwm:
+   True</code>, in which case the micro-controller must support hardware PWM
+  on the pin (otherwise, Klipper will report a "Not a valid PWM pin"
+  error).</li>
+</ul>
+<ul>
+<li>IRQ pins (or Interrupt pins): Klipper does not use hardware interrupts
+  on IO pins, so it is never necessary to wire a device to one of these
+  micro-controller pins.</li>
+</ul>
+<ul>
+<li>SPI pins: When using hardware SPI it is necessary to wire the pins to
+  the micro-controller's SPI capable pins. However, most devices can be
+  configured to use "software SPI", in which case any general purpose IO
+  pins may be used.</li>
+</ul>
+<ul>
+<li>I2C pins: When using I2C it is necessary to wire the pins to the
+  micro-controller's I2C capable pins.</li>
+</ul>
 <p>Other devices may be wired to any general purpose IO pin. For example,
 steppers, heaters, fans, Z probes, servos, LEDs, common hd44780/st7920
 LCD displays, the Trinamic UART control line may be wired to any
 general purpose IO pin.</p>
 <h2 id="how-do-i-cancel-an-m109m190-wait-for-temperature-request">How do I cancel an M109/M190 "wait for temperature" request?<a class="headerlink" href="#how-do-i-cancel-an-m109m190-wait-for-temperature-request" title="Permanent link">&para;</a></h2>
-<p>Navigate to the OctoPrint terminal tab and issue an M112 command in
-the terminal box. The M112 command will cause Klipper to enter into a
+<p>Navigate to the OctoPrint terminal tab and issue an <code>M112</code> command in
+the terminal box. The <code>M112</code> command will cause Klipper to enter into a
 "shutdown" state, and it will cause OctoPrint to disconnect from
 Klipper. Navigate to the OctoPrint connection area and click on
 "Connect" to cause OctoPrint to reconnect. Navigate back to the
-terminal tab and issue a FIRMWARE_RESTART command to clear the Klipper
+terminal tab and issue a <code>FIRMWARE_RESTART</code> command to clear the Klipper
 error state.  After completing this sequence, the previous heating
 request will be canceled and a new print may be started.</p>
 <h2 id="can-i-find-out-whether-the-printer-has-lost-steps">Can I find out whether the printer has lost steps?<a class="headerlink" href="#can-i-find-out-whether-the-printer-has-lost-steps" title="Permanent link">&para;</a></h2>
@@ -1974,25 +1989,25 @@ and waste filament: just run some high-speed moves in between the
 different positions, so a difference of a couple of microsteps is
 likely the result of endstop inaccuracies. A stepper motor itself can
 only lose steps in increments of 4 full steps. (So, if one is using 16
-microsteps, then a lost step on the stepper would result in the "mcu:"
+microsteps, then a lost step on the stepper would result in the <code>mcu:</code>
 step counter being off by a multiple of 64 microsteps.)</p>
 <h2 id="why-does-klipper-report-errors-i-lost-my-print">Why does Klipper report errors? I lost my print!<a class="headerlink" href="#why-does-klipper-report-errors-i-lost-my-print" title="Permanent link">&para;</a></h2>
-<p>Short answer: We want to know if our printers detect a problem so that
-the underlying issue can be fixed and we can obtain great quality
-prints. We definitely do not want our printers to silently produce low
-quality prints.</p>
-<p>Long answer: Klipper has been engineered to automatically workaround
-many transient problems. For example, it automatically detects
-communication errors and will retransmit; it schedules actions in
-advance and buffers commands at multiple layers to enable precise
-timing even with intermittent interference. However, should the
-software detect an error that it can not recover from, if it is
-commanded to take an invalid action, or if it detects it is hopelessly
-unable to perform its commanded task, then Klipper will report an
-error. In these situations there is a high risk of producing a
-low-quality print (or worse). It is hoped that alerting the user will
-empower them to fix the underlying issue and improve the overall
-quality of their prints.</p>
+<p>Short answer: <br>
+We want to know if our printers detect a problem so that the underlying
+issue can be fixed and we can obtain great quality prints. We definitely
+do not want our printers to silently produce low quality prints.</p>
+<p>Long answer: <br>
+Klipper has been engineered to automatically workaround many transient
+problems. For example, it automatically detects communication errors and
+will retransmit; it schedules actions in advance and buffers commands at
+multiple layers to enable precise timing even with intermittent
+interference. However, should the software detect an error that it can
+not recover from, if it is commanded to take an invalid action, or if it
+detects it is hopelessly unable to perform its commanded task, then
+Klipper will report an error. In these situations there is a high risk
+of producing a low-quality print (or worse). It is hoped that alerting
+the user will empower them to fix the underlying issue and improve the
+overall quality of their prints.</p>
 <p>There are some related questions: Why doesn't Klipper pause the print
 instead? Report a warning instead? Check for errors before the print?
 Ignore errors in user typed commands? etc? Currently Klipper reads
@@ -2010,47 +2025,44 @@ part of a software upgrade. It is a good idea to review this document
 prior to upgrading.</p>
 <p>When ready to upgrade, the general method is to ssh into the Raspberry
 Pi and run:</p>
-<div class="highlight"><pre><span></span><code>cd ~/klipper
-git pull
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/klipper
+git<span class="w"> </span>pull
 ~/klipper/scripts/install-octopi.sh
 </code></pre></div>
-
-<p>Then one can recompile and flash the micro-controller code. For
-example:</p>
-<div class="highlight"><pre><span></span><code>make menuconfig
-make clean
+<p>Then one can recompile and flash the micro-controller code.
+For example:
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>menuconfig
+make<span class="w"> </span>clean
 make
 
-sudo service klipper stop
-make flash FLASH_DEVICE=/dev/ttyACM0
-sudo service klipper start
-</code></pre></div>
-
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>stop
+make<span class="w"> </span>flash<span class="w"> </span><span class="nv">FLASH_DEVICE</span><span class="o">=</span>/dev/ttyACM0
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>start
+</code></pre></div></p>
 <p>However, it's often the case that only the host software changes. In
 this case, one can update and restart just the host software with:</p>
-<div class="highlight"><pre><span></span><code>cd ~/klipper
-git pull
-sudo service klipper restart
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/klipper
+git<span class="w"> </span>pull
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
 </code></pre></div>
-
 <p>If after using this shortcut the software warns about needing to
 reflash the micro-controller or some other unusual error occurs, then
 follow the full upgrade steps outlined above.</p>
 <p>If any errors persist then double check the
 <a href="Config_Changes.html">config changes</a> document, as you may need to
 modify the printer configuration.</p>
-<p>Note that the RESTART and FIRMWARE_RESTART g-code commands do not load
-new software - the above "sudo service klipper restart" and "make
-flash" commands are needed for a software change to take effect.</p>
+<p>Note that the <code>RESTART</code> and <code>FIRMWARE_RESTART</code> g-code commands do not
+load new software - the above <code>sudo service klipper restart</code> and
+<code>make flash</code> commands are needed for a software change to take effect.</p>
 <h2 id="how-do-i-uninstall-klipper">How do I uninstall Klipper?<a class="headerlink" href="#how-do-i-uninstall-klipper" title="Permanent link">&para;</a></h2>
-<p>On the firmware end, nothing special needs to happen. Just follow the
-flashing directions for the new firmware.</p>
+<p>On the firmware end, nothing special needs to happen.
+Just follow the flashing directions for the new firmware.</p>
 <p>On the raspberry pi end, an uninstall script is available in
-<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-uninstall.sh">scripts/klipper-uninstall.sh</a>. For
-example:</p>
-<div class="highlight"><pre><span></span><code>sudo ~/klipper/scripts/klipper-uninstall.sh
-rm -rf ~/klippy-env ~/klipper
-</code></pre></div>
+<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-uninstall.sh">scripts/klipper-uninstall.sh</a>.
+For example:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>~/klipper/scripts/klipper-uninstall.sh
+rm<span class="w"> </span>-rf<span class="w"> </span>~/klippy-env<span class="w"> </span>~/klipper
+</code></pre></div></p>
 
               
             </article>

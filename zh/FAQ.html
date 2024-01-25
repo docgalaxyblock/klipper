@@ -1662,18 +1662,15 @@
 <p>查找 USB 串行端口的一般方法是从主机上的 ssh 终端运行 <code>ls /dev/serial/by-id/*</code>。 它可能会产生类似于以下内容的输出：</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
-
 <p>在上述命令中找到的名称是稳定的，可以在配置文件中使用它，同时可用于刷写微控制器的代码。 例如，一个 flash 命令：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
-
 <p>更新后的配置可能如下所示：</p>
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
-
 <p>请务必从上面运行的“ls”命令中复制并粘贴名称，因为每个打印机的名称都不同。</p>
 <p>如果您使用多个微控制器并且它们没有唯一的 ID（在带有 CH340 USB 芯片的板上很常见），那么请按照上面的说明使用命令 <code>ls /dev/serial/by-path/*</code> 代替。</p>
 <h2 id="devttyusb1">当微控制器重新启动设备更改为/dev/ttyUSB1<a class="headerlink" href="#devttyusb1" title="Permanent link">&para;</a></h2>
@@ -1688,7 +1685,6 @@ serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 <div class="highlight"><pre><span></span><code>[mcu]
 baud: 250000
 </code></pre></div>
-
 <p>OctoPrint 网页上显示的波特率对内部 Klipper 微控制器的波特率没有影响。使用 Klipper 时，始终将 OctoPrint 的波特率设置为250000。</p>
 <p>Klipper 微控制器的波特率与微控制器启动引导程序的波特率无关。有关启动引导程序的额外信息请参阅<a href="Bootloaders.html">启动引导程序文档</a>。</p>
 <h2 id="raspberry-pi-3-klipper">我可以在 Raspberry Pi 3 以外的其他设备上运行 Klipper 吗？<a class="headerlink" href="#raspberry-pi-3-klipper" title="Permanent link">&para;</a></h2>
@@ -1703,11 +1699,9 @@ baud: 250000
 <p>可以运行 Klipper 主机软件的多个实例，但这样做需要一定的 Linux 知识。 Klipper 安装脚本最终会导致运行以下 Unix 命令：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -l /tmp/klippy.log
 </code></pre></div>
-
 <p>只要每个实例都有自己的打印机配置文件、自己的日志文件和自己的伪 tty，就可以运行上述命令的多个实例。 例如：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer2.cfg -l /tmp/klippy2.log -I /tmp/printer2
 </code></pre></div>
-
 <p>如果你选择这样做，你将需要实现必要的启动、停止和安装脚本。<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/install-octopi.sh">install-octopi.sh</a>和<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/klipper-start.sh">klipper-start.sh</a>脚本提供了一些例子。</p>
 <h2 id="octoprint">我必须使用 OctoPrint 吗？<a class="headerlink" href="#octoprint" title="Permanent link">&para;</a></h2>
 <p>Klipper 不依赖 OctoPrint。其他软件也可以向 Klipper 发送命令，但这样做可能需要一些 Linux 管理知识。</p>
@@ -1773,7 +1767,6 @@ baud: 250000
 git pull
 ~/klipper/scripts/install-octopi.sh
 </code></pre></div>
-
 <p>然后可以重新编译和刷写微控制器的代码。例如：</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 make clean
@@ -1783,13 +1776,11 @@ sudo service klipper stop
 make flash FLASH_DEVICE=/dev/ttyACM0
 sudo service klipper start
 </code></pre></div>
-
 <p>然而，通常是只有主机软件发生变化。这时可以只更新和重新启动主机软件：</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper
 git pull
 sudo service klipper restart
 </code></pre></div>
-
 <p>如果在使用这个快速方式后，软件警告说需要重新刷写微控制器或出现其他不常见的错误，那么请按照上面所述的完整升级步骤进行。</p>
 <p>如果任何错误持续存在，那么请仔细检查<a href="Config_Changes.html">config changes</a>文件，因为可能需要修改打印机配置。</p>
 <p>请注意，RESTART和FIRMWARE_RESTART g-code命令不会加载新的软件--需要使用上述 "sudo service klipper restart "和 "make flash "命令才能使软件变化生效。</p>

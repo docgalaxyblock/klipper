@@ -1551,7 +1551,6 @@ Recv: // gcode: X:8.338078 Y:-3.123175 Z:233.347878 E:0.000000
 Recv: // gcode base: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
 Recv: // gcode homing: X:0.000000 Y:0.000000 Z:0.000000
 </code></pre></div>
-
 <p>「微控制器位置」（<code>stepper.get_mcu_position()</code>）是微控制器最後一次重置后執行的「正向」步數總數 - 「負向」步數總數的值。如果裝置處於機械運動時，該方法將返回包含運動緩衝區中的位置值，但不包含預計佇列中的運動值。</p>
 <p>「步進電機」部分（<code>stepper.get_commanded_position()</code>）是運動學模型中記錄的特定步進電機位置。通常是對應軌道的相對於設定中的position_endstop設定值的滑車位置（單位為毫米，但部分設定中使用的是弧度單位而非線性單位）。如果在機械運動時觸發上述程式碼，則返回的值為微控制器中快取的位置，而不包含預計佇列（look-ahead queue）中的預計位置。可使用<code>toolhead.flush_step_generation()</code>或<code>toolhead.wati_moves()</code>呼叫完全重新整理預計佇列和步進脈衝產生程式碼。</p>
 <p>運動學位置（<code>kin.cal_position()</code>）是在笛卡爾座標上的，衍生於步進電機位置的，相對於設定檔案中position_endstop值的位置。由於步進電機的解析度原因，這可能與請求的笛卡爾座標值不一致。如果在機械運動時觸發上述程式碼，則返回的值為微控制器中快取的位置，而不包含預計佇列（look-ahead queue）中的預計位置。可使用<code>toolhead.flush_step_generation()</code>或<code>toolhead.wati_moves()</code>呼叫完全重新整理預計佇列和步進脈衝產生程式碼。</p>

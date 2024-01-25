@@ -1356,15 +1356,12 @@
 <p>Készülj fel a tesztre a következő G-kód parancs kiadásával:</p>
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
-
 <p>Ezzel a paranccsal a fúvóka lassabban halad át a kanyarokon, hogy kiemelje az extrudernyomás hatását. Ezután a direkt extruderrel rendelkező nyomtatók esetében futtasd az alábbi parancsot:</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
-
 <p>Hosszú bowdenes extruderekhez:</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
-
 <p>Ezután nyomtasd ki az objektumot. Teljesen kinyomtatva a tesztnyomat így néz ki:</p>
 <p><img alt="tuning_tower" src="img/tuning_tower.jpg" /></p>
 <p>A fenti TUNING_TOWER parancs utasítja a Klippert, hogy a nyomtatás minden egyes rétegénél módosítsa a pressure_advance beállítást. A nyomtatás magasabb rétegeire nagyobb nyomáselőtolási érték lesz beállítva. Az ideális pressure_advance beállítás alatti rétegeknél a sarkoknál pattogás, az ideális beállítás feletti rétegeknél pedig lekerekített sarkok és gyenge extrudálás alakulhat ki a sarokig.</p>

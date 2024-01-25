@@ -1398,17 +1398,14 @@
 <p>Helyezz egy darab kék festőszalagot (vagy hasonlót) a tárgyasztalra a szonda alá. Navigálj az OctoPrint "Terminal" fülre, és adj ki egy PROBE parancsot:</p>
 <div class="highlight"><pre><span></span><code>PROBE
 </code></pre></div>
-
 <p>Tegyél egy jelet a szalagra közvetlenül a szonda alatt (vagy hasonló módszerrel jelöld fel a helyet a tárgyasztalon).</p>
 <p>Adj ki egy <code>GET_POSITION</code> parancsot, és rögzítsd a parancs által jelentett nyomtatófej X-Y pozícióját. Például, ha a következőket látjuk:</p>
 <div class="highlight"><pre><span></span><code>Recv: // toolhead: X:46.500000 Y:27.000000 Z:15.000000 E:0.000000
 </code></pre></div>
-
 <p>akkor a szonda X pozíciója 46,5 és Y pozíciója 27.</p>
 <p>A szonda pozíciójának rögzítése után adj ki egy sor G1 parancsot, amíg a fúvóka közvetlenül a tárgyasztalon lévő jelölés fölé nem kerül. Például a következőket:</p>
 <div class="highlight"><pre><span></span><code>G1 F300 X57 Y30 Z15
 </code></pre></div>
-
 <p>a fúvóka 57-es X-pozícióba és 30-as Y-pozícióba történő mozgatásához. Ha megtaláltuk a közvetlenül a jelölés feletti pozíciót, a <code>GET_POSITION</code> paranccsal jelenthetjük ezt a pozíciót. Ez a fúvóka pozíciója.</p>
 <p>Az x_offset ekkor a <code>nozzle_x_position - probe_x_position</code> és az y_offset hasonlóan a <code>nozzle_y_position - probe_y_position</code>. Frissítsd a printer.cfg fájlt a megadott értékekkel, távolítsd el a szalagot/jeleket a tárgyasztalról, majd adj ki egy <code>RESTART</code> parancsot, hogy az új értékek hatályba lépjenek.</p>
 <h2 id="kalibralo-szonda-z-eltolas">Kalibráló szonda Z eltolás<a class="headerlink" href="#kalibralo-szonda-z-eltolas" title="Permanent link">&para;</a></h2>
@@ -1418,7 +1415,6 @@
 <p>Miután a kézi mérő eszköz elindult, kövesd a <a href="Bed_Level.html#the-paper-test">"a papírteszt"</a>] pontban leírt lépéseket a fúvóka és a tárgyasztal közötti tényleges távolság meghatározásához az adott helyen. Ha ezek a lépések befejeződtek, akkor <code>ACCEPT</code> a pozíció és elmentheted az eredményeket a config fájlba a következővel:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>Vedd figyelembe, hogy ha a nyomtató mozgásrendszerét, a nyomtatófej pozícióját vagy a szonda helyét megváltoztatod, az érvényteleníti a PROBE_CALIBRATE eredményeit.</p>
 <p>Ha a szonda X vagy Y eltolással rendelkezik, és a tárgyasztal dőlése megváltozik (pl. szintezőcsavarok beállításával, DELTA_CALIBRATE futtatásával, Z_TILT_ADJUST futtatásával, QUAD_GANTRY_LEVEL futtatásával vagy hasonlóval), akkor ez érvényteleníti a PROBE_CALIBRATE eredményeit. A fenti beállítások bármelyikének módosítása után újra kell kezdeni a PROBE_CALIBRATE futtatását.</p>
 <p>Ha a PROBE_CALIBRATE eredményei érvénytelenek, akkor a szondával kapott korábbi <a href="Bed_Mesh.html">tárgyasztal háló</a> eredmények is érvénytelenek. A szonda újrakalibrálása után újra kell futtatni a BED_MESH_CALIBRATE programot.</p>
@@ -1439,7 +1435,6 @@ Recv: // probe at -0.003,0.005 is z=2.519448
 Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe accuracy results: maximum 2.519448, minimum 2.506948, range 0.012500, average 2.513198, median 2.513198, standard deviation 0.006250
 </code></pre></div>
-
 <p>Ideális esetben az eszköz azonos maximális és minimális értéket mutat. (Vagyis ideális esetben a szonda mind a tíz mérésen azonos eredményt ad.) Azonban normális, hogy a minimális és maximális értékek egy Z "lépésköz" vagy akár 5 mikron (.005 mm) eltéréssel különböznek. A "lépésköz" <code>rotation_distance/(full_steps_per_rotation*microsteps)</code>. A minimális és a maximális érték közötti távolságot nevezzük tartománynak. Tehát a fenti példában, mivel a nyomtató 0,0125 Z-lépéstávolságot használ, a 0,01252500 tartományt tekintjük normálisnak.</p>
 <p>Ha a teszt eredménye 25 mikronnál (0,025 mm-nél) nagyobb tartományértéket mutat, akkor a szonda nem elég pontos a tipikus szintezési eljárásokhoz. Lehetséges a szonda sebességének és/vagy indulási magasságának hangolása a mérés ismételhetőségének javítása érdekében. A <code>PROBE_ACCURACY</code> parancs lehetővé teszi a tesztek futtatását különböző paraméterekkel, hogy lássa a hatásukat. További részletekért lásd a <a href="G-Codes.html#probe_accuracy">G-kódok dokumentumot</a>. Ha a szonda általában egyforma eredményeket ad, de időnként előfordulnak kiugró értékek, akkor ezt úgy lehet kiküszöbölni, hogy minden egyes mérőponton több mérést hajtunk végre. Olvasd el a szonda <code>samples</code> konfigurációs paramétereinek leírását a <a href="Config_Reference.html#probe">konfigurációs hivatkozásban</a> további részletekért.</p>
 <p>Ha új mérési sebességre, mérésszámra vagy egyéb beállításokra van szükség, akkor frissítsd a printer.cfg fájlt, és adj ki egy <code>RESTART</code> parancsot. Ha igen, akkor érdemes újra <a href="#calibrating-probe-z-offset">kalibrálni a z_offset-et</a>. Ha nem kapsz ismétlődő eredményeket, akkor ne használd a szondát tárgyasztal szintezésére. A Klipper számos kézi mérőeszközzel rendelkezik, amelyek helyette használhatók - további részletekért lásd a <a href="Bed_Level.html">Tárgyasztal szintezése dokumentumot</a>.</p>

@@ -1397,11 +1397,9 @@
 <p>Per eseguire una calibrazione del fine corsa Z, portare la stampante in posizione di partenza, comandare alla testina di spostarsi in una posizione Z che sia almeno cinque millimetri sopra il piatto (se non lo è già), comandare alla testina di spostarsi in una posizione XY vicino al centro di piatto, quindi vai alla scheda del terminale OctoPrint ed esegui:</p>
 <div class="highlight"><pre><span></span><code>Z_ENDSTOP_CALIBRATE
 </code></pre></div>
-
 <p>Quindi segui i passaggi descritti in <a href="Bed_Level.html#the-paper-test">"the paper test"</a> per determinare la distanza effettiva tra l'ugello e il piatto in una determinata posizione. Una volta completati questi passaggi, è possibile "ACCETTARE" la posizione e salvare i risultati nel file di configurazione con:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>È preferibile utilizzare un interruttore di fine corsa Z sull'estremità opposta dell'asse Z rispetto al piatto. (L'allontanamento dal piatto è più robusto in quanto generalmente è sempre sicuro mettere a home la Z.) Tuttavia, se si deve tornare a home verso il piatto, si consiglia di regolare il finecorsa in modo che si attivi a una piccola distanza (ad es. 0,5 mm ) sopra il piatto. Quasi tutti gli interruttori di fine corsa possono essere premuti in sicurezza a una piccola distanza oltre il punto di attivazione. Fatto ciò, si dovrebbe scoprire che il comando <code>Z_ENDSTOP_CALIBRATE</code> riporta un piccolo valore positivo (ad esempio, .5mm) per Z position_endstop. L'attivazione del fine corsa mentre si è ancora a una certa distanza dal piatto riduce il rischio di incidenti involontari del piatto.</p>
 <p>Alcune stampanti hanno la capacità di regolare manualmente la posizione dell'interruttore di fine corsa fisico. Tuttavia, si consiglia di eseguire il posizionamento del finecorsa Z nel software con Klipper: una volta che la posizione fisica del finecorsa è in una posizione comoda, è possibile apportare ulteriori modifiche eseguendo Z_ENDSTOP_CALIBRATE o aggiornando manualmente Z position_endstop nel file di configurazione.</p>
 <h2 id="regolazione-delle-viti-di-livellamento-del-piatto">Regolazione delle viti di livellamento del piatto<a class="headerlink" href="#regolazione-delle-viti-di-livellamento-del-piatto" title="Permanent link">&para;</a></h2>
@@ -1412,12 +1410,10 @@ screw1: 100, 50
 screw2: 100, 150
 screw3: 150, 100
 </code></pre></div>
-
 <p>Se una vite del piatto è sotto il piatto, specificare la posizione XY direttamente sopra la vite. Se la vite è fuori dal piatto, specificare una posizione XY più vicina alla vite che sia ancora all'interno del raggio del piatto.</p>
 <p>Una volta che il file di configurazione è pronto, esegui <code>RESTART</code> per caricare quella configurazione, quindi puoi avviare lo strumento eseguendo:</p>
 <div class="highlight"><pre><span></span><code>BED_SCREWS_ADJUST
 </code></pre></div>
-
 <p>Questo strumento sposterà l'ugello della stampante in ciascuna posizione XY della vite e quindi sposterà l'ugello a un'altezza Z=0. A questo punto si può utilizzare la "prova della carta" per regolare la vite del piatto direttamente sotto l'ugello. Vedere le informazioni descritte in <a href="Bed_Level.html#the-paper-test">"the paper test"</a>, ma regolare la vite del piatto invece di comandare l'ugello ad altezze diverse. Regolare la vite del piatto finché non c'è una piccola quantità di attrito quando si spinge la carta avanti e indietro.</p>
 <p>Una volta che la vite è stata regolata in modo da avvertire una piccola quantità di attrito, eseguire il comando <code>ACCEPT</code> o<code>ADJUSTED</code>. Utilizzare il comando <code>ADJUSTED</code> se la vite del piatto necessita di una regolazione (in genere qualcosa di più di circa 1/8 di giro della vite). Utilizzare il comando <code>ACCEPT</code> se non sono necessarie modifiche significative. Entrambi i comandi faranno sì che lo strumento proceda alla vite successiva. (Quando viene utilizzato un comando <code>ADJUSTED</code>, lo strumento pianificherà un ciclo aggiuntivo di regolazioni delle viti di appoggio; lo strumento viene completato correttamente quando tutte le viti di appoggio vengono verificate e non richiedono regolazioni significative.) È possibile utilizzare il comando 'ABORT' per uscire lo strumento in anticipo.</p>
 <p>Questo sistema funziona al meglio quando la stampante ha una superficie di stampa piatta (come il vetro) e ha binari diritti. Dopo aver completato con successo lo strumento di livellamento del piatto, il piatto dovrebbe essere pronto per la stampa.</p>
@@ -1435,7 +1431,6 @@ screw2_fine_adjust: 300, 300
 screw3: 150, 100
 screw3_fine_adjust: 0, 100
 </code></pre></div>
-
 <p>Quando questa funzione è abilitata, lo strumento <code>BED_SCREWS_ADJUST</code> richiederà prima le regolazioni grossolane direttamente sopra ogni posizione della vite e, una volta accettate, richiederà le regolazioni fini nelle posizioni aggiuntive. Continua a usare <code>ACCEPT</code> e <code>ADJUSTED</code> in ogni posizione.</p>
 <h2 id="regolazione-delle-viti-di-livellamento-del-piatto-mediante-la-sonda-del-piatto">Regolazione delle viti di livellamento del piatto mediante la sonda del piatto<a class="headerlink" href="#regolazione-delle-viti-di-livellamento-del-piatto-mediante-la-sonda-del-piatto" title="Permanent link">&para;</a></h2>
 <p>Questo è un altro modo per calibrare il livello del piatto utilizzando la sonda del piatto. Per utilizzarlo è necessario disporre di una sonda Z (BL Touch, Sensore induttivo, ecc).</p>
@@ -1453,7 +1448,6 @@ horizontal_move_z: 10.
 speed: 50.
 screw_thread: CW-M3
 </code></pre></div>
-
 <p>La vite1 è sempre il punto di riferimento per le altre, quindi il sistema presume che la vite1 sia all'altezza corretta. Eseguire sempre prima <code>G28</code> e poi eseguire <code>SCREWS_TILT_CALCULATE</code> - dovrebbe produrre un output simile a:</p>
 <div class="highlight"><pre><span></span><code>Send: G28
 Recv: ok
@@ -1465,7 +1459,6 @@ Recv: // rear right screw : y=155.0, y=190.0, z=2.71500 : adjust CCW 00:50
 Recv: // read left screw : x=-5.0, y=190.0, z=2.47250 : adjust CW 00:02
 Recv: ok
 </code></pre></div>
-
 <p>Ciò significa che:</p>
 <ul>
 <li>la vite anteriore sinistra è il punto di riferimento non devi cambiarla.</li>
