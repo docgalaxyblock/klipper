@@ -1635,6 +1635,7 @@
 shaper_freq_x: ...  # frequency for the X mark of the test model
 shaper_freq_y: ...  # frequency for the Y mark of the test model
 </code></pre></div>
+
 <p>對於上面的示例，我們得到 shaper_freq_x/y = 49.4。</p>
 <h3 id="input-shaper_1">選擇 input shaper<a class="headerlink" href="#input-shaper_1" title="Permanent link">&para;</a></h3>
 <p>Klipper 支持多種 input shaper。它們對確定共振頻率的誤差的敏感性以及它們在打印部件中引起的平滑程度不同。此外，像 2HUMP_EI 和 3HUMP_EI 這樣的一些整形器通常不應該與 shaper_freq = 共振頻率一起使用——它們是從不同的考慮來配置的，以一次減少多個共振。</p>
@@ -1657,6 +1658,7 @@ shaper_freq_x: ...
 shaper_freq_y: ...
 shaper_type: mzv
 </code></pre></div>
+
 <p>關於整形器選擇的一些注意事項：</p>
 <ul>
 <li>EI shaper 可能更適合於拋床打印機（如果共振頻率和由此產生的平滑允許）：隨著更多的細絲沉積在移動床上，床的質量會增加，共振頻率會降低。由於 EI 整形器對共振頻率變化更加穩健，因此在打印大型零件時可能會更好地工作。</li>
@@ -1736,6 +1738,7 @@ shaper_freq_x: 50
 shaper_freq_y: 50
 shaper_type: 2hump_ei
 </code></pre></div>
+
 <p>使用 <a href="#selecting-max_accel">Selecting max_accel</a> 分區繼續調整。</p>
 <h2 id="_6">故障排除和常見問題解答<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">我無法可靠地測量共振頻率<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -1757,6 +1760,7 @@ gcode:
   SET_DUAL_CARRIAGE CARRIAGE=0
   SET_INPUT_SHAPER SHAPER_TYPE_X=&lt;primary_carriage_shaper&gt; SHAPER_FREQ_X=&lt;primary_carriage_freq&gt; SHAPER_TYPE_Y=&lt;y_shaper&gt; SHAPER_FREQ_Y=&lt;y_freq&gt;
 </code></pre></div>
+
 <p>Note that <code>SHAPER_TYPE_Y</code> and <code>SHAPER_FREQ_Y</code> should be the same in both commands. It is also possible to put a similar snippet into the start g-code in the slicer, however then the shaper will not be enabled until any print is started.</p>
 <p>Note that the input shaper only needs to be configured once. Subsequent changes of the carriages or their modes via <code>SET_DUAL_CARRIAGE</code> command will preserve the configured input shaper parameters.</p>
 <h3 id="input_shaper_1">input_shaper 會影響打印時間嗎？<a class="headerlink" href="#input_shaper_1" title="Permanent link">&para;</a></h3>

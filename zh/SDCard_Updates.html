@@ -1456,10 +1456,12 @@ make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-skr-v1.3
 sudo service klipper start
 </code></pre></div>
+
 <p>由用户决定设备位置和电路板名称。 如果用户需要刷新多个板，在重新启动 Klipper 服务之前，应该为每个板运行 <code>flash-sdcard.sh</code>（或<code>make flash</code>，如果合适）。</p>
 <p>可以使用以下命令列出支持的微控制器板：</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -l
 </code></pre></div>
+
 <p>如果您没有看到您的电路板列出，则可能需要添加一个新的电路板定义<a href="#board-definitions">如下所述</a>。</p>
 <h2 id="_2">高级用法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>上述命令假设您的 MCU 以默认波特率 250000 连接并且固件位于<code>~/klipper/out/klipper.bin</code>。 <code>flash-sdcard.sh</code> 脚本提供了更改这些默认值的选项。 所有选项都可以通过帮助画面查看：</p>
@@ -1480,12 +1482,15 @@ usage: flash_sdcard.sh [-h] [-l] [-c] [-b &lt;波特率&gt;] [-f &lt;固件&gt;]
   -b &lt;波特率&gt;      串口波特率 (默认为250000)
   -f &lt;firmware&gt;   klipper.bin文件路径
 </code></pre></div>
+
 <p>如果您的电路板使用以自定义波特率连接的固件刷新，则可以通过指定 <code>-b</code> 选项进行升级：</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -b 115200 /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>如果您希望闪存位于默认位置以外的其他位置的 Klipper 构建，可以通过指定 <code>-f</code> 选项来完成：</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -f ~/downloads/klipper.bin /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>请注意，升级 MKS Robin E3 时，无需手动运行 <code>update_mks_robin.py</code> 并将生成的二进制文件提供给 <code>flash-sdcard.sh</code>。 此过程在上传过程中自动执行。</p>
 <p><code>-c</code> 选项用于执行检查或只验证的操作，以测试控制板是否正确运行指定的固件。这个选项主要是针对需要手动断电来完成刷写程序的情况，比如使用SDIO模式而不是SPI来访问SD卡的引导程序。(见下面的注意事项）但是，它也可以在任何时候用来验证在任何支持的板子上刷入板子的固件是否与你的构建文件夹中的版本一致。</p>
 <h2 id="_3">注意事项<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -1505,6 +1510,7 @@ usage: flash_sdcard.sh [-h] [-l] [-c] [-b &lt;波特率&gt;] [-f &lt;固件&gt;]
     <span class="o">...&lt;</span><span class="n">更多定义</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>可以指定以下字段：</p>
 <ul>
 <li><code>mcu</code>：微控制器类型。这可以在使用<code>make menuconfig</code>配置构建配置后通过运行<code>cat .config | grep CONFIG_MCU</code>获取。 此字段是必需的。</li>
@@ -1525,6 +1531,7 @@ usage: flash_sdcard.sh [-h] [-l] [-c] [-b &lt;波特率&gt;] [-f &lt;固件&gt;]
     <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>如果您需要一个新的电路板定义并且您对上述过程感到不舒服，建议您在 <a href="Contact.html#discord">Klipper Community Discord</a> 中请求一个。</p>
 <h2 id="sdio">刷写使用SDIO的控制板<a class="headerlink" href="#sdio" title="Permanent link">&para;</a></h2>
 <p><a href="#caveats">正如在注意事项中提到的那样</a>，引导程序使用SDIO模式访问它们的SD卡的控制板需要对控制板进行电源循环，特别是SD卡本身，以便从将文件写入SD卡时使用的SPI模式切换回SDIO模式，以便引导程序将其刷写到板子上。这些板子的定义将使用<code>skip_verify</code> 标志，它告诉刷写工具在将固件写入SD卡后停止，以便控制板可以手动断电并推迟验证步骤直到完成。</p>
@@ -1542,6 +1549,7 @@ make
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <h3 id="rpisdio_1">对与RPi在同一电源上的主板进行SDIO刷写<a class="headerlink" href="#rpisdio_1" title="Permanent link">&para;</a></h3>
 <p>RPI和控制板在同一电源上的典型会话看起来像下面这样。当然，你需要使用正确的设备路径和控制板名称：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
@@ -1558,6 +1566,7 @@ cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <p>在这种情况下，由于RPi主机被重新启动，这将重新启动<code>klipper</code> 服务，所以有必要在做验证步骤之前再次停止<code>klipper</code> ，并在验证完成后重新启动服务。</p>
 <h3 id="sdiospi">SDIO到SPI引脚映射<a class="headerlink" href="#sdiospi" title="Permanent link">&para;</a></h3>
 <p>如果你的控制板原理图显示它使用SDIO的SD卡，你可以按照下图描述的方式映射引脚，以确定在<code>board_defs.py</code> 文件中分配的兼容的软件SPI引脚：</p>

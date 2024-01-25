@@ -1673,15 +1673,18 @@
 <p>Az API-kiszolgáló használatához a klippy.py host szoftvert a <code>-a</code> paraméterrel kell elindítani. Például:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log
 </code></pre></div>
+
 <p>Ennek hatására a gazdaszoftver létrehoz egy Unix Domain Socket-et. Az ügyfél ezután kapcsolatot nyithat ezen keresztül, és parancsokat küldhet a Klippernek.</p>
 <p>Lásd a <a href="https://github.com/Arksine/moonraker">Moonraker</a> projektet egy népszerű eszközért, amely képes továbbítani a HTTP-kéréseket a Klipper's API Server Unix Domain Socket-hez.</p>
 <h2 id="kerelem-formatuma">Kérelem formátuma<a class="headerlink" href="#kerelem-formatuma" title="Permanent link">&para;</a></h2>
 <p>A socket-en küldött és fogadott üzenetek JSON kódolású karakterláncok, amelyeket egy ASCII 0x03 karakter zár le:</p>
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
 </code></pre></div>
+
 <p>A Klipper tartalmaz egy <code>scripts/whconsole.py</code> eszközt, amely képes a fenti üzenetkeretezést elvégezni. Például:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/whconsole.py /tmp/klippy_uds
 </code></pre></div>
+
 <p>Ez az eszköz képes beolvasni egy sor JSON parancsot az stdin-ből, elküldeni őket a Klippernek, és jelenteni az eredményeket. Az eszköz elvárja, hogy minden JSON parancs egyetlen sorban legyen, és a kérés elküldésekor automatikusan hozzáadja a 0x03 végrehajtót. (A Klipper API szervernek nincs új sor követelménye.)</p>
 <h2 id="api-protokoll">API Protokoll<a class="headerlink" href="#api-protokoll" title="Permanent link">&para;</a></h2>
 <p>A kommunikációs foglalat által használt parancsprotokollt a <a href="https://www.jsonrpc.org/">json-rpc</a> ihlette.</p>
@@ -1719,6 +1722,7 @@
 gcode:
   {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
 </code></pre></div>
+
 <p>Amikor a PANELDUE_BEEP G-kód makró végrehajtódik, a Klipper valami ilyesmit küld a kapcsolaton keresztül: <code>{"action": "run_paneldue_beep", "params": {"frequency": 300, "duration": 1.0}}</code></p>
 <h3 id="objectslist">objects/list<a class="headerlink" href="#objectslist" title="Permanent link">&para;</a></h3>
 <p>Ez a végpont lekérdezi az elérhető nyomtató objektumok listáját, amelyeket lekérdezhetünk (az "objects/query" végponton keresztül). Például: <code>{"id": 123, "method": "objects/list"}</code> visszatérhet: <code>{"id": 123, "result": {"objects": ["webhooks", "configfile", "heaters", "gcode_move", "query_endstops", "idle_timeout", "toolhead", "extruder"]}}</code></p>

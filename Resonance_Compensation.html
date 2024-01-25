@@ -1695,11 +1695,12 @@ for example:</p>
 frequencies to see if they have changed.</p>
 <h3 id="input-shaper-configuration">Input shaper configuration<a class="headerlink" href="#input-shaper-configuration" title="Permanent link">&para;</a></h3>
 <p>After the ringing frequencies for X and Y axes are measured, you can add the
-following section to your <code>printer.cfg</code>:
+following section to your <code>printer.cfg</code>:</p>
 <div class="highlight"><pre><span></span><code>[input_shaper]
 shaper_freq_x: ...  # frequency for the X mark of the test model
 shaper_freq_y: ...  # frequency for the Y mark of the test model
-</code></pre></div></p>
+</code></pre></div>
+
 <p>For the example above, we get shaper_freq_x/y = 49.4.</p>
 <h3 id="choosing-input-shaper">Choosing input shaper<a class="headerlink" href="#choosing-input-shaper" title="Permanent link">&para;</a></h3>
 <p>Klipper supports several input shapers. They differ in their sensitivity to
@@ -1733,12 +1734,13 @@ executing at step 4 the following command instead:
 results than MZV, use EI shaper, otherwise prefer MZV. Note that EI shaper will
 cause more smoothing in printed parts (see the next section for further
 details). Add <code>shaper_type: mzv</code> (or ei) parameter to [input_shaper] section,
-e.g.:
+e.g.:</p>
 <div class="highlight"><pre><span></span><code>[input_shaper]
 shaper_freq_x: ...
 shaper_freq_y: ...
 shaper_type: mzv
-</code></pre></div></p>
+</code></pre></div>
+
 <p>A few notes on shaper selection:</p>
 <ul>
 <li>EI shaper may be more suited for bed slinger printers (if the resonance
@@ -1904,12 +1906,13 @@ frequency based on the frequency of 2HUMP_EI shaper you chose:</p>
 <p>providing the shaper_freq_x=... and shaper_freq_y=... as determined previously.</p>
 <p>If EI shaper shows very comparable good results as 2HUMP_EI shaper, stick with
 EI shaper and the frequency determined earlier, otherwise use 2HUMP_EI shaper
-with the corresponding frequency. Add the results to <code>printer.cfg</code> as, e.g.
+with the corresponding frequency. Add the results to <code>printer.cfg</code> as, e.g.</p>
 <div class="highlight"><pre><span></span><code>[input_shaper]
 shaper_freq_x: 50
 shaper_freq_y: 50
 shaper_type: 2hump_ei
-</code></pre></div></p>
+</code></pre></div>
+
 <p>Continue the tuning with <a href="#selecting-max_accel">Selecting max_accel</a> section.</p>
 <h2 id="troubleshooting-and-faq">Troubleshooting and FAQ<a class="headerlink" href="#troubleshooting-and-faq" title="Permanent link">&para;</a></h2>
 <h3 id="i-cannot-get-reliable-measurements-of-resonance-frequencies">I cannot get reliable measurements of resonance frequencies<a class="headerlink" href="#i-cannot-get-reliable-measurements-of-resonance-frequencies" title="Permanent link">&para;</a></h3>
@@ -1942,7 +1945,7 @@ carriages. However, the input shaper for Y axis should be the same for both
 carriages (as ultimately this axis is driven by one or more stepper motors each
 commanded to perform exactly the same steps). One possibility to configure
 the input shaper for such setups is to keep <code>[input_shaper]</code> section empty and
-additionally define a <code>[delayed_gcode]</code> section in the <code>printer.cfg</code> as follows:
+additionally define a <code>[delayed_gcode]</code> section in the <code>printer.cfg</code> as follows:</p>
 <div class="highlight"><pre><span></span><code>[input_shaper]
 # Intentionally empty
 
@@ -1954,7 +1957,8 @@ gcode:
   SET_DUAL_CARRIAGE CARRIAGE=0
   SET_INPUT_SHAPER SHAPER_TYPE_X=&lt;primary_carriage_shaper&gt; SHAPER_FREQ_X=&lt;primary_carriage_freq&gt; SHAPER_TYPE_Y=&lt;y_shaper&gt; SHAPER_FREQ_Y=&lt;y_freq&gt;
 </code></pre></div>
-Note that <code>SHAPER_TYPE_Y</code> and <code>SHAPER_FREQ_Y</code> should be the same in both
+
+<p>Note that <code>SHAPER_TYPE_Y</code> and <code>SHAPER_FREQ_Y</code> should be the same in both
 commands. It is also possible to put a similar snippet into the start g-code
 in the slicer, however then the shaper will not be enabled until any print
 is started.</p>

@@ -1398,14 +1398,17 @@
 <p>Metti un pezzo di nastro adesivo blu (o simile) sul piatto sotto la sonda. Passare alla scheda "Terminale" di OctoPrint ed emettere un comando PROBE:</p>
 <div class="highlight"><pre><span></span><code>PROBE
 </code></pre></div>
+
 <p>Metti un segno sul nastro direttamente sotto il punto in cui si trova la sonda (o usa un metodo simile per annotare la posizione sul letto).</p>
 <p>Emettere un comando <code>GET_POSITION</code> e registrare la posizione XY della testa riportata da quel comando. Ad esempio se si vede:</p>
 <div class="highlight"><pre><span></span><code>Recv: // toolhead: X:46.500000 Y:27.000000 Z:15.000000 E:0.000000
 </code></pre></div>
+
 <p>quindi si registrerebbe una posizione X della sonda di 46,5 e una posizione Y della sonda di 27.</p>
 <p>Dopo aver registrato la posizione della sonda, emettere una serie di comandi G1 fino a quando l'ugello si trova direttamente sopra il segno sul letto. Ad esempio, si potrebbe emettere:</p>
 <div class="highlight"><pre><span></span><code>G1 F300 X57 Y30 Z15
 </code></pre></div>
+
 <p>per spostare l'ugello in una posizione X di 57 e Y di 30. Una volta trovata la posizione direttamente sopra il segno, utilizzare il comando <code>GET_POSITION</code> per segnalare quella posizione. Questa è la posizione dell'ugello.</p>
 <p>L'offset_x è quindi <code>posizione_x_ugello - posizione_x_sonda</code> e l'offset_y è analogamente a <code>posizione_y_ugello - posizione_y_sonda</code>. Aggiorna il file printer.cfg con i valori indicati, rimuovi il nastro con i riferimento dal piatto, quindi esegui un comando <code>RESTART</code> in modo che i nuovi valori diventino effettivi.</p>
 <h2 id="calibrazione-z-offset-sonda">Calibrazione Z offset sonda<a class="headerlink" href="#calibrazione-z-offset-sonda" title="Permanent link">&para;</a></h2>
@@ -1415,6 +1418,7 @@
 <p>Una volta avviata manualmente la sonda, seguire i passaggi descritti in <a href="Bed_Level.html#the-paper-test">"the paper test"</a> per determinare la distanza effettiva tra l'ugello e il letto in una determinata posizione. Una volta completati questi passaggi, è possibile <code>ACCEPT</code> la posizione e salvare i risultati nel file di configurazione con:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>Si noti che se viene apportata una modifica al sistema di movimento della stampante, alla posizione dell'hotend o alla posizione della sonda, i risultati di PROBE_CALIBRATE verranno invalidati.</p>
 <p>Se la sonda ha un offset X o Y e l'inclinazione del letto viene modificata (ad es. regolando le viti del letto, eseguendo DELTA_CALIBRATE, eseguendo Z_TILT_ADJUST, eseguendo QUAD_GANTRY_LEVEL o simili), i risultati di PROBE_CALIBRATE verranno invalidati. Dopo aver apportato una qualsiasi delle modifiche di cui sopra, sarà necessario eseguire nuovamente PROBE_CALIBRATE.</p>
 <p>Se i risultati di PROBE_CALIBRATE vengono invalidati, anche tutti i risultati precedenti di <a href="Bed_Mesh.html">bed mesh</a> ottenuti utilizzando la sonda vengono invalidati: sarà necessario eseguire nuovamente BED_MESH_CALIBRATE dopo aver ricalibrato la sonda.</p>
@@ -1435,6 +1439,7 @@ Recv: // probe at -0.003,0.005 is z=2.519448
 Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe accuracy results: maximum 2.519448, minimum 2.506948, range 0.012500, average 2.513198, median 2.513198, standard deviation 0.006250
 </code></pre></div>
+
 <p>Idealmente lo strumento riporterà un valore massimo e minimo identico. (Ovvero, idealmente la sonda ottiene un risultato identico su tutte e dieci le prove.) Tuttavia, è normale che i valori minimo e massimo differiscano di una "distanza di passo" Z o fino a 5 micron (0,005 mm). Una "distanza passo" è <code>rotation_distance/(full_steps_per_rotation*microsteps)</code>. La distanza tra il valore minimo e quello massimo è chiamata intervallo. Quindi, nell'esempio precedente, poiché la stampante utilizza una distanza di passo Z di 0,0125, un intervallo di 0,012500 sarebbe considerato normale.</p>
 <p>Se i risultati del test mostrano un valore di intervallo maggiore di 25 micron (0,025 mm), la sonda non ha una precisione sufficiente per le procedure tipiche di livellamento del piatto. Potrebbe essere possibile regolare la velocità della sonda e/o l'altezza di inizio della sonda per migliorare la ripetibilità della sonda. Il comando <code>PROBE_ACCURACY</code> consente di eseguire test con parametri diversi per vederne l'impatto - vedere il <a href="G-Codes.html#probe_accuracy">documento G-Codes</a> per ulteriori dettagli. Se la sonda generalmente ottiene risultati ripetibili ma presenta un valore anomalo occasionale, potrebbe essere possibile tenerne conto utilizzando più campioni su ciascuna sonda - leggere la descrizione dei parametri di configurazione dei <code>campioni</code> della sonda in <a href="Config_Reference. md#probe">riferimento di configurazione</a> per maggiori dettagli.</p>
 <p>Se sono necessarie una nuova velocità della sonda, diversa quantità di campioni o altre impostazioni, aggiornare il file printer.cfg ed eseguire un comando <code>RESTART</code>. In tal caso, è una buona idea anche <a href="#calibrating-probe-z-offset">calibrare z_offset</a> di nuovo. Se non è possibile ottenere risultati ripetibili, non utilizzare la sonda per livellare il letto. Klipper ha diversi strumenti manuali che possono essere utilizzati in alternativa: vedere il <a href="Bed_Level.html">Bed Level document</a> per ulteriori dettagli.</p>

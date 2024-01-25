@@ -1505,6 +1505,7 @@
 <p>Klipper實現恒加速度控制，關鍵的方程如下：</p>
 <div class="highlight"><pre><span></span><code>velocity(time) = start_velocity + accel*time
 </code></pre></div>
+
 <h2 id="_3">梯形發生器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>Klipper 使用傳統的"梯形發生器"來產生每個動作的運動--每個動作都有一個起始速度，先恒定的加速度加速到一個巡航速度，再以恒定的速度巡航，最後用恒定的加速度減速到終點速度。</p>
 <p><img alt="trapezoid" src="img/trapezoid.svg.png" /></p>
@@ -1524,6 +1525,7 @@
 <p>預計算的關鍵方程：</p>
 <div class="highlight"><pre><span></span><code>end_velocity^2 = start_velocity^2 + 2*accel*move_distance
 </code></pre></div>
+
 <h3 id="_4">預計算結果平滑<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>Klipper 實現了一種用於平滑短距離之字形移動的機制。參考以下移動：</p>
 <p><img alt="zigzag" src="img/zigzag.svg.png" /></p>
@@ -1536,14 +1538,17 @@
 <p>確定在恆定加速度下移動應該行進多遠的關鍵公式是：</p>
 <div class="highlight"><pre><span></span><code>move_distance = (start_velocity + .5 * accel * move_time) * move_time
 </code></pre></div>
+
 <p>勻速動作的關鍵公式是：</p>
 <div class="highlight"><pre><span></span><code>move_distance = cruise_velocity * move_time
 </code></pre></div>
+
 <p>在給定移動距離的情況下，確定移動的XYZ坐標的關鍵公式是：</p>
 <div class="highlight"><pre><span></span><code>cartesian_x_position = start_x + move_distance * total_x_movement / total_movement
 cartesian_y_position = start_y + move_distance * total_y_movement / total_movement
 cartesian_z_position = start_z + move_distance * total_z_movement / total_movement
 </code></pre></div>
+
 <h3 id="xyz">XYZ 機型<a class="headerlink" href="#xyz" title="Permanent link">&para;</a></h3>
 <p>為XYZ機型打印機生成執行動作是最簡單。每個軸上的動作與各XYZ空間直接相關。</p>
 <p>關鍵公式：</p>
@@ -1551,12 +1556,14 @@ cartesian_z_position = start_z + move_distance * total_z_movement / total_moveme
 stepper_y_position = cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="corexy">CoreXY 機型<a class="headerlink" href="#corexy" title="Permanent link">&para;</a></h3>
 <p>在 CoreXY 機器上生成動作只比基本的XYZ機型的打印機複雜一點。關鍵公式是：</p>
 <div class="highlight"><pre><span></span><code>stepper_a_position = cartesian_x_position + cartesian_y_position
 stepper_b_position = cartesian_x_position - cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="_6">三角洲機型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>三角洲機型的動作生成基於畢達哥拉斯定理：</p>
 <div class="highlight"><pre><span></span><code>stepper_position = (sqrt(arm_length^2
@@ -1565,6 +1572,7 @@ stepper_z_position = cartesian_z_position
                          - (cartesian_y_position - tower_y_position)^2)
                     + cartesian_z_position)
 </code></pre></div>
+
 <h3 id="_7">步進電機加速度限制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>使用三角洲機型時，在XYZ空間中加速的動作可能需要特定步進電機上的加速度大於運動的加速度。當步進臂比垂直更水平並且運動線通過步進器塔附近時，可能會發生這種情況。儘管這些移動可能需要一個大於打印機配置的最大移動加速度的步進電機加速度，但該步進電機移動的有效質量會更小。因此，更高的步進加速度不會導致顯著更高的步進扭矩，因此被認為是無害的。</p>
 <p>但是，為避免極端情況，Klipper 將步進加速度的最大上限設置為打印機配置的最大移動加速度的三倍。 （類似地，步進器的最大速度被限制為最大移動速度的三倍。）為了強制執行此限制，在構建包絡的最邊緣（步進器臂可能幾乎水平）的移動將具有較低的最大加速度和速度。</p>
@@ -1573,12 +1581,14 @@ stepper_z_position = cartesian_z_position
 <p>基本的擠出機運動很容易計算。步時間生成使用與笛卡爾機器人相同的公式：</p>
 <div class="highlight"><pre><span></span><code>stepper_position = requested_e_position
 </code></pre></div>
+
 <h3 id="pressure-advance">Pressure advance<a class="headerlink" href="#pressure-advance" title="Permanent link">&para;</a></h3>
 <p>實驗表明，除了基本的擠出機配方外，還可以改進擠出機的建模。在理想情況下，隨著擠出移動的進行，沿移動的每個點應沉積相同體積的細絲，並且移動後不應有擠出體積。不幸的是，通常會發現基本擠出配方會導致在擠出運動開始時離開擠出機的細絲太少，而在擠出結束後擠出過多的細絲。這通常被稱為"ooze"。</p>
 <p><img alt="ooze" src="img/ooze.svg.png" /></p>
 <p>"pressure advance"系統試圖通過使用不同型號的擠出機來解決這個問題。與其天真地相信每 mm^3 的長絲送入擠出機都會導致該量的 mm^3 立即離開擠出機，而是使用基於壓力的模型。當長絲被推入擠出機時壓力增加（如[胡克定律]（<a href="https://en.wikipedia.org/wiki/Hooke%27s_law）），擠出所需的壓力由通過噴嘴孔的流速決定（如">https://en.wikipedia.org/wiki/Hooke%27s_law）），擠出所需的壓力由通過噴嘴孔的流速決定（如</a> <a href="https://en.wikipedia.org/wiki/Poiseuille_law">Poiseuille 定律</a>）。關鍵思想是燈絲、壓力和流量之間的關係可以使用線性係數進行建模：</p>
 <div class="highlight"><pre><span></span><code>pa_position = nominal_position + pressure_advance_coefficient * nominal_velocity
 </code></pre></div>
+
 <p>有關如何查找此壓力提前係數的信息，請參閱 <a href="Pressure_Advance.html">壓力提前</a> 文檔。</p>
 <p>基本的壓力提前公式會導致擠出機電機發生突然的速度變化。 Klipper 實現了擠出機運動的“平滑”以避免這種情況。</p>
 <p><img alt="pressure-advance" src="img/pressure-velocity.png" /></p>

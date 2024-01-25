@@ -1505,6 +1505,7 @@
 <p>Klipper met en œuvre une accélération constante. La formule clé de l'accélération constante est la suivante :</p>
 <div class="highlight"><pre><span></span><code>velocity(time) = start_velocity + accel*time
 </code></pre></div>
+
 <h2 id="generateur-de-trapezoides">Générateur de trapézoïdes<a class="headerlink" href="#generateur-de-trapezoides" title="Permanent link">&para;</a></h2>
 <p>Klipper utilise un "générateur de trapèze" traditionnel pour modéliser le mouvement de chaque déplacement - chaque déplacement a une vitesse de départ, il accélère jusqu'à une vitesse de croisière à une accélération constante, il se déplace à une vitesse constante, puis décélère jusqu'à la vitesse finale en utilisant une décélération constante.</p>
 <p><img alt="trapezoid" src="img/trapezoid.svg.png" /></p>
@@ -1524,6 +1525,7 @@
 <p>Formule clé pour la projection :</p>
 <div class="highlight"><pre><span></span><code>end_velocity^2 = start_velocity^2 + 2*accel*move_distance
 </code></pre></div>
+
 <h3 id="lissage-de-la-projection">Lissage de la projection<a class="headerlink" href="#lissage-de-la-projection" title="Permanent link">&para;</a></h3>
 <p>Klipper met également en œuvre un mécanisme permettant de lisser les mouvements de courts déplacements en "zigzag". Considérons les mouvements suivants :</p>
 <p><img alt="zigzag" src="img/zigzag.svg.png" /></p>
@@ -1536,14 +1538,17 @@
 <p>La formule clé déterminant la distance qu'un mouvement doit parcourir sous une accélération constante est la suivante :</p>
 <div class="highlight"><pre><span></span><code>move_distance = (start_velocity + .5 * accel * move_time) * move_time
 </code></pre></div>
+
 <p>et la formule clé d'un mouvement à vitesse constante est :</p>
 <div class="highlight"><pre><span></span><code>move_distance = cruise_velocity * move_time
 </code></pre></div>
+
 <p>Les formules clés permettant de déterminer la coordonnée cartésienne d'un déplacement en fonction de la distance du déplacement sont les suivantes :</p>
 <div class="highlight"><pre><span></span><code>cartesian_x_position = start_x + move_distance * total_x_movement / total_movement
 cartesian_y_position = start_y + move_distance * total_y_movement / total_movement
 cartesian_z_position = start_z + move_distance * total_z_movement / total_movement
 </code></pre></div>
+
 <h3 id="robots-cartesiens">Robots cartésiens<a class="headerlink" href="#robots-cartesiens" title="Permanent link">&para;</a></h3>
 <p>La génération de pas des imprimantes cartésiennes est le cas le plus simple. Le mouvement sur chaque axe est directement lié au mouvement dans l'espace cartésien.</p>
 <p>Formules clés :</p>
@@ -1551,12 +1556,14 @@ cartesian_z_position = start_z + move_distance * total_z_movement / total_moveme
 stepper_y_position = cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="robots-corexy">Robots CoreXY<a class="headerlink" href="#robots-corexy" title="Permanent link">&para;</a></h3>
 <p>La génération de pas d'une machine CoreXY n'est qu'un peu plus complexe que les robots cartésiens de base. Les formules clés sont les suivantes :</p>
 <div class="highlight"><pre><span></span><code>stepper_a_position = cartesian_x_position + cartesian_y_position
 stepper_b_position = cartesian_x_position - cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
+
 <h3 id="robots-delta">Robots Delta<a class="headerlink" href="#robots-delta" title="Permanent link">&para;</a></h3>
 <p>La génération de pas d'un robot delta est basée sur le théorème de Pythagore :</p>
 <div class="highlight"><pre><span></span><code>stepper_position = (sqrt(arm_length^2
@@ -1565,6 +1572,7 @@ stepper_z_position = cartesian_z_position
                          - (cartesian_y_position - tower_y_position)^2)
                     + cartesian_z_position)
 </code></pre></div>
+
 <h3 id="limites-dacceleration-du-moteur-pas-a-pas">Limites d'accélération du moteur pas à pas<a class="headerlink" href="#limites-dacceleration-du-moteur-pas-a-pas" title="Permanent link">&para;</a></h3>
 <p>Avec la cinématique delta, il est possible qu'un mouvement accélèrant dans l'espace cartésien nécessite une accélération sur un moteur pas à pas particulier supérieure à l'accélération du mouvement. Cela peut se produire lorsque le bras d'un moteur pas à pas est plus horizontal que vertical et que la ligne de mouvement passe près de la tour de ce moteur pas à pas. Bien que ces mouvements puissent nécessiter une accélération du moteur pas à pas supérieure à l'accélération maximale du mouvement configuré de l'imprimante, la masse effective déplacée par ce moteur pas à pas serait plus faible. Ainsi, l'accélération plus élevée du moteur pas à pas n'entraîne pas un couple beaucoup plus élevé et est donc considérée comme inoffensive.</p>
 <p>Cependant, afin d'éviter les cas extrêmes, Klipper applique un plafond maximal à l'accélération du moteur de trois fois l'accélération de déplacement maximale configurée de l'imprimante. (De même, la vitesse maximale du moteur est limitée à trois fois la vitesse de déplacement maximale). Afin de faire respecter cette limite, les mouvements situés à l'extrémité de l'enveloppe de construction (où le bras du stepper peut être presque horizontal) auront une accélération et une vitesse maximales inférieures.</p>
@@ -1573,12 +1581,14 @@ stepper_z_position = cartesian_z_position
 <p>Le mouvement de base de l'extrudeuse est simple à calculer. La génération de durée de pas utilise les mêmes formules que celles utilisées par les robots cartésiens :</p>
 <div class="highlight"><pre><span></span><code>stepper_position = requested_e_position
 </code></pre></div>
+
 <h3 id="avance-a-la-pression">Avance à la pression<a class="headerlink" href="#avance-a-la-pression" title="Permanent link">&para;</a></h3>
 <p>L'expérimentation a montré qu'il est possible d'améliorer la modélisation de l'extrudeuse au-delà de la formule de base de l'extrudeuse. Dans le cas idéal, au fur et à mesure qu'un mouvement d'extrusion progresse, le même volume de filament devrait être déposé à chaque point du mouvement et il ne devrait pas y avoir de volume extrudé après le mouvement. Malheureusement, il est courant de constater que les formules d'extrusion de base font que trop peu de filament sort de l'extrudeuse au début des mouvements d'extrusion et qu'un excès de filament est extrudé après la fin de l'extrusion. Ce phénomène est souvent appelé "suintement".</p>
 <p><img alt="suintement" src="img/ooze.svg.png" /></p>
 <p>Le système d'"avance à la pression" tente de tenir compte de ce phénomène en utilisant un modèle différent pour l'extrudeuse. Au lieu de croire naïvement que chaque mm^3 de filament introduit dans l'extrudeuse entraînera la sortie immédiate de cette quantité de mm^3, est utilisé un modèle basé sur la pression. La pression augmente lorsque le filament est poussé dans l'extrudeuse (comme dans la <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">loi de Hooke</a>) et la pression nécessaire pour extruder est dominée par le débit à travers l'orifice de la buse (comme dans la <a href="https://en.wikipedia.org/wiki/Poiseuille_law">loi de Poiseuille</a>). L'idée principale est que la relation entre le filament, la pression et le débit peut être modélisée par un coefficient linéaire :</p>
 <div class="highlight"><pre><span></span><code>pa_position = nominal_position + pressure_advance_coefficient * nominal_velocity
 </code></pre></div>
+
 <p>Voir le document <a href="Pressure_Advance.html">avance à la pression</a> pour savoir comment déterminer ce coefficient d'avance à la pression.</p>
 <p>La formule de base de l'avance à la pression peut entraîner des changements brusques de la vitesse du moteur de l'extrudeuse. Klipper met en œuvre un "lissage" du mouvement de l'extrudeuse pour éviter cela.</p>
 <p><img alt="pressure-advance" src="img/pressure-velocity.png" /></p>

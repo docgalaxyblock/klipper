@@ -1905,6 +1905,7 @@
 3.3V+MOSI
 SCLK+CS
 </code></pre></div>
+
 <p>Note that unlike a cable shield, GND must be connected at both ends.</p>
 <h4 id="adxl345">ADXL345<a class="headerlink" href="#adxl345" title="Permanent link">&para;</a></h4>
 <h5 id="direct-to-raspberry-pi">Direct to Raspberry Pi<a class="headerlink" href="#direct-to-raspberry-pi" title="Permanent link">&para;</a></h5>
@@ -2005,10 +2006,12 @@ SCLK+CS
 SDA+GND
 SCL+GND
 </code></pre></div>
+
 <p>or for two pairs:</p>
 <div class="highlight"><pre><span></span><code>3.3V+SDA
 GND+SCL
 </code></pre></div>
+
 <p>Note that unlike a cable shield, any GND(s) should be connected at both ends.</p>
 <h4 id="mpu-9250mpu-9255mpu-6515mpu-6050mpu-6500">MPU-9250/MPU-9255/MPU-6515/MPU-6050/MPU-6500<a class="headerlink" href="#mpu-9250mpu-9255mpu-6515mpu-6050mpu-6500" title="Permanent link">&para;</a></h4>
 <p>These accelerometers have been tested to work over I2C on the RPi, RP2040 (Pico) and AVR at 400kbit/s (<em>fast mode</em>). Some MPU accelerometer modules include pull-ups, but some are too large at 10K and must be changed or supplemented by smaller parallel resistors.</p>
@@ -2129,9 +2132,11 @@ GND+SCL
 <div class="highlight"><pre><span></span><code>sudo apt update
 sudo apt install python3-numpy python3-matplotlib libatlas-base-dev
 </code></pre></div>
+
 <p>Next, in order to install NumPy in the Klipper environment, run the command:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v numpy
 </code></pre></div>
+
 <p>Note that, depending on the performance of the CPU, it may take <em>a lot</em> of time, up to 10-20 minutes. Be patient and wait for the completion of the installation. On some occasions, if the board has too little RAM the installation may fail and you will need to enable swap.</p>
 <h4 id="configure-adxl345-with-rpi">Configure ADXL345 With RPi<a class="headerlink" href="#configure-adxl345-with-rpi" title="Permanent link">&para;</a></h4>
 <p>First, check and follow the instructions in the <a href="RPi_microcontroller.html">RPi Microcontroller document</a> to setup the "linux mcu" on the Raspberry Pi. This will configure a second Klipper instance that runs on your Pi.</p>
@@ -2148,6 +2153,7 @@ accel_chip: adxl345
 probe_points:
     100, 100, 20  # an example
 </code></pre></div>
+
 <p>建议在测试开始前，用探针在热床中央进行一次探测，触发后稍微上移。</p>
 <h4 id="configure-adxl345-with-pi-pico">Configure ADXL345 With Pi Pico<a class="headerlink" href="#configure-adxl345-with-pi-pico" title="Permanent link">&para;</a></h4>
 <h5 id="flash-the-pico-firmware">Flash the Pico Firmware<a class="headerlink" href="#flash-the-pico-firmware" title="Permanent link">&para;</a></h5>
@@ -2156,10 +2162,12 @@ probe_points:
 make clean
 make menuconfig
 </code></pre></div>
+
 <p><img alt="Pico menuconfig" src="img/klipper_pico_menuconfig.png" /></p>
 <p>Now, while holding down the <code>BOOTSEL</code> button on the Pico, connect the Pico to the Raspberry Pi via USB. Compile and flash the firmware.</p>
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=first
 </code></pre></div>
+
 <p>If that fails, you will be told which <code>FLASH_DEVICE</code> to use. In this example, that's <code>make flash FLASH_DEVICE=2e8a:0003</code>. <img alt="Determine flash device" src="img/flash_rp2040_FLASH_DEVICE.png" /></p>
 <h5 id="configure-the-connection">Configure the Connection<a class="headerlink" href="#configure-the-connection" title="Permanent link">&para;</a></h5>
 <p>The Pico will now reboot with the new firmware and should show up as a serial device. Find the pico serial device with <code>ls /dev/serial/by-id/*</code>. You can now add an <code>adxl.cfg</code> file with the following settings:</p>
@@ -2182,9 +2190,11 @@ probe_points:
 [output_pin power_mode] # Improve power stability
 pin: adxl:gpio23
 </code></pre></div>
+
 <p>If setting up the ADXL345 configuration in a separate file, as shown above, you'll also want to modify your <code>printer.cfg</code> file to include this:</p>
 <div class="highlight"><pre><span></span><code>[include adxl.cfg] # Comment this out when you disconnect the accelerometer
 </code></pre></div>
+
 <p>通过<code>RESTART</code>命令重启Klipper。</p>
 <h4 id="configure-lis2dw-series">Configure LIS2DW series<a class="headerlink" href="#configure-lis2dw-series" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>[mcu lis]
@@ -2203,6 +2213,7 @@ probe_points:
     # Somewhere slightly above the middle of your print bed
     147,154, 20
 </code></pre></div>
+
 <h4 id="configure-mpu-60009000-series-with-rpi">Configure MPU-6000/9000 series With RPi<a class="headerlink" href="#configure-mpu-60009000-series-with-rpi" title="Permanent link">&para;</a></h4>
 <p>Make sure the Linux I2C driver is enabled and the baud rate is set to 400000 (see <a href="RPi_microcontroller.html#optional-enabling-i2c">Enabling I2C</a> section for more details). Then, add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu rpi]
@@ -2217,6 +2228,7 @@ accel_chip: mpu9250
 probe_points:
     100, 100, 20  # an example
 </code></pre></div>
+
 <h4 id="configure-mpu-9520-compatibles-with-pico">Configure MPU-9520 Compatibles With Pico<a class="headerlink" href="#configure-mpu-9520-compatibles-with-pico" title="Permanent link">&para;</a></h4>
 <p>Pico I2C is set to 400000 on default. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu pico]
@@ -2234,6 +2246,7 @@ probe_points:
 [static_digital_output pico_3V3pwm] # Improve power stability
 pins: pico:gpio23
 </code></pre></div>
+
 <h4 id="configure-mpu-9520-compatibles-with-avr">Configure MPU-9520 Compatibles with AVR<a class="headerlink" href="#configure-mpu-9520-compatibles-with-avr" title="Permanent link">&para;</a></h4>
 <p>AVR I2C will be set to 400000 by the mpu9250 option. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu nano]
@@ -2247,6 +2260,7 @@ accel_chip: mpu9250
 probe_points:
     100, 100, 20  # an example
 </code></pre></div>
+
 <p>通过<code>RESTART</code>命令重启Klipper。</p>
 <h2 id="_6">测量共振值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">检查设置<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -2258,6 +2272,7 @@ probe_points:
 <p>你应该会看到来自加速度计的当前测量值，包括自由落体（free-fall）的加速度，比如说。</p>
 <div class="highlight"><pre><span></span><code>Recv: // adxl345 values (x, y, z): 470.719200, 941.438400, 9728.196800
 </code></pre></div>
+
 <p>If you get an error like <code>Invalid adxl345 id (got xx vs e5)</code>, where <code>xx</code> is some other ID, immediately try again. There's an issue with SPI initialization. If you still get an error, it is indicative of the connection problem with ADXL345, or the faulty sensor. Double-check the power, the wiring (that it matches the schematics, no wire is broken or loose, etc.), and soldering quality.</p>
 <p><strong>If you are using a MPU-9250 compatible accelerometer and it shows up as <code>mpu-unknown</code>, use with caution! They are probably refurbished chips!</strong></p>
 <p>下一步，在Octoprint中输入 <code>MEASURE_AXES_NOISE</code>，之后将会显示各个轴的基准测量噪声（其值应在1-100之间）。如果轴的噪声极高（例如 1000 或更高）可能意味着3D打印机上存在传感器问题、电源问题或不平衡的风扇。</p>
@@ -2265,6 +2280,7 @@ probe_points:
 <p>现在可以运行进行实测。运行以下命令:</p>
 <div class="highlight"><pre><span></span><code>TEST_RESONANCES AXIS=X
 </code></pre></div>
+
 <p>注意，这将在X轴上产生振动。如果之前启用了输入整形（input shaping ），它也将禁用输入整形，因为在启用输入整形的情况下运行共振测试是无效的。</p>
 <p><strong>注意！</strong>请确保第一次运行时时刻观察打印机，以确保振动不会太剧烈（<code>M112</code>命令可以在紧急情况下中止测试；但愿不会到这一步）。如果振动确实太强烈，你可以尝试在<code>[Resonance_tester]</code>分段中为<code>accel_per_hz</code>参数指定一个低于默认值的值，比如说。</p>
 <div class="highlight"><pre><span></span><code>[resonance_tester]
@@ -2272,13 +2288,16 @@ accel_chip: adxl345
 accel_per_hz: 50  # default is 75
 probe_points: ...
 </code></pre></div>
+
 <p>如果它适用于 X 轴，则也可以为 Y 轴运行：</p>
 <div class="highlight"><pre><span></span><code>TEST_RESONANCES AXIS=Y
 </code></pre></div>
+
 <p>这将生成2个CSV文件（<code>/tmp/reonances_x_*.CSV</code>和`/tmp/Reonances_y_*.CSV'）。这些文件可以在树莓派上使用独立脚本进行处理。要执行此操作，请运行以下命令：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png
 ~/klipper/scripts/calibrate_shaper.py /tmp/resonances_y_*.csv -o /tmp/shaper_calibrate_y.png
 </code></pre></div>
+
 <p>此脚本将生成频率响应的图表 <code>/tmp/shaper_calibrate_x.png</code> 和 <code>/tmp/shaper_calibrate_y.png</code>。它还会给出每个输入整形器的建议频率，以及推荐的输入整形器。例如：</p>
 <p><img alt="共振" src="img/calibrate-y.png" /></p>
 <div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 34.4 Hz (vibrations = 4.0%, smoothing ~= 0.132)
@@ -2293,6 +2312,7 @@ Fitted shaper &#39;3hump_ei&#39; frequency = 61.8 Hz (vibrations = 0.0%, smoothi
 To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2800 mm/sec^2
 Recommended shaper is mzv @ 34.6 Hz
 </code></pre></div>
+
 <p>推荐的配置可以添加到<code>[input_shaper]</code>的<code>printer.cfg</code>分段中，例如：</p>
 <div class="highlight"><pre><span></span><code>[input_shaper]
 shaper_freq_x: ...
@@ -2303,6 +2323,7 @@ shaper_type_y: mzv
 [printer]
 max_accel: 3000  # should not exceed the estimated max_accel for X and Y axes
 </code></pre></div>
+
 <p>也可以根据生成的图表自己选择一些其他配置：图表上的功率谱密度的峰值对应于打印机的共振频率。</p>
 <p>Note that alternatively you can run the input shaper auto-calibration from Klipper <a href="#input-shaper-auto-calibration">directly</a>, which can be convenient, for example, for the input shaper <a href="#input-shaper-re-calibration">re-calibration</a>.</p>
 <h3 id="_9">平行于喷嘴移动打印床的打印机<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
@@ -2322,6 +2343,7 @@ accel_chip_x: adxl345 hotend
 accel_chip_y: adxl345 bed
 probe_points: ...
 </code></pre></div>
+
 <p>Two MPUs can share one I2C bus, but they <strong>cannot</strong> measure simultaneously as the 400kbit/s I2C bus is not fast enough. One must have its AD0 pin pulled-down to 0V (address 104) and the other its AD0 pin pulled-up to 3.3V (address 105):</p>
 <div class="highlight"><pre><span></span><code>[mpu9250 hotend]
 i2c_mcu: rpi
@@ -2339,6 +2361,7 @@ accel_chip_x: mpu9250 hotend
 accel_chip_y: mpu9250 bed
 probe_points: ...
 </code></pre></div>
+
 <p>[Test with each MPU individually before connecting both to the bus for easy debugging.]</p>
 <p>然后，命令<code>TEST_RESONANCES AXIS=X</code>和<code>TEST_RESONANCES AXIS=Y</code>会使用每个轴相应的加速度计。</p>
 <h3 id="_10">最大平滑度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
@@ -2357,10 +2380,12 @@ Fitted shaper &#39;3hump_ei&#39; frequency = 48.0 Hz (vibrations = 0.0%, smoothi
 To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 1500 mm/sec^2
 Recommended shaper is 2hump_ei @ 45.2 Hz
 </code></pre></div>
+
 <p>请注意，报告的 <code>smoothing</code>（平滑）值是抽象的预测值。这些值可用于比较不同的配置：值越高，整形器造成的平滑度就越高。但是，这些平滑值并不表示任何实际的平滑度的量，因为实际的平滑取决于<a href="#selecting-max-accel"><code>max_accel</code></a>和<code>square_corner_velocity</code>参数。因此，如果希望了解所选配置造成的实际平滑效果，需要打印一些测试件。</p>
 <p>在上面的示例中，脚本给出了不错的整形器参数建议，但是如果想在 X 轴上减少平滑度，就需要尝试使用以下命令限制脚本挑选参数时的整形器平滑值极限：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png --max_smoothing=0.2
 </code></pre></div>
+
 <p>这将平滑值限制在0.2。现在可以得到以下结果：</p>
 <p><img alt="共振" src="img/calibrate-x-max-smoothing.png" /></p>
 <div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 55.4 Hz (vibrations = 19.7%, smoothing ~= 0.057)
@@ -2375,6 +2400,7 @@ Fitted shaper &#39;3hump_ei&#39; frequency = 72.6 Hz (vibrations = 1.4%, smoothi
 To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 3900 mm/sec^2
 Recommended shaper is 3hump_ei @ 72.6 Hz
 </code></pre></div>
+
 <p>新的参数与之前的建议比，振动要大一些，但平滑度明显比之前小，允许打印时更高的极限加速度。</p>
 <p>在选择 <code>max_smoothing</code> 参数时，可以使用试错的方法。试试几个不同的值并对比得到的结果。请注意，输入整形器产生的实际平滑效果主要取决于打印机的最低谐振频率：最低谐振的频率越高，平滑效果越小。因此，如果要求脚本找到一个具有不切实际小平滑度的输入整形器配置，它将以增加最低共振频率的振纹为代价（通常，这在打印件中比平滑产生的影响更明显）。因此，一定要仔细检查脚本所报告的预计剩余振动，确保它们不会太高。</p>
 <p>注意，如果为两个轴选择了一个相同的 <code>max_smoothing</code> 值，可以把它存储在 <code>printer.cfg</code> 为</p>
@@ -2383,6 +2409,7 @@ accel_chip: ...
 probe_points: ...
 max_smoothing: 0.25  # an example
 </code></pre></div>
+
 <p>如果在将来使用<code>SHAPER_CALIBRATE</code> Klipper命令<a href="#input-shaper-re-calibration">重新运行</a>输入整形器自动调谐，它将使用存储的<code>max_smoothing</code> 值作为参考。</p>
 <h3 id="max_accel">选择 max_accel<a class="headerlink" href="#max_accel" title="Permanent link">&para;</a></h3>
 <p>由于输入整形器会在打印件中产生一些平滑，特别是在高加速时，选择一个不会产生过多平滑的<code>max_accel</code> 依然很重要校准脚本为<code>max_accel</code> 参数提供了一个不应该产生过多平滑的估计值。请注意，由校准脚本显示的<code>max_accel</code> 只是一个理论上的最大值，在这个值上，各自的整形器仍然能够工作而不产生过多的平滑。这决不是建议设置的打印加速度。你的打印机能够承受的最大加速度取决于它的机械性能和所用步进电机的最大扭矩。因此，建议在<code>[printer]</code> 部分设置<code>max_accel</code> 时不要超过X轴和Y轴的估计值，并保守一些。</p>
@@ -2395,23 +2422,28 @@ max_smoothing: 0.25  # an example
 <div class="highlight"><pre><span></span><code>TEST_RESONANCES AXIS=1,1 OUTPUT=raw_data
 TEST_RESONANCES AXIS=1,-1 OUTPUT=raw_data
 </code></pre></div>
+
 <p>and use <code>graph_accelerometer.py</code> to process the generated files, e.g.</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/graph_accelerometer.py -c /tmp/raw_data_axis*.csv -o /tmp/resonances.png
 </code></pre></div>
+
 <p>以生成<code>/tmp/resonances.png</code>，对比共振的数据。</p>
 <p>对标准构型的三角洲打印机（A塔~210°，B塔~330°，C塔~90°），执行</p>
 <div class="highlight"><pre><span></span><code>TEST_RESONANCES AXIS=0,1 OUTPUT=raw_data
 TEST_RESONANCES AXIS=-0.866025404,-0.5 OUTPUT=raw_data
 TEST_RESONANCES AXIS=0.866025404,-0.5 OUTPUT=raw_data
 </code></pre></div>
+
 <p>然后使用同样的命令</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/graph_accelerometer.py -c /tmp/raw_data_axis*.csv -o /tmp/resonances.png
 </code></pre></div>
+
 <p>以生成<code>/tmp/resonances.png</code>，对比共振的数据。</p>
 <h2 id="_12">输入整形器自动校准<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p>除了为输入整形器功能手动选择适当的参数外，还可以直接从Klipper运行输入整形器的自动调谐。通过Octoprint终端运行以下命令：</p>
 <div class="highlight"><pre><span></span><code>SHAPER_CALIBRATE
 </code></pre></div>
+
 <p>这将为两个轴运行完整的测试，并生成用于频率响应和建议的输入整形器的csv输出（默认为<code>/tmp/calibration_data_*.csv</code> ）。在Octoprint中会提示控制台每个输入整形器的建议频率，以及为这台打印机推荐的输入整形器。例如：</p>
 <div class="highlight"><pre><span></span><code>Calculating the best input shaper parameters for y axis
 Fitted shaper &#39;zv&#39; frequency = 39.0 Hz (vibrations = 13.2%, smoothing ~= 0.105)
@@ -2426,16 +2458,19 @@ Fitted shaper &#39;3hump_ei&#39; frequency = 59.0 Hz (vibrations = 0.0%, smoothi
 To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2
 Recommended shaper_type_y = mzv, shaper_freq_y = 36.8 Hz
 </code></pre></div>
+
 <p>如果认同建议的参数，现在可以执行<code>SAVE_CONFIG</code> 来保存设置并重新启动Klipper。 请注意，这不会更新<code>[printer]</code> 分段中的<code>max_accel</code>值。应该按照<a href="#selecting-max_accel">选择max_accel</a>章节中的注意事项手动更新它。</p>
 <p>如果你的打印机热床水平移动，可以选择测试的轴，这样就可以在测试之间改变加速度计的安装点（默认情况下，测试会同时对两个轴一起进行）：</p>
 <div class="highlight"><pre><span></span><code>SHAPER_CALIBRATE AXIS=Y
 </code></pre></div>
+
 <p>可以在校准每个轴之后执行<code>SAVE_CONFIG</code>。</p>
 <p>然而，如果同时连接了两个加速度计，只需要运行<code>SHAPER_CALIBRATE</code> ，而不指定轴，就可以一次性校准两个轴的输入整形器。</p>
 <h3 id="_13">重新校准输入整形器<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p><code>SHAPER_CALIBRATE</code> 命令也可以用来在将来重新校准输入整形器，特别是当打印机发生了一些可能影响其运动学的变化时。可以使用<code>SHAPER_CALIBRATE</code> 命令重新进行全面校准，或者通过提供<code>AXIS=</code> 参数将自动校准限制在一个轴上，例如</p>
 <div class="highlight"><pre><span></span><code>SHAPER_CALIBRATE AXIS=X
 </code></pre></div>
+
 <p><strong>Warning!</strong> It is not advisable to run the shaper auto-calibration very frequently (e.g. before every print, or every day). In order to determine resonance frequencies, auto-calibration creates intensive vibrations on each of the axes. Generally, 3D printers are not designed to withstand a prolonged exposure to vibrations near the resonance frequencies. Doing so may increase wear of the printer components and reduce their lifespan. There is also an increased risk of some parts unscrewing or becoming loose. Always check that all parts of the printer (including the ones that may normally not move) are securely fixed in place after each auto-tuning.</p>
 <p>此外，由于测量中的一些噪音，每次校准得到的调谐结果会略有不同。不过，这些噪音一般不会对打印质量产生太大影响。然而，我们仍然建议仔细检查建议的参数，并在使用前打印一些测试件以确认它们是正确的。</p>
 <h2 id="_14">离线处理加速计数据<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
@@ -2443,6 +2478,7 @@ Recommended shaper_type_y = mzv, shaper_freq_y = 36.8 Hz
 <div class="highlight"><pre><span></span><code>SET_INPUT_SHAPER SHAPER_FREQ_X=0 SHAPER_FREQ_Y=0
 TEST_RESONANCES AXIS=X OUTPUT=raw_data
 </code></pre></div>
+
 <p>忽略<code>SET_INPUT_SHAPER</code>命令的任何错误。对<code>TEST_RESONANCES</code>指定测试的方向。原始数据保存至<code>/tmp</code>目录内。</p>
 <p>在一些正常的打印机活动中，也可以通过运行命令 <code>ACCELEROMETER_MEASURE</code>两次来获得原始数据——首先是开始测量，然后是停止测量并写入输出文件。有关更多详细信息，请参阅<a href="G-Codes.html#adxl345">G-Codes</a>。</p>
 <p>这些数据可在以后通过<code>scripts/graph_accelerometer.py</code>和scripts/calibrate_shaper.py`脚本进行处理，在不同的工作模式下，两种脚本支持一个或多个原始数据csv文件作为输入。graph_accelerometer.py支持以下几种模式：</p>
@@ -2456,6 +2492,7 @@ TEST_RESONANCES AXIS=X OUTPUT=raw_data
 <p>For example,</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/graph_accelerometer.py /tmp/raw_data_x_*.csv -o /tmp/resonances_x.png -c -a z
 </code></pre></div>
+
 <p>will plot the comparison of several <code>/tmp/raw_data_x_*.csv</code> files for Z axis to <code>/tmp/resonances_x.png</code> file.</p>
 <p>The shaper_calibrate.py script accepts 1 or several inputs and can run automatic tuning of the input shaper and suggest the best parameters that work well for all provided inputs. It prints the suggested parameters to the console, and can additionally generate the chart if <code>-o output.png</code> parameter is provided, or the CSV file if <code>-c output.csv</code> parameter is specified.</p>
 <p>Providing several inputs to shaper_calibrate.py script can be useful if running some advanced tuning of the input shapers, for example:</p>
