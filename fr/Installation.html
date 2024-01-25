@@ -1402,28 +1402,34 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-octopi.sh
 </code></pre></div>
+
 <p>L'opération ci-dessus permet de télécharger Klipper, d'installer certaines dépendances du système, de configurer Klipper pour qu'il soit exécuté au démarrage du système et de lancer le logiciel hôte Klipper. Une connexion Internet est nécessaire et l'opération peut prendre quelques minutes.</p>
 <h2 id="compilation-et-flashage-du-micro-controleur">Compilation et flashage du micro-contrôleur<a class="headerlink" href="#compilation-et-flashage-du-micro-controleur" title="Permanent link">&para;</a></h2>
 <p>Pour compiler le code du microcontrôleur, commencez par exécuter ces commandes sur le Raspberry Pi :</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>Les commentaires en haut du <a href="#obtain-a-klipper-configuration-file">fichier de configuration de l'imprimante</a> devraient décrire les paramètres qui doivent être définis pendant le "make menuconfig". Ouvrez le fichier dans un navigateur Web ou un éditeur de texte et recherchez ces instructions en haut du fichier. Une fois que les paramètres appropriés de "menuconfig" ont été configurés, appuyez sur "Q" pour quitter, puis sur "Y" pour enregistrer. Ensuite, exécutez :</p>
 <div class="highlight"><pre><span></span><code>make
 </code></pre></div>
+
 <p>Si les commentaires au haut de <a href="#obtain-a-klipper-configuration-file">printer configuration file</a> décrive des étapes pour le "flashing" de l'image finale sur la carte de contrôle de l'imprimante alors suivez ces étapes puis procédez à <a href="#configuring-octoprint-to-use-klipper">configuring OctoPrint</a>.</p>
 <p>Sinon, les étapes suivantes sont souvent utilisées pour le "flash" de la carte de contrôle de l'imprimante. D'abord, il est nécessaire de déterminer le port série connecté au micro-contrôleur. Lancez ceci :</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
+
 <p>Il devrait retourner quelque chose de similaire à ce qui suit :</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>Il est courant que chaque imprimante ait son propre nom de port série unique. Ce nom unique sera utilisé lors du flashage du micro-contrôleur. Il est possible qu'il y ait plusieurs lignes dans la sortie ci-dessus - si c'est le cas, choisissez la ligne correspondant au micro-contrôleur (voir la <a href="FAQ.html#wheres-my-serial-port">FAQ</a> pour plus d'informations).</p>
 <p>Pour les micro-contrôleurs courants, le code peut être flashé avec quelque chose de similaire :</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
+
 <p>Veillez à mettre à jour le FLASH_DEVICE avec le nom unique du port série de l'imprimante.</p>
 <p>Lors du premier flashage, assurez-vous qu'OctoPrint n'est pas connecté directement à l'imprimante (à partir de la page web d'OctoPrint, sous la section "Connexion", cliquez sur "Déconnecter").</p>
 <h2 id="configuration-doctoprint-pour-utiliser-klipper">Configuration d'OctoPrint pour utiliser Klipper<a class="headerlink" href="#configuration-doctoprint-pour-utiliser-klipper" title="Permanent link">&para;</a></h2>
@@ -1440,16 +1446,20 @@ sudo service klipper start
 <div class="highlight"><pre><span></span><code>cp ~/klipper/config/example-cartesian.cfg ~/printer.cfg
 nano ~/printer.cfg
 </code></pre></div>
+
 <p>C'est classique pour chaque imprimante d'avoir son propre nom pour le micro-contrôleur. Le nom peut changer après le flashing de Klipper, relancez donc ces étapes à nouveau même si elles ont déjà été faites lors du flashing. Lancez :</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
+
 <p>Il devrait retourner quelque chose de similaire à ce qui suit :</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>Puis mettez à jour le fichier de configuration avec un nom unique. Par exemple, mettez à jour la section <code>[mcu]</code> pour ressembler à quelque chose comme :</p>
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
+
 <p>Après avoir créé et édité le fichier, il sera nécessaire de lancer une commande "restart" dans le terminal web OctoPrint pour charger la configuration. Une commande "status" indiquera que l'imprimante est prête si le fichier de configuration Klipper est lu avec succès et si le micro-contrôleur est trouvé et configuré avec succès.</p>
 <p>Lors de la personnalisation du fichier de configuration de l'imprimante, il n'est pas rare que Klipper signale une erreur de configuration. Si une erreur se produit, apportez les corrections nécessaires au fichier de configuration de l'imprimante et lancez "restart" jusqu'à ce que "status" indique que l'imprimante est prête.</p>
 <p>Klipper rapporte les messages d'erreur via l'onglet du terminal OctoPrint. La commande "status" peut être utilisée pour rapporter à nouveau les messages d'erreur. Le script de démarrage par défaut de Klipper place également un journal dans <strong>/tmp/klippy.log</strong> qui fournit des informations plus détaillées.</p>

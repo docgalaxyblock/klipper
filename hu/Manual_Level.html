@@ -1397,9 +1397,11 @@
 <p>A Z végpont kalibrálásának végrehajtásához kapcsold be a nyomtatót, utasítsd a fejet, hogy mozogjon egy Z pozícióba, amely legalább öt milliméterrel a tárgyasztal felett van (ha még nincs), utasítsd a fejet, hogy mozogjon egy X-Y pozícióba, közel a nyomtató közepéhez a tárgyasztalra, majd navigálj az OctoPrint terminál fülre, és futtasd:</p>
 <div class="highlight"><pre><span></span><code>Z_ENDSTOP_CALIBRATE
 </code></pre></div>
+
 <p>Ezután kövesd a <a href="Bed_Level.html#the-paper-test">"a papírteszt"</a> pontban leírt lépéseket a fúvóka és a tárgyasztal közötti tényleges távolság meghatározásához az adott helyen. Ha ezek a lépések befejeződtek, akkor <code>ACCEPT</code> és elmentheted az eredményeket a config fájlba a következővel:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>Előnyösebb, ha a Z végálláskapcsolót a Z tengelynek az ággyal ellentétes végére helyezzük. (A tárgyasztaltól távolabb történő kezdőpont keresés robusztusabb, mivel akkor általában mindig biztonságosan lehet a Z-t kezdőpontra állítani.) Ha azonban a tárgyasztal felé kell kezdőpontot felvenni, ajánlott a végálláskapcsolót úgy beállítani, hogy az kis távolságra (pl. 0,5 mm-re) a tárgyasztal fölött kapcsoljon. Majdnem minden végálláskapcsoló biztonságosan lenyomható egy kis távolsággal a kioldási ponton túl. Ha ez megtörtént, azt kell tapasztalni, hogy a <code>Z_ENDSTOP_CALIBRATE</code> parancs egy kis pozitív értéket (pl. .5mm) jelez a Z pozíció végálláshoz. A végállás érzékelése akkor, amikor az még bizonyos távolságra van a tárgyasztaltól, csökkenti a véletlen tárgyasztalba ütközések kockázatát.</p>
 <p>Egyes nyomtatókon lehetőség van a fizikai végálláskapcsoló helyének kézi beállítására. Azonban ajánlott a Z végállás pozíciónálását szoftveresen elvégezni a Klipperrel. Ha a végállás fizikai helyzete megfelelő helyen van, a további beállításokat a Z_ENDSTOP_CALIBRATE futtatásával vagy a Z position_endstop konfigurációs fájlban lévő Z position_endstop manuális frissítésével lehet elvégezni.</p>
 <h2 id="targyasztal-szintezocsavarok-beallitasa">Tárgyasztal szintezőcsavarok beállítása<a class="headerlink" href="#targyasztal-szintezocsavarok-beallitasa" title="Permanent link">&para;</a></h2>
@@ -1410,10 +1412,12 @@ screw1: 100, 50
 screw2: 100, 150
 screw3: 150, 100
 </code></pre></div>
+
 <p>Ha egy tárgyasztal csavar a tárgyasztal alatt van, akkor add meg az X-Y pozíciót közvetlenül a csavar felett. Ha a csavar a tárgyasztalon kívül van, akkor add meg a csavarhoz legközelebbi X-Y-pozíciót, amely még a tárgyasztal hatótávolságán belül van.</p>
 <p>Miután a konfigurációs fájl készen áll, futtasd a <code>RESTART</code> parancsot a konfiguráció betöltéséhez, majd elindíthatod az eszközt a következő futtatásával:</p>
 <div class="highlight"><pre><span></span><code>BED_SCREWS_ADJUST
 </code></pre></div>
+
 <p>Ez az eszköz a nyomtató fúvókát minden egyes csavar X-Y helyére mozgatja, majd a fúvókát Z=0 magasságba mozgatja. Ezen a ponton a "papírteszt" segítségével közvetlenül a fúvóka alatt lehet beállítani a tárgyasztal csavarját. Lásd a <a href="Bed_Level.html#the-paper-test">"a papírteszt"</a>-ben leírtakat. De a fúvóka különböző magasságokba navigálása helyett a tárgyasztalcsavart állítsd be. Addig állítsd a csavart, amíg a papír előre-hátra tolása közben kis súrlódás nem keletkezik.</p>
 <p>Miután a csavart úgy állítottuk be, hogy egy kis súrlódás érezhető legyen, futtassuk az <code>ACCEPT</code> vagy az <code>ADJUSTED</code> parancsot. Használd az <code>ADJUSTED</code> parancsot, ha a szintezőcsavar beállítására van szükség (általában bármi, ami több mint 1/8 csavarfordulat). Használd az <code>ACCEPT</code> parancsot, ha nincs szükség jelentős beállításra. Mindkét parancs hatására a szerszám a következő csavarhoz lép. (Ha az <code>ADJUSTED</code> parancsot használod, a szerszám egy további szintezőcsavar-beállítási ciklust ütemez be. A szerszám sikeresen befejezi, ha az összes szintezőcsavarról bebizonyosodik, hogy nem igényel jelentős beállítást.) Az <code>ABORT</code> paranccsal idő előtt ki lehet lépni a szintezésből.</p>
 <p>Ez a rendszer akkor működik a legjobban, ha a nyomtató sík nyomtatási felülettel (például üveggel) és egyenes sínekkel rendelkezik. A tárgyasztal szintező eszköz sikeres elvégzése után a tárgyasztal készen áll a nyomtatásra.</p>
@@ -1431,6 +1435,7 @@ screw2_fine_adjust: 300, 300
 screw3: 150, 100
 screw3_fine_adjust: 0, 100
 </code></pre></div>
+
 <p>Ha ez a funkció engedélyezve van, a <code>BED_SCREWS_ADJUST</code> eszköz először közvetlenül az egyes csavarok pozíciói felett kér durva beállításokat, és ha ezeket elfogadtad, akkor a további helyeken finom beállításokat kér. Folytasd az <code>ACCEPT</code> és <code>ADJUSTED</code> használatával minden egyes pozícióban.</p>
 <h2 id="a-targyasztal-szintezocsavarjainak-beallitasa-meroszonda-segitsegevel">A tárgyasztal szintezőcsavarjainak beállítása mérőszonda segítségével<a class="headerlink" href="#a-targyasztal-szintezocsavarjainak-beallitasa-meroszonda-segitsegevel" title="Permanent link">&para;</a></h2>
 <p>Ez egy másik módja a tárgyasztal szint kalibrálásának a mérőszonda segítségével. Használatához rendelkezned kell Z-szondával (BL Touch, induktív érzékelő stb.).</p>
@@ -1448,6 +1453,7 @@ horizontal_move_z: 10.
 speed: 50.
 screw_thread: CW-M3
 </code></pre></div>
+
 <p>Az 1. csavar mindig a referenciapont a többi csavar számára, így a rendszer feltételezi, hogy az 1. csavar a megfelelő magasságban van. Először mindig futtasd le a <code>G28</code> G-kódot, majd futtasd le a <code>SCREWS_TILT_CALCULATE</code> parancsot. Ennek a következőhöz hasonló kimenetet kell eredményeznie:</p>
 <div class="highlight"><pre><span></span><code>Send: G28
 Recv: ok
@@ -1459,6 +1465,7 @@ Recv: // rear right screw : y=155.0, y=190.0, z=2.71500 : adjust CCW 00:50
 Recv: // read left screw : x=-5.0, y=190.0, z=2.47250 : adjust CW 00:02
 Recv: ok
 </code></pre></div>
+
 <p>Ez azt jelenti, hogy:</p>
 <ul>
 <li>a bal első csavar a referenciapont, nem szabad megváltoztatni.</li>

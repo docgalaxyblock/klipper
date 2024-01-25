@@ -1397,6 +1397,7 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-beaglebone.sh
 </code></pre></div>
+
 <h2 id="octoprint">安裝 Octoprint<a class="headerlink" href="#octoprint" title="Permanent link">&para;</a></h2>
 <p>然後可以安裝 Octoprint：</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/foosel/OctoPrint.git
@@ -1404,37 +1405,45 @@ cd OctoPrint/
 virtualenv venv
 ./venv/bin/python setup.py install
 </code></pre></div>
+
 <p>和設定 Octoprint 開始啟動：</p>
 <div class="highlight"><pre><span></span><code>sudo cp ~/OctoPrint/scripts/octoprint.init /etc/init.d/octoprint
 sudo chmod +x /etc/init.d/octoprint
 sudo cp ~/OctoPrint/scripts/octoprint.default /etc/default/octoprint
 sudo update-rc.d octoprint defaults
 </code></pre></div>
+
 <p>在配置 Klipper 之前，需要先修改OctoPrint的 <strong>/etc/default/octoprint</strong> 配置檔案。把 <code>OCTOPRINT_USER</code> 使用者改為 <code>debian</code>，把 <code>NICELEVEL</code> 改為 <code>0</code> ，取消註釋 <code>BASEDIR</code>、<code>CONFIGFILE</code> 和 <code>DAEMON</code> 的設定，並把引用從<code>/home/pi/</code>改為<code>/home/debian/</code>：</p>
 <div class="highlight"><pre><span></span><code>sudo nano /etc/default/octoprint
 </code></pre></div>
+
 <p>然後啟動 Octoprint 服務：</p>
 <div class="highlight"><pre><span></span><code>sudo systemctl start octoprint
 </code></pre></div>
+
 <p>需要確定可以訪問 OctoPrint 網路伺服器 - 它應該可以通過這個鏈接訪問：<a href="http://beaglebone:5000/">http://beaglebone:5000/</a></p>
 <h2 id="_2">構建微控制器程式碼<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>要編譯的 Klipper 微控制器程式碼，需要先將編譯配置設為「Beaglebone PRU」：</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
+
 <p>要構建和安裝新的微控制器程式碼，請執行：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <p>還需要編譯和安裝用於 Linux 主機程序的微控制器程式碼。再次修改編譯配置為"Linux process"：</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 </code></pre></div>
+
 <p>然後也安裝這個微控制器程式碼：</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash
 sudo service klipper start
 </code></pre></div>
+
 <h2 id="_3">剩餘的配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>根據<a href="Installation.html#configuring-klipper">安裝文件</a>配置 Klipper 和 Octoprint 以完成安裝。</p>
 <h2 id="beaglebone_1">在 Beaglebone 上列印<a class="headerlink" href="#beaglebone_1" title="Permanent link">&para;</a></h2>

@@ -1370,14 +1370,17 @@
 <p>在使用Trinamic驱动 并 使用了运行时设置后，可以使用ENDSTOP_PHASE_CALIBRATE命令进行相位修正。首先在配置文件中加入下列设置：</p>
 <div class="highlight"><pre><span></span><code>[endstop_phase]
 </code></pre></div>
+
 <p>之后，依次执行RESTART ，运行<code>G28</code>和<code>ENDSTOP_PHASE_CALIBRATE</code>。完成后，将打印头移动到一个新位置，再执行<code>G28</code>。重复数次，确保每次打印头在不同地位置执行<code>G28</code>。最少应重复上述移动-<code>G28</code>操作5次。</p>
 <p>完成上述操作后，<code>ENDSTOP_PHASE_CALIBRATE</code>命令会给出相同或进行的步进电机相位值。该值可以输入到配置文件中，之后G28命令执行使会参考该相位数据。（此后，即使限位开关过早或过晚触发，Klipper在归零时会获得调整到相同的相位。）</p>
 <p>要保存特定电机的相位修正信息，可使用下面的命令：</p>
 <div class="highlight"><pre><span></span><code>ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z
 </code></pre></div>
+
 <p>参照上述命令，我们可以保存想要的步进电机信息。通常，stepper_z会用于龙门式或CoreXY式打印机，而stepper_a、stepper_b和stepper_c则用于三角洲。最后运行下面数据保存配置文件：</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <h3 id="_3">额外要点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>此功能在Delta打印机和笛卡尔/COREXY打印机的Z端止器上最有用。可以在笛卡尔打印机的XY端止器上使用此功能，但这并不是特别有用，因为X/Y端止器位置的微小错误不太可能影响打印质量。在Corexy打印机的XY端止器上使用此功能是无效的(因为Corexy运动学上的单个步进器不能确定XY位置)。在使用"probe:z_virtual_endstop"Z EndStop的打印机上使用此功能是无效的(因为仅当EndStop位于轨道上的静态位置时，步进器阶段才稳定)。</li>

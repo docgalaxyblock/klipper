@@ -1800,6 +1800,7 @@ rotation_distance: 40
 homing_speed: 20
 ...
 </code></pre></div>
+
 <h4 id="printercfg">为无传感器归位配置printer.cfg<a class="headerlink" href="#printercfg" title="Permanent link">&para;</a></h4>
 <p>在<code>stepper_x</code> 配置部分， <code>homing_retract_dist</code> 设置必须被设为零，以禁用第二次归位动作。在使用无传感器归位时，第二次归位尝试不会提高精度，也不会可靠地工作，而且会扰乱调整过程。</p>
 <p>确保在配置的TMC驱动部分没有指定 <code>hold_current</code>的设置。（如果设置了hold_current，那么在接触后，当滑车撞到轨道末端时，电机就会停止，在这个位置上减少电流可能会导致滑车移动--这将导致归位性能不佳，并会扰乱调整过程。）</p>
@@ -1814,6 +1815,7 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>用于tmc2130或tmc5160配置的例子如下：</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 #  连接到TMC的DIAG1引脚(或使用diag0_pin / DIAG0引脚)
@@ -1825,6 +1827,7 @@ endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>用于tmc2660配置的例子如下：</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64     # -64是最敏感的值，63是最不敏感的值
@@ -1835,14 +1838,17 @@ endstop_pin: ^PA1   # 与TMC SG_TST引脚相连的引脚
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>上面的例子只显示了针对无传感器归位的设置。所有可用选项请参见<a href="Config_Reference.html#tmc-stepper-driver-configuration">配置参考</a>。</p>
 <h4 id="_7">找到能成功归位的最高的敏感度设定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>将滑车放在靠近轨道中心的位置。使用SET_TMC_FIELD命令来设置最高灵敏度。对于tmc2209：</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
+
 <p>对于tmc2130, tmc5160, and tmc2660:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
 </code></pre></div>
+
 <p>然后发出<code>G28 X0</code> 命令，确认x轴完全不动或者迅速停止移动。如果没有停止移动，则立即发出<code>M112</code>，停止打印机 - diag/sg_tst 引脚的接线或配置可能有错误，必须在继续之前予以纠正。</p>
 <p>接下来，不断降低 <code>VALUE</code> 设置的灵敏度，并再次运行 <code>SET_TMC_FIELD</code>和<code>G28 X0</code> 命令，找到能使使滑车成功地一直移动到端点并停止的最高的灵敏度。(对于TMC2209驱动，调整是减少 SGTHRS，对于其他驱动，调整是增加 sgt)。确保每次尝试都在轨道中心附近开始（如果需要，发出<code>M84</code>，然后手动将滑车移到中心）。该方法应该可以找到可靠归位的最高灵敏度（更高的灵敏度设置会导致滑车只动一小段或完全不动）。注意找到的值为<em>maximum_sensitivity</em>。(如果在最低灵敏度（SGTHRS=0或sgt=63）下滑车也不动，那么diag/sg_tst 引脚的接线或配置可能有问题，必须在继续后面操作前予以修正。）</p>
 <p>在寻找最大灵敏度时，更方便的是跳到不同的VALUE设置（比如将VALUE参数的一半）。如果这样做，请准备好发出 <code>M112</code>命令以停止打印机，因为灵敏度很低的设置可能会导致轴反复 "撞 "到导轨的末端。</p>
@@ -1878,6 +1884,7 @@ gcode:
     # 打印过程中设置电流
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
+
 <p>产生的宏可以从<a href="Config_Reference.html#homing_override">homing_override配置部分</a>或<a href="Slicers.html#klipper-gcode_macro">START_PRINT宏</a>中调用。</p>
 <p>请注意，如果归位期间的驱动电流发生变化，则应重新运行调整过程。</p>
 <h3 id="corexy">在CoreXY上进行无传感器归位的技巧<a class="headerlink" href="#corexy" title="Permanent link">&para;</a></h3>
@@ -1903,6 +1910,7 @@ gcode:
     G28 X0
     G1 X5 F1200
 </code></pre></div>
+
 <h2 id="_10">查询和诊断驱动程序设置<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>`<a href="G-Code.md#dump_tmc">DUMP_TMC 命令</a>是配置和诊断驱动程序的有效工具。它将报告所有由Klipper配置的字段，以及所有可以从驱动中查询到的字段。</p>
 <p>所有报告的字段都定义在驱动器的Trinamic数据手册中。这些数据表可以在<a href="https://www.trinamic.com/">Trinamic网站</a>上找到。请获取并查看驱动器的Trinamic数据手册来解释DUMP_TMC的结果。</p>

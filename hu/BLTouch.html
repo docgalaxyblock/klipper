@@ -1441,6 +1441,7 @@
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
+
 <p>Ha a BL-Touch-ot a Z tengely alaphelyzetbe állítására használjuk, akkor állítsuk be az <code>endstop_pin:probe:z_virtual_endstop</code>-ra és távolítsuk el a <code>position_endstop</code> és a <code>[stepper_z]</code>-t a config szakaszban, majd adjuk hozzá a <code>[safe_z_home]</code> config szakaszt a Z tengely megemeléséhez, az X,Y tengelyek kezdőpont felvételére a tárgyasztal közepére való elmozduláshoz és a Z tengely kezdőpont felvételére. Például:</p>
 <div class="highlight"><pre><span></span><code>[safe_z_home]
 home_xy_position: 100, 100 # A koordinátákat a tárgyasztal közepére módosítjuk.
@@ -1448,6 +1449,7 @@ speed: 50
 z_hop: 10 # Mozgás felfelé 10mm
 z_hop_speed: 5
 </code></pre></div>
+
 <p>Fontos, hogy a z_hop mozgás a safe_z_home-ban elég nagy legyen ahhoz, hogy a mérőcsúcs ne ütközzön semmibe, még akkor sem, ha a BL-Touch mérőtüskéje a legalacsonyabb állásban van.</p>
 <h2 id="kezdeti-tesztek">Kezdeti tesztek<a class="headerlink" href="#kezdeti-tesztek" title="Permanent link">&para;</a></h2>
 <p>Mielőtt továbblépnél, ellenőrizd, hogy a BL-Touch a megfelelő magasságban van-e felszerelve. A mérőtüskének behúzott állapotban nagyjából 2 mm-rel a fúvóka fölött kell lennie</p>

@@ -1562,6 +1562,7 @@ schedule_digital_out oid=8 clock=4000000 value=0
 queue_step oid=7 interval=7458 count=10 add=331
 queue_step oid=7 interval=11717 count=4 add=1281
 </code></pre></div>
+
 <p>See the <a href="MCU_Commands.html">mcu commands</a> document for information on
 available commands. See the <a href="Debugging.html">debugging</a> document for
 information on how to translate a G-Code file into its corresponding
@@ -1585,6 +1586,7 @@ results.</p>
 DECL_COMMAND() macro in the C code. For example:</p>
 <div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
 </code></pre></div>
+
 <p>The above declares a command named "update_digital_out". This allows
 the host to "invoke" this command which would cause the
 command_update_digital_out() C function to be executed in the
@@ -1610,6 +1612,7 @@ is generated. These are both declared and transmitted using the
 sendf() C macro. For example:</p>
 <div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
 </code></pre></div>
+
 <p>The above transmits a "status" response message that contains two
 integer parameters ("clock" and "status"). The micro-controller build
 automatically finds all sendf() calls and generates encoders for
@@ -1629,6 +1632,7 @@ invoked, and it may invoke sendf() at any time from a task handler.</p>
 example:</p>
 <div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
 </code></pre></div>
+
 <p>The output() function is similar in usage to printf() - it is intended
 to generate and format arbitrary messages for human consumption.</p>
 <h3 id="declaring-enumerations">Declaring enumerations<a class="headerlink" href="#declaring-enumerations" title="Permanent link">&para;</a></h3>
@@ -1639,6 +1643,7 @@ declared in the micro-controller code - for example:</p>
 
 DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
 </code></pre></div>
+
 <p>If the first example, the DECL_ENUMERATION() macro defines an
 enumeration for any command/response message with a parameter name of
 "spi_bus" or parameter name with a suffix of "_spi_bus". For those
@@ -1652,11 +1657,13 @@ be transmitted with integers 16, 17, 18, ..., 23.</p>
 <p>Constants can also be exported. For example, the following:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
 </code></pre></div>
+
 <p>would export a constant named "SERIAL_BAUD" with a value of 250000
 from the micro-controller to the host. It is also possible to declare
 a constant that is a string - for example:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
 </code></pre></div>
+
 <h2 id="low-level-message-encoding">Low-level message encoding<a class="headerlink" href="#low-level-message-encoding" title="Permanent link">&para;</a></h2>
 <p>To accomplish the above RPC mechanism, each command and response is
 encoded into a binary format for transmission. This section describes
@@ -1667,6 +1674,7 @@ contained in "message blocks". A message block has a two byte header
 and a three byte trailer. The format of a message block is:</p>
 <div class="highlight"><pre><span></span><code>&lt;1 byte length&gt;&lt;1 byte sequence&gt;&lt;n-byte content&gt;&lt;2 byte crc&gt;&lt;1 byte sync&gt;
 </code></pre></div>
+
 <p>The length byte contains the number of bytes in the message block
 including the header and trailer bytes (thus the minimum message
 length is 5 bytes). The maximum message block length is currently 64
@@ -1697,9 +1705,11 @@ update_digital_out oid=5 value=0
 get_config
 get_clock
 </code></pre></div>
+
 <p>and encoded into the following eight VLQ integers:</p>
 <div class="highlight"><pre><span></span><code>&lt;id_update_digital_out&gt;&lt;6&gt;&lt;1&gt;&lt;id_update_digital_out&gt;&lt;5&gt;&lt;0&gt;&lt;id_get_config&gt;&lt;id_get_clock&gt;
 </code></pre></div>
+
 <p>In order to encode and parse the message contents, both the host and
 micro-controller must agree on the command ids and the number of
 parameters each command has. So, in the above example, both the host
@@ -1762,6 +1772,7 @@ encoded as a simple VLQ integer. Instead it is encoded by transmitting
 the length as a VLQ encoded integer followed by the contents itself:</p>
 <div class="highlight"><pre><span></span><code>&lt;VLQ encoded length&gt;&lt;n-byte contents&gt;
 </code></pre></div>
+
 <p>The command descriptions found in the data dictionary allow both the
 host and micro-controller to know which command parameters use simple
 VLQ encoding and which parameters use string encoding.</p>

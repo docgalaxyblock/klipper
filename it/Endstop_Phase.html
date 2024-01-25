@@ -1370,14 +1370,17 @@
 <p>Se si utilizzano driver Trinamic per motori passo-passo in configurazione runtime, è possibile calibrare le fasi di fine corsa utilizzando il comando ENDSTOP_PHASE_CALIBRATE. Inizia aggiungendo quanto segue al file di configurazione:</p>
 <div class="highlight"><pre><span></span><code>[endstop_phase]
 </code></pre></div>
+
 <p>Quindi RIAVVIARE la stampante ed eseguire un comando <code>G28</code> seguito da un comando <code>ENDSTOP_PHASE_CALIBRATE</code>. Quindi spostare la testina in una nuova posizione ed eseguire nuovamente <code>G28</code>. Prova a spostare la testina in diverse posizioni ed esegui nuovamente <code>G28</code> da ciascuna posizione. Esegui almeno cinque comandi <code>G28</code>.</p>
 <p>Dopo aver eseguito quanto sopra, il comando <code>ENDSTOP_PHASE_CALIBRATE</code> riporterà spesso la stessa (o quasi) fase per lo stepper. Questa fase può essere salvata nel file di configurazione in modo che tutti i futuri comandi G28 utilizzino quella fase. (Quindi, nelle future operazioni di homing, Klipper otterrà la stessa posizione anche se il finecorsa si attiva un po' prima o un po' dopo.)</p>
 <p>Per salvare la fase di fine corsa per un particolare motore passo-passo, eseguire qualcosa di simile a:</p>
 <div class="highlight"><pre><span></span><code>ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z
 </code></pre></div>
+
 <p>Esegui quanto sopra per tutti gli stepper che desideri salvare. Tipicamente, si usa questo su stepper_z per stampanti cartesiane e corexy e per stepper_a, stepper_b e stepper_c su stampanti delta. Infine, eseguire quanto segue per aggiornare il file di configurazione con i dati:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <h3 id="note-aggiuntive">Note aggiuntive<a class="headerlink" href="#note-aggiuntive" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Questa funzione è particolarmente utile sulle stampanti delta e sul fine corsa Z delle stampanti cartesiane/corexy. È possibile utilizzare questa funzione sui fine corsa XY delle stampanti cartesiane, ma ciò non è particolarmente utile poiché è improbabile che un errore minore nella posizione dell'arresto X/Y influisca sulla qualità di stampa. Non è valido utilizzare questa funzione sugli arresti XY delle stampanti corexy (poiché la posizione XY non è determinata da un singolo stepper sulla cinematica corexy). Non è valido utilizzare questa funzione su una stampante che utilizza un fine corsa Z "probe:z_virtual_endstop" (poiché la fase stepper è stabile solo se il fine corsa si trova in una posizione statica su una guida).</li>

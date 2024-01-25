@@ -1460,14 +1460,16 @@ the bed and then wait for the user to follow the steps described at
 <a href="Bed_Level.html#the-paper-test">"the paper test"</a> to determine the
 actual distance between the nozzle and bed at the given location.</p>
 <p>To perform the basic probe, make sure the config has a
-[delta_calibrate] section defined and then run the tool:
+[delta_calibrate] section defined and then run the tool:</p>
 <div class="highlight"><pre><span></span><code>G28
 DELTA_CALIBRATE METHOD=manual
 </code></pre></div>
-After probing the seven points new delta parameters will be
-calculated.  Save and apply these parameters by running:
+
+<p>After probing the seven points new delta parameters will be
+calculated.  Save and apply these parameters by running:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
-</code></pre></div></p>
+</code></pre></div>
+
 <p>The basic calibration should provide delta parameters that are
 accurate enough for basic printing. If this is a new printer, this is
 a good time to print some basic objects and verify general
@@ -1515,10 +1517,11 @@ pillar and the other pillars (distance from center to pillar across
 from C label, distance from center to pillar with B label, etc.).</p>
 <p><img alt="delta_cal_e_step1" src="img/delta_cal_e_step1.png" /></p>
 <p>Enter these parameters into Klipper with a comma separated list of
-floating point numbers:
+floating point numbers:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_DISTS=&lt;a_dist&gt;,&lt;far_c_dist&gt;,&lt;b_dist&gt;,&lt;far_a_dist&gt;,&lt;c_dist&gt;,&lt;far_b_dist&gt;
 </code></pre></div>
-Provide the values without spaces between them.</p>
+
+<p>Provide the values without spaces between them.</p>
 <p>Then measure the distance between the A pillar and the pillar across
 from the C label.</p>
 <p><img alt="delta-ab-distance" src="img/delta-outer-distance.jpg" /></p>
@@ -1526,18 +1529,20 @@ from the C label.</p>
 across from C to the B pillar, the distance between the B pillar and
 the pillar across from A, and so on.</p>
 <p><img alt="delta_cal_e_step2" src="img/delta_cal_e_step2.png" /></p>
-<p>Enter these parameters into Klipper:
+<p>Enter these parameters into Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_DISTS=&lt;a_to_far_c&gt;,&lt;far_c_to_b&gt;,&lt;b_to_far_a&gt;,&lt;far_a_to_c&gt;,&lt;c_to_far_b&gt;,&lt;far_b_to_a&gt;
-</code></pre></div></p>
+</code></pre></div>
+
 <p>At this point it is okay to remove the object from the bed. The final
 measurements are of the pillars themselves. Measure the size of the
 center pillar along the A spoke, then the B spoke, and then the C
 spoke.</p>
 <p><img alt="delta-a-pillar" src="img/delta-a-pillar.jpg" /></p>
 <p><img alt="delta_cal_e_step3" src="img/delta_cal_e_step3.png" /></p>
-<p>Enter them into Klipper:
+<p>Enter them into Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CENTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;b&gt;,&lt;c&gt;
-</code></pre></div></p>
+</code></pre></div>
+
 <p>The final measurements are of the outer pillars. Start by measuring
 the distance of the A pillar along the line from A to the pillar
 across from C.</p>
@@ -1546,24 +1551,28 @@ across from C.</p>
 (pillar across from C along the line to B, B pillar along the line to
 pillar across from A, etc.).</p>
 <p><img alt="delta_cal_e_step4" src="img/delta_cal_e_step4.png" /></p>
-<p>And enter them into Klipper:
+<p>And enter them into Klipper:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE OUTER_PILLAR_WIDTHS=&lt;a&gt;,&lt;far_c&gt;,&lt;b&gt;,&lt;far_a&gt;,&lt;c&gt;,&lt;far_b&gt;
-</code></pre></div></p>
+</code></pre></div>
+
 <p>If the object was scaled to a smaller or larger size then provide the
-scale factor that was used when slicing the object:
+scale factor that was used when slicing the object:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE SCALE=1.0
 </code></pre></div>
-(A scale value of 2.0 would mean the object is twice its original
+
+<p>(A scale value of 2.0 would mean the object is twice its original
 size, 0.5 would be half its original size.)</p>
-<p>Finally, perform the enhanced delta calibration by running:
+<p>Finally, perform the enhanced delta calibration by running:</p>
 <div class="highlight"><pre><span></span><code>DELTA_ANALYZE CALIBRATE=extended
 </code></pre></div>
-This command can take several minutes to complete. After completion it
+
+<p>This command can take several minutes to complete. After completion it
 will calculate updated delta parameters (delta radius, tower angles,
 endstop positions, and arm lengths). Use the SAVE_CONFIG command to
-save and apply the settings:
+save and apply the settings:</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
-</code></pre></div></p>
+</code></pre></div>
+
 <p>The SAVE_CONFIG command will save both the updated delta parameters
 and information from the distance measurements. Future DELTA_CALIBRATE
 commands will also utilize this distance information. Do not attempt

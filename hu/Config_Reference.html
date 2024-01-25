@@ -3722,11 +3722,13 @@ serial:
 #   Az alapértelmezett beállítás az &#39;arduino&#39; ha a mikrokontroller
 #   soros porton keresztül kommunikál, egyébként &#39;command&#39;.
 </code></pre></div>
+
 <h3 id="mcu-my_extra_mcu">[mcu my_extra_mcu]<a class="headerlink" href="#mcu-my_extra_mcu" title="Permanent link">&para;</a></h3>
 <p>További mikrovezérlők (az "mcu" előtaggal tetszőleges számú szekciót lehet definiálni). A további mikrovezérlők további tűket vezetnek be, amelyek fűtőberendezésként, léptetőberendezésként, ventilátorként stb. konfigurálhatók. Például, ha egy "[mcu extra_mcu]" szekciót vezetünk be, akkor az olyan tűket, mint az "extra_mcu:ar9" a konfigurációban máshol is használhatók (ahol "ar9" az adott mcu hardveres tű neve vagy álneve).</p>
 <div class="highlight"><pre><span></span><code>[mcu my_extra_mcu]
 # A konfigurációs paramétereket lásd az &quot;mcu&quot; szakaszban.
 </code></pre></div>
+
 <h2 id="kozos-kinematikai-beallitasok">Közös kinematikai beállítások<a class="headerlink" href="#kozos-kinematikai-beallitasok" title="Permanent link">&para;</a></h2>
 <h3 id="printer">[printer]<a class="headerlink" href="#printer" title="Permanent link">&para;</a></h3>
 <p>A nyomtató szakasz a nyomtató magas szintű beállításait vezérli.</p>
@@ -3759,6 +3761,7 @@ max_accel:
 #   kanyarsebessége kisebb. Ha ez nullára van állítva, akkor a nyomtatófej
 #   minden sarkánál nullára lassul. Az alapértelmezett érték 5 mm/s.
 </code></pre></div>
+
 <h3 id="stepper">[stepper]<a class="headerlink" href="#stepper" title="Permanent link">&para;</a></h3>
 <p>Léptetőmotor meghatározások. A különböző nyomtatótípusok (a [printer] config szakasz "kinematika" opciója által meghatározottak szerint) eltérő neveket igényelnek a léptető számára (pl. <code>stepper_x</code> vs <code>stepper_a</code>). Az alábbiakban a stepper-ek általános definíciói következnek.</p>
 <p>A <code>rotation_distance</code> paraméter kiszámításával kapcsolatos információkért lásd a <a href="Rotation_Distance.html">forgatási távolság dokumentumot</a>. A több mikrovezérlővel történő kezdőpont felvétellel kapcsolatos információkért lásd a <a href="Multi_MCU_Homing.html">Multi-MCU kezdőpont</a> dokumentumot.</p>
@@ -3834,6 +3837,7 @@ position_max:
 #   Az alapértelmezett érték True, ha a position_endstop a position_max
 #   közelében van, és False, ha a position_min közelében van.
 </code></pre></div>
+
 <h3 id="cartesian-kinematika">Cartesian Kinematika<a class="headerlink" href="#cartesian-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-cartesian.cfg">example-cartesian.cfg</a> egy példa cartesian kinematika konfigurációs fájlhoz.</p>
 <p>Itt csak a cartesian nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -3861,6 +3865,7 @@ max_z_accel:
 # Z tengely egy cartesian gépen.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="linearis-delta-kinematika">Lineáris delta kinematika<a class="headerlink" href="#linearis-delta-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-delta.cfg">example-delta.cfg</a> példát a lineáris delta kinematika konfigurációs fájljához. A kalibrálással kapcsolatos információkért lásd a <a href="Delta_Calibrate.html">delta kalibrációs</a> dokumentumot.</p>
 <p>Itt csak a lineáris delta nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -3937,6 +3942,7 @@ radius:
 #   közvetlenül a szondaművelet megkezdése előtt.
 #   Az alapértelmezett érték 5.
 </code></pre></div>
+
 <h3 id="deltesian-kinematika">Deltesian Kinematika<a class="headerlink" href="#deltesian-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-deltesian.cfg">example-deltesian.cfg</a> egy példa deltesian kinematika konfigurációs fájlhoz.</p>
 <p>Itt csak a deltesian nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd a <a href="#altalanos-kinematikai-beallitasok">általános kinematikai beállítások</a> pontban.</p>
@@ -4003,6 +4009,7 @@ arm_x_length:
 # A stepper_y szekció a tornyot vezérlő léptető leírására szolgál egy delta nyomtatón.
 [stepper_y]
 </code></pre></div>
+
 <h3 id="corexy-kinematika">CoreXY Kinematika<a class="headerlink" href="#corexy-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexy.cfg">example-corexy.cfg</a> egy példa corexy (és h-bot) kinematikai fájlt.</p>
 <p>Itt csak a CoreXY nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -4029,6 +4036,7 @@ max_z_accel:
 # A stepper_z szakasz a Z tengely, mozgást vezérlő léptető leírására szolgál.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="corexz-kinematika">CoreXZ Kinematika<a class="headerlink" href="#corexz-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-corexz.cfg">example-corexz.cfg</a> egy példa CoreXZ kinematikai konfigurációs fájlhoz.</p>
 <p>Itt csak a CoreXZ nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -4055,6 +4063,7 @@ max_z_accel:
 # léptető, amely az X-Z mozgást vezérli.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="hybrid-corexy-kinematika">Hybrid-CoreXY Kinematika<a class="headerlink" href="#hybrid-corexy-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexy.cfg">example-hybrid-corexy.cfg</a> példát egy hibrid CoreXY kinematikai konfigurációs fájlhoz.</p>
 <p>Ez a kinematika Markforged kinematikaként is ismert.</p>
@@ -4077,6 +4086,7 @@ max_z_accel:
 # A stepper_z szakasz a Z tengelyt vezérlő léptető leírására szolgál.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="hybrid-corexz-kinematika">Hybrid-CoreXZ Kinematika<a class="headerlink" href="#hybrid-corexz-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-hybrid-corexz.cfg">example-hybrid-corexz.cfg</a> példát egy hibrid CoreXZ kinematikai konfigurációs fájlhoz.</p>
 <p>Ez a kinematika Markforged kinematikaként is ismert.</p>
@@ -4099,6 +4109,7 @@ max_z_accel:
 # A stepper_z szakasz a Z tengelyt vezérlő léptető leírására szolgál.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="polar-kinematika">Polar Kinematika<a class="headerlink" href="#polar-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-polar.cfg">example-polar.cfg</a> egy példa a Polar kinematika konfigurációs fájljához.</p>
 <p>Itt csak a Polar nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -4130,6 +4141,7 @@ gear_ratio:
 # A stepper_z szakasz a Z tengelyt vezérlő léptető leírására szolgál.
 [stepper_z]
 </code></pre></div>
+
 <h3 id="forgo-delta-kinematika">Forgó delta Kinematika<a class="headerlink" href="#forgo-delta-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-rotary-delta.cfg">example-rotary-delta.cfg</a> egy példa a forgó delta kinematika konfigurációs fájljához.</p>
 <p>Itt csak a forgó delta nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -4202,6 +4214,7 @@ radius:
 #   Az a magasság (mm-ben), ameddig a fejet utasítani kell, hogy mozduljon el
 #   közvetlenül a mérőművelet megkezdése előtt. Az alapértelmezett érték 5.
 </code></pre></div>
+
 <h3 id="kabelcsorlos-kinematika">Kábelcsörlős Kinematika<a class="headerlink" href="#kabelcsorlos-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lásd az <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-winch.cfg">example-winch.cfg</a> egy példát a kábelcsörlős kinematika konfigurációs fájljához.</p>
 <p>Itt csak a kábelcsörlős nyomtatókra jellemző paraméterek kerülnek leírásra. A rendelkezésre álló paramétereket lásd az <a href="#common-kinematic-settings">általános kinematikai beállítások</a> pontban.</p>
@@ -4223,6 +4236,7 @@ anchor_z:
 #   A kábelcsörlő X, Y és Z helyzete derékszögű térben.
 #   Ezeket a paramétereket meg kell adni.
 </code></pre></div>
+
 <h3 id="nincs-kinematika">Nincs Kinematika<a class="headerlink" href="#nincs-kinematika" title="Permanent link">&para;</a></h3>
 <p>Lehetőség van egy speciális "none" kinematika definiálására a Klipper kinematikai támogatásának kikapcsolásához. Ez hasznos lehet olyan eszközök vezérléséhez, amelyek nem tipikus 3D nyomtatók, vagy hibakeresési célok.</p>
 <div class="highlight"><pre><span></span><code>[printer]
@@ -4232,6 +4246,7 @@ max_accel: 1
 #   A max_velocity és max_accel paramétereket meg kell határozni.
 #   Az értékeket nem használjuk a &quot;none&quot; kinematika esetén.
 </code></pre></div>
+
 <h2 id="kozos-extruder-es-futott-targyasztal-tamogatas">Közös extruder és fűtött tárgyasztal támogatás<a class="headerlink" href="#kozos-extruder-es-futott-targyasztal-tamogatas" title="Permanent link">&para;</a></h2>
 <h3 id="extruder">[extruder]<a class="headerlink" href="#extruder" title="Permanent link">&para;</a></h3>
 <p>Az extruder szakasz a fúvóka fűtőberendezés paramétereinek leírására szolgál, az extruder vezérlését végző léptetővel együtt. További információkért lásd a <a href="G-Codes.html#extruder">parancs hivatkozás</a> című részt. A nyomás előtolás hangolásával kapcsolatos információkért lásd a <a href="Pressure_Advance.html">nyomás előtolási útmutatót</a>.</p>
@@ -4349,6 +4364,7 @@ max_temp:
 #   Állítsd be ezt a tartományt elég szélesre, hogy a normális hőmérséklet ne
 #   okozzon hibát. Ezeket a paramétereket meg kell adni.
 </code></pre></div>
+
 <h3 id="heater_bed">[heater_bed]<a class="headerlink" href="#heater_bed" title="Permanent link">&para;</a></h3>
 <p>A heater_bed szakasz egy fűtött tárgyasztalt ír le. Ugyanazokat a fűtési beállításokat használja, amelyeket az "extruder" szakaszban leírtunk.</p>
 <div class="highlight"><pre><span></span><code>[heater_bed]
@@ -4360,6 +4376,7 @@ min_temp:
 max_temp:
 #   A fenti paraméterek leírását lásd az &quot;extruder&quot; szakaszban.
 </code></pre></div>
+
 <h2 id="targyasztal-szint-tamogatas">Tárgyasztal szint támogatás<a class="headerlink" href="#targyasztal-szint-tamogatas" title="Permanent link">&para;</a></h2>
 <h3 id="bed_mesh">[bed_mesh]<a class="headerlink" href="#bed_mesh" title="Permanent link">&para;</a></h3>
 <p>Tárgyasztal Háló Kiegyenlítés. Definiálhatunk egy bed_mesh konfigurációs szakaszt, hogy engedélyezzük a Z tengelyt eltoló mozgatási transzformációkat a mért pontokból generált háló alapján. Ha szondát használunk a Z-tengely alaphelyzetbe állítására, ajánlott a printer.cfg fájlban egy safe_z_home szakaszt definiálni a nyomtatási terület közepére történő alaphelyzetbe állításhoz.</p>
@@ -4383,6 +4400,7 @@ max_temp:
                    /
                  x  (0, -r) start
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code>[bed_mesh]
 #speed: 50
 #   The speed (in mm/s) of non-probing moves during the calibration.
@@ -4474,6 +4492,7 @@ max_temp:
 #   for details on faulty regions.  Up to 99 faulty regions may be added.
 #   By default no faulty regions are set.
 </code></pre></div>
+
 <h3 id="bed_tilt">[bed_tilt]<a class="headerlink" href="#bed_tilt" title="Permanent link">&para;</a></h3>
 <p>Tárgyasztal dőlés kompenzáció. Definiálhatunk egy bed_tilt config szekciót, hogy lehetővé tegyük a ferde tárgyasztalt figyelembe vevő mozgástranszformációkat. Vedd figyelembe, hogy a bed_mesh és a bed_tilt nem kompatibilisek. Mindkettő nem definiálható.</p>
 <p>További információkért lásd a <a href="G-Codes.html#bed_tilt">parancsreferencia</a> dokumentumot.</p>
@@ -4506,6 +4525,7 @@ max_temp:
 #   közvetlenül a szondaművelet megkezdése előtt.
 #   Az alapértelmezett érték 5.
 </code></pre></div>
+
 <h3 id="bed_screws">[bed_screws]<a class="headerlink" href="#bed_screws" title="Permanent link">&para;</a></h3>
 <p>Szerszám a tárgyasztal szintbeállító csavarok beállításához. Meghatározható egy [bed_screws] config szakasz a BED_SCREWS_ADJUST G-kód parancs engedélyezéséhez.</p>
 <p>További információkért lásd a <a href="Manual_Level.html#adjusting-bed-leveling-screws">szintezési útmutató</a> és a <a href="G-Codes.html#bed_screws">parancs hivatkozás</a> dokumentumot.</p>
@@ -4541,6 +4561,7 @@ max_temp:
 #   A sebesség (mm/sec-ben) a horizontális_move_z pozícióból történő mozgáskor.
 #   A probe_height pozíciója. Az alapértelmezett érték 5.
 </code></pre></div>
+
 <h3 id="screws_tilt_adjust">[screws_tilt_adjust]<a class="headerlink" href="#screws_tilt_adjust" title="Permanent link">&para;</a></h3>
 <p>Eszköz a tárgyasztal csavarok dőlésszögének beállításához Z-szondával. Meghatározható egy screws_tilt_adjust konfigurációs szakasz a SCREWS_TILT_CALCULATE G-kód paranccsal.</p>
 <p>További információkért lásd a <a href="Manual_Level.html#adjusting-bed-leveling-screws-using-the-bed-probe">szintezési útmutató</a> és a <a href="G-Codes.html#screws_tilt_adjust">parancs hivatkozás</a> dokumentumot.</p>
@@ -4575,6 +4596,7 @@ max_temp:
 # ágy közötti távolságot.
 # Ezzel szemben az óramutató járásával ellentétes irányú forgatás növeli a rést.
 </code></pre></div>
+
 <h3 id="z_tilt">[z_tilt]<a class="headerlink" href="#z_tilt" title="Permanent link">&para;</a></h3>
 <p>Többszörös Z léptető dőlésszög beállítása. Ez a funkció lehetővé teszi több Z léptető független beállítását (lásd a "stepper_z1" szakaszt) a dőlés beállításához. Ha ez a szakasz jelen van, akkor elérhetővé válik a Z_TILT_ADJUST kiterjesztett <a href="G-Codes.html#z_tilt">G-kód parancs</a>.</p>
 <div class="highlight"><pre><span></span><code>[z_tilt]
@@ -4610,6 +4632,7 @@ max_temp:
 #   tartományához, amelyet a parancs kimenetének megfigyelésével
 #   tanulhat meg.
 </code></pre></div>
+
 <h3 id="quad_gantry_level">[quad_gantry_level]<a class="headerlink" href="#quad_gantry_level" title="Permanent link">&para;</a></h3>
 <p>Mozgó állvány szintezése 4 egymástól függetlenül vezérelt Z-motorral. Korrigálja a hiperbolikus parabola hatását (krumplichip) a mozgó portálon, amely rugalmasabb. FIGYELMEZTETÉS: Mozgó tárgyasztalon történő használata nemkívánatos eredményekhez vezethet. Ha ez a szakasz jelen van, akkor elérhetővé válik a QUAD_GANTRY_LEVEL kiterjesztett G-kód parancs. Ez a rutin a következő Z motor konfigurációt feltételezi:</p>
 <div class="highlight"><pre><span></span><code> ----------------
@@ -4621,6 +4644,7 @@ max_temp:
  |Z           Z3|
  ----------------
 </code></pre></div>
+
 <p>Ahol X a tárgyasztal 0, 0 pontja</p>
 <div class="highlight"><pre><span></span><code>[quad_gantry_level]
 #gantry_corners:
@@ -4650,10 +4674,12 @@ max_temp:
 #   legnagyobb és a legkisebb vizsgált pont jobban eltér,
 #   mint a retry_tolerance értéke.
 </code></pre></div>
+
 <h3 id="skew_correction">[skew_correction]<a class="headerlink" href="#skew_correction" title="Permanent link">&para;</a></h3>
 <p>Nyomtató ferdeségkorrekció. Lehetőség van a nyomtató ferdeségének szoftveres korrekciójára 3 síkban: XY, XZ, YZ. Ez úgy történik, hogy egy kalibrációs modellt nyomtatunk egy sík mentén, és három hosszúságot mérünk. A ferdeségkorrekció jellegéből adódóan ezeket a hosszokat G-kódal kell beállítani. Lásd a <a href="Skew_Correction.html">Ferdeség korrekció</a> és a <a href="G-Codes.html#skew_correction">Parancs hivatkozás</a> című fejezetekben található részleteket.</p>
 <div class="highlight"><pre><span></span><code>[skew_correction]
 </code></pre></div>
+
 <h3 id="z_thermal_adjust">[z_thermal_adjust]<a class="headerlink" href="#z_thermal_adjust" title="Permanent link">&para;</a></h3>
 <p>Hőmérsékletfüggő nyomtatófej Z pozíció beállítása. Kompenzálja a nyomtató keretének hőtágulása által okozott függőleges nyomtatófej elmozdulást valós időben egy hőmérséklet-érzékelő segítségével (jellemzően a keret függőleges szakaszához csatlakoztatva).</p>
 <p>Lásd még: <a href="G-Codes.html#z_thermal_adjust">bővített G-kód parancsok</a>.</p>
@@ -4685,6 +4711,7 @@ max_temp:
 #gcode_id:
 #   Lásd a &quot;heater_generic&quot; részt a paraméter meghatározásához.
 </code></pre></div>
+
 <h2 id="testreszabott-kezdopont-felvetel">Testreszabott kezdőpont felvétel<a class="headerlink" href="#testreszabott-kezdopont-felvetel" title="Permanent link">&para;</a></h2>
 <h3 id="safe_z_home">[safe_z_home]<a class="headerlink" href="#safe_z_home" title="Permanent link">&para;</a></h3>
 <p>Biztonságos Z kezdőpont felvétel. Ezzel a mechanizmussal a Z tengelyt egy adott X, Y koordinátára lehet állítani. Ez akkor hasznos, ha például a nyomtatófejnek a tárgyasztal közepére kell mozognia, mielőtt a Z-tengelyt kezdőpontpba irányítaná.</p>
@@ -4711,6 +4738,7 @@ home_xy_position:
 #   az előző pozíciójukra a Z tengely kezdőpont felvétele után.
 #   Az alapértelmezett érték False.
 </code></pre></div>
+
 <h3 id="homing_override">[homing_override]<a class="headerlink" href="#homing_override" title="Permanent link">&para;</a></h3>
 <p>Kezdőpont felvétel felülbírálása. Ezt a mechanizmust arra lehet használni, hogy a normál G-kód bemenetben található G28 helyett egy sor G-kód parancsot futtassunk. Ez olyan nyomtatóknál lehet hasznos, amelyeknél a gép beindításához speciális eljárásra van szükség.</p>
 <div class="highlight"><pre><span></span><code>[homing_override]
@@ -4738,6 +4766,7 @@ gcode:
 #   mozdulnia, mielőtt a normál G28 parancsot meghívná egy tengelyre.
 #   Az alapértelmezés az, hogy nem erőltetik a tengely pozícióját.
 </code></pre></div>
+
 <h3 id="endstop_phase">[endstop_phase]<a class="headerlink" href="#endstop_phase" title="Permanent link">&para;</a></h3>
 <p>Léptető fázissal beállított végállások. A funkció használatához definiálj egy konfigurációs részt egy "endstop_phase" előtaggal, amelyet a megfelelő stepper konfigurációs rész neve követ (például "[endstop_phase stepper_z]"). Ez a funkció javíthatja a végálláskapcsolók pontosságát. Adj hozzá egy csupasz "[endstop_phase]" deklarációt az ENDSTOP_PHASE_CALIBRATE parancs engedélyezéséhez.</p>
 <p>További információkért lásd a <a href="Endstop_Phase.html">végállási fázisok útmutató</a> és a <a href="G-Codes.html#endstop_phase">Parancs hivatkozás</a> dokumentumot.</p>
@@ -4764,6 +4793,7 @@ gcode:
 #   lépéstávolság többszöröse, akkor minden réteg egy teljes lépésben
 #   jelenik meg.) Az alapértelmezett érték False.
 </code></pre></div>
+
 <h2 id="g-kod-makrok-es-esemenyek">G-kód makrók és események<a class="headerlink" href="#g-kod-makrok-es-esemenyek" title="Permanent link">&para;</a></h2>
 <h3 id="gcode_macro">[gcode_macro]<a class="headerlink" href="#gcode_macro" title="Permanent link">&para;</a></h3>
 <p>G-kód makrók (a "gcode_macro" előtaggal tetszőleges számú szakasz definiálható). További információkért lásd a <a href="Command_Templates.html">parancssablonok útmutatóját</a>.</p>
@@ -4793,6 +4823,7 @@ gcode:
 #   automatikus kiegészítés funkció használatakor használnak.
 #   Alapértelmezett a &quot;G-Code macro&quot;
 </code></pre></div>
+
 <h3 id="delayed_gcode">[delayed_gcode]<a class="headerlink" href="#delayed_gcode" title="Permanent link">&para;</a></h3>
 <p>Egy G-kód végrehajtása beállított késleltetéssel. További információkért lásd a <a href="Command_Templates.html#delayed-gcodes">parancssablon útmutató</a> és a <a href="G-Codes.html#delayed_gcode">Parancs hivatkozás</a> dokumentumot.</p>
 <div class="highlight"><pre><span></span><code>[delayed_gcode my_delayed_gcode]
@@ -4807,6 +4838,7 @@ gcode:
 #   van állítva, a delayed_gcode nem fut le az indításkor.
 #   Az alapértelmezett érték 0.
 </code></pre></div>
+
 <h3 id="save_variables">[save_variables]<a class="headerlink" href="#save_variables" title="Permanent link">&para;</a></h3>
 <p>A változók lemezre mentésének támogatása, hogy azok az újraindítások során is megmaradjanak. További információkért lásd <a href="Command_Templates.html#save-variables-to-disk">Parancs hivatkozás</a> és a <a href="G-Codes.html#save_variables">G-kód hivatkozás</a> dokumentumot.</p>
 <div class="highlight"><pre><span></span><code>[save_variables]
@@ -4814,6 +4846,7 @@ filename:
 #   Kötelező - adj meg egy fájlnevet, amelyet a változók
 #   lemezre mentéséhez használna, pl. ~/variables.cfg
 </code></pre></div>
+
 <h3 id="idle_timeout">[idle_timeout]<a class="headerlink" href="#idle_timeout" title="Permanent link">&para;</a></h3>
 <p>Üresjárati időtúllépés. Az üresjárati időtúllépés automatikusan engedélyezve van. Az alapértelmezett beállítások módosításához adj hozzá egy explicit idle_timeout konfigurációs szakaszt.</p>
 <div class="highlight"><pre><span></span><code>[idle_timeout]
@@ -4825,6 +4858,7 @@ filename:
 #   A fenti G-kód parancsok futtatása előtti várakozási idő (másodpercben).
 #   Az alapértelmezett érték a 600 másodperc.
 </code></pre></div>
+
 <h2 id="valaszthato-g-kod-funkciok">Választható G-kód funkciók<a class="headerlink" href="#valaszthato-g-kod-funkciok" title="Permanent link">&para;</a></h2>
 <h3 id="virtual_sdcard">[virtual_sdcard]<a class="headerlink" href="#virtual_sdcard" title="Permanent link">&para;</a></h3>
 <p>A virtuális sdcard hasznos lehet, ha a gazdaszámítógép nem elég gyors az OctoPrint megfelelő futtatásához. Ez lehetővé teszi a Klipper gazdagép szoftver számára, hogy közvetlenül kinyomtasd a G-kód fájlokat, amelyeket a gazdagépen lévő könyvtárban tárolnak a szabványos sdcard G-kód parancsok (pl. M24) használatával.</p>
@@ -4837,11 +4871,13 @@ path:
 #on_error_gcode:
 #   A hibajelentéskor végrehajtandó G-kód parancsok listája.
 </code></pre></div>
+
 <h3 id="sdcard_loop">[sdcard_loop]<a class="headerlink" href="#sdcard_loop" title="Permanent link">&para;</a></h3>
 <p>Néhány szakaszok törlésével rendelkező nyomtató, például alkatrész-kidobó vagy szalagnyomtató, hasznát veheti az SD-kártya fájl hurkolt szakaszainak. (Például ugyanazon alkatrész újra és újra történő kinyomtatásához, vagy egy alkatrész egy szakaszának megismétléséhez egy lánc vagy más ismétlődő mintához).</p>
 <p>A támogatott parancsokat lásd a <a href="G-Codes.html#sdcard_loop">Parancs hivatkozásban</a>. Vagy lásd a <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> fájlt egy Marlin kompatibilis M808 G-kód makróért.</p>
 <div class="highlight"><pre><span></span><code>[sdcard_loop]
 </code></pre></div>
+
 <h3 id="force_move">[force_move]<a class="headerlink" href="#force_move" title="Permanent link">&para;</a></h3>
 <p>Támogatja a lépegetőmotorok kézi mozgatását diagnosztikai célokra. Figyelem, ennek a funkciónak a használata a nyomtatót érvénytelen állapotba hozhatja. A fontos részletekért lásd a <a href="G-Codes.html#force_move">Parancs hivatkozás</a> dokumentumot.</p>
 <div class="highlight"><pre><span></span><code>[force_move]
@@ -4850,6 +4886,7 @@ path:
 #   állítsuk True-ra a kiterjesztett G-kód parancsot.
 #   Az alapértelmezett érték False.
 </code></pre></div>
+
 <h3 id="pause_resume">[pause_resume]<a class="headerlink" href="#pause_resume" title="Permanent link">&para;</a></h3>
 <p>Szüneteltetési/folytatási funkció a pozíció rögzítésének és visszaállításának támogatásával. További információért lásd a <a href="G-Codes.html#pause_resume">Parancs hivatkozás</a> dokumentumot.</p>
 <div class="highlight"><pre><span></span><code>[pause_resume]
@@ -4858,6 +4895,7 @@ path:
 #   sebességgel, tér vissza a rögzített pozícióhoz (mm/sec-ben).
 #   Az alapértelmezett érték 50,0 mm/sec.
 </code></pre></div>
+
 <h3 id="firmware_retraction">[firmware_retraction]<a class="headerlink" href="#firmware_retraction" title="Permanent link">&para;</a></h3>
 <p>Firmware szál visszahúzás. Ez lehetővé teszi a G10 (visszahúzás) és G11 (visszahúzás megszüntetése) G-kód parancsokat, amelyeket sok szeletelő program használ. Az alábbi paraméterek az indítási alapértelmezett értékeket adják meg, bár az értékek a SET_RETRACTION <a href="G-Codes.html#firmware_retraction">parancs</a>) segítségével módosíthatók, lehetővé téve a szálankénti beállításokat és a futásidejű hangolást.</p>
 <div class="highlight"><pre><span></span><code>[firmware_retraction]
@@ -4875,6 +4913,7 @@ path:
 #   A visszahúzás feloldásának sebessége mm/sec-ben.
 #   Az alapértelmezett érték 10 mm/sec.
 </code></pre></div>
+
 <h3 id="gcode_arcs">[gcode_arcs]<a class="headerlink" href="#gcode_arcs" title="Permanent link">&para;</a></h3>
 <p>A G-kód ív (G2/G3) parancsok támogatása.</p>
 <div class="highlight"><pre><span></span><code>[gcode_arcs]
@@ -4885,6 +4924,7 @@ path:
 #   a gépen. A beállított értéknél kisebb ívek egyenesekké válnak.
 #   Az alapértelmezett érték 1 mm.
 </code></pre></div>
+
 <h3 id="respond">[respond]<a class="headerlink" href="#respond" title="Permanent link">&para;</a></h3>
 <p>Engedélyezd az "M118" és "RESPOND" kiterjesztett <a href="G-Codes.html#respond">parancsokat</a>.</p>
 <div class="highlight"><pre><span></span><code>[respond]
@@ -4898,11 +4938,13 @@ path:
 #   Közvetlenül beállítja az alapértelmezett előtagot. Ha jelen van, ez az
 #   érték felülírja a „default_type” értéket.
 </code></pre></div>
+
 <h3 id="exclude_object">[exclude_object]<a class="headerlink" href="#exclude_object" title="Permanent link">&para;</a></h3>
 <p>Lehetővé teszi az egyes objektumok kizárásának vagy törlésének támogatását a nyomtatási folyamat során.</p>
 <p>További információkért lásd a <a href="Exclude_Object.html">kizárandó objektumok útmutatót</a> és a <a href="G-Codes.html#excludeobject">parancsreferenciát</a>. Lásd a <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> fájlt egy Marlin/RepRapFirmware kompatibilis M486 G-kód makróhoz.</p>
 <div class="highlight"><pre><span></span><code>[exclude_object]
 </code></pre></div>
+
 <h2 id="rezonancia-kompenzacio">Rezonancia kompenzáció<a class="headerlink" href="#rezonancia-kompenzacio" title="Permanent link">&para;</a></h2>
 <h3 id="input_shaper">[input_shaper]<a class="headerlink" href="#input_shaper" title="Permanent link">&para;</a></h3>
 <p>Engedélyezi a <a href="Resonance_Compensation.html">rezonancia kompenzációt</a>. Lásd még a <a href="G-Codes.html#input_shaper">parancsreferencia</a> dokumentumot.</p>
@@ -4938,6 +4980,7 @@ path:
 #   esetben ez a paraméter nem igényel hangolást, és nem szabad
 #   megváltoztatni.
 </code></pre></div>
+
 <h3 id="adxl345">[adxl345]<a class="headerlink" href="#adxl345" title="Permanent link">&para;</a></h3>
 <p>ADXL345 gyorsulásmérők támogatása. Ez a támogatás lehetővé teszi a gyorsulásmérő méréseinek lekérdezését az érzékelőtől. Ez lehetővé teszi az ACCELEROMETER_MEASURE parancsot (további információkért lásd a <a href="G-Codes.html#adxl345">G-kódok</a> dokumentumot). Az alapértelmezett chipnév "default", de megadhatunk egy explicit nevet (pl. [adxl345 my_chip_name]).</p>
 <div class="highlight"><pre><span></span><code>[adxl345]
@@ -4968,6 +5011,7 @@ cs_pin:
 #   sebességek jelentősen befolyásolják a rezonancia mérés
 #   eredményeinek minőségét.
 </code></pre></div>
+
 <h3 id="lis2dw">[lis2dw]<a class="headerlink" href="#lis2dw" title="Permanent link">&para;</a></h3>
 <p>Support for LIS2DW accelerometers.</p>
 <div class="highlight"><pre><span></span><code>[lis2dw]
@@ -4985,6 +5029,7 @@ cs_pin:
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
+
 <h3 id="mpu9250">[mpu9250]<a class="headerlink" href="#mpu9250" title="Permanent link">&para;</a></h3>
 <p>MPU-9250, MPU-9255, MPU-6515, MPU-6050 és MPU-6500 gyorsulásmérők támogatása (tetszőleges számú szekciót lehet definiálni "mpu9250" előtaggal).</p>
 <div class="highlight"><pre><span></span><code>[mpu9250 my_accelerometer]
@@ -5000,6 +5045,7 @@ cs_pin:
 #axes_map: x, y, z
 #   See the &quot;adxl345&quot; section for information on this parameter.
 </code></pre></div>
+
 <h3 id="resonance_tester">[resonance_tester]<a class="headerlink" href="#resonance_tester" title="Permanent link">&para;</a></h3>
 <p>A rezonancia tesztelés és az automatikus bemeneti alakító kalibráció támogatása. A modul legtöbb funkciójának használatához további szoftverfüggőségeket kell telepíteni; további információkért olvasd el a <a href="Measuring_Resonances.html">Rezonanciák mérése</a> és a <a href="G-Codes.html#resonance_tester">parancs hivatkozás</a> című dokumentumot. A rezonanciák mérése című útmutató <a href="Measuring_Resonances.html#max-smoothing">Max simítás</a> szakaszában további információkat talál a <code>max_smoothing</code> paraméterről és annak használatáról.</p>
 <div class="highlight"><pre><span></span><code>[resonance_tester]
@@ -5052,6 +5098,7 @@ cs_pin:
 #   lassúvá teszik a tesztet, a nagy értékek pedig csökkentik a teszt
 #   pontosságát. Az alapértelmezett érték 1.0 (Hz/sec == sec^-2).
 </code></pre></div>
+
 <h2 id="konfiguracios-fajl-segedletek">Konfigurációs fájl segédletek<a class="headerlink" href="#konfiguracios-fajl-segedletek" title="Permanent link">&para;</a></h2>
 <h3 id="board_pins">[board_pins]<a class="headerlink" href="#board_pins" title="Permanent link">&para;</a></h3>
 <p>Alaplap tű álnevek (tetszőleges számú szekciót definiálhatunk "board_pins" előtaggal). Ezzel definiálhatsz álneveket a mikrokontroller tűihez.</p>
@@ -5068,10 +5115,12 @@ aliases_&lt;name&gt;:
 #   (például az &quot;EXP1_9=&lt;GND&gt;&quot; az &quot;EXP1_9&quot;-et foglalná le). Bármilyen
 #   számú &quot;aliases_&quot; karakterrel kezdődő opció megadható.
 </code></pre></div>
+
 <h3 id="include">[include]<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
 <p>Include fájl támogatás. A nyomtató fő konfigurációs fájljához további konfigurációs fájlokat lehet csatolni. Helyettesítő karakterek is használhatók (pl. "configs/*.cfg").</p>
 <div class="highlight"><pre><span></span><code>[include my_other_config.cfg]
 </code></pre></div>
+
 <h3 id="duplicate_pin_override">[duplicate_pin_override]<a class="headerlink" href="#duplicate_pin_override" title="Permanent link">&para;</a></h3>
 <p>Ez az eszköz lehetővé teszi, hogy egyetlen mikrokontroller-tűt többször definiáljon egy konfigurációs fájlban a szokásos hibajelentés nélkül. Ez diagnosztikai és hibakeresési célokra szolgál. Erre a szakaszra nincs szükség ott, ahol a Klipper támogatja ugyanazon tű többszöri használatát, és ennek a felülbírálatnak a használata zavaros és váratlan eredményeket okozhat.</p>
 <div class="highlight"><pre><span></span><code>[duplicate_pin_override]
@@ -5080,6 +5129,7 @@ pins:
 #   használhatók egy konfigurációs fájlban normál hibajelentés
 #   nélkül. Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h2 id="targyasztal-szintezo-hardver">Tárgyasztal szintező hardver<a class="headerlink" href="#targyasztal-szintezo-hardver" title="Permanent link">&para;</a></h2>
 <h3 id="probe">[probe]<a class="headerlink" href="#probe" title="Permanent link">&para;</a></h3>
 <p>Z magasságmérő szonda. Ezt a szakaszt a Z magasságmérő hardver engedélyezéséhez lehet definiálni. Ha ez a szakasz engedélyezve van, a PROBE és a QUERY_PROBE kiterjesztett <a href="G-Codes.html#probe">G-kód parancsok</a> elérhetővé válnak. Lásd még a <a href="Probe_Calibrate.html">szonda kalibrálási útmutatót</a>. A szondaszekció létrehoz egy virtuális "probe:z_virtual_endstop" tűt is. A stepper_z endstop_pin-t erre a virtuális tűre állíthatjuk a cartesian stílusú nyomtatókon, amelyek a szondát használják a Z végállás helyett. Ha a "probe:z_virtual_endstop" típust használjuk, akkor ne definiáljunk position_endstop-ot a stepper_z konfigurációs szakaszban.</p>
@@ -5144,6 +5194,7 @@ z_offset:
 #   nyomtatófejet. Az alapértelmezés az, hogy deaktiváláskor ne futtassunk
 #   semmilyen speciális G-kód parancsot.
 </code></pre></div>
+
 <h3 id="bltouch">[bltouch]<a class="headerlink" href="#bltouch" title="Permanent link">&para;</a></h3>
 <p>BLTouch szonda. Ezt a szakaszt (a szondaszakasz helyett) a BLTouch szonda engedélyezéséhez lehet definiálni. További információkért lásd a <a href="BLTouch.html">BL-Touch útmutató</a> és a <a href="G-Codes.html#bltouch">parancsreferencia</a> című dokumentumot. Egy virtuális "probe:z_virtual_endstop" tű is létrejön (a részleteket lásd a "probe" szakaszban).</p>
 <div class="highlight"><pre><span></span><code>[bltouch]
@@ -5200,6 +5251,7 @@ control_pin:
 #samples_tolerance_retries:
 #   A paraméterekkel kapcsolatos információkért lásd a &quot;szonda&quot; részt.
 </code></pre></div>
+
 <h3 id="smart_effector">[smart_effector]<a class="headerlink" href="#smart_effector" title="Permanent link">&para;</a></h3>
 <p>A "Smart Effector" a Duet3d-től egy Z-szondát valósít meg egy erőérzékelő segítségével. Ezt a részt a <code>[probe]</code> helyett definiálhatjuk a Smart Effector specifikus funkcióinak engedélyezéséhez. Ez lehetővé teszi a <a href="G-Codes.html#smart_effector">futásidejű parancsok</a> használatát is a Smart Effector paramétereinek futásidejű beállításához.</p>
 <div class="highlight"><pre><span></span><code>[smart_effector]
@@ -5253,6 +5305,7 @@ z_offset:
 #   A fenti paraméterekkel kapcsolatos további információkért
 #   lásd a &quot;szonda&quot; részt.
 </code></pre></div>
+
 <h3 id="axis_twist_compensation">[axis_twist_compensation]<a class="headerlink" href="#axis_twist_compensation" title="Permanent link">&para;</a></h3>
 <p>A tool to compensate for inaccurate probe readings due to twist in X gantry. See the <a href="Axis_Twist_Compensation.html">Axis Twist Compensation Guide</a> for more detailed information regarding symptoms, configuration and setup.</p>
 <div class="highlight"><pre><span></span><code>[axis_twist_compensation]
@@ -5276,6 +5329,7 @@ calibrate_y: 112.5
 #   calibration process. This parameter must be provided and is recommended to
 #   be near the center of the bed
 </code></pre></div>
+
 <h2 id="tovabbi-leptetomotorok-es-extruderek">További léptetőmotorok és extruderek<a class="headerlink" href="#tovabbi-leptetomotorok-es-extruderek" title="Permanent link">&para;</a></h2>
 <h3 id="stepper_z1">[stepper_z1]<a class="headerlink" href="#stepper_z1" title="Permanent link">&para;</a></h3>
 <p>Több léptetőmotoros tengelyek. Egy cartesian stílusú nyomtatónál az adott tengelyt vezérlő léptető további konfigurációs blokkokkal rendelkezhet, amelyek olyan léptetőket határoznak meg, amelyeket az elsődleges léptetővel együtt kell léptetni. Bármennyi szakasz definiálható 1-től kezdődő numerikus utótaggal (például "stepper_z1", "stepper_z2" stb.).</p>
@@ -5292,6 +5346,7 @@ calibrate_y: 112.5
 #   a léptető mindaddig visszatér, amíg a tengely elsődleges
 #   léptetőjének végálláskapcsolója ki nem vált.
 </code></pre></div>
+
 <h3 id="extruder1">[extruder1]<a class="headerlink" href="#extruder1" title="Permanent link">&para;</a></h3>
 <p>Több extruderes nyomtató esetén minden további extruder után adj hozzá egy új extruder szakaszt. A további extruder szakaszok neve legyen "extruder1", "extruder2", "extruder3", és így tovább. A rendelkezésre álló paraméterek leírását lásd az "extruder" szakaszban.</p>
 <p>Lásd a <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-multi-extruder.cfg">sample-multi-extruder.cfg</a> példakonfigurációt.</p>
@@ -5304,6 +5359,7 @@ calibrate_y: 112.5
 #shared_heater:
 #   Ez az opció elavult, és többé nem kell megadni.
 </code></pre></div>
+
 <h3 id="dual_carriage">[dual_carriage]<a class="headerlink" href="#dual_carriage" title="Permanent link">&para;</a></h3>
 <p>Support for cartesian and hybrid_corexy/z printers with dual carriages on a single axis. The carriage mode can be set via the SET_DUAL_CARRIAGE extended g-code command. For example, "SET_DUAL_CARRIAGE CARRIAGE=1" command will activate the carriage defined in this section (CARRIAGE=0 will return activation to the primary carriage). Dual carriage support is typically combined with extra extruders - the SET_DUAL_CARRIAGE command is often called at the same time as the ACTIVATE_EXTRUDER command. Be sure to park the carriages during deactivation. Note that during G28 homing, typically the primary carriage is homed first followed by the carriage defined in the <code>[dual_carriage]</code> config section. However, the <code>[dual_carriage]</code> carriage will be homed first if both carriages home in a positive direction and the [dual_carriage] carriage has a <code>position_endstop</code> greater than the primary carriage, or if both carriages home in a negative direction and the <code>[dual_carriage]</code> carriage has a <code>position_endstop</code> less than the primary carriage.</p>
 <p>Additionally, one could use "SET_DUAL_CARRIAGE CARRIAGE=1 MODE=COPY" or "SET_DUAL_CARRIAGE CARRIAGE=1 MODE=MIRROR" commands to activate either copying or mirroring mode of the dual carriage, in which case it will follow the motion of the carriage 0 accordingly. These commands can be used to print two parts simultaneously - either two identical parts (in COPY mode) or mirrored parts (in MIRROR mode). Note that COPY and MIRROR modes also require appropriate configuration of the extruder on the dual carriage, which can typically be achieved with "SYNC_EXTRUDER_MOTION MOTION_QUEUE=extruder EXTRUDER=<dual_carriage_extruder>" or a similar command.</p>
@@ -5332,6 +5388,7 @@ axis:
 #position_max:
 #   See the &quot;stepper&quot; section for the definition of the above parameters.
 </code></pre></div>
+
 <h3 id="extruder_stepper">[extruder_stepper]<a class="headerlink" href="#extruder_stepper" title="Permanent link">&para;</a></h3>
 <p>Az extruder mozgásához szinkronizált további léptetők támogatása (tetszőleges számú szakasz definiálható "extruder_stepper" előtaggal).</p>
 <p>További információkért lásd a <a href="G-Codes.html#extruder">parancshivatkozás</a> dokumentumot.</p>
@@ -5347,6 +5404,7 @@ extruder:
 #rotation_distance:
 #   A fenti paraméterek meghatározásához lásd a &quot;léptető&quot; részt.
 </code></pre></div>
+
 <h3 id="manual_stepper">[manual_stepper]<a class="headerlink" href="#manual_stepper" title="Permanent link">&para;</a></h3>
 <p>Kézi léptetők (tetszőleges számú szakasz definiálható "manual_stepper" előtaggal). Ezeket a léptetőket a MANUAL_STEPPER G-kód parancs vezérli. Például: "MANUAL_STEPPER STEPPER=my_stepper MOVE=10 SPEED=5". A MANUAL_STEPPER parancs leírását lásd a <a href="G-Codes.html#manual_stepper">G-kódok</a> fájlban. A léptetők nem kapcsolódnak a nyomtató normál kinematikájához.</p>
 <div class="highlight"><pre><span></span><code>[manual_stepper my_stepper]
@@ -5370,6 +5428,7 @@ extruder:
 #   STOP_ON_ENDSTOP paraméter hozzáadásával a MANUAL_STEPPER
 #   mozgásparancsokhoz &quot;kezdőpont felvételi mozgások&quot; hajthatók végre.
 </code></pre></div>
+
 <h2 id="egyedi-futotestek-es-erzekelok">Egyedi fűtőtestek és érzékelők<a class="headerlink" href="#egyedi-futotestek-es-erzekelok" title="Permanent link">&para;</a></h2>
 <h3 id="verify_heater">[verify_heater]<a class="headerlink" href="#verify_heater" title="Permanent link">&para;</a></h3>
 <p>A fűtés és a hőmérséklet-érzékelő ellenőrzése. A fűtőelemek ellenőrzése automatikusan engedélyezve van minden olyan fűtőelemhez, amely a nyomtatón be van állítva. Az alapértelmezett beállítások módosításához használd a verify_heater szakaszt.</p>
@@ -5404,6 +5463,7 @@ extruder:
 #   növelnie kell a check_gain_time ellenőrzés során.
 #   Ritka az érték testreszabása. Az alapértelmezett érték 2.
 </code></pre></div>
+
 <h3 id="homing_heaters">[homing_heaters]<a class="headerlink" href="#homing_heaters" title="Permanent link">&para;</a></h3>
 <p>Eszköz a fűtőberendezések letiltására, amikor egy tengely kezdőpont felvételt vagy szintezést csinál.</p>
 <div class="highlight"><pre><span></span><code>[homing_heaters]
@@ -5417,6 +5477,7 @@ extruder:
 #   az elhelyezési/mérési lépések során. Az alapértelmezett az összes
 #   fűtőelem letiltása. Tipikus példa: extruder, heater_bed
 </code></pre></div>
+
 <h3 id="thermistor">[thermistor]<a class="headerlink" href="#thermistor" title="Permanent link">&para;</a></h3>
 <p>Egyéni termisztorok (tetszőleges számú szakasz definiálható "thermistor" előtaggal). Egyéni termisztor használható a fűtőberendezés konfigurációs szakaszának sensor_type mezőjében. (Ha például egy "[thermistor my_thermistor]" szekciót definiálunk, akkor a fűtőelem definiálásakor használhatjuk a "sensor_type: my_thermistor" mezőt.) Ügyelj arra, hogy a termisztor szekciót a konfigurációs fájlban az első fűtőszekcióban való használata fölé helyezd.</p>
 <div class="highlight"><pre><span></span><code>[thermistor my_thermistor]
@@ -5436,6 +5497,7 @@ extruder:
 #   paramétert akkor kell megadni, ha &quot;beta&quot;-t használ a termisztor
 #   meghatározásához.
 </code></pre></div>
+
 <h3 id="adc_temperature">[adc_temperature]<a class="headerlink" href="#adc_temperature" title="Permanent link">&para;</a></h3>
 <p>Egyedi ADC hőmérséklet-érzékelők (tetszőleges számú szekciót lehet definiálni "adc_temperature" előtaggal). Ez lehetővé teszi egy olyan egyéni hőmérséklet-érzékelő definiálását, amely egy feszültséget mér egy analóg-digitális átalakító (ADC) tűn, és lineáris interpolációt használ a konfigurált hőmérséklet/feszültség (vagy hőmérséklet/ellenállás) mérések között a hőmérséklet meghatározásához. Az így kapott érzékelő sensor_type-ként használható egy fűtőszekcióban. (Ha például egy "[adc_temperature my_sensor]" szekciót definiálunk, akkor egy fűtőelem definiálásakor használhatjuk a "sensor_type: my_sensor" szekciót). Ügyelj arra, hogy a szenzor szekciót a config fájlban az első felhasználása fölé helyezd a fűtőszekcióban.</p>
 <div class="highlight"><pre><span></span><code>[adc_temperature my_sensor]
@@ -5460,6 +5522,7 @@ extruder:
 #   pullup_resistor paramétert (a részleteket lásd az &quot;extruder&quot; szakaszban).
 #   A címen legalább két mérést kell megadni.
 </code></pre></div>
+
 <h3 id="heater_generic">[heater_generic]<a class="headerlink" href="#heater_generic" title="Permanent link">&para;</a></h3>
 <p>Általános fűtőtestek (tetszőleges számú szakasz definiálható a "heater_generic" előtaggal). Ezek a fűtőberendezések a standard fűtőberendezésekhez (extruderek, fűtött tárgyasztal) hasonlóan viselkednek. A SET_HEATER_TEMPERATURE paranccsal (lásd a <a href="G-Codes.html#heaters">G-kódok</a> dokumentumban) állíthatjuk be a célhőmérsékletet.</p>
 <div class="highlight"><pre><span></span><code>[heater_generic my_generic_heater]
@@ -5482,6 +5545,7 @@ extruder:
 #   A fenti paraméterek meghatározásához
 #   lásd az &quot;extruder&quot; részt.
 </code></pre></div>
+
 <h3 id="temperature_sensor">[temperature_sensor]<a class="headerlink" href="#temperature_sensor" title="Permanent link">&para;</a></h3>
 <p>Általános hőmérséklet-érzékelők. Tetszőleges számú további hőmérséklet-érzékelőt lehet definiálni, amelyek az M105 parancson keresztül jelentenek.</p>
 <div class="highlight"><pre><span></span><code>[temperature_sensor my_sensor]
@@ -5495,6 +5559,7 @@ extruder:
 #   Lásd a &quot;heater_generic&quot; részt a paraméter
 #   meghatározásához.
 </code></pre></div>
+
 <h2 id="homerseklet-erzekelok">Hőmérséklet-érzékelők<a class="headerlink" href="#homerseklet-erzekelok" title="Permanent link">&para;</a></h2>
 <p>A Klipper számos típusú hőmérséklet-érzékelő definícióját tartalmazza. Ezek az érzékelők bármely olyan konfigurációs szakaszban használhatók, amely hőmérséklet-érzékelőt igényel (például az <code>[extruder]</code> vagy a <code>[heater_bed]</code> szakaszban).</p>
 <h3 id="kozos-termisztorok">Közös termisztorok<a class="headerlink" href="#kozos-termisztorok" title="Permanent link">&para;</a></h3>
@@ -5515,6 +5580,7 @@ sensor_pin:
 #   ellenállás ellenállása (ohmban). Ritka az ilyen beállítás.
 #   Az alapértelmezett érték 0 ohm.
 </code></pre></div>
+
 <h3 id="kozos-homerseklet-erositok">Közös hőmérséklet erősítők<a class="headerlink" href="#kozos-homerseklet-erositok" title="Permanent link">&para;</a></h3>
 <p>Közös hőmérsékletű erősítők. A következő paraméterek állnak rendelkezésre azokban a fűtőszakaszokban, amelyek ezen érzékelők valamelyikét használják.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5529,6 +5595,7 @@ sensor_pin:
 #voltage_offset: 0
 #   Az ADC feszültség eltolása (V-ban). Az alapértelmezett érték 0.
 </code></pre></div>
+
 <h3 id="kozvetlenul-csatlakozo-pt1000-erzekelo">Közvetlenül csatlakozó PT1000 érzékelő<a class="headerlink" href="#kozvetlenul-csatlakozo-pt1000-erzekelo" title="Permanent link">&para;</a></h3>
 <p>Közvetlenül csatlakoztatott PT1000 érzékelő. A következő paraméterek állnak rendelkezésre azokban a fűtési szakaszokban, amelyek valamelyik érzékelőt használják.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: PT1000
@@ -5539,6 +5606,7 @@ sensor_pin:
 #   Az érzékelőhöz csatlakoztatott felhúzó ellenállás (ohmban).
 #   Az alapértelmezett 4700 ohm.
 </code></pre></div>
+
 <h3 id="maxxxxxx-homerseklet-erzekelok">MAXxxxxx hőmérséklet-érzékelők<a class="headerlink" href="#maxxxxxx-homerseklet-erzekelok" title="Permanent link">&para;</a></h3>
 <p>MAXxxxxx soros perifériás interfész (SPI) hőmérséklet-alapú érzékelők. A következő paraméterek állnak rendelkezésre azokban a fűtési szakaszokban, amelyek ezen érzékelőtípusok valamelyikét használják.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5568,6 +5636,7 @@ sensor_pin:
 #   szabályozzák. Az egyes paraméterek alapértelmezett értékei a
 #   paraméter neve mellett találhatók a fenti listában.
 </code></pre></div>
+
 <h3 id="bmp280bme280bme680-homerseklet-erzekelo">BMP280/BME280/BME680 hőmérséklet-érzékelő<a class="headerlink" href="#bmp280bme280bme680-homerseklet-erzekelo" title="Permanent link">&para;</a></h3>
 <p>BMP280/BME280/BME680 kétvezetékes interfész (I2C) környezeti érzékelők. Vedd figyelembe, hogy ezeket az érzékelőket nem extruderekkel és fűtött tárgyasztalokkal való használatra szánják, hanem a környezeti hőmérséklet (C), a nyomás (hPa), a relatív páratartalom és a BME680 esetében a gázszint ellenőrzésére. Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> egy gcode_macro-t, amely a hőmérséklet mellett a nyomás és a páratartalom mérésére is használható.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: BME280
@@ -5582,6 +5651,7 @@ sensor_pin:
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
+
 <h3 id="aht10aht20aht21-temperature-sensor">AHT10/AHT20/AHT21 temperature sensor<a class="headerlink" href="#aht10aht20aht21-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>AHT10/AHT20/AHT21 two wire interface (I2C) environmental sensors. Note that these sensors are not intended for use with extruders and heater beds, but rather for monitoring ambient temperature (C) and relative humidity. See <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> for a gcode_macro that may be used to report humidity in addition to temperature.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: AHT10
@@ -5597,6 +5667,7 @@ sensor_pin:
 #aht10_report_time:
 #   Interval in seconds between readings. Default is 30, minimum is 5
 </code></pre></div>
+
 <h3 id="htu21d-erzekelo">HTU21D érzékelő<a class="headerlink" href="#htu21d-erzekelo" title="Permanent link">&para;</a></h3>
 <p>HTU21D kétvezetékes interfész (I2C) környezeti érzékelő. Vedd figyelembe, hogy ezt az érzékelőt nem extruderekkel és fűtött tárgyasztalokkal való használatra szánják, hanem a környezeti hőmérséklet (C) és a relatív páratartalom ellenőrzésére. Lásd <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> egy gcode_macro-t, amely a hőmérséklet mellett a páratartalom jelentésére is használható.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
@@ -5625,6 +5696,7 @@ sensor_pin:
 #htu21d_report_time:
 #   Interval in seconds between readings. Default is 30
 </code></pre></div>
+
 <h3 id="lm75-homerseklet-erzekelo">LM75 hőmérséklet-érzékelő<a class="headerlink" href="#lm75-homerseklet-erzekelo" title="Permanent link">&para;</a></h3>
 <p>LM75/LM75A kétvezetékes (I2C) csatlakozású hőmérséklet érzékelők. Ezek az érzékelők -55~125 C tartományban működnek, így pl. kamrahőmérséklet ellenőrzésre használhatók. Egyszerű ventilátor/fűtésvezérlőként is működhetnek.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: LM75
@@ -5643,6 +5715,7 @@ sensor_pin:
 #   Interval in seconds between readings. Default is 0.8, with minimum
 #   0.5.
 </code></pre></div>
+
 <h3 id="beepitett-mikrokontroller-homerseklet-erzekelo">Beépített mikrokontroller hőmérséklet-érzékelő<a class="headerlink" href="#beepitett-mikrokontroller-homerseklet-erzekelo" title="Permanent link">&para;</a></h3>
 <p>Az atsam, atsamd és stm32 mikrovezérlők belső hőmérséklet-érzékelőt tartalmaznak. A "temperature_mcu" parancsot használhatjuk e hőmérsékletek megjelenítésére.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_mcu
@@ -5672,6 +5745,7 @@ sensor_pin:
 #   (ha van) vagy a mikrovezérlő specifikációjából származó névleges
 #   értékeket kell használni.
 </code></pre></div>
+
 <h3 id="gazdagep-homerseklet-erzekelo">Gazdagép hőmérséklet érzékelő<a class="headerlink" href="#gazdagep-homerseklet-erzekelo" title="Permanent link">&para;</a></h3>
 <p>Gazdagép hőmérséklet (pl. Raspberry Pi), amelyen a gazdaszoftver fut.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_host
@@ -5680,6 +5754,7 @@ sensor_pin:
 #   a &quot;/sys/class/thermal/thermal_zone0/temp&quot;, amely a Raspberry Pi
 #   számítógép hőmérsékleti rendszerfájlja.
 </code></pre></div>
+
 <h3 id="ds18b20-homerseklet-erzekelo">DS18B20 hőmérséklet érzékelő<a class="headerlink" href="#ds18b20-homerseklet-erzekelo" title="Permanent link">&para;</a></h3>
 <p>A DS18B20 egy 1 vezetékes (w1) digitális hőmérséklet érzékelő. Vedd figyelembe, hogy ezt az érzékelőt nem extruderekkel és fűtött tárgyasztalokkal való használatra szánják, hanem inkább a környezeti hőmérséklet (C) ellenőrzésére. Ezek az érzékelők 125 C-ig terjedő tartományban működnek, így pl. kamrahőmérséklet ellenőrzésre használhatók. Egyszerű ventilátor/fűtőberendezés szabályozóként is működhetnek. A DS18B20 érzékelőket csak a "host mcu", pl. a Raspberry Pi támogatja. A w1-gpio Linux kernel modult kell telepíteni hozzá.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: DS18B20
@@ -5695,6 +5770,7 @@ serial_no:
 #sensor_mcu:
 #   A mikrokontroller, amelyből olvasni lehet. A host_mcu legyen
 </code></pre></div>
+
 <h3 id="combined-temperature-sensor">Combined temperature sensor<a class="headerlink" href="#combined-temperature-sensor" title="Permanent link">&para;</a></h3>
 <p>Combined temperature sensor is a virtual temperature sensor based on several other sensors. This sensor can be used with extruders, heater_generic and heater beds.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_combined
@@ -5709,6 +5785,7 @@ serial_no:
 #   Must be provided. Maximum permissible deviation between the sensors
 #   to combine (e.g. 5 degrees). To disable it, use a large value (e.g. 999.9)
 </code></pre></div>
+
 <h2 id="hutoventilatorok">Hűtőventilátorok<a class="headerlink" href="#hutoventilatorok" title="Permanent link">&para;</a></h2>
 <h3 id="fan">[fan]<a class="headerlink" href="#fan" title="Permanent link">&para;</a></h3>
 <p>Nyomtatás hűtőventilátor.</p>
@@ -5776,6 +5853,7 @@ pin:
 #   normálisan használható, és pl. földkapcsolt FET (normál ventilátorcsap)
 #   használható a ventilátor tápellátásának szabályozására.
 </code></pre></div>
+
 <h3 id="heater_fan">[heater_fan]<a class="headerlink" href="#heater_fan" title="Permanent link">&para;</a></h3>
 <p>Fejhűtő ventilátorok (a "heater_fan" előtaggal tetszőleges számú szakasz definiálható). A "fejhűtő ventilátor" egy olyan ventilátor, amely akkor lesz engedélyezve, amikor a hozzá tartozó fűtőberendezés aktív. Alapértelmezés szerint a heater_fan alapértelmezés szerint a shutdown_speed a max_power értékkel egyenlő.</p>
 <div class="highlight"><pre><span></span><code>[heater_fan heatbreak_cooling_fan]
@@ -5804,6 +5882,7 @@ pin:
 #   will be set to when its associated heater is enabled. The default
 #   is 1.0
 </code></pre></div>
+
 <h3 id="controller_fan">[controller_fan]<a class="headerlink" href="#controller_fan" title="Permanent link">&para;</a></h3>
 <p>Vezérlő hűtőventilátor (a "controller_fan" előtaggal tetszőleges számú szakasz definiálható). A "vezérlő hűtőventilátor" egy olyan ventilátor, amely akkor lesz engedélyezve, amikor a hozzá tartozó fűtőberendezés vagy a hozzá tartozó léptető meghajtó aktív. A ventilátor leáll, amikor elér egy idle_timeout értéket, hogy biztosítsa, hogy a felügyelt komponens kikapcsolása után ne következzen be túlmelegedés.</p>
 <div class="highlight"><pre><span></span><code>[controller_fan my_controller_fan]
@@ -5840,6 +5919,7 @@ pin:
 #   fűtőtestek/léptetők bármelyike engedélyezett. Az alapértelmezett fűtőelem
 #   az &quot;extruder&quot;, az alapértelmezett léptető pedig mindegyik.
 </code></pre></div>
+
 <h3 id="temperature_fan">[temperature_fan]<a class="headerlink" href="#temperature_fan" title="Permanent link">&para;</a></h3>
 <p>Hőmérséklet vezérelt hűtőventilátorok (tetszőleges számú szekciót lehet definiálni a "temperature_fan" előtaggal). A "hőmérsékleti ventilátor" olyan ventilátor, amely akkor kapcsol be, amikor a hozzá tartozó érzékelő egy beállított hőmérséklet felett van. Alapértelmezés szerint a temperature_fan kikapcsolási sebessége egyenlő a max_power értékkel.</p>
 <p>További információkért lásd a <a href="G-Codes.html#temperature_fan">parancs hivatkozást</a>.</p>
@@ -5894,6 +5974,7 @@ pin:
 #   megadott azonosítóval. Az alapértelmezés szerint nem jelenti a
 #   hőmérsékletet az M105-ön keresztül.
 </code></pre></div>
+
 <h3 id="fan_generic">[fan_generic]<a class="headerlink" href="#fan_generic" title="Permanent link">&para;</a></h3>
 <p>Kézi vezérlésű ventilátor (a "fan_generic" előtaggal tetszőleges számú szekciót lehet definiálni). A kézi vezérlésű ventilátor fordulatszámát a SET_FAN_SPEED <a href="G-Codes.html#fan_generic">G-kód</a> paranccsal lehet beállítani.</p>
 <div class="highlight"><pre><span></span><code>[fan_generic extruder_partfan]
@@ -5910,6 +5991,7 @@ pin:
 #enable_pin:
 #   A fenti paraméterek leírását lásd a &quot;ventilátor&quot; részben.
 </code></pre></div>
+
 <h2 id="led-ek">LED-ek<a class="headerlink" href="#led-ek" title="Permanent link">&para;</a></h2>
 <h3 id="led">[led]<a class="headerlink" href="#led" title="Permanent link">&para;</a></h3>
 <p>A mikrokontroller PWM tűin keresztül vezérelt LED-ek (és LED-csíkok) támogatása (a "led" előtaggal tetszőleges számú szekciót definiálhatunk). További információkért lásd a <a href="G-Codes.html#led">parancs hivatkozást</a>.</p>
@@ -5936,6 +6018,7 @@ pin:
 #   Beállítja a LED kezdeti színét. Mindegyik értéknek 0,0 és 1,0 között
 #   kell lennie. Minden szín alapértelmezett értéke 0.
 </code></pre></div>
+
 <h3 id="neopixel">[neopixel]<a class="headerlink" href="#neopixel" title="Permanent link">&para;</a></h3>
 <p>Neopixel (más néven WS2812) LED támogatás (tetszőleges számú szekciót definiálhatunk "neopixel" előtaggal). További információkért lásd a <a href="G-Codes.html#led">parancs hivatkozást</a>.</p>
 <p>Vedd figyelembe, hogy a <a href="RPi_microcontroller.html">linux mcu</a> implementáció jelenleg nem támogatja a közvetlenül csatlakoztatott neopixeleket. A Linux kernel interfészt használó jelenlegi tervezet nem teszi lehetővé ezt a forgatókönyvet, mivel a kernel GPIO interfésze nem elég gyors a szükséges impulzusszámok biztosításához.</p>
@@ -5959,6 +6042,7 @@ pin:
 #initial_WHITE: 0.0
 #   Ezekről a paraméterekről lásd a &quot;LED&quot; részt.
 </code></pre></div>
+
 <h3 id="dotstar">[dotstar]<a class="headerlink" href="#dotstar" title="Permanent link">&para;</a></h3>
 <p>Dotstar (más néven APA102) LED-támogatás (tetszőleges számú szekciót lehet definiálni "dotstar" előtaggal). További információkért lásd a <a href="G-Codes.html#led">parancs hivatkozást</a>.</p>
 <div class="highlight"><pre><span></span><code>[dotstar my_dotstar]
@@ -5975,6 +6059,7 @@ clock_pin:
 #initial_BLUE: 0.0
 #   Ezen paraméterek leírásáról nézd meg a &quot;LED&quot; részt.
 </code></pre></div>
+
 <h3 id="pca9533">[pca9533]<a class="headerlink" href="#pca9533" title="Permanent link">&para;</a></h3>
 <p>PCA9533 LED-támogatás. A PCA9533 a mightyboardon használatos.</p>
 <div class="highlight"><pre><span></span><code>[pca9533 my_pca9533]
@@ -5994,6 +6079,7 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h3 id="pca9632">[pca9632]<a class="headerlink" href="#pca9632" title="Permanent link">&para;</a></h3>
 <p>PCA9632 LED támogatás. A PCA9632-t a FlashForge Dreamer-ben használják.</p>
 <div class="highlight"><pre><span></span><code>[pca9632 my_pca9632]
@@ -6021,6 +6107,7 @@ clock_pin:
 #initial_WHITE: 0.0
 #   See the &quot;led&quot; section for information on these parameters.
 </code></pre></div>
+
 <h2 id="tovabbi-szervok-gombok-es-egyeb-tuk">További szervók, gombok és egyéb tűk<a class="headerlink" href="#tovabbi-szervok-gombok-es-egyeb-tuk" title="Permanent link">&para;</a></h2>
 <h3 id="servo">[servo]<a class="headerlink" href="#servo" title="Permanent link">&para;</a></h3>
 <p>Szervók (a "servo" előtaggal tetszőleges számú szekciót lehet definiálni). A szervók a SET_SERVO <a href="G-Codes.html#servo">G-kód parancs</a> segítségével vezérelhetők. Például: SET_SERVO SERVO=my_servo ANGLE=180</p>
@@ -6047,6 +6134,7 @@ pin:
 #   (Ez csak akkor érvényes, ha a initial_angle nincs beállítva.)
 #   Az alapértelmezés az, hogy indításkor nem küld jelet.
 </code></pre></div>
+
 <h3 id="gcode_button">[gcode_button]<a class="headerlink" href="#gcode_button" title="Permanent link">&para;</a></h3>
 <p>A G-kód végrehajtása, amikor egy gombot megnyomnak vagy elengednek (vagy amikor egy tű állapota megváltozik). A gomb állapotát a <code>QUERY_BUTTON button=my_gcode_button</code> segítségével ellenőrizhetjük.</p>
 <div class="highlight"><pre><span></span><code>[gcode_button my_gcode_button]
@@ -6068,6 +6156,7 @@ pin:
 #   A G-kód sablonok támogatottak. Az alapértelmezés szerint nem
 #   futnak le parancsok a gombok felengedésekor.
 </code></pre></div>
+
 <h3 id="output_pin">[output_pin]<a class="headerlink" href="#output_pin" title="Permanent link">&para;</a></h3>
 <p>Futtatási időben konfigurálható kimeneti tűk (tetszőleges számú szekciót lehet definiálni "output_pin" előtaggal). Az itt konfigurált tűk kimeneti tűkként lesznek beállítva, és futtatási időben a "SET_PIN PIN=my_pin VALUE=.1" típusú kiterjesztett <a href="G-Codes.html#output_pin">G-kód parancsok</a> segítségével módosíthatjuk őket.</p>
 <div class="highlight"><pre><span></span><code>[output_pin my_pin]
@@ -6114,6 +6203,7 @@ pin:
 #   áramerősségével.
 #   Az alapértelmezés szerint nem skálázzuk a &#39;value&#39; paramétert.
 </code></pre></div>
+
 <h3 id="static_digital_output">[static_digital_output]<a class="headerlink" href="#static_digital_output" title="Permanent link">&para;</a></h3>
 <p>Statikusan konfigurált digitális kimeneti tűk (tetszőleges számú szakasz definiálható "static_digital_output" előtaggal). Az itt konfigurált tűk az MCU konfigurálása során GPIO kimenetként lesznek beállítva. Üzem közben nem módosíthatók.</p>
 <div class="highlight"><pre><span></span><code>[static_digital_output my_output_pins]
@@ -6122,6 +6212,7 @@ pins:
 #   listája. A gomb tűje magas szintre lesz állítva, hacsak a tű neve
 #   előtt nem szerepel &quot;!&quot;. Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h3 id="multi_pin">[multi_pin]<a class="headerlink" href="#multi_pin" title="Permanent link">&para;</a></h3>
 <p>Több tűs kimenetek (a "multi_pin" előtaggal tetszőleges számú szakasz definiálható). A multi_pin kimenet egy belső tű álnevet hoz létre, amely több kimeneti tűt is módosíthat minden alkalommal, amikor az álnév tű be van állítva. Például definiálhatunk egy "[multi_pin my_fan]" objektumot, amely két tűt tartalmaz, majd beállíthatjuk a "pin=multi_pin:my_fan" értéket a "[fan]" szakaszban. Minden egyes ventilátorváltáskor mindkét kimeneti tű frissül. Ezek az álnevek nem használhatók léptetőmotoros tűkkel.</p>
 <div class="highlight"><pre><span></span><code>[multi_pin my_multi_pin]
@@ -6129,6 +6220,7 @@ pins:
 #   Az ehhez az álnévhez társított tűk vesszővel elválasztott listája.
 #   Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h2 id="tmc-motorvezerlo-konfiguracioja">TMC motorvezérlő konfigurációja<a class="headerlink" href="#tmc-motorvezerlo-konfiguracioja" title="Permanent link">&para;</a></h2>
 <p>Trinamic léptetőmotor meghajtók konfigurálása UART/SPI üzemmódban. További információk a <a href="TMC_Drivers.html">TMC Drivers útmutatóban</a> és a <a href="G-Codes.html#tmcxxxxxx">parancsreferenciában</a> is találhatóak.</p>
 <h3 id="tmc2130">[tmc2130]<a class="headerlink" href="#tmc2130" title="Permanent link">&para;</a></h3>
@@ -6222,6 +6314,7 @@ run_current:
 #   van állítva.) Az alapértelmezés az, hogy nem engedélyezett az érzékelő
 #   nélküli kezdőpont.
 </code></pre></div>
+
 <h3 id="tmc2208">[tmc2208]<a class="headerlink" href="#tmc2208" title="Permanent link">&para;</a></h3>
 <p>TMC2208 (vagy TMC2224) motorvezérlő konfigurálása egyvezetékes UART-on keresztül. A funkció használatához definiáljon egy konfigurációs részt "tmc2208" előtaggal, amelyet a megfelelő léptető konfigurációs rész neve követ (például "[tmc2208 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc2208 stepper_x]
@@ -6277,6 +6370,7 @@ run_current:
 #   defaults for each parameter are next to the parameter name in the
 #   above list.
 </code></pre></div>
+
 <h3 id="tmc2209">[tmc2209]<a class="headerlink" href="#tmc2209" title="Permanent link">&para;</a></h3>
 <p>TMC2209 motorvezérlő konfigurálása egyvezetékes UART-on keresztül. A funkció használatához definiáljon egy konfigurációs szekciót "tmc2209" előtaggal, amelyet a megfelelő léptető konfigurációs szekció neve követ (például "[tmc2209 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc2209 stepper_x]
@@ -6321,6 +6415,7 @@ run_current:
 #   an appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h3 id="tmc2660">[tmc2660]<a class="headerlink" href="#tmc2660" title="Permanent link">&para;</a></h3>
 <p>TMC2660 motorvezérlő konfigurálása SPI-buszon keresztül. A funkció használatához definiáljon egy konfigurációs szekciót tmc2660 előtaggal, amelyet a megfelelő léptető konfigurációs szekció neve követ (például "[tmc2660 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
@@ -6387,6 +6482,7 @@ run_current:
 #   elrendezésmódosításokhoz vezet (a HDEC első bitje) ebben az esetben
 #   a HSTRT MSB-jeként értelmeződik).
 </code></pre></div>
+
 <h3 id="tmc2240">[tmc2240]<a class="headerlink" href="#tmc2240" title="Permanent link">&para;</a></h3>
 <p>Configure a TMC2240 stepper motor driver via SPI bus or UART. To use this feature, define a config section with a "tmc2240" prefix followed by the name of the corresponding stepper config section (for example, "[tmc2240 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc2240 stepper_x]
@@ -6504,6 +6600,7 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h3 id="tmc5160">[tmc5160]<a class="headerlink" href="#tmc5160" title="Permanent link">&para;</a></h3>
 <p>TMC5160 motorvezérlő konfigurálása SPI-buszon keresztül. A funkció használatához definiáljon egy konfigurációs szekciót "tmc5160" előtaggal, amelyet a megfelelő léptető konfigurációs szekció neve követ (például "[tmc5160 stepper_x]").</p>
 <div class="highlight"><pre><span></span><code>[tmc5160 stepper_x]
@@ -6615,6 +6712,7 @@ run_current:
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
+
 <h2 id="futas-ideju-leptetomotor-aram-konfiguracio">Futás-idejű léptetőmotor áram konfiguráció<a class="headerlink" href="#futas-ideju-leptetomotor-aram-konfiguracio" title="Permanent link">&para;</a></h2>
 <h3 id="ad5206">[ad5206]<a class="headerlink" href="#ad5206" title="Permanent link">&para;</a></h3>
 <p>Statikusan konfigurált AD5206 digipotok, amelyek SPI-buszon keresztül csatlakoznak (tetszőleges számú szekciót lehet definiálni "ad5206" előtaggal).</p>
@@ -6651,6 +6749,7 @@ enable_pin:
 #   megadva a léptető kívánt amperértékével. Az
 #   alapértelmezés szerint nem skálázza a &#39;channel_x&#39; paramétereket.
 </code></pre></div>
+
 <h3 id="mcp4451">[mcp4451]<a class="headerlink" href="#mcp4451" title="Permanent link">&para;</a></h3>
 <p>Statikusan konfigurált MCP4451 digipot, amely I2C buszon keresztül csatlakozik (tetszőleges számú szekciót lehet definiálni "mcp4451" előtaggal).</p>
 <div class="highlight"><pre><span></span><code>[mcp4451 my_digipot]
@@ -6683,6 +6782,7 @@ i2c_address:
 #   using the desired amperage value for the stepper. The default is
 #   to not scale the &#39;wiper_x&#39; parameters.
 </code></pre></div>
+
 <h3 id="mcp4728">[mcp4728]<a class="headerlink" href="#mcp4728" title="Permanent link">&para;</a></h3>
 <p>Statikusan konfigurált MCP4728 digitális-analóg átalakító, amely I2C buszon keresztül csatlakozik (az "mcp4728" előtaggal tetszőleges számú szekciót lehet definiálni).</p>
 <div class="highlight"><pre><span></span><code>[mcp4728 my_dac]
@@ -6716,6 +6816,7 @@ i2c_address:
 #   can be specified using the desired amperage value for the
 #   stepper. The default is to not scale the &#39;channel_x&#39; parameters.
 </code></pre></div>
+
 <h3 id="mcp4018">[mcp4018]<a class="headerlink" href="#mcp4018" title="Permanent link">&para;</a></h3>
 <p>Statikusan konfigurált MCP4018 digipot, amely két GPIO "bit banging" tűn keresztül csatlakozik (tetszőleges számú szekciót lehet definiálni "mcp4018" előtaggal).</p>
 <div class="highlight"><pre><span></span><code>[mcp4018 my_digipot]
@@ -6738,6 +6839,7 @@ wiper:
 #   majd a &#39;wiper&#39; paraméter megadható a léptető kívánt amperértékével.
 #   Az alapértelmezett beállítás az, hogy nem skálázza a &#39;wiper&#39; paramétert.
 </code></pre></div>
+
 <h2 id="kijelzotamogatas">Kijelzőtámogatás<a class="headerlink" href="#kijelzotamogatas" title="Permanent link">&para;</a></h2>
 <h3 id="display">[display]<a class="headerlink" href="#display" title="Permanent link">&para;</a></h3>
 <p>A mikrokontrollerhez csatlakoztatott kijelző támogatása.</p>
@@ -6821,6 +6923,7 @@ lcd_type:
 #   Analóg gomb használata esetén a tartomány minimális és
 #   maximális értékeit vesszővel elválasztva kell megadni.
 </code></pre></div>
+
 <h4 id="hd44780-kijelzo">hd44780 kijelző<a class="headerlink" href="#hd44780-kijelzo" title="Permanent link">&para;</a></h4>
 <p>Információk a HD44780 kijelzők konfigurálásáról (amelyet a "RepRapDiscount 2004 Smart Controller" típusú kijelzőkben használnak).</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6845,6 +6948,7 @@ d7_pin:
 #   A sorok száma 4-re van rögzítve.
 ...
 </code></pre></div>
+
 <h4 id="hd44780_spi-kijelzo">hd44780_spi kijelző<a class="headerlink" href="#hd44780_spi-kijelzo" title="Permanent link">&para;</a></h4>
 <p>Információ a HD44780_spi kijelző konfigurálásáról egy 20x04-es kijelző, egy hardveres "shift register" (amelyet a mightyboard alapú nyomtatókban használnak).</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6869,6 +6973,7 @@ spi_software_miso_pin:
 #   A sorok száma 4-re van rögzítve.
 ...
 </code></pre></div>
+
 <h4 id="st7920-kijelzo">st7920 kijelző<a class="headerlink" href="#st7920-kijelzo" title="Permanent link">&para;</a></h4>
 <p>Információk az ST7920 kijelzők konfigurálásáról (amelyet a "RepRapDiscount 12864 Full Graphic Smart Controller" típusú kijelzőknél használnak).</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6881,6 +6986,7 @@ sid_pin:
 #   Ezeket a paramétereket meg kell adni.
 ...
 </code></pre></div>
+
 <h4 id="emulated_st7920-kijelzo">emulated_st7920 kijelző<a class="headerlink" href="#emulated_st7920-kijelzo" title="Permanent link">&para;</a></h4>
 <p>Információ az emulált ST7920 kijelző konfigurálásáról. Megtalálható néhány "2,4 hüvelykes érintőképernyős eszközben" és hasonlókban.</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6898,6 +7004,7 @@ spi_software_miso_pin:
 #   szoftveres SPI-megvalósításhoz ezt a tűt kell konfigurálni.
 ...
 </code></pre></div>
+
 <h4 id="uc1701-kijelzo">uc1701 kijelző<a class="headerlink" href="#uc1701-kijelzo" title="Permanent link">&para;</a></h4>
 <p>Információk az UC1701 kijelzők konfigurálásáról (amelyet az "MKS Mini 12864" típusú kijelzőknél használnak).</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6916,6 +7023,7 @@ a0_pin:
 #   alapértelmezett érték pedig 40.
 ...
 </code></pre></div>
+
 <h4 id="ssd1306-es-sh1106-kijelzok">ssd1306 és sh1106 kijelzők<a class="headerlink" href="#ssd1306-es-sh1106-kijelzok" title="Permanent link">&para;</a></h4>
 <p>Az SSD1306 és SH1106 kijelzők konfigurálásával kapcsolatos információk.</p>
 <div class="highlight"><pre><span></span><code>[display]
@@ -6959,6 +7067,7 @@ lcd_type:
 #   0.
 ...
 </code></pre></div>
+
 <h3 id="display_data">[display_data]<a class="headerlink" href="#display_data" title="Permanent link">&para;</a></h3>
 <p>Egyéni adatok megjelenítésének támogatása LCD-kijelzőn. Tetszőleges számú megjelenítési csoportot és ezek alatt tetszőleges számú adatelemet lehet létrehozni. A kijelző egy adott csoport összes adatelemét megjeleníti, ha a [display] szakaszban a display_group opciót az adott csoport nevére állítjuk.</p>
 <p>Az <a href="https://github.com/Klipper3d/klipper/blob/master/klippy/extras/display/display.cfg">alapértelmezett kijelzőcsoportok</a> automatikusan létrejönnek. Ezeket a display_data elemeket a printer.cfg konfigurációs fájlban lévő alapértelmezett értékek felülírásával lehet helyettesíteni vagy bővíteni.</p>
@@ -6972,6 +7081,7 @@ text:
 #   kiértékelése parancssablonok segítségével történik
 #   (lásd: docs/Command_Templates.md). Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h3 id="display_template">[display_template]<a class="headerlink" href="#display_template" title="Permanent link">&para;</a></h3>
 <p>Megjelenített adatok szövege "makrók" (tetszőleges számú szakasz definiálható display_template előtaggal). A sablonok kiértékelésével kapcsolatos információkért lásd a <a href="Command_Templates.html">parancssablonok</a> dokumentumot.</p>
 <p>Ez a funkció lehetővé teszi az ismétlődő definíciók csökkentését a display_data szakaszokban. A sablon kiértékelésére a beépített <code>render()</code> függvényt használhatjuk a display_data szakaszokban. Ha például definiálnánk <code>[display_template my_template]</code>, akkor használhatnánk a <code>{ render('my_template') }</code> függvényt a display_data szakaszban.</p>
@@ -6990,6 +7100,7 @@ text:
 #   kiértékelése parancssablonok segítségével történik (lásd:
 #   docs/Command_Templates.md). Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h3 id="display_glyph">[display_glyph]<a class="headerlink" href="#display_glyph" title="Permanent link">&para;</a></h3>
 <p>Egy egyéni írásjel megjelenítése az azt támogató kijelzőkön. A megadott névhez hozzárendeli a megadott megjelenítési adatokat, amelyekre aztán a megjelenítési sablonokban a két "tilde" szimbólummal körülvett nevükkel lehet hivatkozni, pl. <code>~my_display_glyph~</code></p>
 <p>Lásd a <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-glyphs.cfg">sample-glyphs.cfg</a> néhány példáját.</p>
@@ -7012,11 +7123,13 @@ text:
 #   közül csak egyet használj az adott képernyőn. Ez a paraméter akkor
 #   szükséges, ha a hd44780_data meg van adva.
 </code></pre></div>
+
 <h3 id="display-my_extra_display">[display my_extra_display]<a class="headerlink" href="#display-my_extra_display" title="Permanent link">&para;</a></h3>
 <p>Ha a printer.cfg fájlban a fentiek szerint egy elsődleges [display] szakasz került meghatározásra, akkor több kiegészítő kijelzőt is lehet definiálni. Vedd figyelembe, hogy a kiegészítő kijelzők jelenleg nem támogatják a menüfunkciókat, így nem támogatják a "menu" opciókat vagy a gombok konfigurálását.</p>
 <div class="highlight"><pre><span></span><code>[display my_extra_display]
 # A rendelkezésre álló paramétereket lásd a &quot;kijelző&quot; szakaszban.
 </code></pre></div>
+
 <h3 id="menu">[menu]<a class="headerlink" href="#menu" title="Permanent link">&para;</a></h3>
 <p>Testreszabható LCD kijelző menük.</p>
 <p>Egy <a href="https://github.com/Klipper3d/klipper/blob/master/klippy/extras/display/menu.cfg">alapértelmezett menükészlet</a> automatikusan létrejön. A menüt a fő printer.cfg konfigurációs fájlban lévő alapértelmezett értékek felülbírálásával lehet helyettesíteni vagy bővíteni.</p>
@@ -7094,6 +7207,7 @@ text:
 #   futtatható szkript. Sablonként értékelve. A gomb kattintása elindítja
 #   a szerkesztési mód kezdetét vagy befejezését.
 </code></pre></div>
+
 <h2 id="nyomtatoszal-erzekelok">Nyomtatószál érzékelők<a class="headerlink" href="#nyomtatoszal-erzekelok" title="Permanent link">&para;</a></h2>
 <h3 id="filament_switch_sensor">[filament_switch_sensor]<a class="headerlink" href="#filament_switch_sensor" title="Permanent link">&para;</a></h3>
 <p>Nyomtatószál érzékelő. Támogatás a nyomtatószál behelyezésének és kifutásának érzékelésére kapcsolóérzékelő, például végálláskapcsoló segítségével.</p>
@@ -7127,6 +7241,7 @@ text:
 #   Az a tű, amelyre a kapcsoló csatlakoztatva van.
 #   Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h3 id="filament_motion_sensor">[filament_motion_sensor]<a class="headerlink" href="#filament_motion_sensor" title="Permanent link">&para;</a></h3>
 <p>Nyomtatószál mozgásérzékelő. Támogatja a nyomtatószál behelyezésének és kifutásának érzékelését egy olyan kódoló segítségével, amely az érzékelőn keresztül történő mozgás közben váltogatja a kimeneti jelet.</p>
 <p>További információkért lásd a <a href="G-Codes.html#filament_switch_sensor">parancs hivatkozást</a>.</p>
@@ -7147,6 +7262,7 @@ switch_pin:
 #   A fenti paraméterek leírását a &quot;filament_switch_sensor&quot;
 #   részben találja.
 </code></pre></div>
+
 <h3 id="tsl1401cl_filament_width_sensor">[tsl1401cl_filament_width_sensor]<a class="headerlink" href="#tsl1401cl_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>TSLl401CL alapú szálszélesség érzékelő. További információkért lásd az <a href="TSL1401CL_Filament_Width_Sensor.html">útmutatót</a>.</p>
 <div class="highlight"><pre><span></span><code>[tsl1401cl_filament_width_sensor]
@@ -7158,6 +7274,7 @@ switch_pin:
 #   Az érzékelő és a fúvóka közötti távolság mm-ben.
 #measurement_delay: 100
 </code></pre></div>
+
 <h3 id="hall_filament_width_sensor">[hall_filament_width_sensor]<a class="headerlink" href="#hall_filament_width_sensor" title="Permanent link">&para;</a></h3>
 <p>Hall szálszélesség érzékelő (lásd <a href="Hall_Filament_Width_Sensor.html">Hall szálszélesség érzékelő</a>).</p>
 <div class="highlight"><pre><span></span><code>[hall_filament_width_sensor]
@@ -7209,6 +7326,7 @@ adc2:
 #pause_delay:
 #   A fenti paraméterek leírását lásd a &quot;filament_switch_sensor&quot; részben.
 </code></pre></div>
+
 <h2 id="alaplap-specifikus-hardvertamogatas">Alaplap specifikus hardvertámogatás<a class="headerlink" href="#alaplap-specifikus-hardvertamogatas" title="Permanent link">&para;</a></h2>
 <h3 id="sx1509">[sx1509]<a class="headerlink" href="#sx1509" title="Permanent link">&para;</a></h3>
 <p>Konfiguráljon egy SX1509 I2C-GPIO bővítőt. Az I2C-kommunikáció által okozott késleltetés miatt NEM szabad az SX1509 tűit motorvezérlő engedélyező, STEP vagy DIR tűként vagy bármilyen más olyan tűként használni, amely gyors bit-impulzust igényel. Legjobban statikus vagy G-kód vezérelt digitális kimenetekként vagy hardveres PWM tűként használhatók pl. ventilátorokhoz. Bármennyi szekciót definiálhatunk "sx1509" előtaggal. Minden egyes bővítő egy 16 tűből álló készletet biztosít (sx1509_my_sx1509:PIN_0-tól sx1509_my_sx1509:PIN_15-ig), amelyek a nyomtató konfigurációjában használhatók.</p>
@@ -7226,6 +7344,7 @@ i2c_address:
 #   See the &quot;common I2C settings&quot; section for a description of the
 #   above parameters.
 </code></pre></div>
+
 <h3 id="samd_sercom">[samd_sercom]<a class="headerlink" href="#samd_sercom" title="Permanent link">&para;</a></h3>
 <p>SAMD SERCOM konfiguráció annak megadására, hogy mely tűket kell használni egy adott SERCOM-on. A "samd_sercom" előtaggal tetszőleges számú szekciót definiálhatunk. Minden SERCOM-ot konfigurálni kell, mielőtt SPI vagy I2C perifériaként használnánk. Helyezd ezt a konfigurációs szekciót minden más, SPI vagy I2C buszokat használó szekció fölé.</p>
 <div class="highlight"><pre><span></span><code>[samd_sercom my_sercom]
@@ -7250,6 +7369,7 @@ clk_pin:
 #   konfigurációval kell rendelkeznie az adott SERCOM perifériához.
 #   Ezt a paramétert meg kell adni.
 </code></pre></div>
+
 <h3 id="adc_scaled">[adc_scaled]<a class="headerlink" href="#adc_scaled" title="Permanent link">&para;</a></h3>
 <p>Duet2 Maestro analóg skálázás vref és vssa leolvasások alapján. Az adc_scaled szakasz definiálása virtuális adc-tűként (például "my_name:PB0") tesz lehetővé, amelyeket automatikusan a kártya vref és vssa figyelőtűi állítanak be. Ügyelj arra, hogy ezt a konfigurációs szakaszt minden olyan konfigurációs szakasz felett definiáld, amely ezeket a virtuális tűket használja.</p>
 <p>Lásd a <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-duet2-maestro.cfg">generic-duet2-maestro.cfg</a> fájlt egy példáért.</p>
@@ -7263,6 +7383,7 @@ vssa_pin:
 #   mérések simításra kerülnek, hogy csökkentsék a mérés hatását
 #   zaj csökkentése érdekében. Az alapértelmezett érték 2 másodperc.
 </code></pre></div>
+
 <h3 id="replicape">[replicape]<a class="headerlink" href="#replicape" title="Permanent link">&para;</a></h3>
 <p>Replicape támogatás. Lásd a <a href="Beaglebone.html">beaglebone útmutatót</a> és a <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-replicape.cfg">generic-replicape.cfg</a> fájlt egy példáért.</p>
 <div class="highlight"><pre><span></span><code># A &quot;replicape&quot; konfigurációs rész hozzáadja a
@@ -7326,6 +7447,7 @@ host_mcu:
 #   (a True a CFG5 értéket magasra, a False pedig alacsonyra állítja).
 #   Az alapértelmezett érték True.
 </code></pre></div>
+
 <h2 id="egyeb-egyedi-modulok">Egyéb egyedi modulok<a class="headerlink" href="#egyeb-egyedi-modulok" title="Permanent link">&para;</a></h2>
 <h3 id="palette2">[palette2]<a class="headerlink" href="#palette2" title="Permanent link">&para;</a></h3>
 <p>Palette 2 multimaterial támogatás szorosabb integrációt biztosít, amely támogatja a Palette 2 eszközöket csatlakoztatott módban.</p>
@@ -7346,6 +7468,7 @@ serial:
 #auto_cancel_variation: 0.1
 # Automatikusan törli a nyomtatást, ha a ping variáció meghaladja ezt a küszöbértéket.
 </code></pre></div>
+
 <h3 id="angle">[angle]<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <p>Mágneses Hall-szögérzékelő támogatása A1333, AS5047D vagy TLE5012B SPI-chipek használatával a léptetőmotorok szögtengelyének méréseinek leolvasásához. A mérések az <a href="API_Server.html">API Szerver</a> és a <a href="Debugging.html#motion-analysis-and-data-logging">mozgáselemző eszköz</a> segítségével érhetők el. A rendelkezésre álló parancsokat lásd a <a href="G-Codes.html#angle">G-kód hivatkozásban</a>.</p>
 <div class="highlight"><pre><span></span><code>[angle my_angle_sensor]
@@ -7372,6 +7495,7 @@ cs_pin:
 #   A fenti paraméterek leírását az „általános SPI-beállítások”
 #   részben találja.
 </code></pre></div>
+
 <h2 id="gyakori-buszparameterek">Gyakori buszparaméterek<a class="headerlink" href="#gyakori-buszparameterek" title="Permanent link">&para;</a></h2>
 <h3 id="gyakori-spi-beallitasok">Gyakori SPI beállítások<a class="headerlink" href="#gyakori-spi-beallitasok" title="Permanent link">&para;</a></h3>
 <p>Az SPI-buszt használó eszközök esetében általában a következő paraméterek állnak rendelkezésre.</p>
@@ -7391,6 +7515,7 @@ cs_pin:
 #   bármilyen általános célú érintkező használható). Az alapértelmezés
 #   szerint nem használja a &quot;software SPI&quot;-t.
 </code></pre></div>
+
 <h3 id="gyakori-i2c-beallitasok">Gyakori I2C beállítások<a class="headerlink" href="#gyakori-i2c-beallitasok" title="Permanent link">&para;</a></h3>
 <p>A következő paraméterek általában az I2C-buszt használó eszközökhöz állnak rendelkezésre.</p>
 <p>Vedd figyelembe, hogy a Klipper jelenlegi mikrokontroller I2C támogatása általában nem tolerálja a hálózati zajt. Az I2C vezetékek nem várt hibái a Klipper futásidejű hibaüzenetét eredményezhetik. A Klipper hibaelhárítási támogatása az egyes mikrokontroller-típusoknál eltérő. Általában csak olyan I2C eszközök használata ajánlott, amelyek ugyanazon a nyomtatott áramköri lapon vannak, mint a mikrokontroller.</p>

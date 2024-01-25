@@ -1800,6 +1800,7 @@ rotation_distance: 40
 homing_speed: 20
 ...
 </code></pre></div>
+
 <h4 id="a-printercfg-beallitasa-erzekelo-nelkuli-kezdopont-felvetelhez">A printer.cfg beállítása érzékelő nélküli kezdőpont felvételhez<a class="headerlink" href="#a-printercfg-beallitasa-erzekelo-nelkuli-kezdopont-felvetelhez" title="Permanent link">&para;</a></h4>
 <p>A <code>homing_retract_dist</code> beállítást nullára kell állítani a <code>stepper_x</code> config szakaszban a második kezdőpont felvételi mozdulat letiltásához. A második kezdőpont felvételi kísérlet nem ad hozzáadott értéket az érzékelő nélküli kezdőpont felvételhez, nem fog megbízhatóan működni, és összezavarja a hangolási folyamatot.</p>
 <p>Győződj meg róla, hogy a konfiguráció TMC motorvezérlő részlegében nincs megadva <code>hold_current</code> beállítás. (Ha hold_current használatban van, akkor a kapcsolat létrejötte után a motor megáll, miközben a kocsi a sín végéhez van nyomva, és az áram csökkentése ebben a helyzetben a kocsi elmozdulhat. Ez rossz teljesítményt eredményez, és összezavarja a hangolási folyamatot.)</p>
@@ -1814,6 +1815,7 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>Egy TMC2130 vagy TMC5160 konfiguráció például így nézhet ki:</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 # A TMC DIAG1 tűhöz csatlakoztatott tű (vagy használd a diag0_pin / DIAG0 tűt)
@@ -1825,6 +1827,7 @@ endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>Egy TMC2660 konfiguráció így nézhet ki:</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64           # -64 a legérzékenyebb érték, 63 a legkevésbé érzékeny.
@@ -1835,14 +1838,17 @@ endstop_pin: ^PA1       # A TMC SG_TST tűjéhez csatlakoztatott tű.
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>A fenti példák csak az érzékelő nélküli kezdőpont felvételre jellemző beállításokat mutatják. Az összes elérhető beállításért lásd a <a href="Config_Reference.html#tmc-motorvezerlo-konfiguracioja">konfigurációs referencia</a> dokumentumot.</p>
 <h4 id="keresd-meg-a-legmagasabb-erzekenyseget-amely-sikeresen-jelzi-a-kezdopontot">Keresd meg a legmagasabb érzékenységet, amely sikeresen jelzi a kezdőpontot<a class="headerlink" href="#keresd-meg-a-legmagasabb-erzekenyseget-amely-sikeresen-jelzi-a-kezdopontot" title="Permanent link">&para;</a></h4>
 <p>Helyezd a kocsit a sín közepéhez közel. A SET_TMC_FIELD paranccsal állítsd be a legnagyobb érzékenységet. A TMC2209 esetében:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
+
 <p>A TMC2130, TMC5160 és a TMC2660 modellekhez:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
 </code></pre></div>
+
 <p>Ezután adj ki egy <code>G28 X0</code> parancsot, és ellenőrizd, hogy a tengely egyáltalán nem mozog, vagy gyorsan megáll. Ha a tengely nem áll meg, akkor adj ki egy <code>M112</code> parancsot a nyomtató megállítására. Valami nem stimmel a diag/sg_tst tű kábelezésével vagy konfigurációjával, és a folytatás előtt ki kell javítani.</p>
 <p>Ezután folyamatosan csökkentsd a <code>VALUE</code> beállítás érzékenységét, és futtasd le újra a <code>SET_TMC_FIELD</code> <code>G28 X0</code> parancsokat, hogy megtaláld a legnagyobb érzékenységet, amely a kocsi sikeres mozgását eredményezi a végállásig és a megállásig. (A TMC2209 motorvezérlők esetében ez az SGTHRS csökkentése, más vezérlők esetében az sgt növelése lesz.) Ügyelj arra, hogy minden kísérletet úgy kezdj, hogy a kocsi a sín közepéhez közel legyen (ha szükséges, adj ki egy <code>M84</code> parancsot, majd kézzel mozgasd a kocsit középállásba). Meg kell találni a legnagyobb érzékenységet, amely megbízhatóan jelzi a végállást (a nagyobb érzékenységű beállítások kicsi vagy semmilyen mozgást nem eredményeznek). Jegyezd fel a kapott értéket <em>maximum_sensitivity</em> néven. (Ha a lehető legkisebb érzékenységet (SGTHRS=0 vagy sgt=63) kapjuk a kocsi elmozdulása nélkül, akkor valami nincs rendben a diag/sg_tst tűk bekötésével vagy konfigurációjával, és a folytatás előtt ki kell javítani.)</p>
 <p>A maximum_sensitivity keresésekor kényelmes lehet a különböző VALUE beállításokra ugrani (a VALUE paraméter kettéosztása érdekében). Ha ezt tesszük, akkor készüljünk fel arra, hogy a nyomtató leállításához adjunk ki egy <code>M112</code> parancsot, mivel egy nagyon alacsony érzékenységű beállítás miatt a tengely többször "beleütközhet" a sín végébe.</p>
@@ -1878,6 +1884,7 @@ gcode:
          # Állítsd be az áramerősséget nyomtatás közben
          SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
+
 <p>Az így kapott makró meghívható a <a href="Config_Reference.html#homing_override">homing_override konfigurációs szakasz</a> vagy a <a href="Slicers.html#klipper-gcode_macro">START_PRINT makró</a> segítségével.</p>
 <p>Vedd figyelembe, hogy ha a motorvezérlő áramát a kezdőpont felvétel során megváltoztatod, akkor a hangolási folyamatot újra el kell végezni.</p>
 <h3 id="tippek-corexy-gepek-szenzor-nelkuli-kezdopont-felvetelehez">Tippek CoreXY gépek szenzor nélküli kezdőpont felvételéhez<a class="headerlink" href="#tippek-corexy-gepek-szenzor-nelkuli-kezdopont-felvetelehez" title="Permanent link">&para;</a></h3>
@@ -1903,6 +1910,7 @@ gcode:
     G28 X0
     G1 X5 F1200
 </code></pre></div>
+
 <h2 id="a-motorvezerlo-beallitasainak-lekerdezese-es-diagnosztizalasa">A motorvezérlő beállításainak lekérdezése és diagnosztizálása<a class="headerlink" href="#a-motorvezerlo-beallitasainak-lekerdezese-es-diagnosztizalasa" title="Permanent link">&para;</a></h2>
 <p>A `<a href="G-Codes.html#dump_tmc">DUMP_TMC parancs</a> hasznos eszköz a motorvezérlők konfigurálásához és diagnosztizálásához. A Klipper által konfigurált összes mezőt, valamint a motorvezérlőt lekérdezhető összes mezőt jelenti.</p>
 <p>Az összes bejelentett mezőt az egyes motorvezérlők Trinamic adatlapja határozza meg. Ezek az adatlapok megtalálhatók a <a href="https://www.trinamic.com/">Trinamic weboldalán</a>. A DUMP_TMC eredményeinek értelmezéséhez szerezd be és tekintsd át a meghajtó Trinamic adatlapját.</p>

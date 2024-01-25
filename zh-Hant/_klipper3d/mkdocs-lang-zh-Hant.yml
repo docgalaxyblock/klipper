@@ -17,13 +17,10 @@ markdown_extensions:
   - toc:
       permalink: True
       toc_depth: 6
-  - admonition
   - attr_list
   - mdx_partial_gfm
   - mdx_truly_sane_lists
   - mdx_breakless_lists
-  - pymdownx.details
-  - pymdownx.superfences
 plugins:
   search:
     lang: ja

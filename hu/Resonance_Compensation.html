@@ -1635,6 +1635,7 @@
 shaper_freq_x: ...  # a tesztmodell X jelének frekvenciája
 shaper_freq_y: ...  # a tesztmodell Y jelének frekvenciája
 </code></pre></div>
+
 <p>A fenti példában a shaper_freq_x/y = 49.4.</p>
 <h3 id="bemeneti-formazo-kivalasztasa">Bemeneti formázó kiválasztása<a class="headerlink" href="#bemeneti-formazo-kivalasztasa" title="Permanent link">&para;</a></h3>
 <p>A Klipper számos bemeneti formázót támogat. Ezek a rezonanciafrekvenciát meghatározó hibákra való érzékenységükben és abban különböznek, hogy milyen mértékű simítást okoznak a nyomtatott alkatrészekben. Emellett néhány shapert, például a 2HUMP_EI és a 3HUMP_EI formázókat általában nem szabad használni shaper_freq = rezonanciafrekvenciával - ezek különböző megfontolásokból vannak beállítva, hogy egyszerre több rezonanciát csökkentsenek.</p>
@@ -1657,6 +1658,7 @@ shaper_freq_x: ...
 shaper_freq_y: ...
 shaper_type: mzv
 </code></pre></div>
+
 <p>Néhány megjegyzés a formázó kiválasztásáról:</p>
 <ul>
 <li>Az EI-formázó alkalmasabb lehet az Y tárgyasztalos nyomtatókhoz (ha a rezonanciafrekvencia és az ebből eredő simítás lehetővé teszi): mivel több szál kerül a mozgó tárgyasztalra, a tárgyasztal tömege nő, és a rezonanciafrekvencia csökken. Mivel az EI shaper robusztusabb a rezonanciafrekvencia-változásokkal szemben, jobban működhet nagy méretű alkatrészek nyomtatásakor.</li>
@@ -1736,6 +1738,7 @@ shaper_freq_x: 50
 shaper_freq_y: 50
 shaper_type: 2hump_ei
 </code></pre></div>
+
 <p>Folytassa a hangolást a <a href="#a-max_accel-kivalasztasa">A max_accel kiválasztása</a> szakaszban.</p>
 <h2 id="hibaelharitas-es-gyik">Hibaelhárítás és GYIK<a class="headerlink" href="#hibaelharitas-es-gyik" title="Permanent link">&para;</a></h2>
 <h3 id="nem-tudok-megbizhato-mereseket-vegezni-a-rezonanciafrekvenciakrol">Nem tudok megbízható méréseket végezni a rezonanciafrekvenciákról<a class="headerlink" href="#nem-tudok-megbizhato-mereseket-vegezni-a-rezonanciafrekvenciakrol" title="Permanent link">&para;</a></h3>
@@ -1757,6 +1760,7 @@ gcode:
   SET_DUAL_CARRIAGE CARRIAGE=0
   SET_INPUT_SHAPER SHAPER_TYPE_X=&lt;primary_carriage_shaper&gt; SHAPER_FREQ_X=&lt;primary_carriage_freq&gt; SHAPER_TYPE_Y=&lt;y_shaper&gt; SHAPER_FREQ_Y=&lt;y_freq&gt;
 </code></pre></div>
+
 <p>Note that <code>SHAPER_TYPE_Y</code> and <code>SHAPER_FREQ_Y</code> should be the same in both commands. It is also possible to put a similar snippet into the start g-code in the slicer, however then the shaper will not be enabled until any print is started.</p>
 <p>Note that the input shaper only needs to be configured once. Subsequent changes of the carriages or their modes via <code>SET_DUAL_CARRIAGE</code> command will preserve the configured input shaper parameters.</p>
 <h3 id="az-input_shaper-befolyasolja-a-nyomtatasi-idot">Az input_shaper befolyásolja a nyomtatási időt?<a class="headerlink" href="#az-input_shaper-befolyasolja-a-nyomtatasi-idot" title="Permanent link">&para;</a></h3>

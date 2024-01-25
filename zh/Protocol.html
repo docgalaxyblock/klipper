@@ -1557,6 +1557,7 @@ schedule_digital_out oid=8 clock=4000000 value=0
 queue_step oid=7 interval=7458 count=10 add=331
 queue_step oid=7 interval=11717 count=4 add=1281
 </code></pre></div>
+
 <p>有关可用命令的信息，请参阅 <a href="MCU_Commands.html">mcu 命令</a>文档。有关如何将 G-Code 文件转换为其相应的可读的微控制器命令信息，请参阅<a href="Debugging.html">调试</a>文档。</p>
 <p>本页提供了Klipper消息传递协议本身的高层描述。它描述了消息是如何被声明、以二进制格式编码（"压缩 "方案）和传输的。</p>
 <p>该协议的目标是在主机和微控制器之间建立一个无错误的通信通道，对微控制器来说是低延迟、低带宽和低复杂度的。</p>
@@ -1566,6 +1567,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>微控制器软件通过使用C代码中的DECL_COMMAND()宏来声明一个 “命令”。例如：</p>
 <div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
 </code></pre></div>
+
 <p>以上声明了一个名为 "update_digital_out "的命令。这允许主机 “invoke”这个命令，这将使得command_update_digital_out()C函数在微控制器中被执行。上述内容还表明，该命令需要两个整数参数。当command_update_digital_out()C代码被执行时，它将被传递一个包含这两个整数的数组--第一个对应于 "oid"，第二个对应于 "value"。</p>
 <p>一般来说，参数是用printf()风格的语法描述的（例如，"%u"）。这种格式化直接对应于人类可读的命令（例如，"update_digital_out oid=7 value=1"）。在上面的例子中，"value="是一个参数名称，"%c "表示该参数是一个整数。在内部，参数名只作为记录使用。在这个例子中，"%c "也是作为记录使用的，表示预期的整数是1字节宽度（声明的整数宽度不影响编解码）。</p>
 <p>微控制器固件构建的时候包含所有用DECL_COMMAND()声明的命令，确定其参数，并使得它们可以被调用。</p>
@@ -1573,6 +1575,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>当从微控制器向主机发送信息时会产生一个 "响应"。这些都是使用sendf()C语言宏来声明和发送的。例如：</p>
 <div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
 </code></pre></div>
+
 <p>以上传输了一个 "状态 "响应消息，其中包含两个整数参数（"时钟 "和 "状态"）。微控制器的构建会自动找到所有sendf()的调用，并为其生成编码器。sendf()函数的第一个参数描述了响应，它的格式与命令声明相同。</p>
 <p>主机可以为每个响应注册一个回调函数。因此，实际上，命令允许主机在微控制器上调用C函数，响应允许微控制器软件在主机上调用代码。</p>
 <p>sendf()宏只能从命令或任务处理程序中调用，而不能从中断或定时器中调用。代码不需要在收到命令的响应中发出sendf()，代码也不限制sendf()的调用次数，任务处理程序在在任何时候都可以调用sendf()。</p>
@@ -1580,6 +1583,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>为了简化调试，也有一个output()C函数。例如：</p>
 <div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
 </code></pre></div>
+
 <p>output()函数的用法与printf()相似–它的目的是生成和格式化任意的信息供人阅读。</p>
 <h3 id="_6">声明枚举<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>枚举允许主机代码对微控制器作为整数处理的参数使用字符串标识。它们在微控制器代码中被声明-例如：</p>
@@ -1587,21 +1591,25 @@ queue_step oid=7 interval=11717 count=4 add=1281
 
 DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
 </code></pre></div>
+
 <p>在第一个例子中，DECL_ENUMERATION()宏定义了一个枚举量可以用于任意的命令/响应消息，这个枚举量的参数名称为 "spi_bus "或参数名称后缀为"_spi_bus "。对于此参数，字符串 "spi "是一个有效的值，它将以一个零的整数值被传递。</p>
 <p>也可以声明一个枚举范围。在第二个例子中，"pin "参数（或任何后缀为"_pin "的参数）将接受PC0、PC1、PC2、...、PC7作为有效值。字符串将被转化成整数16、17、18...23进行传输。</p>
 <h3 id="_7">声明常量<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>常量也可以被导出。例子如下：</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
 </code></pre></div>
+
 <p>可以从微控制器向主机输出一个名为 "SERIAL_BAUD "，值为250000的常数。也可以将字符串声明成常量-例如：</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
 </code></pre></div>
+
 <h2 id="_8">底层消息编码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>为了实现上述RPC机制，每个命令和响应都被编码成二进制格式进行传输。本节介绍这个传输系统。</p>
 <h3 id="_9">消息块<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>所有从主机到微控制器以及从微控制器到主机的数据都包含在 "消息块 "中。一个消息块有一个两字节的头和一个三字节的尾。信息块的格式如下：</p>
 <div class="highlight"><pre><span></span><code>&lt;1 byte length&gt;&lt;1 byte sequence&gt;&lt;n-byte content&gt;&lt;2 byte crc&gt;&lt;1 byte sync&gt;
 </code></pre></div>
+
 <p>长度字节指示消息块中的字节数，包括头和尾的字节（因此消息的最短长度为5字节）。目前最大的消息块长度为64字节。序号字节的低4位是序列号，高4位总是0x10（高4位保留给未来用）。内容字节包含任意数据，其格式在下一节中描述。crc字节包含消息块的16位CCITT<a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC</a>，CRC计算包括头字节但不包括尾字节。同步字节为0x7e。</p>
 <p>消息块的格式是受<a href="https://en.wikipedia.org/wiki/High-Level_Data_Link_Control">HDLC</a>消息帧的启发。与HDLC一样，消息块在开始时可以选择包含一个额外的同步字符。与HDLC不同的是，同步字符并不专属于框架，也可以出现在消息块内容中（不需要转义）。</p>
 <h3 id="_10">消息块内容<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
@@ -1612,9 +1620,11 @@ update_digital_out oid=5 value=0
 get_config
 get_clock
 </code></pre></div>
+
 <p>并编码为下面八个VLQ整数：</p>
 <div class="highlight"><pre><span></span><code>&lt;id_update_digital_out&gt;&lt;6&gt;&lt;1&gt;&lt;id_update_digital_out&gt;&lt;5&gt;&lt;0&gt;&lt;id_get_config&gt;&lt;id_get_clock&gt;
 </code></pre></div>
+
 <p>为了对信息内容进行编解码，主机和微控制器都必须确保使用的命令的ID和每个命令对应的参数数量一致。因此，在上面的例子中，主机和微控制器都知道 "id_update_digital_out "后面总是跟着两个参数，而 "id_get_config "和 "id_get_clock "没有参数。主机和微控制器共享一个 "数据字典"，这个数据字典将命令描述（例如，"update_digital_out oid=%c value=%c"）映射到它们的整数命令ID。当处理数据时，解析器将知道一个给定的命令ID后预期有特定数量的VLQ编码参数。</p>
 <p>从微控制器发送到主机的块的消息内容遵循相同的格式。这些消息中的标识符是 "响应ID"，但它们的作用相同，并遵循相同的编码规则。事实上，从微控制器发送到主机的消息块在消息块内容中只包含一个响应。</p>
 <h4 id="_11">可变长度数值<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
@@ -1653,6 +1663,7 @@ get_clock
 <p>作为上述编码规则的例外，如果一个命令或响应的参数是一个动态字符串，那么该参数不会被编码为一个简单的VLQ整数。相反，它的编码方式是将长度作为一个VLQ编码的整数并跟着内容本身来传输：</p>
 <div class="highlight"><pre><span></span><code>&lt;VLQ encoded length&gt;&lt;n-byte contents&gt;
 </code></pre></div>
+
 <p>在数据字典中的命令描述使主机和微控制器都知道哪些命令参数使用简单的VLQ编码，哪些参数使用字符串编码。</p>
 <h2 id="_13">数据字典<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p>为了在微控制器和主机之间建立有意义的通信，双方必须商定一个 "数据字典"。这个数据字典包含了命令和响应的整数标识符及它们的描述。</p>

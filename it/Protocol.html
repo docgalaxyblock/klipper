@@ -1557,6 +1557,7 @@ schedule_digital_out oid=8 clock=4000000 value=0
 queue_step oid=7 interval=7458 count=10 add=331
 queue_step oid=7 interval=11717 count=4 add=1281
 </code></pre></div>
+
 <p>Vedere il documento <a href="MCU_Commands.html">mcu commands</a> per informazioni sui comandi disponibili. Vedere il documento <a href="Debugging.html">debugging</a> per informazioni su come tradurre un file G-Code nei corrispondenti comandi del microcontrollore leggibili dall'uomo.</p>
 <p>Questa pagina fornisce una descrizione di alto livello del protocollo di messaggistica Klipper. Descrive come i messaggi sono dichiarati, codificati in formato binario (lo schema di "compressione") e trasmessi.</p>
 <p>L'obiettivo del protocollo è abilitare un canale di comunicazione privo di errori tra l'host e il microcontrollore che sia a bassa latenza, bassa larghezza di banda e bassa complessità per il microcontrollore.</p>
@@ -1566,6 +1567,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Il software del microcontrollore dichiara un "comando" utilizzando la macro DECL_COMMAND() nel codice C. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
 </code></pre></div>
+
 <p>Quanto sopra dichiara un comando denominato "update_digital_out". Ciò consente all'host di "richiamare" questo comando che causerebbe l'esecuzione della funzione C command_update_digital_out() nel microcontrollore. Quanto sopra indica anche che il comando accetta due parametri interi. Quando viene eseguito il codice C command_update_digital_out(), verrà passata una matrice contenente questi due numeri interi: il primo corrispondente all'"oid" e il secondo corrispondente al "valore".</p>
 <p>In generale, i parametri sono descritti con la sintassi di stile printf() (ad esempio, "%u"). La formattazione corrisponde direttamente alla visualizzazione leggibile dei comandi (ad es. "update_digital_out oid=7 value=1"). Nell'esempio precedente, "value=" è un nome di parametro e "%c" indica che il parametro è un numero intero. Internamente, il nome del parametro viene utilizzato solo come documentazione. In questo esempio, "%c" viene utilizzato anche come documentazione per indicare che l'intero previsto ha una dimensione di 1 byte (la dimensione intera dichiarata non influisce sull'analisi o sulla codifica).</p>
 <p>La build del microcontrollore raccoglierà tutti i comandi dichiarati con DECL_COMMAND(), ne determinerà i parametri e farà in modo che siano richiamabili.</p>
@@ -1573,6 +1575,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Per inviare informazioni dal microcontrollore all'host viene generata una "risposta". Questi sono sia dichiarati che trasmessi usando la macro C sendf(). Per esempio:</p>
 <div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
 </code></pre></div>
+
 <p>Quanto sopra trasmette un messaggio di risposta di "stato" che contiene due parametri interi ("clock" e "status"). La build del microcontrollore trova automaticamente tutte le chiamate sendf() e genera codificatori per esse. Il primo parametro della funzione sendf() descrive la risposta ed è nello stesso formato delle dichiarazioni di comando.</p>
 <p>L'host può organizzare la registrazione di una funzione di richiamata per ogni risposta. Quindi, in effetti, i comandi consentono all'host di invocare le funzioni C nel microcontrollore e le risposte consentono al software del microcontrollore di richiamare il codice nell'host.</p>
 <p>La macro sendf() deve essere invocata solo da gestori di comandi o attività e non deve essere invocata da interrupt o timer. Il codice non ha bisogno di emettere un sendf() in risposta a un comando ricevuto, non è limitato nel numero di volte in cui sendf() può essere invocato e può invocare sendf() in qualsiasi momento da un task handler.</p>
@@ -1580,6 +1583,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Per semplificare il debug, esiste anche una funzione C output(). Per esempio:</p>
 <div class="highlight"><pre><span></span><code>output(&quot;Il valore di%u è %s con dimensione %u.&quot;, x, buf, buf_len);
 </code></pre></div>
+
 <p>La funzione output() è simile nell'uso a printf() - è intesa per generare e formattare messaggi arbitrari per il 'consumo umano'.</p>
 <h3 id="dichiarazione-di-enumerazioni">Dichiarazione di enumerazioni<a class="headerlink" href="#dichiarazione-di-enumerazioni" title="Permanent link">&para;</a></h3>
 <p>Le enumerazioni consentono al codice host di utilizzare identificatori di stringa per i parametri che il microcontrollore gestisce come numeri interi. Sono dichiarati nel codice del microcontrollore, ad esempio:</p>
@@ -1587,21 +1591,25 @@ queue_step oid=7 interval=11717 count=4 add=1281
 
 DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
 </code></pre></div>
+
 <p>Se il primo esempio, la macro DECL_ENUMERATION() definisce un'enumerazione per qualsiasi messaggio di comando/risposta con nome parametro "spi_bus" o nome parametro con suffisso "_spi_bus". Per quei parametri la stringa "spi" è un valore valido e verrà trasmessa con un valore intero pari a zero.</p>
 <p>È anche possibile dichiarare un intervallo di enumerazione. Nel secondo esempio, un parametro "pin" (o qualsiasi parametro con suffisso "_pin") accetterebbe PC0, PC1, PC2, ..., PC7 come valori validi. Le stringhe verranno trasmesse con numeri interi 16, 17, 18, ..., 23.</p>
 <h3 id="dichiarazione-di-costanti">Dichiarazione di costanti<a class="headerlink" href="#dichiarazione-di-costanti" title="Permanent link">&para;</a></h3>
 <p>Le costanti possono anche essere esportate. Ad esempio, quanto segue:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
 </code></pre></div>
+
 <p>esporterebbe una costante denominata "SERIAL_BAUD" con un valore di 250000 dal microcontrollore all'host. È anche possibile dichiarare una costante che è una stringa, ad esempio:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
 </code></pre></div>
+
 <h2 id="codifica-dei-messaggi-di-basso-livello">Codifica dei messaggi di basso livello<a class="headerlink" href="#codifica-dei-messaggi-di-basso-livello" title="Permanent link">&para;</a></h2>
 <p>Per realizzare il meccanismo RPC di cui sopra, ogni comando e risposta viene codificato in un formato binario per la trasmissione. Questa sezione descrive il sistema di trasmissione.</p>
 <h3 id="blocchi-di-messaggi">Blocchi di messaggi<a class="headerlink" href="#blocchi-di-messaggi" title="Permanent link">&para;</a></h3>
 <p>Tutti i dati inviati dall'host al microcontrollore e viceversa sono contenuti in "blocchi di messaggi". Un blocco di messaggi ha un'intestazione di due byte e un trailer di tre byte. Il formato di un blocco di messaggi è:</p>
 <div class="highlight"><pre><span></span><code>&lt;1 byte lunghezza&gt;&lt;1 byte sequenza&gt;&lt;n-byte contenuto&gt;&lt;2 byte crc&gt;&lt;1 byte sync&gt;
 </code></pre></div>
+
 <p>Il byte di lunghezza contiene il numero di byte nel blocco di messaggi inclusi i byte di intestazione e trailer (quindi la lunghezza minima del messaggio è 5 byte). La lunghezza massima del blocco di messaggi è attualmente di 64 byte. Il byte di sequenza contiene un numero di sequenza di 4 bit nei bit di ordine inferiore e i bit di ordine superiore contengono sempre 0x10 (i bit di ordine superiore sono riservati per un uso futuro). I byte di contenuto contengono dati arbitrari e il relativo formato è descritto nella sezione seguente. I byte crc contengono un CCITT <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC</a> a 16 bit del blocco di messaggi inclusi i byte di intestazione ma esclusi i byte di trailer. Il byte di sincronizzazione è 0x7e.</p>
 <p>Il formato del blocco di messaggi si ispira ai telegrammi <a href="https://en.wikipedia.org/wiki/High-Level_Data_Link_Control">HDLC</a>. Come in HDLC, il blocco di messaggi può contenere facoltativamente un carattere di sincronizzazione aggiuntivo all'inizio del blocco. A differenza di HDLC, un carattere di sincronizzazione non è esclusivo del framing e può essere presente nel contenuto del blocco di messaggi.</p>
 <h3 id="contenuto-del-blocco-messaggi">Contenuto del blocco messaggi<a class="headerlink" href="#contenuto-del-blocco-messaggi" title="Permanent link">&para;</a></h3>
@@ -1612,9 +1620,11 @@ update_digital_out oid=5 value=0
 get_config
 get_clock
 </code></pre></div>
+
 <p>e codificato nei seguenti otto interi VLQ:</p>
 <div class="highlight"><pre><span></span><code>&lt;id_update_digital_out&gt;&lt;6&gt;&lt;1&gt;&lt;id_update_digital_out&gt;&lt;5&gt;&lt;0&gt;&lt;id_get_config&gt;&lt;id_get_clock&gt;
 </code></pre></div>
+
 <p>Per codificare e analizzare il contenuto del messaggio, sia l'host che il microcontrollore devono concordare gli ID comando e il numero di parametri di ciascun comando. Quindi, nell'esempio sopra, sia l'host che il microcontrollore saprebbero che "id_update_digital_out" è sempre seguito da due parametri e "id_get_config" e "id_get_clock" hanno zero parametri. L'host e il microcontrollore condividono un "dizionario dei dati" che mappa le descrizioni dei comandi (ad esempio, "update_digital_out oid=%c value=%c") ai loro ID di comando interi. Durante l'elaborazione dei dati, il parser saprà di aspettarsi un numero specifico di parametri codificati VLQ a seguito di un determinato ID comando.</p>
 <p>Il contenuto del messaggio per i blocchi inviati dal microcontrollore all'host segue lo stesso formato. Gli identificatori in questi messaggi sono "ID di risposta", ma servono allo stesso scopo e seguono le stesse regole di codifica. In pratica, i blocchi di messaggi inviati dal microcontrollore all'host non contengono mai più di una risposta nel contenuto del blocco di messaggi.</p>
 <h4 id="quantita-di-lunghezza-variabile">Quantità di lunghezza variabile<a class="headerlink" href="#quantita-di-lunghezza-variabile" title="Permanent link">&para;</a></h4>
@@ -1653,6 +1663,7 @@ get_clock
 <p>Come eccezione alle regole di codifica precedenti, se un parametro di un comando o di una risposta è una stringa dinamica, il parametro non viene codificato come un semplice intero VLQ. Invece viene codificato trasmettendo la lunghezza come intero codificato VLQ seguito dal contenuto stesso:</p>
 <div class="highlight"><pre><span></span><code>&lt;VLQ encoded length&gt;&lt;n-byte contents&gt;
 </code></pre></div>
+
 <p>Le descrizioni dei comandi che si trovano nel dizionario dei dati consentono sia all'host che al microcontrollore di sapere quali parametri del comando utilizzano la semplice codifica VLQ e quali parametri utilizzano la codifica delle stringhe.</p>
 <h2 id="dizionario-dati">Dizionario dati<a class="headerlink" href="#dizionario-dati" title="Permanent link">&para;</a></h2>
 <p>Affinché vengano stabilite comunicazioni significative tra microcontrollore e host, entrambe le parti devono concordare un "dizionario dei dati". Questo dizionario di dati contiene gli identificatori interi per comandi e risposte insieme alle relative descrizioni.</p>

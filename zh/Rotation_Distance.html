@@ -1437,9 +1437,11 @@
 <p>你的 3D 打印机的最初设计需要从旋转距离换算 <code>steps_per_mm</code>。如果您知道steps_per_mm，则可以使用此通用公式获得原始旋转距离：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; / &lt;steps_per_mm&gt;
 </code></pre></div>
+
 <p>或者，如果你有一个旧版本的Klipper配置并知道<code>step_distance</code>参数，你可以使用这个公式：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;full_steps_per_rotation&gt; * &lt;microsteps&gt; * &lt;step_distance&gt;
 </code></pre></div>
+
 <p><code>&lt;full_steps_per_rotation&gt;</code> 设置由步进电机的类型决定。大多数步进电机是“1.8 度步进电机”，因此每转 200 步（360 除以 1.8 等于 200）。一些步进电机是“0.9 度步进电机”，因此每转有 400 整步。其他类型的步进电机很少见。如果不确定，请不要在配置文件中设置 full_steps_per_rotation 并在上面的公式中使用 200。</p>
 <p><code>&lt;microsteps&gt;</code>（微步）设置由取决于步进电机驱动型号。大多数驱动使用 16 个微步。如果不确定，请在配置中设置 <code>microsteps: 16</code>，并在上面的公式中使用 16。</p>
 <p>几乎所有的打印机在X、Y和Z型轴上的<code>旋转距离</code>都应该是整数。如果上述公式得出的旋转距离在整数的0.01以内，那么就把最终值四舍五入到该整数。</p>
@@ -1463,11 +1465,13 @@
 <p>首先确定皮带的类型。大多数打印机使用2毫米的皮带间距（也就是说，皮带上的每个齿相距2毫米）。然后计算步进电机滑轮上的齿数。然后计算出rotation_distance （旋转距离）为：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;belt_pitch&gt; * &lt;number_of_teeth_on_pulley&gt;
 </code></pre></div>
+
 <p>例如，如果一台打印机有一条2毫米间距的皮带并使用一个20齿的皮带轮，那么旋转距离为40。</p>
 <h3 id="_4">使用丝杆的轴<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>使用以下公式可以简单的计算出常见的旋转距离：</p>
 <div class="highlight"><pre><span></span><code>rotation_distance = &lt;screw_pitch&gt; * &lt;number_of_separate_threads&gt;
 </code></pre></div>
+
 <p>例如，常见的"T8丝杆"的旋转距离为8（它的间距为2mm，有4个独立的螺纹）。</p>
 <p>老式打印机的"螺杆"在导螺杆上只有一个"螺纹"，因此旋转距离是螺杆的间距。(例如，M6公制杆的旋转距离为1，M8杆的旋转距离为1.25。</p>
 <h3 id="_5">挤出机<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>

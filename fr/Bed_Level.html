@@ -1390,20 +1390,24 @@
 Recv: // Finish with ACCEPT or ABORT command.
 Recv: // Z position: ?????? --&gt; 5.000 &lt;-- ??????
 </code></pre></div>
+
 <p>La hauteur actuelle de la buse (telle que l'imprimante la calcule) est indiquée entre "--&gt; &lt;--". Le nombre à droite est la hauteur du dernier essai de sondage juste supérieure à la hauteur actuelle, et à gauche c'est la hauteur du dernier essai de sondage inférieur à la hauteur actuelle (ou ?????? si aucune tentative n'a été effectuée).</p>
 <p>Placez le papier entre la buse et le lit. Il peut être utile de plier un coin du papier pour qu'il soit plus facile à saisir. (Essayez de ne pas appuyer sur le lit lorsque vous déplacez le papier d'avant en arrière.)</p>
 <p><img alt="test du papier" src="img/paper-test.jpg" /></p>
 <p>Utilisez la commande TESTZ pour demander à la buse de se rapprocher du papier. Par exemple :</p>
 <div class="highlight"><pre><span></span><code>TESTZ Z=-0.1
 </code></pre></div>
+
 <p>La commande TESTZ déplacera la buse à une distance relative de la position actuelle de la buse. (Ainsi, <code>Z = -0.1</code> demande à la buse de se rapprocher du lit de 0,1 mm.) Une fois que la buse a cessé de bouger, poussez le papier d'avant en arrière pour vérifier si la buse est en contact avec le papier et pour sentir la quantité de frottement. Continuez à émettre des commandes TESTZ jusqu'à ce que vous ressentiez une légère friction lors du test avec le papier.</p>
 <p>Si il y a trop de frottement, on peut utiliser une valeur Z positive pour déplacer la buse vers le haut. Il est également possible d'utiliser <code>TESTZ Z=+</code> ou <code>TESTZ Z=-</code> pour "dichotomiser" la dernière position - c'est-à-dire se déplacer vers une position à mi-chemin entre deux positions. Par exemple, si l'on reçoit l'invite suivante d'une commande TESTZ :</p>
 <div class="highlight"><pre><span></span><code>Recv: // Z position: 0.130 --&gt; 0.230 &lt;-- 0.280
 </code></pre></div>
+
 <p>Ensuite, un 'TESTZ Z=-' déplacerait la buse vers une position Z de 0,180 (à mi-chemin entre 0,130 et 0,230). On peut utiliser cette fonctionnalité pour aider à réduire rapidement à un frottement constant. Il est également possible d'utiliser <code>Z=++</code> et <code>Z=--</code> pour revenir directement à une mesure passée - par exemple, après l'invite ci-dessus, une commande <code>TESTZ Z=--</code> déplacerait la buse vers un Z position de 0,130.</p>
 <p>Après réglé la légère force de friction, exécutez la commande ACCEPT :</p>
 <div class="highlight"><pre><span></span><code>ACCEPT
 </code></pre></div>
+
 <p>Cela validera la hauteur Z donnée et enregistrera la valeur d'étalonnage.</p>
 <p>La force de friction ressentie n'est pas cruciale, tout comme la quantité de dilatation thermique et la largeur exacte du papier ne sont pas cruciales. Essayez simplement d'obtenir la même quantité de frottement à chaque fois que vous exécutez le test.</p>
 <p>Si quelque chose ne va pas pendant le test, on peut utiliser la commande <code>ABORT</code> pour quitter l'outil d'étalonnage.</p>

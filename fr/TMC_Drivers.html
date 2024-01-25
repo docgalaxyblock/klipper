@@ -1800,6 +1800,7 @@ rotation_distance: 40
 homing_speed: 20
 ...
 </code></pre></div>
+
 <h4 id="configurer-printercfg-pour-une-mise-a-lorigine-sans-capteur">Configurer 'printer.cfg' pour une mise à l'origine sans capteur<a class="headerlink" href="#configurer-printercfg-pour-une-mise-a-lorigine-sans-capteur" title="Permanent link">&para;</a></h4>
 <p>Le paramètre <code>homing_retract_dist</code> doit être défini sur zéro dans la section de configuration <code>stepper_x</code> pour désactiver le deuxième mouvement de mise à l'origine. La deuxième tentative de mise à l'origine n'ajoute pas de valeur lors de l'utilisation d'une mise à l'origine sans capteur, elle ne fonctionnera pas de manière fiable et introduira des erreurs dans le processus de réglage.</p>
 <p>Assurez-vous que le paramètre <code>hold_current</code> n’est pas spécifié dans la section Pilote TMC de la configuration. (Si un hold_current est réglé, le moteur s’arrête lorsque le chariot est appuyé contre l’extrémité du rail, et la réduction du courant dans cette position peut entraîner le déplacement du chariot - ce qui entraînera de mauvaises performances et perturbera le processus de réglage.)</p>
@@ -1814,6 +1815,7 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>Un exemple de configuration de tmc2130 ou tmc5160 pourrait ressembler à :</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 # Broche connectée à TMC DIAG1  (ou utilisez diag0_pin / DIAG0 pin)
@@ -1825,6 +1827,7 @@ endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>Un exemple de configuration de tmc2660 pourrait ressembler à :</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64     # -64 est la valeur la plus sensible,, 63 est moins sensible
@@ -1835,14 +1838,17 @@ endstop_pin: ^PA1   # Broche connectée à TMC SG_TST
 homing_retract_dist: 0
 ...
 </code></pre></div>
+
 <p>Les exemples ci-dessus ne montrent que les paramètres spécifiques à la mise à l'origine sans capteur. Voir la <a href="Config_Reference.html#tmc-stepper-driver-configuration">référence de configuration</a> pour toutes les options disponibles.</p>
 <h4 id="trouvez-la-sensibilite-la-plus-elevee-qui-fonctionne-avec-succes">Trouvez la sensibilité la plus élevée qui fonctionne avec succès<a class="headerlink" href="#trouvez-la-sensibilite-la-plus-elevee-qui-fonctionne-avec-succes" title="Permanent link">&para;</a></h4>
 <p>Placez le chariot près du centre du rail. Utilisez la commande SET_TMC_FIELD pour définir la sensibilité la plus élevée. Pour un tmc2209 :</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
+
 <p>Pour un tmc2130, tmc5160 et tmc2660 :</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
 </code></pre></div>
+
 <p>Émettez ensuite une commande <code>G28 X0</code> et vérifiez que l'axe ne bouge pas du tout ou s'arrête rapidement. Si l'axe ne s'arrête pas, émettez un <code>M112</code> pour arrêter l'imprimante - quelque chose n'est pas correct avec le câblage ou la configuration de la broche diag/sg_tst et ce doit être corrigé avant de continuer.</p>
 <p>Ensuite, diminuez continuellement la sensibilité du paramètre <code>VALUE</code> et exécutez à nouveau les commandes <code>SET_TMC_FIELD</code> <code>G28 X0</code> pour trouver la sensibilité la plus élevée qui permet au chariot de se déplacer et de s'arrêter en butée. (Pour les pilotes tmc2209, cela diminuera SGTHRS, pour les autres pilotes, cela augmentera sgt.). Il devrait être possible de trouver la sensibilité la plus élevée et fiable (les réglages avec une sensibilité plus élevée entraînant peu ou pas de mouvement). Notez la valeur trouvée comme <em>maximum_sensitivity</em>. (Si la sensibilité minimale possible (SGTHRS = 0 ou sgt = 63) est obtenue sans aucun mouvement du chariot, alors quelque chose ne fonctionne pas aun niveau câblage ou configuration de la broche diag/sg_tst et il faut corriger le problème avant de continuer.)</p>
 <p>Lors de la recherche de maximum_sensitivity, il peut être pratique de passer à différents paramètres VALUE (travaillez le paramètre VALUE par dichotomie pour plus d'efficacité). Si vous procédez ainsi, préparez-vous à émettre une commande <code>M112</code> pour arrêter l'imprimante, car un réglage avec une sensibilité trop faible peut entraîner un "cognement" répété de l'axe contre l'extrémité du rail.</p>
@@ -1878,6 +1884,7 @@ gcode :
     # Remise du courant d&#39;impression
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
+
 <p>La macro peut être appelée depuis une <a href="Config_Reference.html#homing_override">section de configuration homing_override</a> ou depuis une <a href="Slicers.html#klipper-gcode_macro">macro START_PRINT</a>.</p>
 <p>Notez que si le courant du pilote pas à pas lors de la mise à l'origine est modifié, le processus de réglage doit être entièrement refait.</p>
 <h3 id="conseils-pour-la-mise-a-lorigine-sans-capteur-sur-corexy">Conseils pour la mise à l'origine sans capteur sur CoreXY<a class="headerlink" href="#conseils-pour-la-mise-a-lorigine-sans-capteur-sur-corexy" title="Permanent link">&para;</a></h3>
@@ -1903,6 +1910,7 @@ gcode:
     G28 X0
     G1 X5 F1200
 </code></pre></div>
+
 <h2 id="interroger-et-diagnostiquer-les-informations-du-pilote-pas-a-pas">Interroger et diagnostiquer les informations du pilote pas à pas<a class="headerlink" href="#interroger-et-diagnostiquer-les-informations-du-pilote-pas-a-pas" title="Permanent link">&para;</a></h2>
 <p>La `<a href="G-Codes.html#dump_tmc">commande DUMP_TMC</a> est un outil utile lors de la configuration et du diagnostic des pilotes. Il signalera tous les champs configurés par Klipper ainsi que tous les champs pouvant être interrogés à partir du pilote.</p>
 <p>Tous les champs signalés sont définis dans la fiche technique de Trinamic pour chaque pilote. Ces fiches techniques sont disponibles sur le <a href="https://www.trinamic.com/">site Internet de Trinamic</a>. Obtenez et examinez la fiche technique de Trinamic du pilote pas à pas afin d'interpréter correctement les résultats d'un DUMP_TMC.</p>

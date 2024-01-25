@@ -1453,13 +1453,15 @@ kernel for debugging purposes. A log of these messages may be of use
 in diagnostics.</p>
 <p>The Linux <a href="https://github.com/linux-can/can-utils">can-utils</a> tool
 provides the capture software. It is typically installed on a machine
-by running:
-<div class="highlight"><pre><span></span><code>sudo apt update &amp;&amp; sudo apt install can-utils
-</code></pre></div></p>
+by running:</p>
+<div class="highlight"><pre><span></span><code>sudo apt-get update &amp;&amp; sudo apt-get install can-utils
+</code></pre></div>
+
 <p>Once installed, one may obtain a capture of all CAN bus messages on an
-interface with the following command:
+interface with the following command:</p>
 <div class="highlight"><pre><span></span><code>candump -tz -Ddex can0,#FFFFFFFF &gt; mycanlog
-</code></pre></div></p>
+</code></pre></div>
+
 <p>One can view the resulting log file (<code>mycanlog</code> in the example above)
 to see each raw CAN bus message that was sent and received by Klipper.
 Understanding the content of these messages will likely require
@@ -1469,9 +1471,10 @@ and Klipper's <a href="MCU_Commands.html">MCU commands</a>.</p>
 <p>One may use the <code>parsecandump.py</code> tool to parse the low-level Klipper
 micro-controller messages contained in a candump log. Using this tool
 is an advanced topic that requires knowledge of Klipper
-<a href="MCU_Commands.html">MCU commands</a>. For example:
+<a href="MCU_Commands.html">MCU commands</a>. For example:</p>
 <div class="highlight"><pre><span></span><code>./scripts/parsecandump.py mycanlog 108 ./out/klipper.dict
-</code></pre></div></p>
+</code></pre></div>
+
 <p>This tool produces output similar to the <a href="Debugging.html#translating-gcode-files-to-micro-controller-commands">parsedump
 tool</a>. See
 the documentation for that tool for information on generating the

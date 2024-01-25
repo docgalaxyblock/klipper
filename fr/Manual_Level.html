@@ -1397,9 +1397,11 @@
 <p>Pour effectuer un étalonnage de la fin de course Z, placez l'imprimante à l'origine, déplacez la tête vers une position Z située à au moins cinq millimètres au-dessus du lit (si ce n'est déjà fait), déplacez ensuite la tête vers une position XY près du centre de le lit, puis accédez à l'aide du terminal exécutez :</p>
 <div class="highlight"><pre><span></span><code>Z_ENDSTOP_CALIBRATE
 </code></pre></div>
+
 <p>Suivez ensuite les étapes décrites dans <a href="Bed_Level.html#the-paper-test">"le test du papier"</a> pour déterminer la distance réelle entre la buse et le lit à l'emplacement donné. Une fois ces étapes terminées, on peut taper <code>ACCEPT</code> pour valider la position et enregistrer les résultats dans le fichier de configuration avec :</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
+
 <p>Il est préférable d'utiliser un interrupteur de fin de course Z à l'extrémité de l'axe Z opposée au lit (il est plus sécurisant d'effectuer le retour au point d'origine loin du lit). Cependant, si l'on doit se diriger vers le lit, il est recommandé de régler la butée de fin de course de manière à ce qu'elle se déclenche à une petite distance (par exemple, 0,5 mm) au-dessus du lit. Presque tous les interrupteurs de fin de course peuvent être enfoncés en toute sécurité à une petite distance au-delà de leur point de déclenchement. Lorsque cela est fait, on devrait constater que la commande <code>Z_ENDSTOP_CALIBRATE</code> rapporte une petite valeur positive (par exemple, 0,5 mm) pour la position Z_endstop. Déclencher la butée de fin de course alors qu'elle est encore à une certaine distance du lit réduit le risque d'écrasement involontaire de la buse sur le lit.</p>
 <p>Certaines imprimantes laissent la possibilité d'ajuster manuellement l'emplacement de l'interrupteur de fin de course. Cependant, il est recommandé d'effectuer le positionnement de la butée Z dans le logiciel avec Klipper - une fois que la butée est bien positionné, on peut faire d'autres ajustements en exécutant Z_ENDSTOP_CALIBRATE ou en mettant à jour manuellement la position Z_endstop dans le fichier de configuration.</p>
 <h2 id="reglage-des-vis-de-mise-a-niveau-du-lit">Réglage des vis de mise à niveau du lit<a class="headerlink" href="#reglage-des-vis-de-mise-a-niveau-du-lit" title="Permanent link">&para;</a></h2>
@@ -1410,10 +1412,12 @@ screw1: 100, 50
 screw2: 100, 150
 screw3: 150, 100
 </code></pre></div>
+
 <p>Si la vis de réglage se trouve sous le lit, spécifiez la position XY directement au-dessus de la vis. Si la vis est à l'extérieur du lit, spécifiez une position XY la plus proche de la vis tout en restant dans les limites du lit.</p>
 <p>Une fois que le fichier de configuration est prêt, exécutez <code>RESTART</code> pour charger la nouvelle configuration, puis vous pouvez démarrer l'outil en exécutant :</p>
 <div class="highlight"><pre><span></span><code>BED_SCREWS_ADJUST
 </code></pre></div>
+
 <p>Cet outil va déplacer la buse de l'imprimante vers chaque emplacement XY de vis, puis déplacera la buse à une hauteur Z = 0. À ce stade, on peut utiliser le "test du papier" pour ajuster la vis de réglage directement sous la buse. Voir les informations décrites dans <a href="Bed_Level.html#the-paper-test">"le test du papier"</a>, mais ajustez la vis de réglage au lieu de déplacer la buse à différentes hauteurs. Ajustez la vis de réglage jusqu'à ce qu'il y ait une petite friction lorsque vous poussez le papier d'avant en arrière.</p>
 <p>Une fois la vis ajustée de manière à ressentir une légère friction, exécutez la commande <code>ACCEPT</code> ou <code>ADJUSTED</code>. Utilisez la commande <code>ADJUSTED</code> si la vis du lit nécessitait un ajustement (généralement plus d'environ 1/8 de tour de vis). Utilisez la commande <code>ACCEPTER</code> si aucun ajustement significatif n'est nécessaire. Les deux commandes feront passer l'outil à la vis suivante. (Lorsqu'une commande <code>ADJUSTED</code> est utilisée, l'outil programme un cycle supplémentaire d'ajustements des vis ; l'outil se termine avec succès lorsque toutes les vis d'assise sont vérifiées pour ne pas nécessiter d'ajustements importants.) On peut utiliser la commande <code>ABORT</code> pour quitter l'outil plus tôt.</p>
 <p>Ce système fonctionne mieux lorsque l'imprimante a une surface d'impression plate (telle que du verre) et des rails rectilignes. Une fois l'outil de nivellement du lit terminé avec succès, le lit est prêt pour l'impression.</p>
@@ -1431,6 +1435,7 @@ screw2_fine_adjust: 300, 300
 screw3: 150, 100
 screw3_fine_adjust: 0, 100
 </code></pre></div>
+
 <p>Lorsque cette fonctionnalité est activée, la commande <code>BED_SCREWS_ADJUST</code> demandera d'abord des ajustements grossiers directement au-dessus de chaque position de vis, et une fois ceux-ci acceptés, il demandera des ajustements fins aux emplacements supplémentaires. Continuez à utiliser <code>ACCEPT</code> et <code>ADJUSTED</code> à chaque position.</p>
 <h2 id="reglage-des-vis-de-mise-a-niveau-du-lit-a-laide-de-la-sonde-de-lit">Réglage des vis de mise à niveau du lit à l'aide de la sonde de lit<a class="headerlink" href="#reglage-des-vis-de-mise-a-niveau-du-lit-a-laide-de-la-sonde-de-lit" title="Permanent link">&para;</a></h2>
 <p>C'est une autre façon de calibrer le niveau du lit avec la sonde de lit. Pour l'utiliser, vous devez disposer d'une sonde Z (BL Touch, capteur inductif, etc.).</p>
@@ -1448,6 +1453,7 @@ horizontal_move_z: 10.
 speed: 50.
 screw_thread: CW-M3
 </code></pre></div>
+
 <p>La vis1 est toujours le point de référence pour les autres, donc le système suppose que la vis1 est à la bonne hauteur. Exécutez toujours <code>G28</code> en premier, puis exécutez <code>SCREWS_TILT_CALCULATE</code> - cela devrait produire une sortie similaire à :</p>
 <div class="highlight"><pre><span></span><code>Send: G28
 Recv: ok
@@ -1459,6 +1465,7 @@ Recv: // rear right screw : y=155.0, y=190.0, z=2.71500 : adjust CCW 00:50
 Recv: // read left screw : x=-5.0, y=190.0, z=2.47250 : adjust CW 00:02
 Recv: ok
 </code></pre></div>
+
 <p>Cela signifie que :</p>
 <ul>
 <li>la vis avant gauche est le point de référence vous ne devez pas la changer.</li>

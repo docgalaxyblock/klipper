@@ -1456,10 +1456,12 @@ make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-skr-v1.3
 sudo service klipper start
 </code></pre></div>
+
 <p>C'est à l'utilisateur de déterminer l'emplacement du périphérique et le nom de la carte. Si un utilisateur a besoin de flasher plusieurs cartes, <code>flash-sdcard.sh</code> (ou <code>make flash</code> si approprié) doit être exécuté pour chaque carte avant de redémarrer le service Klipper.</p>
 <p>Les cartes supportées peuvent être listées avec la commande suivante :</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -l
 </code></pre></div>
+
 <p>Si votre carte ne figure pas dans la liste, il peut être nécessaire d'ajouter une nouvelle définition de carte comme <a href="#board-definitions">décrit ci-dessous</a>.</p>
 <h2 id="utilisation-avancee">Utilisation avancée<a class="headerlink" href="#utilisation-avancee" title="Permanent link">&para;</a></h2>
 <p>Les commandes ci-dessus supposent que votre MCU se connecte à la vitesse de transmission par défaut de 250000 et que le firmware se trouve dans <code>~/klipper/out/klipper.bin</code>. Le script <code>flash-sdcard.sh</code> fournit des options pour changer ces valeurs par défaut. Toutes les options peuvent être visualisées par l'écran d'aide :</p>
@@ -1480,12 +1482,15 @@ optional arguments:
   -b &lt;baud&gt;       serial baud rate (default is 250000)
   -f &lt;firmware&gt;   path to klipper.bin
 </code></pre></div>
+
 <p>Si votre carte est flashée avec un micro logiciel qui se connecte à une vitesse (baud rate) personnalisée, il est possible de mettre à jour en spécifiant l'option <code>-b</code> :</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -b 115200 /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Si vous souhaitez flasher une version de Klipper située ailleurs que dans l'emplacement par défaut, vous pouvez le faire en spécifiant l'option <code>-f</code> :</p>
 <div class="highlight"><pre><span></span><code>./scripts/flash-sdcard.sh -f ~/downloads/klipper.bin /dev/ttyAMA0 btt-skr-v1.3
 </code></pre></div>
+
 <p>Notez que lors de la mise à jour d'un MKS Robin E3, il n'est pas nécessaire d'exécuter manuellement <code>update_mks_robin.py</code> et de fournir le binaire résultant à <code>flash-sdcard.sh</code>. Cette procédure est automatisée pendant le processus de téléversement.</p>
 <p>L'option <code>-c</code> est utilisée pour effectuer une opération de contrôle ou de vérification uniquement pour tester si la carte exécute correctement le firmware spécifié. Cette option est principalement destinée aux cas où un cycle d'alimentation manuel est nécessaire pour compléter la procédure de flashage, comme avec des chargeurs de démarrage utilisant le mode SDIO au lieu de SPI pour accéder à leurs cartes SD. (Voir Caveats ci-dessous) Mais, elle peut également être utilisée à tout moment pour vérifier si le code flashé dans la carte correspond à la version dans votre dossier de construction sur toute carte supportée.</p>
 <h2 id="avertissements">Avertissements<a class="headerlink" href="#avertissements" title="Permanent link">&para;</a></h2>
@@ -1505,6 +1510,7 @@ optional arguments:
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Les champs suivants peuvent être précisés :</p>
 <ul>
 <li><code>mcu</code> : le type de mcu. Il peut être récupéré après avoir configuré la construction via <code>make menuconfig</code> en exécutant <code>cat .config | grepCONFIG_MCU</code>. Ce champ est obligatoire.</li>
@@ -1525,6 +1531,7 @@ optional arguments:
     <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Si vous avez besoin d'une nouvelle définition de carte et que vous n'êtes pas à l'aise avec la procédure décrite ci-dessus, il est recommandé d'en demander une sur le <a href="Contact.html#discord">Discord de la communauté Klipper</a>.</p>
 <h2 id="flashage-des-cartes-utilisant-sdio">Flashage des cartes utilisant SDIO<a class="headerlink" href="#flashage-des-cartes-utilisant-sdio" title="Permanent link">&para;</a></h2>
 <p>Comme mentionné dans les <a href="#caveats">Caveats</a>, les cartes dont le chargeur de démarrage utilise le mode SDIO pour l'accès à leur carte SD nécessitent un power-cycle de la carte, et plus particulièrement de la carte SD elle-même, afin de passer du mode SPI utilisé lors de l'écriture du fichier sur la carte SD au mode SDIO pour que le chargeur de démarrage puisse le flasher sur la carte. Ces définitions de cartes utiliseront le drapeau <code>skip_verify</code>, qui indique à l'outil de flashage de s'arrêter après l'écriture du firmware sur la carte SD afin que la carte puisse être mise sous tension manuellement et que l'étape de vérification soit reportée jusqu'à ce qu'elle soit terminée.</p>
@@ -1542,6 +1549,7 @@ make
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <h3 id="programmation-sdio-avec-rpi-sur-la-meme-alimentation-electrique">Programmation SDIO avec RPi sur la même alimentation électrique<a class="headerlink" href="#programmation-sdio-avec-rpi-sur-la-meme-alimentation-electrique" title="Permanent link">&para;</a></h3>
 <p>Une session typique avec le RPi sur la même alimentation ressemble à ce qui suit. Vous devrez, bien sûr, utiliser le chemin du périphérique et le nom de la carte :</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
@@ -1558,6 +1566,7 @@ cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
+
 <p>Dans ce cas, puisque l'hôte RPi est en train d'être redémarré, ce qui va redémarrer le service <code>klipper</code>, il est nécessaire d'arrêter le service <code>klipper</code> avant de faire l'étape de vérification et de le redémarrer une fois la vérification terminée.</p>
 <h3 id="mappage-des-broches-sdio-vers-spi">Mappage des broches SDIO vers SPI<a class="headerlink" href="#mappage-des-broches-sdio-vers-spi" title="Permanent link">&para;</a></h3>
 <p>Si le schéma de votre carte utilise SDIO pour sa carte SD, vous pouvez mapper les broches comme décrit dans le tableau ci-dessous pour déterminer les broches SPI logicielles compatibles à assigner dans le fichier <code>board_defs.py</code> :</p>
