@@ -1356,15 +1356,12 @@
 <p>通過發出以下 G-Code命令為測試做準備：</p>
 <div class="highlight"><pre><span></span><code>SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=1 ACCEL=500
 </code></pre></div>
-
 <p>此命令使噴嘴通過角落的速度變慢，以強調擠出機壓力的影響。然後對於帶有直接驅動擠出機的打印機，運行命令：</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
 </code></pre></div>
-
 <p>遠程擠出機，請使用：</p>
 <div class="highlight"><pre><span></span><code>TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.020
 </code></pre></div>
-
 <p>然後打印對象。完全打印後，測試打印看起來像：</p>
 <p><img alt="tuning_tower" src="img/tuning_tower.jpg" /></p>
 <p>上面的 TUNING_TOWER 命令指示 Klipper 更改打印的每一層的 pressure_advance 設置。打印中的較高層將設置較大的pressure advance值。低於理想 pressure_advance 設置的圖層在拐角處會出現斑點，而高於理想設置的圖層可能會導致圓角和導致拐角處的擠壓不良。</p>

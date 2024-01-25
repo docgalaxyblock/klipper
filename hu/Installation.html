@@ -1402,34 +1402,28 @@
 <div class="highlight"><pre><span></span><code>git clone https://github.com/Klipper3d/klipper
 ./klipper/scripts/install-octopi.sh
 </code></pre></div>
-
 <p>A fentiek letöltik a Klippert, telepítenek néhány rendszerösszetevőt, beállítják a Klippert, hogy a rendszer indulásakor fusson, és elindítja a Klipper gazdagép szoftverét. Internetkapcsolatra lesz szükség, és néhány percet is igénybe vehet.</p>
 <h2 id="a-mikrokontroller-felepitese-es-egetese">A mikrokontroller felépítése és égetése<a class="headerlink" href="#a-mikrokontroller-felepitese-es-egetese" title="Permanent link">&para;</a></h2>
 <p>A mikrokontroller kódjának lefordításához futtasd ezeket a parancsokat a Raspberry Pi-n:</p>
 <div class="highlight"><pre><span></span><code>cd ~/klipper/
 make menuconfig
 </code></pre></div>
-
 <p>A <a href="#obtain-a-klipper-configuration-file">nyomtató konfigurációs fájl</a> tetején található megjegyzéseknek le kell írniuk a beállításokat, amelyeket a "make menuconfig" során kell beállítani. Nyisd meg a fájlt egy webböngészőben vagy szövegszerkesztőben, és keresd meg ezeket az utasításokat a fájl teteje közelében. Miután a megfelelő "menuconfig" beállításokat elvégezted, nyomd meg a "Q" gombot a kilépéshez, majd az "Y" gombot a mentéshez. Ezután futtasd:</p>
 <div class="highlight"><pre><span></span><code>make
 </code></pre></div>
-
 <p>Ha a <a href="#obtain-a-klipper-configuration-file">nyomtató konfigurációs fájl</a> tetején található megjegyzések egyéni lépéseket írnak le a "flash" végső képnek a nyomtató vezérlőpanelére történő égetéséhez, akkor kövesd ezeket a lépéseket, majd folytasd az <a href="#configuring-octoprint-to-use-klipper">OctoPrint konfigurálása</a> lépésekkel.</p>
 <p>Ellenkező esetben a következő lépéseket gyakran használják a nyomtató vezérlőlapjának "flash" égetésére. Először meg kell határozni a mikrokontrollerhez csatlakoztatott soros portot. Futtasd a következőket:</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
-
 <p>Az alábbiakhoz hasonlót kell kapnod:</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
-
 <p>Gyakori, hogy minden nyomtatónak saját egyedi soros port neve van. Ezt az egyedi nevet használjuk a mikrokontroller égetésére. Lehetséges, hogy a fenti kimenetben több sor is található – ha igen, válaszd ki a mikrovezérlőnek megfelelő sort (további információkért lásd a <a href="FAQ.html#wheres-my-serial-port">GYIK</a> részt).</p>
 <p>Az általános mikrokontrollereknél a kódot valami hasonlóval lehet égetni:</p>
 <div class="highlight"><pre><span></span><code>sudo service klipper stop
 make flash FLASH_DEVICE=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 sudo service klipper start
 </code></pre></div>
-
 <p>Feltétlenül frissítd a FLASH_DEVICE eszközt a nyomtató egyedi soros portjának nevével.</p>
 <p>Amikor először égetsz, győződj meg arról, hogy az OctoPrint nincs közvetlenül csatlakoztatva a nyomtatóhoz (az OctoPrint weboldalon a "Kapcsolat" részben kattints a "Kapcsolat bontása" gombra).</p>
 <h2 id="az-octoprint-beallitasa-a-klipper-hasznalatahoz">Az OctoPrint beállítása a Klipper használatához<a class="headerlink" href="#az-octoprint-beallitasa-a-klipper-hasznalatahoz" title="Permanent link">&para;</a></h2>
@@ -1446,20 +1440,16 @@ sudo service klipper start
 <div class="highlight"><pre><span></span><code>cp ~/klipper/config/example-cartesian.cfg ~/printer.cfg
 nano ~/printer.cfg
 </code></pre></div>
-
 <p>Gyakori, hogy minden nyomtatónak saját egyedi neve van a mikrokontroller számára. A név a Klipper égetése után megváltozhat, ezért futtasd újra ezeket a lépéseket, még akkor is, ha már az égetéskor elvégezted őket. Futtatás:</p>
 <div class="highlight"><pre><span></span><code>ls /dev/serial/by-id/*
 </code></pre></div>
-
 <p>Az alábbiakhoz hasonlót kell kapnod:</p>
 <div class="highlight"><pre><span></span><code>/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
-
 <p>Ezután frissítsd a konfigurációs fájlt az egyedi névvel. Például frissítsd az <code>[mcu]</code> részt, hogy valami hasonlót kapj:</p>
 <div class="highlight"><pre><span></span><code>[mcu]
 serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 </code></pre></div>
-
 <p>A fájl létrehozása és szerkesztése után az OctoPrint webes terminálján ki kell adni egy "újraindítás" parancsot a konfiguráció betöltéséhez. A "status" parancs azt jelenti, hogy a nyomtató készen áll, ha a Klipper config fájl sikeresen beolvasásra került, és a mikrokontroller sikeresen meg lett találva és konfigurálva.</p>
 <p>A nyomtató konfigurációs fájljának testreszabásakor nem ritka, hogy a Klipper konfigurációs hibát jelez. Ha hiba lép fel, végezd el a szükséges javításokat a nyomtató konfigurációs fájljában, és add ki az "újraindítás" parancsot, amíg az "állapot" nem jelzi, hogy a nyomtató készen áll.</p>
 <p>A Klipper az OctoPrint terminállapon keresztül jelenti a hibaüzeneteket. A "status" paranccsal a hibaüzenetek újra jelenthetők. A Klipper alapértelmezett indítószkriptje egy naplót is elhelyez a <strong>/tmp/klippy.log</strong> fájlban, amely részletesebb információkat tartalmaz.</p>

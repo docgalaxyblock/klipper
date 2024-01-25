@@ -1800,7 +1800,6 @@ rotation_distance: 40
 homing_speed: 20
 ...
 </code></pre></div>
-
 <h4 id="configura-printercfg-per-lhoming-sensorless">Configura printer.cfg per l'homing sensorless<a class="headerlink" href="#configura-printercfg-per-lhoming-sensorless" title="Permanent link">&para;</a></h4>
 <p>L'impostazione <code>homing_retract_dist</code> deve essere impostata su zero nella sezione di configurazione <code>stepper_x</code> per disabilitare il secondo movimento di homing. Il secondo tentativo di homing non aggiunge valore quando si utilizza l'homing sensorless, non funzionerà in modo affidabile e confonderà il processo di ottimizzazione.</p>
 <p>Assicurati che un'impostazione <code>hold_current</code> non sia specificata nella sezione del driver TMC del file config. (Se viene impostata una hold_current, dopo che è stato stabilito il contatto, il motore si arresta mentre il carrello viene premuto contro l'estremità del binario e la riduzione della corrente mentre si trova in quella posizione può causare il movimento del carrello, il che si traduce in prestazioni scadenti e confonde il processo di regolazione.)</p>
@@ -1815,7 +1814,6 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
-
 <p>Un esempio di configurazione tmc2130 o tmc5160 potrebbe essere simile a:</p>
 <div class="highlight"><pre><span></span><code>[tmc2130 stepper_x]
 diag1_pin: ^!PA1 # Pin collegato al pin TMC DIAG1 (o utilizzare pin diag0_pin / DIAG0)
@@ -1827,7 +1825,6 @@ endstop_pin: tmc2130_stepper_x:virtual_endstop
 homing_retract_dist: 0
 ...
 </code></pre></div>
-
 <p>Un esempio di configurazione di tmc2660 potrebbe essere simile a:</p>
 <div class="highlight"><pre><span></span><code>[tmc2660 stepper_x]
 driver_SGT: -64     # -64 è il valore più sensibile, 63 è il meno sensibile
@@ -1838,17 +1835,14 @@ endstop_pin: ^PA1   # Pin collegato al pin TMC SG_TST
 homing_retract_dist: 0
 ...
 </code></pre></div>
-
 <p>Gli esempi sopra mostrano solo le impostazioni specifiche per l'homing sensorless. Vedere il <a href="Config_Reference.html#tmc-stepper-driver-configuration">riferimento alla configurazione</a> per tutte le opzioni disponibili.</p>
 <h4 id="trova-la-massima-sensibilita-che-porta-a-homing-con-successo">Trova la massima sensibilità che porta a homing con successo<a class="headerlink" href="#trova-la-massima-sensibilita-che-porta-a-homing-con-successo" title="Permanent link">&para;</a></h4>
 <p>Posizionare il carrello vicino al centro del binario. Utilizzare il comando SET_TMC_FIELD per impostare la sensibilità più alta. Per tmc2209:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=SGTHRS VALUE=255
 </code></pre></div>
-
 <p>Per tmc2130, tmc5160 e tmc2660:</p>
 <div class="highlight"><pre><span></span><code>SET_TMC_FIELD STEPPER=stepper_x FIELD=sgt VALUE=-64
 </code></pre></div>
-
 <p>Quindi inviare un comando <code>G28 X0</code> e verificare che l'asse non si muova affatto o smetta rapidamente di muoversi. Se l'asse non si ferma, inviare un <code>M112</code> per fermare la stampante - qualcosa non è corretto con il cablaggio o la configurazione dei pin diag/sg_tst e deve essere corretto prima di continuare.</p>
 <p>Quindi, diminuire progressivamente la sensibilità dell'impostazione <code>VALUE</code> ed eseguire nuovamente i comandi <code>SET_TMC_FIELD</code> <code>G28 X0</code> per trovare la sensibilità più alta che fa sì che il carrello si muova con successo fino all'arresto e si arresti. (Per i driver tmc2209 questo diminuirà SGTHRS, per altri conducenti aumenterà il sgt.) Assicurati di iniziare ogni tentativo con il carrello vicino al centro del binario (se necessario, emetti <code>M84</code> e quindi sposta manualmente il carrello sul centro). Dovrebbe essere possibile trovare la sensibilità più alta che si adatta in modo affidabile (le impostazioni con una sensibilità più alta comportano movimenti piccoli o nulli). Nota il valore trovato come <em>sensibilità_massima</em>. (Se si ottiene la sensibilità minima possibile (SGTHRS=0 o sgt=63) senza alcun movimento del carrello, allora qualcosa non è corretto con il cablaggio o la configurazione dei pin diag/sg_tst e deve essere corretto prima di continuare.)</p>
 <p>Quando si cerca la sensibilità_massima, può essere conveniente passare a diverse impostazioni VALUE (in modo da dividere in due il parametro VALUE). In tal caso, prepararsi a emettere un comando <code>M112</code> per arrestare la stampante, poiché un'impostazione con una sensibilità molto bassa potrebbe far "sbattere" ripetutamente l'asse contro l'estremità del binario.</p>
@@ -1884,7 +1878,6 @@ gcode:
     # Imposta corrente durante la stampa
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
-
 <p>La macro risultante può essere chiamata da una <a href="Config_Reference.html#homing_override">sezione di configurazione homing_override</a> o da una <a href="Slicers.html#klipper-gcode_macro">START_PRINT macro</a>.</p>
 <p>Si noti che se viene modificata la corrente del driver durante l'homing, il processo di ottimizzazione dovrebbe essere eseguito nuovamente.</p>
 <h3 id="suggerimenti-per-lhoming-sensorless-su-corexy">Suggerimenti per l'homing sensorless su CoreXY<a class="headerlink" href="#suggerimenti-per-lhoming-sensorless-su-corexy" title="Permanent link">&para;</a></h3>
@@ -1910,7 +1903,6 @@ gcode:
     G28 X0
     G1 X5 F1200
 </code></pre></div>
-
 <h2 id="interrogazione-e-diagnosi-delle-impostazioni-del-driver">Interrogazione e diagnosi delle impostazioni del driver<a class="headerlink" href="#interrogazione-e-diagnosi-delle-impostazioni-del-driver" title="Permanent link">&para;</a></h2>
 <p>Il <a href="G-Codes.html#dump_tmc">comando DUMP_TMC</a> è uno strumento utile durante la configurazione e la diagnosi dei driver. Riporterà tutti i campi configurati da Klipper così come tutti i campi che possono essere interrogati dal driver.</p>
 <p>Tutti i campi riportati sono definiti nella scheda tecnica Trinamic per ciascun driver. Queste schede tecniche possono essere trovate sul <a href="https://www.trinamic.com/">sito web Trinamic</a>. Ottenere e rivedere i dati Trinamic affinché il conducente interpreti i risultati di DUMP_TMC.</p>

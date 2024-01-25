@@ -1430,7 +1430,6 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
-
 <h2 id="az-ellenallasok-megszuntetese">Az ellenállások megszüntetése<a class="headerlink" href="#az-ellenallasok-megszuntetese" title="Permanent link">&para;</a></h2>
 <p>A CAN-buszon két 120 ohmos ellenállásnak kell lennie a CANH és CANL vezetékek között. Ideális esetben egy-egy ellenállás a busz mindkét végén található.</p>
 <p>Note that some devices have a builtin 120 ohm resistor that can not be easily removed. Some devices do not include a resistor at all. Other devices have a mechanism to select the resistor (typically by connecting a "pin jumper"). Be sure to check the schematics of all devices on the CAN bus to verify that there are two and only two 120 Ohm resistors on the bus.</p>
@@ -1439,11 +1438,9 @@ iface can0 can static
 <p>A CAN-buszon lévő minden mikrovezérlőhöz egyedi azonosítót rendelnek a gyári chipazonosító alapján, amely minden mikrovezérlőbe kódolva van. Az egyes mikrokontrollerek eszközazonosítójának megtalálásához győződj meg arról, hogy a hardver megfelelően van bekapcsolva és bekötve, majd futtasd le:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0
 </code></pre></div>
-
 <p>Ha nem inicializált CAN-eszközöket észlelsz, a fenti parancs a következő sorokat fogja jelenteni:</p>
 <div class="highlight"><pre><span></span><code>Talált canbus_uuid=11aa22bb33cc, Alkalmazás: Klipper
 </code></pre></div>
-
 <p>Minden eszköz egyedi azonosítóval rendelkezik. A fenti példában <code>11aa22bb33cc</code> a mikrokontroller "canbus_uuid" azonosítója.</p>
 <p>Vedd figyelembe, hogy a <code>canbus_query.py</code> eszköz csak az inicializálatlan eszközöket jelzi. Ha a Klipper (vagy egy hasonló eszköz) konfigurálja az eszközt, akkor az már nem jelenik meg a listában.</p>
 <h2 id="a-klipper-beallitasa">A Klipper beállítása<a class="headerlink" href="#a-klipper-beallitasa" title="Permanent link">&para;</a></h2>
@@ -1451,7 +1448,6 @@ iface can0 can static
 <div class="highlight"><pre><span></span><code>[mcu my_can_mcu]
 canbus_uuid: 11aa22bb33cc
 </code></pre></div>
-
 <h2 id="usb-es-can-busz-kozotti-hid-uzemmod">USB és CAN-busz közötti híd üzemmód<a class="headerlink" href="#usb-es-can-busz-kozotti-hid-uzemmod" title="Permanent link">&para;</a></h2>
 <p>Some micro-controllers support selecting "USB to CAN bus bridge" mode during Klipper's "make menuconfig". This mode may allow one to use a micro-controller as both a "USB to CAN bus adapter" and as a Klipper node.</p>
 <p>When Klipper uses this mode the micro-controller appears as a "USB CAN bus adapter" under Linux. The "Klipper bridge mcu" itself will appear as if it was on this CAN bus - it can be identified via <code>canbus_query.py</code> and it must be configured like other CAN bus Klipper nodes.</p>
@@ -1465,7 +1461,6 @@ iface can0 can static
     bitrate 1000000
     up ifconfig $IFACE txqueuelen 128
 </code></pre></div>
-
 <ul>
 <li>
 <p>The "bridge mcu" is not actually on the CAN bus. Messages to and from the bridge mcu will not be seen by other adapters that may be on the CAN bus.</p>

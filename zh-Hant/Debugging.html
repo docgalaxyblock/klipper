@@ -1450,17 +1450,14 @@
 <p>源代碼"whitespace check"可以運行：</p>
 <div class="highlight"><pre><span></span><code>./scripts/check_whitespace.sh
 </code></pre></div>
-
 <p>Klippy regression測試套件需要來自許多平台的"data dictionaries"。獲取它們的最簡單方法是<a href="https://github.com/Klipper3d/klipper/issues/1438">從 github 下載它們</a>。下載"data dictionaries"後，使用以下命令運行regression套件：</p>
 <div class="highlight"><pre><span></span><code>tar xfz klipper-dict-20??????.tar.gz
 ~/klippy-env/bin/python ~/klipper/scripts/test_klippy.py -d dict/ ~/klipper/test/klippy/*.test
 </code></pre></div>
-
 <h2 id="_2">手動向微控制器發送命令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>通常情況下，主機klippy.py程序會被用來將gcode命令翻譯成Klipper微控制器命令。然而，也可以手動發送這些MCU命令（Klipper原始碼中標有DECL_COMMAND()宏的函式）。要做到這一點，請執行：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/console.py /tmp/pseudoserial
 </code></pre></div>
-
 <p>請參閱該工具中的"HELP"命令，以獲得有關其功能的更多資訊。</p>
 <p>一些命令列選項是可用的。更多資訊請執行：<code>~/klippy-env/bin/python ./klippy/console.py --help</code></p>
 <h2 id="g-code">將G-Code檔案轉換為微控制器命令<a class="headerlink" href="#g-code" title="Permanent link">&para;</a></h2>
@@ -1469,15 +1466,12 @@
 <div class="highlight"><pre><span></span><code>make menuconfig
 make
 </code></pre></div>
-
 <p>完成上述操作后，可以在批處理模式下執行 Klipper（請參閱<a href="Installation.html">安裝</a>以瞭解構建 Python 虛擬環境(venv)和 printer.cfg 檔案所需的步驟）：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py ~/printer.cfg -i test.gcode -o test.serial -v -d out/klipper.dict
 </code></pre></div>
-
 <p>以上命令將產生一個包含二進制序列輸出的<strong>test.serial</strong>檔案。該檔案可以用以下方法翻譯成可讀文字：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/parsedump.py out/klipper.dict test.serial &gt; test.txt
 </code></pre></div>
-
 <p>產生的檔案 <strong>test.txt</strong> 包含可讀的微控制器命令列表。</p>
 <p>爲了使批處理模式正常執行，一些響應和請求命令被禁用了。因此，實際命令和上述輸出之間會有一些差異。產生的數據可以用於測試和檢查，但是它不能被髮送到真正的微控制器。</p>
 <h2 id="_3">動作分析和數據記錄<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -1485,30 +1479,24 @@ make
 <p>使用 <code>data_logger.py</code> 工具啟用數據記錄。例如：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog
 </code></pre></div>
-
 <p>此命令將連接到 Klipper API 服務器，訂閱狀態和運動信息，並記錄結果。生成兩個文件 - 一個壓縮數據文件和一個索引文件（例如，<code>mylog.json.gz</code> 和 <code>mylog.index.gz</code>）。開始記錄後，可以完成打印和其他操作 - 記錄將在後台繼續。完成記錄後，點擊“ctrl-c”退出“data_logger.py”工具。</p>
 <p>可以使用 <code>motan_graph.py</code> 工具讀取生成的文件並繪製圖形。要在 Raspberry Pi 上生成圖形，需要一步安裝“matplotlib”包：</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get update
 sudo apt-get install python-matplotlib
 </code></pre></div>
-
 <p>但是，將數據文件與 <code>scripts/motan/</code> 目錄中的 Python 代碼一起復製到桌麵類機器可能更方便。運動分析腳本應該在任何安裝了最新版本的 <a href="https://python.org">Python</a> 和 <a href="https://matplotlib.org/">Matplotlib</a> 的機器上運行。</p>
 <p>可以使用如下命令生成圖形：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -o mygraph.png
 </code></pre></div>
-
 <p>可以使用 <code>-g</code> 選項來指定要繪製的數據集（它需要一個包含列表列表的 Python 文字）。例如：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
 </code></pre></div>
-
 <p>可以使用 <code>-l</code> 選項找到可用數據集的列表 - 例如：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py -l
 </code></pre></div>
-
 <p>也可以為每個數據集指定 matplotlib 繪圖選項：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
 </code></pre></div>
-
 <p>許多 matplotlib 選項可用；一些例子是"color", "label", "alpha", and "linestyle"。</p>
 <p><code>motan_graph.py</code> 工具支持其他幾個命令行選項 - 使用 <code>--help</code> 選項查看列表。查看/修改 <a href="https://github.com/Klipper3d/klipper/blob/master/scripts/motan/motan_graph.py">motan_graph.py</a> 腳本本身也可能很方便。</p>
 <p><code>data_logger.py</code> 工俱生成的原始數據日誌遵循 <a href="API_Server.html">API 服務器</a> 中描述的格式。使用 Unix 命令檢查數據可能很有用，如下所示：<code>gunzip &lt; mylog.json.gz | tr '\03' '\n' | less</code></p>
@@ -1518,11 +1506,9 @@ sudo apt-get install python-matplotlib
 <div class="highlight"><pre><span></span><code>sudo apt-get update
 sudo apt-get install python-matplotlib
 </code></pre></div>
-
 <p>然後可以使用以下方式產生圖形：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/graphstats.py /tmp/klippy.log -o loadgraph.png
 </code></pre></div>
-
 <p>然後結果可以通過<strong>loadgraph.png</strong>檢視。</p>
 <p>可以產生不同的圖表。更多資訊請執行：<code>~/klipper/scripts/graphstats.py --help</code></p>
 <h2 id="klippylog">從klippy.log檔案中提取資訊<a class="headerlink" href="#klippylog" title="Permanent link">&para;</a></h2>
@@ -1532,7 +1518,6 @@ cd work_directory
 cp /tmp/klippy.log .
 ~/klipper/scripts/logextract.py ./klippy.log
 </code></pre></div>
-
 <p>該腳本將提取打印機配置文件並將提取 MCU 關機信息。來自 MCU 關閉（如果存在）的信息轉儲將按時間戳重新排序，以幫助診斷因果場景。</p>
 <h2 id="simulavr">用 simulavr 測試<a class="headerlink" href="#simulavr" title="Permanent link">&para;</a></h2>
 <p><a href="http://www.nongnu.org/simulavr/">simulavr</a>工具使人們可以模擬Atmel ATmega微控制器。本節描述瞭如何通過simulavr執行測試gcode檔案。建議在臺式機（而不是Raspberry Pi）上執行這個工具，因為它需要大量的cpu來有效執行。</p>
@@ -1542,11 +1527,9 @@ cd simulavr
 make python
 make build
 </code></pre></div>
-
 <p>確保在上述編譯後存在 <strong>./build/pysimulavr/_pysimulavr.*.so</strong> 之類的文件：</p>
 <div class="highlight"><pre><span></span><code>ls ./build/pysimulavr/_pysimulavr.*.so
 </code></pre></div>
-
 <p>此命令應報告特定文件（例如 <strong>./build/pysimulavr/_pysimulavr.cpython-39-x86_64-linux-gnu.so</strong>）而不是錯誤。</p>
 <p>如果您在基於 Debian 的系統（Debian、Ubuntu 等）上，您可以安裝以下軟件包並生成 *.deb 文件以在系統範圍內安裝 simulavr：</p>
 <div class="highlight"><pre><span></span><code>sudo apt update
@@ -1554,29 +1537,23 @@ sudo apt install g++ make cmake swig rst2pdf help2man texinfo
 make cfgclean python debian
 sudo dpkg -i build/debian/python3-simulavr*.deb
 </code></pre></div>
-
 <p>要編譯Klipper以便在simulavr中使用，請執行：</p>
 <div class="highlight"><pre><span></span><code>cd /path/to/klipper
 make menuconfig
 </code></pre></div>
-
 <p>並為 AVR atmega644p 編譯微控制器軟件並選擇 SIMULAVR 軟件仿真支持。然後可以編譯 Klipper（運行 <code>make</code>）然後開始模擬：</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/build/pysimulavr/ ./scripts/avrsim.py out/klipper.elf
 </code></pre></div>
-
 <p>注意，如果你已經安裝了python3-simulavr system-wide，你不需要設置<code>PYTHONPATH</code>，並且可以簡單地運行模擬器</p>
 <div class="highlight"><pre><span></span><code>./scripts/avrsim.py out/klipper.elf
 </code></pre></div>
-
 <p>然後，在另一個視窗中執行simulavr，可以執行以下內容，從一個檔案（例如，"test.gcode"）中讀取gcode，用Klippy處理它，並將其發送到simulavr中執行的Klipper（關於建立python虛擬環境的必要步驟，見<a href="Installation.html">安裝</a>）:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py config/generic-simulavr.cfg -i test.gcode -v
 </code></pre></div>
-
 <h3 id="gtkwavesimulavr">在gtkwave中使用simulavr<a class="headerlink" href="#gtkwavesimulavr" title="Permanent link">&para;</a></h3>
 <p>simulavr的一個有用的功能是它能夠建立具有準確事件時間的訊號波產生檔案。要做到這一點，請按照上面的指示，在命令列執行avrsim.py請使用：</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/src/python/ ./scripts/avrsim.py out/klipper.elf -t PORTA.PORT,PORTC.PORT
 </code></pre></div>
-
 <p>以上將建立一個檔案<strong>avrsim.vcd</strong>，其中包括PORTA和PORTB上的GPIO的每個變化資訊。然後可以用gtkwave來檢視：</p>
 <div class="highlight"><pre><span></span><code>gtkwave avrsim.vcd
 </code></pre></div>

@@ -1505,12 +1505,10 @@ pass through parameters from the slicer variables to the macro.</p>
 would be used:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT BED_TEMP={material_bed_temperature_layer_0} EXTRUDER_TEMP={material_print_temperature_layer_0}
 </code></pre></div>
-
 <p>In slic3r derivatives such as PrusaSlicer and SuperSlicer, the
 following would be used:</p>
 <div class="highlight"><pre><span></span><code>START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
 </code></pre></div>
-
 <p>Also note that these slicers will insert their own heating codes when
 certain conditions are not met. In Cura, the existence of the
 <code>{material_bed_temperature_layer_0}</code> and <code>{material_print_temperature_layer_0}</code>
@@ -1519,7 +1517,6 @@ you would use:</p>
 <div class="highlight"><pre><span></span><code>M140 S0
 M104 S0
 </code></pre></div>
-
 <p>before the macro call. Also note that SuperSlicer has a
 "custom gcode only" button option, which achieves the same outcome.</p>
 <p>An example of a START_PRINT macro using these paramaters can

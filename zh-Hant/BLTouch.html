@@ -1441,7 +1441,6 @@
 sensor_pin: ^P1.24
 control_pin: P1.26
 </code></pre></div>
-
 <p>如果 BL-Touch 將用於 Z 軸歸位，則設定 <code>endstop_pin:probe:z_virtual_endstop</code> 並刪除 <code>[stepper_z]</code> 配置分段中的 <code>position_endstop</code>，然後新增一個 <code>[safe_z_home]</code> 配置分段來先提升 z 軸，並歸位 xy 軸，再移動到床的中心，並歸位 z 軸。例如：</p>
 <div class="highlight"><pre><span></span><code>[safe_z_home]
 home_xy_position: 100, 100 # 修改該座標為列印床中心
@@ -1449,7 +1448,6 @@ speed: 50
 z_hop: 10                 # 向上移動 10mm
 z_hop_speed: 5
 </code></pre></div>
-
 <p>重要的是，safe_z_home 中的 z_hop 運動需要足夠高以保證即使探針恰好處於最低狀態，也不會發生碰撞。</p>
 <h2 id="_1">初始測試<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>在繼續前，請檢查 BL-Touch 是否安裝在正確的高度，探針在收起時應該在噴頭上大約2mm的位置</p>

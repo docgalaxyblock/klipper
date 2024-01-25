@@ -1695,11 +1695,9 @@ avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U flash:w:stk500boot_v2_mega2560.hex
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
-
 <p>要刷写一个应用程序使用：</p>
 <div class="highlight"><pre><span></span><code>avrdude -cwiring -patmega2560 -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <h3 id="atmega1280">Atmega1280<a class="headerlink" href="#atmega1280" title="Permanent link">&para;</a></h3>
 <p>这个芯片通常出现在早期版本的 "Arduino Mega "中。</p>
 <p>要刷写引导程序本身，请使用类似以下的方法：</p>
@@ -1709,11 +1707,9 @@ avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U flash:w:ATmegaBOOT_168_atmega1280.hex
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
-
 <p>要刷写一个应用程序使用：</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1280 -P/dev/ttyACM0 -b57600 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <h3 id="atmega1284p">Atmega1284p<a class="headerlink" href="#atmega1284p" title="Permanent link">&para;</a></h3>
 <p>这种芯片通常出现在 "Melzi "式的3D打印机主板上。</p>
 <p>要刷写引导程序本身，请使用类似以下的方法：</p>
@@ -1723,21 +1719,17 @@ avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m 
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega1284p.hex
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
-
 <p>要刷写一个应用程序使用：</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1284p -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <p>注意，一些 "Melzi "风格的板子预载了一个使用57600波特率的引导程序。在这种情况下，要刷写一个应用程序，请使用类似这样的东西来代替：</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega1284p -P/dev/ttyACM0 -b57600 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <h3 id="at90usb1286">At90usb1286<a class="headerlink" href="#at90usb1286" title="Permanent link">&para;</a></h3>
 <p>本文件不包括向At90usb1286刷写引导程序的方法，也不包括向该设备刷写一般应用。</p>
 <p>来自pjrc.com的Teensy++设备带有一个专用的引导程序。它需要一个来自<a href="https://github.com/PaulStoffregen/teensy_loader_cli">https://github.com/PaulStoffregen/teensy_loader_cli</a>的定制刷写工具。可以用这个工具来刷写一个应用程序，例如：</p>
 <div class="highlight"><pre><span></span><code>teensy_loader_cli --mcu=at90usb1286 out/klipper.elf.hex -v
 </code></pre></div>
-
 <h3 id="atmega168">Atmega168<a class="headerlink" href="#atmega168" title="Permanent link">&para;</a></h3>
 <p>atmega168的闪存空间有限。如果使用引导程序，建议使用Optiboot bootloader。要刷写该引导程序，请使用这个的方法：</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex&#39;
@@ -1746,11 +1738,9 @@ avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega168.hex
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 </code></pre></div>
-
 <p>要通过Optiboot bootloader 刷写一个应用程序，请使用以下方法：</p>
 <div class="highlight"><pre><span></span><code>avrdude -carduino -patmega168 -P/dev/ttyACM0 -b115200 -D -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <h2 id="sam3-arduino-due">SAM3 微控制器 (Arduino Due)<a class="headerlink" href="#sam3-arduino-due" title="Permanent link">&para;</a></h2>
 <p>通常在 SAM 3 微控制器上不使用引导程序。芯片自带一个允许从3.3V 串口或从USB进行编程的ROM。</p>
 <p>为了启用ROM，将"erase"引脚在复位过程中保持高电平，这将擦除闪存的内容，并使ROM运行。在Arduino Due上，这个程序可以通过在 "programming usb port"（编程USB口，最靠近电源的USB端口）上设置1200的波特率来完成。</p>
@@ -1759,7 +1749,6 @@ avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 -a -e -w out/klipper.bin -v -b
 bossac -U -p /dev/ttyACM0 -R
 </code></pre></div>
-
 <h2 id="sam4-duet-wifi">SAM4 微控制器 (Duet Wifi)<a class="headerlink" href="#sam4-duet-wifi" title="Permanent link">&para;</a></h2>
 <p>通常在 SAM4 微控制器中不使用引导程序。芯片自带一个可以从 3.3V 串口或 USB 进行编程的ROM。</p>
 <p>为了启用ROM，在复位过程中要将"erase"引脚保持为高电平，这将擦除闪存内容，并使ROM运行。</p>
@@ -1767,7 +1756,6 @@ bossac -U -p /dev/ttyACM0 -R
 <p>要刷写一个应用程序使用：</p>
 <div class="highlight"><pre><span></span><code>bossac --port=/dev/ttyACM0 -b -U -e -w -v -R out/klipper.bin
 </code></pre></div>
-
 <h2 id="samdc21-micro-controllers-duet3d-toolboard-1lc">SAMDC21 micro-controllers (Duet3D Toolboard 1LC)<a class="headerlink" href="#samdc21-micro-controllers-duet3d-toolboard-1lc" title="Permanent link">&para;</a></h2>
 <p>The SAMC21 is flashed via the ARM Serial Wire Debug (SWD) interface. This is commonly done with a dedicated SWD hardware dongle. Alternatively, one can use a <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi with OpenOCD</a>.</p>
 <p>When using OpenOCD with the SAMC21, extra steps must be taken to first put the chip into Cold Plugging mode if the board makes use of the SWD pins for other purposes. If using OpenOCD on a Rasberry Pi, this can be done by running the following commands before invoking OpenOCD.</p>
@@ -1790,64 +1778,51 @@ echo &quot;Unexporting SWCLK and SRST pins.&quot;
 echo $SWCLK &gt; /sys/class/gpio/unexport
 echo $SRST &gt; /sys/class/gpio/unexport
 </code></pre></div>
-
 <p>To flash a program with OpenOCD use the following chip config:</p>
 <div class="highlight"><pre><span></span><code>source [find target/at91samdXX.cfg]
 </code></pre></div>
-
 <p>Obtain a program; for instance, klipper can be built for this chip. Flash with OpenOCD commands similar to:</p>
 <div class="highlight"><pre><span></span><code>at91samd chip-erase
 at91samd bootloader 0
 program out/klipper.elf verify
 </code></pre></div>
-
 <h2 id="samd21arduino-zero">SAMD21微控制器（Arduino Zero）<a class="headerlink" href="#samd21arduino-zero" title="Permanent link">&para;</a></h2>
 <p>SAMD21 引导加载程序通过 ARM 串行线调试 （SWD） 接口进行刷写，通常需要一个专用的 SWD 硬件转换器或者使用<a href="#running-openocd-on-the-raspberry-pi">安装了 OpenOCD 的 Raspberry Pi</a>来完成。</p>
 <p>要使用 OpenOCD 刷写引导加载程序，请使用以下芯片配置：</p>
 <div class="highlight"><pre><span></span><code>source [find target/at91samdXX.cfg]
 </code></pre></div>
-
 <p>获取引导加载程序 - 例如：</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin&#39;
 </code></pre></div>
-
 <p>使用类似下面的 OpenOCD 命令来刷写：</p>
 <div class="highlight"><pre><span></span><code>at91samd bootloader 0
 program samd21_sam_ba.bin verify
 </code></pre></div>
-
 <p>SAMD21上最常见的启动引导程序可以在 "Arduino Zero "上找到。它使用一个 8KiB 的引导程序（应用程序必须以 8KiB 的起始地址进行编译），按下复位按钮两次就可以进入。要刷写一个程序，请使用类似以下的方法：</p>
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 --offset=0x2000 -w out/klipper.bin -v -b -R
 </code></pre></div>
-
 <p>相比之下，"Arduino M0 "使用一个 16KiB 的启动引导程序（程序必须用 16KiB 的起始地址进行编译）。使用这个启动引导程序来刷写一个程序，请重置微控制器，并在启动的头几秒钟内运行刷写命令--类似如下命令：</p>
 <div class="highlight"><pre><span></span><code>avrdude -c stk500v2 -p atmega2560 -P /dev/ttyACM0 -u -Uflash:w:out/klipper.elf.hex:i
 </code></pre></div>
-
 <h2 id="samd51-adafruit-metro-m4">SAMD51 微控制器(Adafruit Metro-M4及类似的开发板)<a class="headerlink" href="#samd51-adafruit-metro-m4" title="Permanent link">&para;</a></h2>
 <p>和 SAMD21 一样，SAMD51 的启动引导程序也是通过 ARM 串行线调试（SWD）接口刷写的。要用<a href="#running-openocd-on-the-raspberry-pi">运行 OpenOCD的 Raspberry Pi</a>刷写引导程序，请使用以下芯片配置：</p>
 <div class="highlight"><pre><span></span><code>source [find target/atsame5x.cfg]
 </code></pre></div>
-
 <p>获得一个引导程序--很多引导程序可以从<a href="https://github.com/adafruit/uf2-samdx1/releases/latest">https://github.com/adafruit/uf2-samdx1/releases/latest</a>获得。例如：</p>
 <div class="highlight"><pre><span></span><code>wget &#39;https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin&#39;
 </code></pre></div>
-
 <p>使用类似下面的 OpenOCD 命令来刷写：</p>
 <div class="highlight"><pre><span></span><code>at91samd bootloader 0
 program bootloader-itsybitsy_m4-v3.7.0.bin verify
 at91samd bootloader 16384
 </code></pre></div>
-
 <p>SAMD51 使用 16KiB 的启动引导程序（应用程序必须以16KiB的起始地址进行编译）。要刷写一个应用程序，请使用类似以下的方法：</p>
 <div class="highlight"><pre><span></span><code>bossac -U -p /dev/ttyACM0 --offset=0x4000 -w out/klipper.bin -v -b -R
 </code></pre></div>
-
 <h2 id="stm32f103-blue-pill">STM32F103 微控制器（Blue Pill 开发板）<a class="headerlink" href="#stm32f103-blue-pill" title="Permanent link">&para;</a></h2>
 <p>STM32F103设备有一个ROM，可以通过3.3V串口刷写引导程序或应用程序。通常会把PA10（MCU Rx）和PA9（MCU Tx）引脚连接到3.3V UART适配器上。要访问ROM，应该把"boot 0"引脚连接到高电平，"boot 1"引脚连接到低电平，然后重置设备。然后可以用"stm32flash"包刷写设备，使用的方法如下：</p>
 <div class="highlight"><pre><span></span><code>stm32flash -w out/klipper.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
-
 <p>注意，如果使用树莓派的3.3V串口，stm32flash协议使用的串行奇偶校验模式，树莓派的 "mini UART "并不支持。关于在树莓派的GPIO引脚上启用完整的UART的细节，见<a href="https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts">https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts</a>。</p>
 <p>刷写后，将 "boot 0 "和 "boot 1 "都恢复设为低电平，以便在复位后从闪存启动。</p>
 <h3 id="stm32duino-stm32f103">带有 stm32duino 引导加载程序的 STM32F103<a class="headerlink" href="#stm32duino-stm32f103" title="Permanent link">&para;</a></h3>
@@ -1857,11 +1832,9 @@ at91samd bootloader 16384
 
 stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
-
 <p>这个引导程序使用 8KiB 的闪存空间（应用程序必须以 8KiB 的起始地址编译）。刷写应用程序需要使用类似以下的命令：</p>
 <div class="highlight"><pre><span></span><code>dfu-util -d 1eaf:0003 -a 2 -R -D out/klipper.bin
 </code></pre></div>
-
 <p>启动引导程序通常只在启动后的一小段时间运行。在输入以上命令的时候，需要确保启动引导程序还在运行（启动引导程序运行的时候会控制板上的led闪烁）。此外，启动后如果设置“boot 0”引脚为低，设置“boot 1”引脚为高则可以一直停留在启动引导程序。</p>
 <h3 id="hid-stm32f103">带有 HID 引导程序的STM32F103<a class="headerlink" href="#hid-stm32f103" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/Serasidis/STM32_HID_Bootloader">HID bootloader</a>是一个紧凑的、不包含驱动的启动引导程序，能够通过USB进行刷写。此外，还有一个<a href="https://github.com/Arksine/STM32_HID_Bootloader/releases/latest">针对SKR Mini E3 1.2构建的分支</a>。</p>
@@ -1869,16 +1842,13 @@ stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 <p>SKR Mini E3无法使用stm32flash ，因为boot 0引脚被直接接到GND且没有跳线断开。推荐使用STLink V2通过STM32Cubeprogrammer刷写启动引导程序。如果你没有STLink ，也可以按照以下芯片配置使用<a href="#running-openocd-on-the-raspberry-pi">树莓派和OpenOCD</a> 刷写：</p>
 <div class="highlight"><pre><span></span><code>source [find target/stm32f1x.cfg]
 </code></pre></div>
-
 <p>如果你愿意，可以使用下面的命令备份当前闪存上的程序。请注意，这可能需要一些时间来完成备份：</p>
 <div class="highlight"><pre><span></span><code>flash read_bank 0 btt_skr_mini_e3_backup.bin
 </code></pre></div>
-
 <p>最后，你可以用类似以下的命令刷写固件：</p>
 <div class="highlight"><pre><span></span><code>stm32f1x mass_erase 0
 program hid_btt_skr_mini_e3.bin verify 0x08000000
 </code></pre></div>
-
 <p>注意：</p>
 <ul>
 <li>上面的例子是先擦除芯片，然后再写入引导程序。无论选择哪种方法刷写，都建议在刷写前擦除芯片。</li>
@@ -1905,19 +1875,15 @@ Info : Listening on port 3333 for gdb connections</code>
 cd ~/klipper/lib/hidflash
 make
 </code></pre></div>
-
 <p>如果bootloader正在运行，你可以用这个来刷写：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/lib/hidflash/hid-flash ~/klipper/out/klipper.bin
 </code></pre></div>
-
 <p>或者，你可以使用<code>make flash</code>来直接刷写klipper：</p>
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=1209:BEBA
 </code></pre></div>
-
 <p>或者，如果klipper之前已经被写入过：</p>
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=/dev/ttyACM0
 </code></pre></div>
-
 <p>可能需要手动进入引导程序，可以通过将 "boot 0"配置为低电平和 "boot 1"为高电平来完成。在SKR Mini E3上不能调整"Boot 1"，所以如果你刷写过 "hid_btt_skr_mini_e3.bin"，可以通过设置PA2低电平来完成。在SKR Mini E3的引脚文档中，这个引脚在TFT头中被标为 "TX0"。在PA2旁边有一个接地引脚，你可以用它来把PA2拉低。</p>
 <h3 id="mscstm32f103stm32f072">带MSC引导程序的STM32F103/STM32F072<a class="headerlink" href="#mscstm32f103stm32f072" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/Telekatz/MSC-stm32f103-bootloader">MSC 引导程序</a> 是一个能够进行 USB 刷写的免驱引导程序。</p>
@@ -1925,7 +1891,6 @@ make
 <p>STM32F072板也可以通过USB（通过DFU）刷写引导程序，如下所示：</p>
 <div class="highlight"><pre><span></span><code> dfu-util -d 0483:df11 -a 0 -R -D  MSCboot-STM32F072.bin -s0x08000000:leave
 </code></pre></div>
-
 <p>此引导加载程序使用 8KiB 或 16KiB 的闪存空间，请参阅引导加载程序的说明（必须使用相应的起始地址编译应用程序）。</p>
 <p>可以通过按两次电路板上的复位按钮来激活引导程序。一旦启动引导程序，该板就会显示为一个 USB 闪存驱动器，可以将 klipper.bin 文件复制到该驱动器上。</p>
 <h3 id="canbootstm32f103stm32f0x2">带有CanBoot引导程序的STM32F103/STM32F0x2<a class="headerlink" href="#canbootstm32f103stm32f0x2" title="Permanent link">&para;</a></h3>
@@ -1935,12 +1900,10 @@ make
 <p><code>flash_can.py</code>在<code>lib/canboot</code>文件夹中提供的工具可以用来上传Klipper固件。设备的UUID对于写入固件来说是必要的。如果你没有UUID可以查询当前运行引导程序的节点：</p>
 <div class="highlight"><pre><span></span><code>python3 flash_can.py -q
 </code></pre></div>
-
 <p>这会返回所有未被分配UUID的节点的UUID。这应该包括当前在bootloader中的所有节点。</p>
 <p>一旦你有了UUID，你可以用以下命令上传固件：</p>
 <div class="highlight"><pre><span></span><code>python3 flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u aabbccddeeff
 </code></pre></div>
-
 <p>其中<code>aabbccddeeff</code>被你的UUID取代。注意选项<code>-i</code>和<code>-f</code>可以被省略，它们分别默认为<code>can0</code>和<code>~/klipper/out/klipper.bin</code>。</p>
 <p>当构建Klipper与CanBoot一起使用时，选择8 KiB Bootloader选项。</p>
 <h2 id="stm32f4-skr-pro-11">STM32F4 微控制器 (SKR Pro 1.1)<a class="headerlink" href="#stm32f4-skr-pro-11" title="Permanent link">&para;</a></h2>
@@ -1950,7 +1913,6 @@ make
 
 stm32flash -w hid_bootloader_SKR_PRO.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
-
 <p>这个引导程序在STM32F4上需要16Kib的闪存空间（应用程序必须以16KiB的起始地址进行编译）。</p>
 <p>与STM32F1一样，STM32F4使用hid-flash工具来上传二进制文件到MCU。关于如何构建和使用hid-flash的细节，请参见上面的说明。</p>
 <p>可能需要手动进入引导程序，这可以通过设置 "boot 0 "为低电平，"boot 1 "为高电平并上电来完成。编程完成后，设备断电，将 "boot 1 "重设为低电平，这样应用程序就会被加载。</p>
@@ -1972,12 +1934,10 @@ cd openocd
 make
 make install
 </code></pre></div>
-
 <h3 id="openocd_1">配置OpenOCD<a class="headerlink" href="#openocd_1" title="Permanent link">&para;</a></h3>
 <p>创建一个OpenOCD配置文件：</p>
 <div class="highlight"><pre><span></span><code>nano ~/openocd/openocd.cfg
 </code></pre></div>
-
 <p>使用类似于以下的配置：</p>
 <div class="highlight"><pre><span></span><code># Uses RPi pins: GPIO25 for SWDCLK, GPIO24 for SWDIO, GPIO18 for nRST
 source [find interface/raspberrypi2-native.cfg]
@@ -2001,7 +1961,6 @@ init
 targets
 reset halt
 </code></pre></div>
-
 <h3 id="_2">将树莓派与目标芯片相连<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>在接线之前，请关闭树莓派和目标芯片的电源! 在连接到树莓派之前，请确认目标芯片使用3.3V电压!</p>
 <p>将目标芯片上的GND、SWDCLK、SWDIO和RST分别连接到树莓派上的GND、GPIO25、GPIO24和GPIO18。</p>
@@ -2011,12 +1970,10 @@ reset halt
 <div class="highlight"><pre><span></span><code>cd ~/openocd/
 sudo ~/openocd/install/bin/openocd -f ~/openocd/openocd.cfg
 </code></pre></div>
-
 <p>上述操作应该使OpenOCD输出一些文本信息，然后等待（它不会立即返回到Unix shell提示符）。如果OpenOCD自己退出或继续输出文本信息，那么请仔细检查接线。</p>
 <p>一旦OpenOCD运行稳定，就可以通过telnet向它发送命令。打开另一个ssh会话，运行下面的命令：</p>
 <div class="highlight"><pre><span></span><code>telnet 127.0.0.1 4444
 </code></pre></div>
-
 <p>(可以按ctrl+]退出telnet，然后运行 "quit "命令。)</p>
 <h3 id="openocdgdb">OpenOCD和gdb<a class="headerlink" href="#openocdgdb" title="Permanent link">&para;</a></h3>
 <p>可以使用OpenOCD和gdb来调试Klipper。下面的命令假设是在台式机上运行gdb。</p>
@@ -2024,16 +1981,13 @@ sudo ~/openocd/install/bin/openocd -f ~/openocd/openocd.cfg
 <div class="highlight"><pre><span></span><code>bindto 0.0.0.0
 gdb_port 44444
 </code></pre></div>
-
 <p>在树莓派上重新启动OpenOCD，然后在台式机上运行以下Unix命令：</p>
 <div class="highlight"><pre><span></span><code>cd /path/to/klipper/
 gdb out/klipper.elf
 </code></pre></div>
-
 <p>在gdb中运行：</p>
 <div class="highlight"><pre><span></span><code>target remote octopi:44444
 </code></pre></div>
-
 <p>(用树莓派的主机名替换 "octopi"）一旦gdb运行，就可以设置断点并检查寄存器。</p>
 
               

@@ -1673,18 +1673,15 @@
 <p>Per utilizzare il server API, il software host klippy.py deve essere avviato con il parametro <code>-a</code>. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log
 </code></pre></div>
-
 <p>Ciò fa sì che il software host crei un socket di dominio Unix. Un client può quindi aprire una connessione su quel socket e inviare comandi a Klipper.</p>
 <p>Consulta il progetto <a href="https://github.com/Arksine/moonraker">Moonraker</a> per uno strumento popolare in grado di inoltrare richieste HTTP all'API Server Unix Domain Socket di Klipper.</p>
 <h2 id="formato-richiesta">Formato richiesta<a class="headerlink" href="#formato-richiesta" title="Permanent link">&para;</a></h2>
 <p>I messaggi inviati e ricevuti sul socket sono stringhe codificate JSON terminate da un carattere ASCII 0x03:</p>
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
 </code></pre></div>
-
 <p>Klipper contiene uno strumento <code>scripts/whconsole.py</code> che può eseguire il framing dei messaggi sopra. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/whconsole.py /tmp/klippy_uds
 </code></pre></div>
-
 <p>Questo strumento può leggere una serie di comandi JSON da stdin, inviarli a Klipper e riportare i risultati. Lo strumento prevede che ogni comando JSON si trovi su una singola riga e aggiungerà automaticamente il terminatore 0x03 durante la trasmissione di una richiesta. (Il server dell'API Klipper non ha un requisito di newline.)</p>
 <h2 id="protocollo-api">Protocollo API<a class="headerlink" href="#protocollo-api" title="Permanent link">&para;</a></h2>
 <p>Il protocollo dei comandi utilizzato sul socket di comunicazione è ispirato a <a href="https://www.jsonrpc.org/">json-rpc</a>.</p>
@@ -1722,7 +1719,6 @@
 gcode:
   {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
 </code></pre></div>
-
 <p>Quando viene eseguita la macro gcode PANELDUE_BEEP, Klipper invia qualcosa di simile al seguente tramite il socket: <code>{"action": "run_paneldue_beep", "params": {"frequency": 300, "duration": 1.0}}</code></p>
 <h3 id="oggettielenco">oggetti/elenco<a class="headerlink" href="#oggettielenco" title="Permanent link">&para;</a></h3>
 <p>Questo endpoint interroga l'elenco degli "oggetti" della stampante disponibili che è possibile interrogare (tramite l'endpoint "objects/query"). Ad esempio: <code>{"id": 123, "method": "objects/list"}</code> potrebbe restituire: <code>{"id": 123, "result": {"objects": ["webhooks", "configfile" , "heaters", "gcode_move", "query_endstops", "idle_timeout", "toolhead", "extruder"]}}</code></p>

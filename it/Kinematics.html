@@ -1505,7 +1505,6 @@
 <p>Klipper implementa l'accelerazione costante. La formula chiave per l'accelerazione costante è:</p>
 <div class="highlight"><pre><span></span><code>velocità(tempo) = velocità_inizio + accelerazione*tempo
 </code></pre></div>
-
 <h2 id="generatore-di-trapezoide">Generatore di trapezoide<a class="headerlink" href="#generatore-di-trapezoide" title="Permanent link">&para;</a></h2>
 <p>Klipper utilizza un "generatore di trapezoide" di tipo tradizionale per modellare il movimento - ogni movimento ha una velocità iniziale, accelera verso la velocità di crociera ad accelerazione costante, prosegue a velocità costante ed infine decelera fino alla velocità finale ad accelerazione costante.</p>
 <p><img alt="trapezoid" src="img/trapezoid.svg.png" /></p>
@@ -1525,7 +1524,6 @@
 <p>Formula chiave per il look-ahead:</p>
 <div class="highlight"><pre><span></span><code>velocità_finale^2 = velocità_iniziale^2 + 2*accelerazione*distanza_movimento
 </code></pre></div>
-
 <h3 id="look-ahead-ammorbidito">Look-ahead ammorbidito<a class="headerlink" href="#look-ahead-ammorbidito" title="Permanent link">&para;</a></h3>
 <p>Klipper implementa anche un meccanismo per smussare i movimenti di brevi movimenti a "zigzag". Considera i seguenti movimenti:</p>
 <p><img alt="zigzag" src="img/zigzag.svg.png" /></p>
@@ -1538,17 +1536,14 @@
 <p>La formula chiave per determinare la distanza che un movimento deve percorrere con un'accelerazione costante è:</p>
 <div class="highlight"><pre><span></span><code>distanza_movimento = (velocita_iniziale + .5 * accelerazione *durata_movimento) * durata_movimento
 </code></pre></div>
-
 <p>e la formula chiave per il movimento a velocità costante è:</p>
 <div class="highlight"><pre><span></span><code>distanza_movimento = velocità_crociera * durata_movimento
 </code></pre></div>
-
 <p>Le formule chiave per determinare la coordinata cartesiana di un movimento data una distanza di movimento sono:</p>
 <div class="highlight"><pre><span></span><code>cartesian_x_position = start_x + move_distance * total_x_movement / total_movement
 cartesian_y_position = start_y + move_distance * total_y_movement / total_movement
 cartesian_z_position = start_z + move_distance * total_z_movement / total_movement
 </code></pre></div>
-
 <h3 id="robot-cartesiani">Robot Cartesiani<a class="headerlink" href="#robot-cartesiani" title="Permanent link">&para;</a></h3>
 <p>La generazione di passaggi per stampanti cartesiane è il caso più semplice. Il movimento su ciascun asse è direttamente correlato al movimento nello spazio cartesiano.</p>
 <p>Formule chiave:</p>
@@ -1556,14 +1551,12 @@ cartesian_z_position = start_z + move_distance * total_z_movement / total_moveme
 stepper_y_position = cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
-
 <h3 id="robot-corexy">Robot CoreXY<a class="headerlink" href="#robot-corexy" title="Permanent link">&para;</a></h3>
 <p>La generazione di passaggi su una macchina CoreXY è solo un po' più complessa dei robot cartesiani di base. Le formule chiave sono:</p>
 <div class="highlight"><pre><span></span><code>stepper_a_position = cartesian_x_position + cartesian_y_position
 stepper_b_position = cartesian_x_position - cartesian_y_position
 stepper_z_position = cartesian_z_position
 </code></pre></div>
-
 <h3 id="robot-delta">Robot Delta<a class="headerlink" href="#robot-delta" title="Permanent link">&para;</a></h3>
 <p>La generazione di passi su un robot delta si basa sul teorema di Pitagora:</p>
 <div class="highlight"><pre><span></span><code>stepper_position = (sqrt(arm_length^2
@@ -1572,7 +1565,6 @@ stepper_z_position = cartesian_z_position
                          - (cartesian_y_position - tower_y_position)^2)
                     + cartesian_z_position)
 </code></pre></div>
-
 <h3 id="limiti-di-accelerazione-del-motore-passo-passo">Limiti di accelerazione del motore passo-passo<a class="headerlink" href="#limiti-di-accelerazione-del-motore-passo-passo" title="Permanent link">&para;</a></h3>
 <p>Con la cinematica delta è possibile che un movimento che sta accelerando nello spazio cartesiano richieda un'accelerazione su un particolare motore passo-passo maggiore dell'accelerazione del movimento. Ciò può verificarsi quando un braccio dello stepper è più orizzontale che verticale e la linea di movimento passa vicino alla torre dello stepper. Sebbene questi movimenti possano richiedere un'accelerazione del motore passo-passo maggiore dell'accelerazione di movimento massima configurata della stampante, la massa effettiva spostata da quel passo-passo sarebbe inferiore. Pertanto la maggiore accelerazione stepper non si traduce in una coppia stepper significativamente più elevata ed è quindi considerata innocua.</p>
 <p>Tuttavia, per evitare casi estremi, Klipper impone un limite massimo all'accelerazione stepper di tre volte l'accelerazione di movimento massima configurata della stampante. (Allo stesso modo, la velocità massima dello stepper è limitata a tre volte la velocità massima di spostamento.) Per far rispettare questo limite, i movimenti sul bordo estremo dell'inviluppo (dove un braccio dello stepper può essere quasi orizzontale) avranno un massima accelerazione e velocità.</p>
@@ -1581,14 +1573,12 @@ stepper_z_position = cartesian_z_position
 <p>Il movimento di base dell'estrusore è semplice da calcolare. La generazione del tempo di passaggio utilizza le stesse formule utilizzate dai robot cartesiani:</p>
 <div class="highlight"><pre><span></span><code>stepper_position = requested_e_position
 </code></pre></div>
-
 <h3 id="anticipo-di-pressione">Anticipo di pressione<a class="headerlink" href="#anticipo-di-pressione" title="Permanent link">&para;</a></h3>
 <p>La sperimentazione ha dimostrato che è possibile migliorare la modellazione dell'estrusore oltre la formula di base dell'estrusore. Nel caso ideale, mentre un movimento di estrusione avanza, lo stesso volume di filamento dovrebbe essere depositato in ogni punto lungo il movimento e non dovrebbe esserci volume estruso dopo il movimento. Sfortunatamente, è comune scoprire che le formule di estrusione di base fanno sì che una quantità insufficiente di filamento fuoriesca dall'estrusore all'inizio dei movimenti di estrusione e che il filamento in eccesso venga estruso al termine dell'estrusione. Questo è spesso indicato come "melma" "ooze".</p>
 <p><img alt="ooze" src="img/ooze.svg.png" /></p>
 <p>Il sistema di "pressure advance" tenta di spiegare ciò utilizzando un modello diverso per l'estrusore. Invece di credere ingenuamente che ogni mm^3 di filamento alimentato nell'estrusore comporterà l'uscita immediata di quella quantità di mm^3 dall'estrusore, utilizza un modello basato sulla pressione. La pressione aumenta quando il filamento viene spinto nell'estrusore (come in <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Legge di Hook</a>) e la pressione necessaria per estrudere è dominata dalla portata attraverso l'orifizio dell'ugello (come nella <a href="https://en.wikipedia.org/wiki/Poiseuille_law">legge di Poiseuille</a>). L'idea chiave è che la relazione tra filamento, pressione e portata può essere modellata utilizzando un coefficiente lineare:</p>
 <div class="highlight"><pre><span></span><code>pa_position = nominal_position + pressure_advance_coefficient * nominal_velocity
 </code></pre></div>
-
 <p>Per informazioni su come trovare questo coefficiente di anticipo della pressione, vedere il documento <a href="Pressure_Advance.html">Pressure Advance</a>.</p>
 <p>La formula di base del pressure advance può far sì che il motore dell'estrusore apporti improvvisi cambiamenti di velocità. Klipper implementa la "smussatura" del movimento dell'estrusore per evitarlo.</p>
 <p><img alt="pressure-advance" src="img/pressure-velocity.png" /></p>

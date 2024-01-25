@@ -1673,18 +1673,15 @@
 <p>要启用API服务器，klipper.py运行时应加上 <code>-a</code> 参数。例如：</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ~/klipper/klippy/klippy.py ~/printer.cfg -a /tmp/klippy_uds -l /tmp/klippy.log
 </code></pre></div>
-
 <p>上述操作会使主机创建一个Unix本地套接字。之后，客户应用程序可以创建一个套接字链接，从而给Klipper发送命令。</p>
 <p>参见<a href="https://github.com/Arksine/moonraker">Moonraker</a>项目，该项目是一个流行的工具，可以将HTTP请求转发到Klipper的API服务器Unix域插座。</p>
 <h2 id="_1">请求格式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>套接字进出的数据包应使用JSON编码的字符串，并以ASCII字符0x03作为结尾：</p>
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
 </code></pre></div>
-
 <p>Klipper使用<code>scripts/whconsole.py</code>的代码进行上述的数据帧打包。例如：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/whconsole.py /tmp/klippy_uds
 </code></pre></div>
-
 <p>该工具会从stdin中读取一系列的JSON命令，发送到Klipper执行，并将结果送出。该工具默认输入的每条Json命令中不存在换行，并自动地在发送命令时在结尾附上0x03。（Klipper API服务器没有换行符要求。）</p>
 <h2 id="api_2">API协议<a class="headerlink" href="#api_2" title="Permanent link">&para;</a></h2>
 <p>套接字的命令协议受 <a href="https://www.jsonrpc.org/">json-rpc</a> 启发。</p>
@@ -1722,7 +1719,6 @@
 gcode:
   {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
 </code></pre></div>
-
 <p>当PANELDUE_BEEP gcode宏被执行时，Klipper将通过套接字发送类似以下内容：<code>{"action": "run_paneldue_beep", "params": {"frequency": 300, "duration": 1.0}}</code></p>
 <h3 id="objectslist">objects/list<a class="headerlink" href="#objectslist" title="Permanent link">&para;</a></h3>
 <p>该端点查询可用打印机“对象”的列表，可以查询（通过“对象/查询”端点）。例如：<code>｛“id”：123，“method”：“objects/list”｝</code>可能返回： <code>{"id": 123, "result": {"objects": ["webhooks", "configfile", "heaters", "gcode_move", "query_endstops", "idle_timeout", "toolhead", "extruder"]}}</code></p>

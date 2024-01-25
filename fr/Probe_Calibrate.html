@@ -1398,17 +1398,14 @@
 <p>Placez un morceau de ruban adhésif bleu (ou similaire) sur le lit sous la sonde. Accédez à l'onglet "Terminal" d'OctoPrint et lancez une commande PROBE :</p>
 <div class="highlight"><pre><span></span><code>SONDE
 </code></pre></div>
-
 <p>Placez une marque sur le ruban directement sous l'endroit où se trouve la sonde (ou utilisez une méthode similaire pour noter l'emplacement sur le lit).</p>
 <p>Exécutez une commande <code>GET_POSITION</code> et enregistrez l'emplacement XY de la tête d'outil signalé par cette commande. Par exemple si l'on voit :</p>
 <div class="highlight"><pre><span></span><code>Recv: // toolhead: X:46.500000 Y:27.000000 Z:15.000000 E:0.000000
 </code></pre></div>
-
 <p>La position d l a sonde serait de 46,5 en X et de 27 en Y.</p>
 <p>Après avoir enregistré la position de la sonde, lancez une série de commandes G1 jusqu'à ce que la buse soit directement au-dessus de la marque sur le lit. Par exemple, on pourrait lancer :</p>
 <div class="highlight"><pre><span></span><code>G1 F300 X57 Y30 Z15
 </code></pre></div>
-
 <p>pour déplacer la buse vers une position X de 57 et Y de 30. Une fois que l'on a trouvé la position directement au-dessus de la marque, utilisez la commande <code>GET_POSITION</code> pour afficher cette position. C'est la position de la buse.</p>
 <p>Le x_offset est alors la <code>nozzle_x_position - probe_x_position</code> et y_offset est de même la <code>nozzle_y_position - probe_y_position</code>. Mettez à jour le fichier printer.cfg avec les valeurs données, retirez la bande/les marques du lit, puis émettez une commande <code>RESTART</code> afin que les nouvelles valeurs prennent effet.</p>
 <h2 id="etalonnage-de-loffset-z-de-la-sonde">Étalonnage de l'offset Z de la sonde<a class="headerlink" href="#etalonnage-de-loffset-z-de-la-sonde" title="Permanent link">&para;</a></h2>
@@ -1418,7 +1415,6 @@
 <p>Une fois que l'outil de sondage manuel démarre, suivez les étapes décrites dans <a href="Bed_Level.html#the-paper-test">"le test du papier"</a>) pour déterminer la distance réelle entre la buse et le lit à l'emplacement donné. Une fois ces étapes terminées, vous pouvez taper <code>ACCEPT</code> pour enregistrer les résultats dans le fichier de configuration avec :</p>
 <div class="highlight"><pre><span></span><code>SAVE_CONFIG
 </code></pre></div>
-
 <p>Notez que si une modification est apportée au système de mouvement de l'imprimante, à la position de la hotend ou à l'emplacement de la sonde, cela invalidera les résultats de PROBE_CALIBRATE.</p>
 <p>Si la sonde a un décalage X ou Y et que l'inclinaison du lit est modifiée (par exemple, en ajustant les vis du lit, en exécutant DELTA_CALIBRATE, en exécutant Z_TILT_ADJUST, en exécutant QUAD_GANTRY_LEVEL, ou similaire), les résultats de PROBE_CALIBRATE seront invalidés. Après avoir effectué l'un des ajustements ci-dessus, il sera nécessaire d'exécuter à nouveau PROBE_CALIBRATE.</p>
 <p>Si les résultats de PROBE_CALIBRATE sont invalidés, tous les résultats précédents <a href="Bed_Mesh.html">bed mesh</a> qui ont été obtenus à l'aide de la sonde sont également invalidés - il sera nécessaire de réexécuter BED_MESH_CALIBRATE après avoir recalibré la sonde.</p>
@@ -1439,7 +1435,6 @@ Recv: // probe at -0.003,0.005 is z=2.519448
 Recv: // probe at -0.003,0.005 is z=2.506948
 Recv: // probe accuracy results: maximum 2.519448, minimum 2.506948, range 0.012500, average 2.513198, median 2.513198, standard deviation 0.006250
 </code></pre></div>
-
 <p>Idéalement, l'outil rapportera une valeur maximale et minimale identique. (C'est-à-dire que, idéalement, la sonde obtient un résultat identique sur les dix sondes.) Cependant, il est normal que les valeurs minimale et maximale diffèrent d'une "distance de pas" Z ou jusqu'à 5 microns (0,005 mm). Une "distance de pas" est <code>distance_rotation/(full_steps_per_rotation*microsteps)</code>. La distance entre la valeur minimale et la valeur maximale s'appelle la plage. Ainsi, dans l'exemple ci-dessus, étant donné que l'imprimante utilise une distance de pas Z de 0,0125, une plage de 0,012500 serait considérée comme normale.</p>
 <p>Si les résultats du test indiquent une plage de valeur supérieure à 25 microns (0,025 mm), la sonde n'a pas une précision suffisante pour les procédures de nivellement de lit typiques. Il peut être possible de régler la vitesse de la sonde et/ou la hauteur de départ de la sonde pour améliorer la répétabilité de la sonde. La commande <code>PROBE_ACCURACY</code> permet d'exécuter des tests avec différents paramètres pour voir leur impact - voir le <a href="G-Codes.html#probe_accuracy">document G-Codes</a> pour plus de détails. Si la sonde obtient généralement des résultats reproductibles mais présente une valeur aberrante occasionnelle, il peut être possible d'en tenir compte en utilisant plusieurs échantillons sur chaque sonde - lisez la description des paramètres de configuration de la sonde <code>samples</code> dans la <a href="Config_Reference.html#probe">référence de configuration </a> pour plus de détails.</p>
 <p>Si une nouvelle vitesse de sondage, un nouveau nombre d'échantillons ou d'autres paramètres sont nécessaires, mettez à jour le fichier printer.cfg et lancez une commande <code>RESTART</code>. Si c'est le cas, c'est une bonne idée de <a href="#calibrating-probe-z-offset">calibrer le z_offset</a> à nouveau. Si des résultats reproductibles ne peuvent pas être obtenus, n'utilisez pas la sonde pour le nivellement du lit. Klipper dispose de plusieurs outils de sondage manuels qui peuvent être utilisés à la place - voir le <a href="Bed_Level.html">Mise à niveau du lit</a> pour plus de détails.</p>
