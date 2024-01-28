@@ -175,6 +175,7 @@ BOARD_ALIASES = {
     'mks-sbase': BOARD_DEFS['generic-lpc1768'],
     'mks-sgenl-v1': BOARD_DEFS['generic-lpc1768'],
     'mks-sgenl-v2': BOARD_DEFS['generic-lpc1769'],
+    'mks-skipr': BOARD_DEFS['monster8'],
     'robin_v3': BOARD_DEFS['monster8'],
     'smoothieboard-v1': BOARD_DEFS['generic-lpc1769']
 }
