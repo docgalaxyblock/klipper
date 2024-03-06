@@ -1821,12 +1821,12 @@ bed. This way, when homing the axis, it will stop before the nozzle
 touches the bed. See the <a href="Bed_Level.html">bed level document</a> for more
 information.</p>
 <h2 id="i-converted-my-config-from-marlin-and-the-xy-axes-work-fine-but-i-just-get-a-screeching-noise-when-homing-the-z-axis">I converted my config from Marlin and the X/Y axes work fine, but I just get a screeching noise when homing the Z axis<a class="headerlink" href="#i-converted-my-config-from-marlin-and-the-xy-axes-work-fine-but-i-just-get-a-screeching-noise-when-homing-the-z-axis" title="Permanent link">&para;</a></h2>
-<p>Short answer: <br>
+<p>Short answer:<br>
 First, make sure you have verified the stepper configuration as
 described in the <a href="Config_checks.html">config check document</a>. If the
 problem persists, try reducing the max_z_velocity setting in the
 printer config.</p>
-<p>Long answer: <br>
+<p>Long answer:<br>
 In practice Marlin can typically only step at a rate of around 10000
 steps per second. If it is requested to move at a speed that would
 require a higher step rate then Marlin will generally just step as fast
@@ -1839,7 +1839,7 @@ configured in Marlin.</p>
 <p>If using the TMC2208 (or TMC2224) driver in "standalone mode" then
 make sure to use the
 <a href="#how-do-i-upgrade-to-the-latest-software">latest version of Klipper</a>.
-An workaround for a TMC2208 "stealthchop" driver problem was added to
+A workaround for a TMC2208 "stealthchop" driver problem was added to
 Klipper in mid-March of 2020.</p>
 <h2 id="i-keep-getting-random-lost-communication-with-mcu-errors">I keep getting random "Lost communication with MCU" errors<a class="headerlink" href="#i-keep-getting-random-lost-communication-with-mcu-errors" title="Permanent link">&para;</a></h2>
 <p>This is commonly caused by hardware errors on the USB connection
@@ -1906,7 +1906,7 @@ heaters and temperature sensors are functioning correctly. See the
 <a href="Config_Reference.html#verify_heater">config reference</a> for further
 details.</p>
 <h2 id="how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name">How do I convert a Marlin pin number to a Klipper pin name?<a class="headerlink" href="#how-do-i-convert-a-marlin-pin-number-to-a-klipper-pin-name" title="Permanent link">&para;</a></h2>
-<p>Short answer: <br>
+<p>Short answer:<br>
 A mapping is available in the
 <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-aliases.cfg">sample-aliases.cfg</a> file. Use that file
 as a guide to finding the actual micro-controller pin names. (It is
@@ -1918,7 +1918,7 @@ the sample-aliases.cfg file uses pin names that start with the prefix
 "ar" instead of "D" (eg, Arduino pin <code>D23</code> is Klipper alias <code>ar23</code>)
 and the prefix "analog" instead of "A" (eg, Arduino pin <code>A14</code> is
 Klipper alias <code>analog14</code>).</p>
-<p>Long answer: <br>
+<p>Long answer:<br>
 Klipper uses the standard pin names defined by the
 micro-controller. On the Atmega chips these hardware pins have names
 like <code>PA4</code>, <code>PC7</code>, or <code>PD2</code>.</p>
@@ -1992,11 +1992,11 @@ only lose steps in increments of 4 full steps. (So, if one is using 16
 microsteps, then a lost step on the stepper would result in the <code>mcu:</code>
 step counter being off by a multiple of 64 microsteps.)</p>
 <h2 id="why-does-klipper-report-errors-i-lost-my-print">Why does Klipper report errors? I lost my print!<a class="headerlink" href="#why-does-klipper-report-errors-i-lost-my-print" title="Permanent link">&para;</a></h2>
-<p>Short answer: <br>
+<p>Short answer:<br>
 We want to know if our printers detect a problem so that the underlying
 issue can be fixed and we can obtain great quality prints. We definitely
 do not want our printers to silently produce low quality prints.</p>
-<p>Long answer: <br>
+<p>Long answer:<br>
 Klipper has been engineered to automatically workaround many transient
 problems. For example, it automatically detects communication errors and
 will retransmit; it schedules actions in advance and buffers commands at

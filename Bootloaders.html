@@ -1997,8 +1997,8 @@ the bootloader via 3.3V serial using stm32flash as noted in the stm32duino
 section above, substituting the file name for the desired hid bootloader binary
 (ie: hid_generic_pc13.bin for the blue pill).</p>
 <p>It is not possible to use stm32flash for the SKR Mini E3 as the boot0 pin is
-tied directly to ground and not broken out via header pins. It is recommended
-to use a STLink V2 with STM32Cubeprogrammer to flash the bootloader. If you
+tied directly to ground and not broken out via header pins.  It is recommended
+to use a STLink V2 with STM32Cubeprogrammer to flash the bootloader.  If you
 don't have access to a STLink it is also possible to use a
 <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi and OpenOCD</a> with
 the following chip config:
@@ -2014,13 +2014,13 @@ program hid_btt_skr_mini_e3.bin verify 0x08000000
 </code></pre></div>
 NOTES:</p>
 <ul>
-<li>The example above erases the chip then programs the bootloader. Regardless
+<li>The example above erases the chip then programs the bootloader.  Regardless
   of the method chosen to flash it is recommended to erase the chip prior to
   flashing.</li>
 <li>Prior flashing the SKR Mini E3 with this bootloader you should be aware
   that you will no longer be able to update firmware via the sdcard.</li>
 <li>You may need to hold down the reset button on the board while launching
-  OpenOCD. It should display something like:
+  OpenOCD.  It should display something like:
   <div class="highlight"><pre><span></span><code>Open On-Chip Debugger 0.10.0+dev-01204-gc60252ac-dirty (2020-04-27-16:00)
 Licensed under GNU GPL v2
 For bug reports, read
@@ -2055,10 +2055,10 @@ OR if klipper has been previously flashed:
 <div class="highlight"><pre><span></span><code>make flash FLASH_DEVICE=/dev/ttyACM0
 </code></pre></div></p>
 <p>It may be necessary to manually enter the bootloader, this can be done by
-setting "boot 0" low and "boot 1" high. On the SKR Mini E3 "Boot 1" is not
-available, so it may be done by setting pin PA2 low if you flashed
-"hid_btt_skr_mini_e3.bin". This pin is labeled "TX0" on the TFT header in
-the SKR Mini E3's "PIN" document. There is a ground pin next to PA2
+setting "boot 0" low and "boot 1" high.  On the SKR Mini E3 "Boot 1" is
+not available, so it may be done by setting pin PA2 low if you flashed
+"hid_btt_skr_mini_e3.bin".  This pin is labeled "TX0" on the TFT header in
+the SKR Mini E3's "PIN" document.  There is a ground pin next to PA2
 which you can use to pull PA2 low.</p>
 <h3 id="stm32f103stm32f072-with-msc-bootloader">STM32F103/STM32F072 with MSC bootloader<a class="headerlink" href="#stm32f103stm32f072-with-msc-bootloader" title="Permanent link">&para;</a></h3>
 <p>The <a href="https://github.com/Telekatz/MSC-stm32f103-bootloader">MSC bootloader</a>
