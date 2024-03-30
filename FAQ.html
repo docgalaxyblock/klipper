@@ -1675,8 +1675,8 @@ make<span class="w"> </span>flash<span class="w"> </span><span class="nv">FLASH_
 sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>start
 </code></pre></div>
 and the updated config might look like:
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">mcu</span><span class="p p-Indicator">]</span>
-<span class="nt">serial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0</span>
+<div class="highlight"><pre><span></span><code><span class="k">[mcu]</span>
+<span class="na">serial</span><span class="o">:</span><span class="w"> </span><span class="s">/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0</span>
 </code></pre></div></p>
 <p>Be sure to copy-and-paste the name from the "<code>ls</code>" command that you ran
 above as the name will be different for each printer.</p>
@@ -1720,8 +1720,8 @@ flashed to the micro-controller. The Klipper printer.cfg file will
 also need to be updated to match that baud rate (see the
 <a href="Config_Reference.html#mcu">config reference</a> for details).  For
 example:
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">mcu</span><span class="p p-Indicator">]</span>
-<span class="nt">baud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">250000</span>
+<div class="highlight"><pre><span></span><code><span class="k">[mcu]</span>
+<span class="na">baud</span><span class="o">:</span><span class="w"> </span><span class="s">250000</span>
 </code></pre></div></p>
 <p>The baud rate shown on the OctoPrint web page has no impact on the
 internal Klipper micro-controller baud rate. Always set the OctoPrint
