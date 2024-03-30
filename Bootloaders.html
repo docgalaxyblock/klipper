@@ -1301,11 +1301,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stm32f4-micro-controllers-with-dfu-bootloader" class="md-nav__link">
-    STM32F4 micro-controllers with DFU bootloader
+  <a href="#stm32f4-micro-controllers" class="md-nav__link">
+    STM32F4 micro-controllers
   </a>
   
-    <nav class="md-nav" aria-label="STM32F4 micro-controllers with DFU bootloader">
+    <nav class="md-nav" aria-label="STM32F4 micro-controllers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1619,11 +1619,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stm32f4-micro-controllers-with-dfu-bootloader" class="md-nav__link">
-    STM32F4 micro-controllers with DFU bootloader
+  <a href="#stm32f4-micro-controllers" class="md-nav__link">
+    STM32F4 micro-controllers
   </a>
   
-    <nav class="md-nav" aria-label="STM32F4 micro-controllers with DFU bootloader">
+    <nav class="md-nav" aria-label="STM32F4 micro-controllers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2075,13 +2075,13 @@ MSC bootloader binary (ie: MSCboot-Bluepill.bin for the blue pill).</p>
 <p>The bootloader can be activated by pressing the reset button of the board twice.
 As soon as the bootloader is activated, the board appears as a USB flash drive
 onto which the klipper.bin file can be copied.</p>
-<h2 id="stm32f4-micro-controllers-with-dfu-bootloader">STM32F4 micro-controllers with DFU bootloader<a class="headerlink" href="#stm32f4-micro-controllers-with-dfu-bootloader" title="Permanent link">&para;</a></h2>
+<h2 id="stm32f4-micro-controllers">STM32F4 micro-controllers<a class="headerlink" href="#stm32f4-micro-controllers" title="Permanent link">&para;</a></h2>
 <p>STM32F4 micro-controllers come equipped with a built-in system bootloader
 capable of flashing over USB (via DFU), 3.3V Serial, and various other
 methods (see STM Document AN2606 for more information).</p>
 <p>As with the STM32F1, the STM32F4 uses the hid-flash tool to upload binaries to
-the MCU. See the instructions above for details on how to build and use
-hid-flash.</p>
+the MCU. See the <a href="#stm32f103-with-hid-bootloader">instructions above</a> for details
+on how to build and use hid-flash.</p>
 <p>It may be necessary to manually enter the bootloader, this can be done by
 setting "boot 0" low, "boot 1" high and plugging in the device.  After
 programming is complete unplug the device and set "boot 1" back to low
